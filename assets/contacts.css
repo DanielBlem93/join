@@ -1,0 +1,162 @@
+*{
+    margin: 0;
+    box-sizing: border-box;
+}
+body{
+    background-color: #F6F7F8;
+    font-family: 'Inter';
+    display: flex;
+}
+.contacts-list{
+    width: 453px;
+    height: 100vh;
+    background-color: #FFFFFF;
+    padding-top: 20px;
+}
+.contact-list-first-latter{
+    font-size: 20px;
+    font-weight: 400;
+    margin: 0 40px 20px 40px;
+}
+.contact-list-hr{
+    width: 323px;
+    height: 1px;
+    background-color: #d1d1d1;
+    border: none;
+}
+.contact-list-icon{
+    width: 42px;
+    height: 42px;
+    color: #FFFFFF;
+    border-radius: 50%;
+    border:1px solid #FFFFFF;
+    background-color: #29ABE2;
+    margin: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.contacts-list-item{
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    margin: 10px;
+
+}
+.contacts-list-item-email{
+    color: #29ABE2;
+}
+.active{
+    background-color:#2A3647;
+    color: #FFFFFF;
+    border-radius: 10px;
+}
+.contact{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    
+}
+.contact-header-title{
+    width: 569px;
+    font-size: 20px;
+    font-weight: 400;
+    margin-top: 50px; 
+    margin-left: 10px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+.contact-header-title-icon{
+    font-size: 61px;
+    font-weight: 700;
+}
+.contact-header-hr{
+    width: 3px;
+    height: 59px;
+    background-color: #29ABE2;
+    border: none;
+    border-radius: 3px;
+}
+.contact-header-icon{
+    width: 120px;
+    height: 120px;
+    background-color: #29ABE2;
+    border-radius: 50%;
+    color: #FFFFFF;
+    font-size: 47px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.contact-header{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin: 20px;
+    padding-left: 30px;
+    gap: 20px;
+}
+.contact-header-name{
+    font-size: 47px;
+    font-weight: 500;
+}
+.contact-header-add-task{
+    margin-top: 10px;
+    color: #29ABE2;
+    font-size: 16px;
+    font-weight: 400;
+    cursor: pointer;
+}
+.contact-body-header{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin: 20px;
+    gap: 90px;
+    padding-left: 30px;
+}
+.contact-body-header-title{
+    font-size: 20px;
+    font-weight: 400;
+}
+.contact-body-header-edit{
+    font-size: 16px;
+    font-weight: 400;
+    cursor: pointer;
+}
+.contact-body-item{
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    margin: 20px;
+    gap: 10px;
+    margin-bottom: 30px;
+    padding-left: 30px;
+}
+.contact-body-item-title{
+    font-size: 16px;
+    font-weight: 700;
+}
+.contact-body-item-value-email{
+    color: #29ABE2;
+    font-size: 16px;
+    font-weight: 400;
+    cursor: pointer;
+}
+.contact-btn{
+    position: absolute;
+    bottom: 50px;
+    right: 50px;
+    width: 120px;
+    height: 40px;
+    background-color: #2A3647;
+    border-radius: 10px;
+    color: #FFFFFF;
+    font-size: 16px;
+    font-weight: 400;
+    cursor: pointer;
+    margin: 20px;
+    margin-left: 30px;
+    border: none;
+}
