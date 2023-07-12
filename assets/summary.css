@@ -6,12 +6,13 @@
 body{
     background-color: #F6F7F8;
     font-family: 'Inter';
-    width: 100%;
+    width: 70%;
     height: 100vh;
+    margin: auto;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
+    align-items: start;
     gap: 70px;
 }
 h1{
