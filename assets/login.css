@@ -166,6 +166,14 @@ label{
 }
 .back{
     position: absolute;
-    top: 50px;
+    top: 40px;
     left: 30px;
+}
+.forgot-password{
+    width: 826px;
+    height: 459px;
+}
+.forgot-password-btn{
+    width: 246px;
+    height: 51px;
 }
