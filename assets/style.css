@@ -1,141 +1,144 @@
-*{
+:root {
+
+    /* Hauptfarben */
+    --background-white: #F6F7F8;
+    --background-dark: #2A3647;
+    --background-dark-active: #091931;
+    --background-dark-hover:#2A3D59;
+    --font-color-not-active: #CDCDCD;
+    --lightblue: #29ABE2;
+
+}
+
+* {
     box-sizing: border-box;
     margin: 0;
     font-family: 'Inter';
 }
-body{
-    background-color: #F6F7F8;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-    gap: 20px;
-}
-.img-container{
-    position: absolute;
-    background-color: #F6F7F8;
-    width: 100%;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
-    z-index: 999;
-    animation: slideAndFade 2s ease-in-out 0.5s forwards;
-}
-@keyframes slideAndFade {
-    0% {
-      top: 0;
-      left: 0;
-    }
-    100% {
-      top: -100%;
-      left: -100%;
-    }
-  }
-  
 
-.login-header{
-    width: 100%;
+
+/*============== Main-Desktop-Template =================*/
+
+/*=== Header === */
+
+header {
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: flex-start;
-    padding: 40px;
-}
-.login-header-signup{
-    width: 272px;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
     align-items: center;
-    gap: 10px;
+    justify-content: center;
+    position: fixed;
+    top: 0;
+    left:0;
+    width: 100%;
+    height: 89px;
+    padding: 20px, 36px, 20px, 348px;
+    background: white;
+    box-shadow: 0px 4px 4px 0px #0000001A;
+
 }
-.login-form{
-    width: 652px;
-    border-radius: 30px;
-    background-color: #FFFFFF;
+
+#temp-header-container {
+    width: 90%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+header>div>span {
+    margin-left: 300px;
+    font-size: 20px;
+    font-size: 20px;
+    line-height: 24px;
+    letter-spacing: 0em;
+    text-align: left;
+}
+
+.temp-logout {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 26px;
+}
+
+.temp-vector-img {
+    height: 31px;
+    width: 31px;
+}
+
+.temp-logout-symbol {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 49px;
+    width: 49px;
+    border: 3px solid var(--background-dark);
+    border-radius: 100%;
+    color: var(--lightblue);
+
+}
+
+/* === NAV === */
+
+nav {
     display: flex;
     flex-direction: column;
+    
     align-items: center;
-    gap: 20px;
-    padding: 35px 0;
-    box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 232px;
+    height: 100vh;
+    padding: 66px 20px 66px 20px;
+    gap: 103px;
+    background-color: var(--background-dark);
+    box-shadow: 0px 0px 4px 0px #0000001A;
+
+
 }
-button{
-    background-color: #2A3647;
-    border: none;
-    border-radius: 8px;
-    padding: 4px 16px;
-    color: #FFFFFF;
+
+nav > img{
+    width: 100px;
+    height: 121px;
 }
-.btn-login-singup{
-    width: 91px;
-    height: 51px;
-}
-.input-container{
-    width: 422px;
-    height: 51px;
-    position: relative;
-}
-input{
-    width: 100%;
-    height: 100%;
-    border-radius: 10px;
-    border: 1px solid #D1D1D1;
-    padding: 13px 21px;
-}
-input::placeholder{
-    font-size: 16px;
-    font-weight: 400;
-    line-height: 19px;
-    color: #BDBDBD;
-}
-.login-img{
-    position: absolute;
-    right: 20px;
-    top: 50%;
-    transform: translateY(-50%);
-}
-.login-remember{
-    width: 335px;
+
+#temp-reiter-container{
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    gap: 10px;
+    flex-direction: column;
+    gap: 30px;
+    
 }
-.login-chackbox{
-   width: 146px;
-   display: flex;
-    flex-direction: row;
-}
-.login-chakbox-insert{
-    width: 50px;
-    height: 18px;
-    padding: 5px 5px;
-}
-label{
-    width: 180px;
-}
-.login-link{
-    text-decoration: none;
-    color: #29ABE2;
-}
-.login-submit{
-    width: 335px;
+
+
+#temp-reiter-container div{
+    color: white;
     display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
+    gap: 8px;
     align-items: center;
+    justify-content: left;
+    cursor: pointer;
+  
 }
-.login-guest{
-    width: 151px;
-    height: 51px;
-    font-size: 19px;
-    background-color: #FFFFFF;
-    color: #2A3647;
-    border: 1px solid #2A3647;
-    padding: 4px 16px;
+
+.temp-icon-imgs{
+    width: 30px;
+    height: 30px;
 }
+
+#impressum-container{
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+
+}
+
+#impressum-container> div{ 
+    color: white;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    justify-content: left;
+    cursor: pointer;
+
+}
+
+
