@@ -16,6 +16,9 @@ h1{
     font-size: 71px;
     font-weight: 700;
 }
+button{
+    cursor: pointer;
+}
 .img-container{
     position: absolute;
     background-color: #F6F7F8;
@@ -168,6 +171,7 @@ label{
     position: absolute;
     top: 40px;
     left: 30px;
+    cursor: pointer;
 }
 .forgot-password{
     width: 826px;
@@ -176,4 +180,9 @@ label{
 .forgot-password-btn{
     width: 246px;
     height: 51px;
+}
+.new-pw{
+    position: relative;
+    width: 826px;
+    height: 459px;
 }
