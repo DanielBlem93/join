@@ -141,3 +141,8 @@ input::placeholder{
     height: 20px;
     cursor: pointer;
 }
+.contact-member-icon h1{
+    color: #ffffff;
+    font-size: 47px;
+    font-weight: 500;
+}
