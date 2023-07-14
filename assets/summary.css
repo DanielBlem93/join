@@ -15,6 +15,9 @@ body{
     align-items: start;
     gap: 70px;
 }
+.summary-content{
+    margin: 30px;
+}
 h1{
     font-size: 61px;
     font-weight: 700;
@@ -26,6 +29,7 @@ h1{
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin: 60px;
 }
 .summary-container{
     display: flex;
