@@ -5,9 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./assets/fonts.css">
     <link rel="stylesheet" href="./assets/contacts.css">
-    <title>Contacts</title>
+    <link rel="stylesheet" href="./assets/style.css">
+    <script src="js/template-script2.js"></script>
+    <title>Contakts</title>
 </head>
-<body>
+<body onload="init()">
+<div w3-include-html="assets/templates/desktop_template.html"></div>
+<div class="content">
     <div class="contacts-list">
         <div class="contact-list-first-latter">A</div>
          <hr class="contact-list-hr">
@@ -81,5 +85,6 @@
         New contact
         <img src="./assets/img/memberaddweiss.png" alt="">
     </button>
+</div>
 </body>
 </html>
