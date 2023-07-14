@@ -1,0 +1,128 @@
+/* Add task */
+
+body {
+    margin: 0px;
+    background: #F6F7F8;
+}
+
+
+/* Frame 40 */
+.addTaskFrame40 {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    position: absolute;
+    top: 171px;
+    left: 355px;
+}
+
+.addTaskFrame40 {
+    width: 466px;
+    height: 78px;
+}
+
+.typography2t1 {
+    font-family: 'Inter';
+    font-size: 61px;
+    font-weight: 700;
+    line-height: 73px;
+    text-align: left;
+}
+
+
+/* Frame 38 */
+.addTaskFrame38 {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
+    position: absolute;
+    width: 422px;
+    height: 501px;
+    left: 355px;
+    top: 290px;
+}
+
+/* Title V1 */
+.addTaskTitle {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    width: 422px;
+    height: 102px;
+}
+
+.typography2T6 {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 24px;
+    color: #000000;
+}
+
+
+/* Frame 14 */
+.addTaskFrame14 {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 13px 21px;
+    gap: 10px;
+    width: 422px;
+    height: 50px;
+    background: #FFFFFF;
+    border: 1px solid #D1D1D1;
+    border-radius: 10px;
+    outline: none;
+}
+
+/* t7 */
+.typographyT7 {
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 14px;
+}
+
+/* Description v1 */
+.addTaskDescription {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    width: 422px;
+    height: 171px;
+    position: relative;
+}
+
+/* Frame 17 */
+.addTaskFrame17 {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    padding: 18px 21px;
+    gap: 10px;
+    width: 422px;
+    height: 119px;
+    background: #FFFFFF;
+    border: 1px solid #D1D1D1;
+    border-radius: 10px;
+    resize: none;
+    overflow: hidden;
+    outline: none;
+}
+
+/* Recurso 1 1 */
+.addTaskFrame17Recurso11 {
+    position: absolute;
+    width: 18.9px;
+    height: 18.9px;
+    left: 398px;
+    top: 124px;
+    /* top: 95px; */
+}
