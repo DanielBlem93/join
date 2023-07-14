@@ -124,5 +124,86 @@ body {
     height: 18.9px;
     left: 398px;
     top: 124px;
-    /* top: 95px; */
+    /* ursprünglich top: 95px; */
+}
+
+/* Category v1 */
+.addTaskCategory {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0px;
+    gap: 8px;
+    width: 422px;
+    height: 103px;
+}
+
+/* Select design  Frame72 bei mir durch Frame14 ersetzt*/
+
+.addTaskFrame72 {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 422px;
+    height: 51px;
+    border-radius: 10px;
+}
+
+
+.addTaskFrame14 {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    /* padding: 18px 21px; */
+    gap: 10px;
+    isolation: isolate;
+    width: 422px;
+    height: 51px;
+    background: #FFFFFF;
+    border: 1px solid #D1D1D1;
+    border-radius: 10px;
+    appearance: none;
+}
+
+/* Vector 2 */
+.addTaskVector2 {
+    position: absolute;
+    width: 16px;
+    height: 8px;
+    left: 392px;
+    top: 358px;
+}
+
+.addTaskAssignedTo {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0px;
+    gap: 8px;
+    width: 422px;
+    height: 83px;
+}
+
+/* Frame 16 */
+/* verstehe den border-radius nicht, habe hier auch Frame 14 gesetzt */
+.addTaskFrame16 {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 18px 21px;
+    gap: 10px;
+    width: 422px;
+    height: 51px;
+    border-radius: 0px 0px 10px 10px;
+}
+
+/* Vector 4 */
+.addTaskVector4 {
+    position: absolute;
+    width: 0px;
+    height: 551px;
+    left: 836px;
+    top: 290px;
+    border: 1px solid #D1D1D1;
 }

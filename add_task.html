@@ -9,7 +9,9 @@
     <title>add_task</title>
 </head>
 
+
 <body>
+    <!-- <div w3-include-html="assets/templates/desktop_template.html"></div> -->
     <div class="addTaskFrame40">
         <span class="typography2t1">Add Task</span>
     </div>
@@ -27,16 +29,29 @@
         </div>
         <div class="addTaskCategory">
             <span class="typography2T6">Category</span>
-            <select>
-                <option disabled selected hidden>Select task category</option>
-                <option value="">New Category</option>
-                <option value="">Sales</option>
-                <option value="">Backoffice</option>
-              </select>
-
+            <select class="addTaskFrame14 typography2T6">
+                <option selected hidden>Select task category</option>
+                <option class="typography2T6" value="">New Category</option>
+                <option class="typography2T6" value="">Sales</option>
+                <option class="typography2T6" value="">Backoffice</option>
+            </select>
+            <img class="addTaskVector2" src="assets/img/vector2.svg">
+            <span class="typographyT7">This field is required</span>
         </div>
-        <div class="addTaskAssignedTo">Bla</div>
+        <div class="addTaskAssignedTo">
+            <span class="typography2T6">Assigned to</span>
+            <select class="addTaskFrame14 typography2T6">
+                <option selected hidden>Select contacts to assign</option>
+                <option class="typography2T6" value="">You</option>
+                <option class="typography2T6" value="">Maximilian Vogel</option>
+                <option class="typography2T6" value="">Invite new contact</option>
+            </select>
+            <img class="addTaskVector2" src="assets/img/vector2.svg">
+            <span class="typographyT7">This field is required</span>
+        </div>
     </div>
+    <div class="addTaskVector4"><img src="./assets/img/vector4.svg"></div>
+
 </body>
 
 </html>
