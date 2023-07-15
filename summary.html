@@ -6,9 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./assets/fonts.css">
     <link rel="stylesheet" href="./assets/summary.css">
+    <link rel="stylesheet" href="./assets/style.css">
+    <script src="js/template-script2.js"></script>
     <title>Summary</title>
 </head>
-<body>
+<body onload="init()">
+    <div w3-include-html="assets/templates/desktop_template.html"></div>
+<div class="content">
+    <div class="summary-content">
     <div class="summary-haeder">
         <h1 class="summary-h1">Summary</h1>
         <hr class="summary-trenner">
@@ -18,7 +23,7 @@
         <div class="summary-body">
             <div class="summary-tasks">
                 <div class="summary-task">
-                    <h1>5</h1>
+                    <h1>3</h1>
                     <p>Tasks in 
                         Board</p>
                 </div>
@@ -73,5 +78,7 @@
             <h2 class="summary-greeting-h2">Sofia Müller</h2>
         </div>
     </div>
+</div>
+</div>
 </body>
 </html>

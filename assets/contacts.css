@@ -7,6 +7,9 @@ body{
     font-family: 'Inter';
     display: flex;
 }
+.contacts-content{
+    display: flex;
+}
 .contacts-list{
     width: 453px;
     height: 100vh;

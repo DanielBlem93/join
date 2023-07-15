@@ -1,0 +1,150 @@
+:root {
+
+    /* Hauptfarben */
+    --background-white: #F6F7F8;
+    --background-dark: #2A3647;
+    --background-dark-active: #091931;
+    --background-dark-hover:#2A3D59;
+    --font-color-not-active: #CDCDCD;
+    --lightblue: #29ABE2;
+
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    font-family: 'Inter';
+}
+
+
+/*============== Main-Desktop-Template =================*/
+
+/*=== Header === */
+
+header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    top: 0;
+    left:0;
+    width: 100%;
+    height: 89px;
+    padding: 20px, 36px, 20px, 348px;
+    background: white;
+    box-shadow: 0px 4px 4px 0px #0000001A;
+
+}
+
+#temp-header-container {
+    width: 90%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+header>div>span {
+    margin-left: 300px;
+    font-size: 20px;
+    font-size: 20px;
+    line-height: 24px;
+    letter-spacing: 0em;
+    text-align: left;
+}
+
+.temp-logout {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 26px;
+}
+
+.temp-vector-img {
+    height: 31px;
+    width: 31px;
+}
+
+.temp-logout-symbol {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 49px;
+    width: 49px;
+    border: 3px solid var(--background-dark);
+    border-radius: 100%;
+    color: var(--lightblue);
+
+}
+
+/* === NAV === */
+
+nav {
+    display: flex;
+    flex-direction: column;
+    
+    align-items: center;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 232px;
+    height: 100vh;
+    padding: 66px 20px 66px 20px;
+    gap: 103px;
+    background-color: var(--background-dark);
+    box-shadow: 0px 0px 4px 0px #0000001A;
+
+
+}
+
+nav > img{
+    width: 100px;
+    height: 121px;
+}
+
+#temp-reiter-container{
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    
+}
+
+
+#temp-reiter-container div{
+    color: white;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    justify-content: left;
+    cursor: pointer;
+  
+}
+
+.temp-icon-imgs{
+    width: 30px;
+    height: 30px;
+}
+
+#impressum-container{
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+
+}
+
+#impressum-container> div{ 
+    color: white;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    justify-content: left;
+    cursor: pointer;
+
+}
+.content{
+    position: absolute;
+    top: 89px;
+    left: 232px;
+    display: flex;
+    z-index: -1;
+}
+
