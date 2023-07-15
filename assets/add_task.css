@@ -1,7 +1,10 @@
 /* Add task */
+* {
+    box-sizing: border-box;
+    margin: 0;
+}
 
 body {
-    margin: 0px;
     background: #F6F7F8;
 }
 
@@ -63,21 +66,9 @@ body {
 }
 
 
-/* Frame 14 */
-.addTaskFrame14 {
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    padding: 13px 21px;
-    gap: 10px;
-    width: 422px;
-    height: 50px;
-    background: #FFFFFF;
-    border: 1px solid #D1D1D1;
-    border-radius: 10px;
-    outline: none;
-}
+
+
+
 
 /* t7 */
 .typographyT7 {
@@ -101,7 +92,6 @@ body {
 
 /* Frame 17 */
 .addTaskFrame17 {
-    box-sizing: border-box;
     display: flex;
     flex-direction: row;
     align-items: flex-start;
@@ -112,9 +102,15 @@ body {
     background: #FFFFFF;
     border: 1px solid #D1D1D1;
     border-radius: 10px;
+}
+
+.textareaFrame {
+    width: 100%;
+    border: none;
+    outline: none;
     resize: none;
     overflow: hidden;
-    outline: none;
+    padding: 0px;
 }
 
 /* Recurso 1 1 */
@@ -141,38 +137,52 @@ body {
 /* Select design  Frame72 bei mir durch Frame14 ersetzt*/
 
 .addTaskFrame72 {
+    /* layout */
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    width: 422px;
-    height: 51px;
+
+    /* style */
     border-radius: 10px;
+
+    /* position */
+    position: relative;
 }
 
-
 .addTaskFrame14 {
-    box-sizing: border-box;
+    /* layout */
     display: flex;
-    flex-direction: row;
-    align-items: center;
-    /* padding: 18px 21px; */
-    gap: 10px;
-    isolation: isolate;
     width: 422px;
     height: 51px;
-    background: #FFFFFF;
-    border: 1px solid #D1D1D1;
+    padding: 6px 21px;
+    /* figma: padding: 18px 21px; */
+    align-items: center;
+    gap: 10px;
+
+    /* style */
     border-radius: 10px;
+    border: 1px solid #D1D1D1;
+    background: #FFF;
+
+    /* position */
+    position: relative;
+}
+
+.selectFrame {
     appearance: none;
+    outline: none;
 }
 
 /* Vector 2 */
 .addTaskVector2 {
-    position: absolute;
+    /* layout */
     width: 16px;
     height: 8px;
-    left: 392px;
-    top: 358px;
+
+    /* position */
+    position: absolute;
+    right: 14px;
+    top: 21px;
 }
 
 .addTaskAssignedTo {
@@ -206,4 +216,156 @@ body {
     left: 836px;
     top: 290px;
     border: 1px solid #D1D1D1;
+}
+
+/* -------------------------------------- */
+
+.addTaskFrame43 {
+    /* layout */
+    display: inline-flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 175px;
+
+    /* position */
+    position: absolute;
+    top: 290px;
+    left: 895px;
+}
+
+.addTaskFrame39 {
+    /* layout */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
+}
+
+.addTaskDueDate {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+}
+
+.addTaskFrame22 {
+    /* layout */
+    display: flex;
+    width: 56px;
+    height: 56px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+
+    /* position */
+    position: absolute;
+    right: 0px;
+    top: -3px;
+}
+
+.calendarEventFill {
+    width: 28px;
+    height: 28px;
+    flex-shrink: 0;
+}
+
+
+
+.inputFrame {
+    width: 100%;
+    border: none;
+    outline: none;
+}
+
+/* Frame 28 */
+
+.addTaskFrame28 {
+    /* layout */
+    display: flex;
+    height: 113px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+}
+
+.addTaskPriority {
+    /* layout */
+    display: flex;
+    height: 61px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0;
+}
+
+.addTaskFrame14Prio {
+    /* layout */
+    display: flex;
+    width: 136px;
+    height: 51px;
+    padding: 18px 10px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+
+    /* style */
+    border-radius: 10px;
+    background: var(--white, #FFF);
+
+    /* nuevo */
+    box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.10);
+}
+
+
+.buttonFramePrio {
+    border: 0px;
+    cursor: pointer;
+}
+
+.buttonFramePrio:hover {
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+
+/* subtasks */
+
+.addTaskSubtasks {
+    /* layout */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+}
+
+.iconnoirCancel {
+    width: 28px;
+    height: 28px;
+    flex-shrink: 0;
+}
+
+.addTaskFrame37 {
+    /* layout */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.rectangle6 {
+    width: 16px;
+    height: 16px;
+}
+
+.typography2body {
+    font-family: Inter;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 19.2px;
+}
+
+.labelContainer {
+    display: block;
+    position: relative;
+    cursor: pointer;
 }
