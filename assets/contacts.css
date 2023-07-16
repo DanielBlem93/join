@@ -7,6 +7,9 @@ body{
     font-family: 'Inter';
     display: flex;
 }
+.contacts-content{
+    display: flex;
+}
 .contacts-list{
     width: 453px;
     height: 100vh;
@@ -111,7 +114,7 @@ body{
 .contact-body-header{
     display: flex;
     justify-content: flex-start;
-    align-items: center;
+    align-items: baseline;
     margin: 20px;
     gap: 90px;
     padding-left: 30px;
@@ -124,6 +127,9 @@ body{
     font-size: 16px;
     font-weight: 400;
     cursor: pointer;
+}
+.contact-body-header-edit img{
+    width: 15px;
 }
 .contact-body-item{
     display: flex;
@@ -148,8 +154,8 @@ body{
     position: absolute;
     bottom: 50px;
     right: 50px;
-    width: 120px;
-    height: 40px;
+    width: 180px;
+    height: 53px;
     background-color: #2A3647;
     border-radius: 10px;
     color: #FFFFFF;
@@ -159,4 +165,12 @@ body{
     margin: 20px;
     margin-left: 30px;
     border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+}
+.contact-btn img{
+    width: 30px;
+
 }

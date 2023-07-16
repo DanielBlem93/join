@@ -5,9 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./assets/fonts.css">
     <link rel="stylesheet" href="./assets/contacts.css">
-    <title>Contacts</title>
+    <link rel="stylesheet" href="./assets/style.css">
+    <script src="js/template-script2.js"></script>
+    <title>Contakts</title>
 </head>
-<body>
+<body onload="init()">
+<div w3-include-html="assets/templates/desktop_template.html"></div>
+<div class="content">
+    <div class="contacts-content">
+
     <div class="contacts-list">
         <div class="contact-list-first-latter">A</div>
          <hr class="contact-list-hr">
@@ -63,7 +69,12 @@
         <div class="contact-body">
             <div class="contact-body-header">
                 <div class="contact-body-header-title">Contact Information</div>
-                <div class="contact-body-header-edit">Edit Contact</div>
+
+                <div class="contact-body-header-edit">
+                    <img src="./assets/img/stift-dunkel.png" alt="">
+                    Edit Contact
+                </div>
+
             </div>
             <div class="contact-body-item">
                 <div class="contact-body-item-title">Email</div>
@@ -74,6 +85,13 @@
                 <div class="contact-body-item-value">+49 1111 111 11 1</div>
             </div>
     </div>
-    <button class="contact-btn">New contact</button>
+
+    <button class="contact-btn">
+        New contact
+        <img src="./assets/img/memberaddweiss.png" alt="">
+    </button>
+</div>
+</div>
+
 </body>
 </html>

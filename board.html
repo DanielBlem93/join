@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./assets/fonts.css">
+    <link rel="stylesheet" href="./assets/board.css">
+    <link rel="stylesheet" href="./assets/style.css">
+    <script src="js/template-script2.js"></script>
+    <title>Board</title>
+</head>
+<body onload="init()">
+<div w3-include-html="assets/templates/desktop_template.html"></div>
+
+<div class="content">
+ <div class="board-content">
+    <div class="board-header">
+        <h1>Board</h1>
+        <div class="board-header-search">
+            <div class="input-container">
+                <input  type="text" placeholder="Find Task">
+                    <img class="search-img" src="./assets/img/search-icon-schwarz.png">
+                    <hr class="search-img-hr">
+            </div>
+            <button>Add Task +</button>
+        </div>
+    </div>
+        <div class="board-body-container">
+            <div class="board-body board-todo">
+                <div class="board-body-haeder">
+                    <h3>Todo</h3>
+                    <img src="./assets/img/add-icon.png" alt="">
+                </div>
+
+                <div class="todo-box">
+
+                    <div class="todo-box-header">
+                        <h4>Category</h4>
+                    </div>
+
+                    <div class="todo-box-title">
+                        <h3>Task Title</h3>
+                    </div>
+
+                    <div class="todo-box-body">
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.</p>
+                    </div>
+
+                    <div class="todo-box-progress">
+                        <div class="todo-box-progress-bar">
+                            <div class="todo-box-progress-bar-fill"></div>
+                        </div>
+                        <p>1/3 Done</p>
+                    </div>
+
+                    <div class="todo-box-footer-bar">
+
+                        <div class="todo-box-footer">
+                            <div class="todo-box-footer-left">
+                                <p>MM</p>
+                            </div>
+                        </div>
+
+                        <div class="todo-box-footer  bg-color-red">
+                            <div class="todo-box-footer-left">
+                                <p>AA</p>
+                            </div>
+                        </div>
+
+                        <div class="todo-box-footer  bg-color-black">
+                            <div class="todo-box-footer-left">
+                                <p>+3</p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+            <div class="board-body board-in-progress">
+                <div class="board-body-haeder">
+                    <h3>In progress</h3>
+                    <img src="./assets/img/add-icon.png" alt="">
+                </div>
+
+                <div class="todo-box">
+
+                    <div class="todo-box-header">
+                        <h4>Category</h4>
+                    </div>
+
+                    <div class="todo-box-title">
+                        <h3>Task Title</h3>
+                    </div>
+
+                    <div class="todo-box-body">
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.</p>
+                    </div>
+
+                    <div class="todo-box-progress">
+                        <div class="todo-box-progress-bar">
+                            <div class="todo-box-progress-bar-fill"></div>
+                        </div>
+                        <p>1/3 Done</p>
+                    </div>
+
+                    <div class="todo-box-footer-bar">
+
+                        <div class="todo-box-footer">
+                            <div class="todo-box-footer-left">
+                                <p>MM</p>
+                            </div>
+                        </div>
+
+                        <div class="todo-box-footer  bg-color-red">
+                            <div class="todo-box-footer-left">
+                                <p>AA</p>
+                            </div>
+                        </div>
+
+                        <div class="todo-box-footer  bg-color-black">
+                            <div class="todo-box-footer-left">
+                                <p>+3</p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="todo-box">
+
+                    <div class="todo-box-header">
+                        <h4>Category</h4>
+                    </div>
+
+                    <div class="todo-box-title">
+                        <h3>Task Title</h3>
+                    </div>
+
+                    <div class="todo-box-body">
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.</p>
+                    </div>
+
+                    <div class="todo-box-progress">
+                        <div class="todo-box-progress-bar">
+                            <div class="todo-box-progress-bar-fill"></div>
+                        </div>
+                        <p>1/3 Done</p>
+                    </div>
+
+                    <div class="todo-box-footer-bar">
+
+                        <div class="todo-box-footer bg-color-black">
+                            <div class="todo-box-footer-left">
+                                <p>MM</p>
+                            </div>
+                        </div>
+
+                        <div class="todo-box-footer  bg-color-red">
+                            <div class="todo-box-footer-left">
+                                <p>AA</p>
+                            </div>
+                        </div>
+
+                        <div class="todo-box-footer  bg-color-black">
+                            <div class="todo-box-footer-left">
+                                <p>+3</p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+            <div class="board-body board-feedback">
+                <div class="board-body-haeder">
+                    <h3>Awaiting Feedback</h3>
+                    <img src="./assets/img/add-icon.png" alt="">
+                </div>
+
+                <div class="todo-box">
+
+                    <div class="todo-box-header">
+                        <h4>Category</h4>
+                    </div>
+
+                    <div class="todo-box-title">
+                        <h3>Task Title</h3>
+                    </div>
+
+                    <div class="todo-box-body">
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.</p>
+                    </div>
+
+                    <div class="todo-box-progress">
+                        <div class="todo-box-progress-bar">
+                            <div class="todo-box-progress-bar-fill"></div>
+                        </div>
+                        <p>1/3 Done</p>
+                    </div>
+
+                    <div class="todo-box-footer-bar">
+
+                        <div class="todo-box-footer">
+                            <div class="todo-box-footer-left">
+                                <p>MM</p>
+                            </div>
+                        </div>
+
+                        <div class="todo-box-footer  bg-color-red">
+                            <div class="todo-box-footer-left">
+                                <p>AA</p>
+                            </div>
+                        </div>
+
+                        <div class="todo-box-footer  bg-color-black">
+                            <div class="todo-box-footer-left">
+                                <p>+3</p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+            <div class="board-body board-done">
+                <div class="board-body-haeder">
+                    <h3>Done</h3>
+                    <img src="./assets/img/add-icon.png" alt="">
+                </div>
+
+                <div class="todo-box">
+
+                    <div class="todo-box-header bg-color-red">
+                        <h4>Category</h4>
+                    </div>
+
+                    <div class="todo-box-title">
+                        <h3>Task Title</h3>
+                    </div>
+
+                    <div class="todo-box-body">
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.</p>
+                    </div>
+
+                    <div class="todo-box-progress">
+                        <div class="todo-box-progress-bar">
+                            <div class="todo-box-progress-bar-fill"></div>
+                        </div>
+                        <p>1/3 Done</p>
+                    </div>
+
+                    <div class="todo-box-footer-bar">
+
+                        <div class="todo-box-footer">
+                            <div class="todo-box-footer-left">
+                                <p>MM</p>
+                            </div>
+                        </div>
+
+                        <div class="todo-box-footer  bg-color-red">
+                            <div class="todo-box-footer-left">
+                                <p>AA</p>
+                            </div>
+                        </div>
+
+                        <div class="todo-box-footer  bg-color-black">
+                            <div class="todo-box-footer-left">
+                                <p>+3</p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="todo-box">
+
+                    <div class="todo-box-header bg-color-blue">
+                        <h4>Category</h4>
+                    </div>
+
+                    <div class="todo-box-title">
+                        <h3>Task Title</h3>
+                    </div>
+
+                    <div class="todo-box-body">
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.</p>
+                    </div>
+
+                    <div class="todo-box-progress">
+                        <div class="todo-box-progress-bar">
+                            <div class="todo-box-progress-bar-fill"></div>
+                        </div>
+                        <p>3/3 Done</p>
+                    </div>
+
+                    <div class="todo-box-footer-bar">
+
+                        <div class="todo-box-footer">
+                            <div class="todo-box-footer-left">
+                                <p>MM</p>
+                            </div>
+                        </div>
+
+                        <div class="todo-box-footer  bg-color-red">
+                            <div class="todo-box-footer-left">
+                                <p>AA</p>
+                            </div>
+                        </div>
+
+                        <div class="todo-box-footer  bg-color-black">
+                            <div class="todo-box-footer-left">
+                                <p>+3</p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    </div>
+</div>
+</body>
+</html>
