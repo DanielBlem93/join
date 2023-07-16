@@ -4,6 +4,10 @@
     margin: 0;
 }
 
+.displayNone {
+    display: none;
+}
+
 body {
     background: #F6F7F8;
 }
@@ -362,6 +366,7 @@ body {
     width: 16px;
     height: 16px;
 
+
     /* position */
     position: absolute;
     top: 1px;
@@ -378,8 +383,6 @@ body {
 
 
 /* customized checkbox */
-
-
 /* Customize the label (the container) */
 /* with .addTaskFrame37*/
 
@@ -429,4 +432,116 @@ body {
 /* Hide the image "empty-Box" when checked */
 .addTaskFrame37 input:checked~.checkmark img {
     display: none;
+}
+
+/* Frame 35 */
+
+.addTaskFrame35 {
+    /* layout */
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 4px;
+
+    /* position */
+    position: absolute;
+    top: 889px;
+    left: 984px;
+}
+
+.addTaskFrame27 {
+    /* layout */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 25px;
+}
+
+.addTaskSecondary {
+    /* layout */
+    display: flex;
+    width: 136px;
+    height: 55px;
+    padding: 18px 10px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+
+    /* style */
+    border-radius: 10px;
+    border: 1px solid var(--version-2-main-color, #2A3647);
+
+    /* design */
+    cursor: pointer;
+    color: var(--version-2-main-color, #2A3647);
+}
+
+.addTaskPrimCheckBtn {
+    /* layout */
+    display: flex;
+    height: 55px;
+    padding: 18px 15px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+
+    /* style */
+    border-radius: 10px;
+    background: #2A3647;
+
+    /* design */
+    cursor: pointer;
+}
+
+.addTaskSecondary:hover {
+    /* layout */
+    display: flex;
+    width: 136px;
+    height: 55px;
+    padding: 18px 10px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0;
+    
+    /* style */
+    border-radius: 10px;
+    border: 2px solid var(--ligth-blue, #29ABE2);
+    
+    /* stronger */
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    
+    /* interacitons */
+    /* On click
+    Change to: "click";
+    Animate: Smart animate; */
+}
+
+.iconoirCancel3 {
+    display: none;
+}
+
+.addTaskSecondary:hover span {
+    color: #29ABE2 !important;
+}
+
+.addTaskSecondary:hover .iconoirCancel3 {
+    display: block;
+}
+
+.addTaskSecondary:hover .iconoirCancel2 {
+    display: none;
+}
+
+
+
+
+.typographyPrimCheckBtn {
+    color: #FFF;
+    font-family: Inter;
+    font-size: 21px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 22.2px;
 }
