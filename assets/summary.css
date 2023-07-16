@@ -4,6 +4,7 @@
     
 }
 body{
+    
     background-color: #F6F7F8;
     font-family: 'Inter';
     width: 70%;
@@ -97,11 +98,7 @@ h1{
     align-items: center;
     flex-direction: row;
 }
-.summary-data:hover{
-    background-color: #2A3647;
-    color: #FFFFFF;
-    scale: 1.1;
-}
+
 .summary-icon-urgent{
     width: 60px;
     height: 60px;
@@ -118,6 +115,11 @@ h1{
     background-color: #d1d1d1;
     border: none;
     border-radius: 2px;
+}
+.summary-data:hover{
+    background-color: #2A3647;
+    color: #FFFFFF;
+    scale: 1.1;
 }
 .summary-todos{
     width: 560px;
