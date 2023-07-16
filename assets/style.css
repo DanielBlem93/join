@@ -102,6 +102,7 @@ nav > img{
 }
 
 #temp-reiter-container{
+<<<<<<< HEAD
     display: flex;
     flex-direction: column;
     gap: 30px;
@@ -142,3 +143,51 @@ nav > img{
 }
 
 
+=======
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    
+}
+
+
+#temp-reiter-container div{
+    color: white;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    justify-content: left;
+    cursor: pointer;
+  
+}
+
+.temp-icon-imgs{
+    width: 30px;
+    height: 30px;
+}
+
+#impressum-container{
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+
+}
+
+#impressum-container> div{ 
+    color: white;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    justify-content: left;
+    cursor: pointer;
+
+}
+.content{
+    position: absolute;
+    top: 89px;
+    left: 232px;
+    display: flex;
+    z-index: -1;
+}
+
+>>>>>>> b387827d62a8ea68324285b7e14f30c65002097a

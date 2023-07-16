@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./assets/fonts.css">
+    <link rel="stylesheet" href="./assets/add_task.css">
+    <link rel="stylesheet" href="./assets/style.css">
+    <script src="js/template-script2.js"></script>
+    <title>Add Task</title>
+</head>
+
+<body onload="">
+    <!-- <div w3-include-html="assets/templates/desktop_template.html"></div> -->
+    <div class="addTaskFrame40">
+        <span class="typography2t1">Add Task</span>
+    </div>
+    <div class="addTaskFrame38">
+        <div class="addTaskTitle">
+            <span class="typography2T6">Title</span>
+            <div class="addTaskFrame14">
+                <input class="typography2T6 inputFrame" placeholder="Enter a Title">
+            </div>
+            <span class="typographyT7 displayNone">This field is required</span>
+        </div>
+        <div class="addTaskDescription">
+            <span class="typography2T6">Description</span>
+            <div class="addTaskFrame17">
+                <textarea class="typography2T6 textareaFrame" placeholder="Enter a Description"></textarea>
+                <img class="addTaskFrame17Recurso11" src="./assets/img/recurso-11.svg">
+            </div>
+            <span class="typographyT7 displayNone">This field is required</span>
+        </div>
+        <div class="addTaskCategory">
+            <span class="typography2T6">Category</span>
+            <div class="addTaskFrame72 selectFrame">
+                <select class="addTaskFrame14 selectFrame typography2T6">
+                    <option selected hidden>Select task category</option>
+                    <option>New Category</option>
+                    <option>Sales</option>
+                    <option>Backoffice</option>
+                </select>
+                <img class="addTaskVector2" src="assets/img/vector2.svg">
+            </div>
+            <span class="typographyT7 displayNone">This field is required</span>
+        </div>
+        <div class="addTaskAssignedTo">
+            <span class="typography2T6">Assigned to</span>
+            <div class="addTaskFrame72 selectFrame">
+                <select class="addTaskFrame14 selectFrame typography2T6">
+                    <option selected hidden>Select contacts to assign</option>
+                    <option>You</option>
+                    <option>Maximilian Vogel</option>
+                    <option>Invite new contact</option>
+                </select>
+                <img class="addTaskVector2" src="assets/img/vector2.svg">
+            </div>
+            <span class="typographyT7 displayNone">This field is required</span>
+        </div>
+    </div>
+    <div class="addTaskVector4"><img src="./assets/img/vector4.svg"></div>
+    <div class="addTaskFrame43">
+        <div class="addTaskFrame39">
+            <div class="addTaskDueDate">
+                <span class="typography2T6">Due date</span>
+                <div class="addTaskFrame14">
+                    <input class="typography2T6 inputFrame" placeholder="dd/mm/yyyy">
+                    <div class="addTaskFrame22">
+                        <img class="calendarEventFill" src="./assets/img/calendar-event-fill.svg">
+                    </div>
+                </div>
+                <span class="typographyT7 displayNone">This field is required</span>
+            </div>
+            <div class="addTaskFrame28">
+                <span class="typography2T6">Prio</span>
+                <div class="addTaskPriority">
+                    <button onclick="" class="addTaskFrame14Prio buttonFramePrio">
+                        <span id="addTaskBtnUrgend" class="typography2T6">Urgent</span>
+                        <img src="./assets/img/prioAlta.svg">
+                    </button>
+                    <button onclick="" class="addTaskFrame14Prio buttonFramePrio">
+                        <span id="addTaskBtnUrgend" class="typography2T6">Medium</span>
+                        <img src="./assets/img/prioBaja.svg">
+                    </button>
+                    <button onclick="" class="addTaskFrame14Prio buttonFramePrio">
+                        <span id="addTaskBtnUrgend" class="typography2T6">Low</span>
+                        <img src="./assets/img/prioMedia.svg">
+                    </button>
+                </div>
+            </div>
+            <div class="addTaskSubtasks">
+                <span class="typography2T6">Subtasks</span>
+                <div class="addTaskFrame14">
+                    <input class="typography2T6 inputFrame" placeholder="Add new Subtasks">
+                    <div class="addTaskFrame22">
+                        <img class="iconoirCancel" src="./assets/img/iconoir_cancel.svg">
+                    </div>
+                </div>
+                <div class="addTaskFrame37">
+                    <label>
+                        <input type="checkbox" checked="checked">
+                        <span class="checkmarkText typography2body">Subtask&nbsp;1</span>
+                        <span class="checkmark"><img class="rectangle6" src="./assets/img/rectangle6.svg"></span>
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="addTaskFrame35">
+        <div class="addTaskFrame27">
+            <button onclick="" class="addTaskSecondary">
+                <span class="typography2T6">Clear</span>
+                <img class="iconoirCancel2" src="assets/img/iconoir_cancel2.svg">
+                <img class="iconoirCancel3" src="assets/img/iconoir_cancel3.svg">
+            </button>
+            <button onclick="" class="addTaskPrimCheckBtn">
+                <span class="typographyPrimCheckBtn">Create Task</span>
+                <img src="assets/img/akar-icons_check.svg">            
+            </button>
+        </div>
+    </div>
+
+</body>
+
+</html>

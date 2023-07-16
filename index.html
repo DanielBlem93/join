@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./assets/fonts.css">
+    <link rel="stylesheet" href="./assets/login.css">
     <link rel="stylesheet" href="./assets/style.css">
     <script src="script.js"></script>
     <title>Join</title>
@@ -16,11 +17,12 @@
         <img src="./assets/img/join-logo-dunkel-klein.png" alt="logo Join">
         <div class="login-header-signup">
             <p>Not a Join user?</p>
-            <button class="btn-login-singup">Sing up</button>
+            <button onclick="window.location.href = 'signup.html'" class="btn-login-singup">Sing up</button>
         </div>
     </div>
 <div class="login-form">
     <h1>Log In</h1>
+    <hr class="form-hr">
     <div class="input-container">
         <input  type="email" placeholder="Email">
         <img class="login-img" src="./assets/img/email-logo.png" alt="email-logo">
@@ -34,11 +36,11 @@
             <input class="login-chakbox-insert" type="checkbox" id="remember">
             <label for="remember">Remember me</label>
         </div>
-        <a class="login-link" href="#">Forgot my password</a>
+        <a class="login-link" href="forgotpassword.html">Forgot my password</a>
     </div>    
     <div class="login-submit">
         <button class="btn-login-singup" >Log In</button>
-        <button class="login-guest">Guest Log In</button>
+        <button onclick="window.location.href = 'summary.html'" class="login-guest">Guest Log In</button>
     </div>
 </div>
 </body>

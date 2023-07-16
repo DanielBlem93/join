@@ -16,4 +16,8 @@ async function includeHTML() {
             element.innerHTML = 'Page not found';
         }
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> b387827d62a8ea68324285b7e14f30c65002097a
