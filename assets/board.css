@@ -170,3 +170,20 @@ button{
 .bg-color-purple{
     background-color: #800080;
 }
+
+
+/*======Shows active site=====  */
+#temp-board{
+    background-color: var(--background-dark-active);
+}
+#temp-board p{
+    color: white;
+}
+
+#board-icon-img-hover{
+display: unset;
+
+}
+/* ========================================= */
+
+

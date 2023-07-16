@@ -4,7 +4,7 @@
     --background-white: #F6F7F8;
     --background-dark: #2A3647;
     --background-dark-active: #091931;
-    --background-dark-hover:#2A3D59;
+    --background-dark-hover: #2A3D59;
     --font-color-not-active: #CDCDCD;
     --lightblue: #29ABE2;
 
@@ -27,7 +27,7 @@ header {
     justify-content: center;
     position: fixed;
     top: 0;
-    left:0;
+    left: 0;
     width: 100%;
     height: 89px;
     padding: 20px, 36px, 20px, 348px;
@@ -44,7 +44,7 @@ header {
 }
 
 header>div>span {
-    margin-left: 300px;
+    margin-left: 240px;
     font-size: 20px;
     font-size: 20px;
     line-height: 24px;
@@ -81,14 +81,14 @@ header>div>span {
 nav {
     display: flex;
     flex-direction: column;
-    
+
     align-items: center;
     position: fixed;
     left: 0;
     top: 0;
     width: 232px;
     height: 100vh;
-    padding: 66px 20px 66px 20px;
+    /* padding: 66px 20px 66px 20px; */
     gap: 103px;
     background-color: var(--background-dark);
     box-shadow: 0px 0px 4px 0px #0000001A;
@@ -96,51 +96,77 @@ nav {
 
 }
 
-nav > img{
+nav>img {
+    margin-top: 66px;
     width: 100px;
     height: 121px;
 }
 
-#temp-reiter-container{
+#temp-reiter-container {
     display: flex;
     flex-direction: column;
-    gap: 30px;
-    
+    gap: 16px;
+    width: 100%;
+
 }
 
-
-#temp-reiter-container div{
-    color: white;
+.temp-reiter-links {
+    width: 150px;
+    height: 50px;
     display: flex;
-    gap: 8px;
-    align-items: center;
     justify-content: left;
-    cursor: pointer;
-  
+    align-items: center;
+
+    color: var(--font-color-not-active);
+    display: flex;
+    gap: 10px;
+   
 }
 
-.temp-icon-imgs{
+.temp-reiter {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.temp-reiter:hover {
+    background-color: var(--background-dark-hover);
+}
+
+.temp-reiter:hover .temp-icon-hover-img {
+    display: unset;
+}
+.temp-reiter:hover .temp-reiter-links {
+    color: white;
+}
+
+.temp-icon-imgs {
     width: 30px;
     height: 30px;
 }
 
-#impressum-container{
-        display: flex;
-        flex-direction: column;
-        gap: 30px;
-
+.temp-icon-hover-img {
+    display: none;
+    z-index: 2;
+    position: absolute;
 }
 
-#impressum-container> div{ 
-    color: white;
+#impressum-container {
     display: flex;
-    gap: 8px;
-    align-items: center;
-    justify-content: left;
-    cursor: pointer;
+    flex-direction: column;
+    gap: 30px;
+    width: 100%;
 
 }
-.content{
+
+#legal-notice-img{
+    width: 25px;
+    height: 25px;
+}
+
+.content {
     position: absolute;
     top: 89px;
     left: 232px;

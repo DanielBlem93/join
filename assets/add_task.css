@@ -534,9 +534,6 @@ body {
     display: none;
 }
 
-
-
-
 .typographyPrimCheckBtn {
     color: #FFF;
     font-family: Inter;
@@ -545,3 +542,19 @@ body {
     font-weight: 700;
     line-height: 22.2px;
 }
+
+/*======Shows active site=====  */
+#temp-add-task{
+    background-color: var(--background-dark-active);
+}
+#temp-add-task p{
+    color: white;
+}
+
+#add-task-icon-img-hover{
+display: unset;
+
+}
+/* ========================================= */
+
+

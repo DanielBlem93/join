@@ -173,3 +173,19 @@ h1{
     line-height: 30px;
     color: #29ABE2;
 }
+/*======Shows active site=====  */
+#temp-summary{
+    background-color: var(--background-dark-active);
+}
+#temp-summary p{
+    color: white;
+}
+
+#summary-icon-img-hover{
+display: unset;
+
+}
+/* ========================================= */
+
+
+
