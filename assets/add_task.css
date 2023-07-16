@@ -477,22 +477,6 @@ body {
     color: var(--version-2-main-color, #2A3647);
 }
 
-.addTaskPrimCheckBtn {
-    /* layout */
-    display: flex;
-    height: 55px;
-    padding: 18px 15px;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-
-    /* style */
-    border-radius: 10px;
-    background: #2A3647;
-
-    /* design */
-    cursor: pointer;
-}
 
 .addTaskSecondary:hover {
     /* layout */
@@ -504,14 +488,14 @@ body {
     align-items: center;
     gap: 10px;
     flex-shrink: 0;
-    
+
     /* style */
     border-radius: 10px;
     border: 2px solid var(--ligth-blue, #29ABE2);
-    
+
     /* stronger */
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-    
+
     /* interacitons */
     /* On click
     Change to: "click";
@@ -535,7 +519,22 @@ body {
 }
 
 
+.addTaskPrimCheckBtn {
+    /* layout */
+    display: flex;
+    height: 55px;
+    padding: 18px 15px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
 
+    /* style */
+    border-radius: 10px;
+    background: #2A3647;
+
+    /* design */
+    cursor: pointer;
+}
 
 .typographyPrimCheckBtn {
     color: #FFF;
@@ -544,4 +543,12 @@ body {
     font-style: normal;
     font-weight: 700;
     line-height: 22.2px;
+}
+
+.addTaskPrimCheckBtn:hover {
+    background: var(--ligth-blue, #29ABE2);
+
+    /* stronger */
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+
 }
