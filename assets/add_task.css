@@ -172,11 +172,6 @@ body {
 
 }
 
-.addTaskFrame14:active {
-  /* design */
-    display:none;       
-}
-
 .addTaskFrame14 option {
     border: 1px solid transparent;
     border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
@@ -522,9 +517,6 @@ body {
 
 .iconoirCancel3 {
     display: none;
-
-
-
 }
 
 .addTaskSecondary:hover span {
