@@ -174,3 +174,17 @@ body{
     width: 30px;
 
 }
+
+/*======Shows active site=====  */
+#temp-contacts{
+    background-color: var(--background-dark-active);
+}
+#temp-contacts p{
+    color: white;
+}
+
+#contacts-icon-img-hover{
+display: unset;
+
+}
+/* ========================================= */
