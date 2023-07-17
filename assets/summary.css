@@ -72,6 +72,7 @@ h1{
     font-size: 61px;
 }
 .summary-task{
+    cursor: pointer;
     width: 168px;
     height: 168px;
     background-color: #FFFFFF;
@@ -81,6 +82,13 @@ h1{
     justify-content: center;
     align-items: center;
     gap: 10px;
+    transition: 0.3s ease-in-out;
+}
+div.summary-task:hover{
+    background-color: #2A3647;
+    color: #FFFFFF;
+    transform: scale(1.1);
+    cursor: pointer;
 }
 
 
@@ -93,6 +101,13 @@ h1{
     justify-content: space-evenly;
     align-items: center;
     flex-direction: row;
+    transition: 0.3s ease-in-out;
+}
+.summary-date:hover{
+    background-color: #2A3647;
+    color: #FFFFFF;
+    transform: scale(1.1);
+    cursor: pointer;
 }
 
 .summary-icon-urgent{
@@ -112,11 +127,7 @@ h1{
     border: none;
     border-radius: 2px;
 }
-.summary-data:hover{
-    background-color: #2A3647;
-    color: #FFFFFF;
-    scale: 1.1;
-}
+
 .summary-todos{
     width: 560px;
     height: 170px;
@@ -125,6 +136,7 @@ h1{
     align-items: center;
     flex-direction: row;
 }
+
 .summary-todo{
     width: 264px;
     height: 168px;
@@ -135,6 +147,13 @@ h1{
     justify-content: center;
     align-items: center;
     gap: 20px;
+    transition: 0.3s ease-in-out;
+}
+.summary-todo:hover{
+    background-color: #2A3647;
+    color: #FFFFFF;
+    transform: scale(1.1);
+    cursor: pointer;
 }
 .summary-todo-icon{
     width: 60px;
@@ -171,7 +190,7 @@ h1{
     line-height: 30px;
     color: #29ABE2;
 }
-/*======Shows active site=====  */
+
 #temp-summary{
     background-color: var(--background-dark-active);
 }
@@ -183,18 +202,7 @@ h1{
 display: unset;
 
 }
-/* ========================================= */
 
 
 
 
-.summary-task:hover{
-    background-color: #2A3647!important;
-    color: #FFFFFF!important;
-    scale: 1.1!important;
-}
-.summary-data:hover{
-    background-color: #2A3647!important;
-    color: #FFFFFF!important;
-    scale: 1.1!important;
-}

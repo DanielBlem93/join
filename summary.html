@@ -39,7 +39,7 @@
                         Feedback</p>
                 </div>
             </div>
-            <div class="summary-date">
+            <div onclick="window.location.href = 'board.html'"  class="summary-date">
                     <div class="summary-icon-urgent">
                         <img src="./assets/img/urgent.svg" alt="">
                     </div>
@@ -53,8 +53,8 @@
                     <p>Upcoming Deadline</p>
                 </div>
             </div>
-            <div class="summary-todos">
-                <div class="summary-todo">
+            <div onclick="window.location.href = 'board.html'"  class="summary-todos">
+                <div onclick="window.location.href = 'board.html'" class="summary-todo">
                     <div class="summary-todo-icon">
                         <img class="summary-todo-icon-stift" src="./assets/img/stift.svg" alt="">
                     </div>
@@ -63,7 +63,7 @@
                         <p>Todo</p>
                     </div>
                 </div>
-                <div class="summary-todo">
+                <div onclick="window.location.href = 'board.html'"  class="summary-todo">
                     <div class="summary-todo-icon">
                         <img  src="./assets/img/chack.svg" alt="">
                     </div>
@@ -82,6 +82,14 @@
 
 </div>
 </div>
+<script>
+   const Tasks =  document.querySelectorAll('.summary-task');
+    Tasks.forEach(task => {
+        task.addEventListener('click', () => {
+            window.location.href = 'board.html';
+        })
+    })
 
+</script>
 </body>
 </html>
