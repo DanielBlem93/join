@@ -82,11 +82,7 @@ h1{
     gap: 10px;
 }
 
-.summary-task:hover{
-    background-color: #2A3647;
-    color: #FFFFFF;
-    scale: 1.1;
-}
+
 .summary-date{
     width: 560px;
     height: 170px;
@@ -97,11 +93,7 @@ h1{
     align-items: center;
     flex-direction: row;
 }
-.summary-data:hover{
-    background-color: #2A3647;
-    color: #FFFFFF;
-    scale: 1.1;
-}
+
 .summary-icon-urgent{
     width: 60px;
     height: 60px;
@@ -172,4 +164,14 @@ h1{
     font-weight: 700;
     line-height: 30px;
     color: #29ABE2;
+}
+.summary-task:hover{
+    background-color: #2A3647!important;
+    color: #FFFFFF!important;
+    scale: 1.1!important;
+}
+.summary-data:hover{
+    background-color: #2A3647!important;
+    color: #FFFFFF!important;
+    scale: 1.1!important;
 }
