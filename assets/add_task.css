@@ -138,7 +138,6 @@ body {
     height: 103px;
 }
 
-/* Select design  Frame72 bei mir durch Frame14 ersetzt*/
 
 .addTaskFrame72 {
     /* layout */
@@ -157,7 +156,7 @@ body {
     /* layout */
     display: flex;
     width: 422px;
-    height: 51px;
+    /* height: 51px; */
     padding: 6px 21px;
     /* figma: padding: 18px 21px; */
     align-items: center;
@@ -170,10 +169,26 @@ body {
 
     /* position */
     position: relative;
+
 }
 
-.selectFrame {
+.addTaskFrame14:active {
+  /* design */
+    display:none;       
+}
+
+.addTaskFrame14 option {
+    border: 1px solid transparent;
+    border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
+}
+
+.selectBackground {
+    /* design */
+    -webkit-appearance: none;
+    -moz-appearance: none;
     appearance: none;
+    /* Remove default arrow */
+    background: url(./img/vector2.svg) 97% / 4% no-repeat white;
     outline: none;
 }
 
@@ -458,6 +473,16 @@ body {
     gap: 25px;
 }
 
+@keyframes changeSecondary {
+    from {
+        border: 1px solid var(--ligth-blue, #29ABE2);
+    }
+
+    to {
+        border: 4px solid var(--ligth-blue, #29ABE2);
+    }
+}
+
 .addTaskSecondary {
     /* layout */
     display: flex;
@@ -479,31 +504,27 @@ body {
 
 
 .addTaskSecondary:hover {
-    /* layout */
-    display: flex;
-    width: 136px;
-    height: 55px;
-    padding: 18px 10px;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    flex-shrink: 0;
-
     /* style */
-    border-radius: 10px;
-    border: 2px solid var(--ligth-blue, #29ABE2);
+    border: 4px solid var(--ligth-blue, #29ABE2);
 
     /* stronger */
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 
-    /* interacitons */
-    /* On click
-    Change to: "click";
-    Animate: Smart animate; */
+    /* interaciton */
+    animation-name: changeSecondary;
+    animation-fill-mode: forwards;
+    animation-duration: 100ms;
+    animation-timing-function: ease-in-out;
 }
+
+
+
 
 .iconoirCancel3 {
     display: none;
+
+
+
 }
 
 .addTaskSecondary:hover span {
@@ -518,7 +539,16 @@ body {
     display: none;
 }
 
-<<<<<<< HEAD
+@keyframes changePrimCheckBtn {
+    from {
+        background: #2A3647;
+    }
+
+    to {
+        background: var(--ligth-blue, #29ABE2);
+    }
+
+}
 
 .addTaskPrimCheckBtn {
     /* layout */
@@ -535,10 +565,9 @@ body {
 
     /* design */
     cursor: pointer;
+    border: none;
 }
 
-=======
->>>>>>> 4af8d115f0060d7eda6ed0cd347b8c69d43dbed2
 .typographyPrimCheckBtn {
     color: #FFF;
     font-family: Inter;
@@ -548,28 +577,36 @@ body {
     line-height: 22.2px;
 }
 
-<<<<<<< HEAD
 .addTaskPrimCheckBtn:hover {
     background: var(--ligth-blue, #29ABE2);
 
     /* stronger */
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 
+    /* intaraction */
+    /* Open overlay: "Added to back log V1"; */
+    /* On click */
+    /* Animate: Move in Bottom; */
+    animation-name: changePrimCheckBtn;
+    animation-fill-mode: forwards;
+    animation-timing-function: ease-in-out;
+    animation-duration: 100ms;
+
 }
-=======
+
+
 /*======Shows active site=====  */
-#temp-add-task{
+#temp-add-task {
     background-color: var(--background-dark-active);
 }
-#temp-add-task p{
+
+#temp-add-task p {
     color: white;
 }
 
-#add-task-icon-img-hover{
-display: unset;
+#add-task-icon-img-hover {
+    display: unset;
 
 }
+
 /* ========================================= */
-
-
->>>>>>> 4af8d115f0060d7eda6ed0cd347b8c69d43dbed2
