@@ -1,6 +1,15 @@
 let currentUser = [];
 let currentUserName = '';
 
+
+/**
+ * This asynchronous function handles user login. It retrieves user input (email and password), checks it against stored users,
+ * and redirects to 'summary.html' if a match is found. The name of the logged in user is also stored locally.
+ * 
+ * @async
+ * @function
+ * @returns {Promise<void>} Returns a Promise that resolves when the process is complete. No return value.
+ */
 async function login(){
     let email = document.getElementById('loginEmail');
     let password = document.getElementById('loginPassword');
