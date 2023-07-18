@@ -6,7 +6,11 @@
     <link rel="stylesheet" href="./assets/fonts.css">
     <link rel="stylesheet" href="./assets/login.css">
     <link rel="stylesheet" href="./assets/style.css">
-    <script src="script.js"></script>
+    <script src="./js/script.js"></script>
+    <script src="./js/db-connect.js"></script>
+    <script src="./js/signUp.js"></script>
+    <script src="./js/login.js"></script>
+    <script src="./js/summary.js"></script>
     <title>Join</title>
 </head>
 <body>
@@ -24,11 +28,11 @@
     <h1>Log In</h1>
     <hr class="form-hr">
     <div class="input-container">
-        <input  type="email" placeholder="Email">
+        <input id="loginEmail"  type="email" placeholder="Email">
         <img class="login-img" src="./assets/img/email-logo.png" alt="email-logo">
     </div>
     <div class="input-container">
-        <input type="password" placeholder="Password">
+        <input  id="loginPassword" type="password" placeholder="Password">
         <img class="login-img" src="./assets/img/schloss-logo.png" alt="password-logo">
     </div>
     <div class="login-remember">
@@ -39,7 +43,7 @@
         <a class="login-link" href="forgotpassword.html">Forgot my password</a>
     </div>    
     <div class="login-submit">
-        <button class="btn-login-singup" >Log In</button>
+        <button onclick="login()" class="btn-login-singup" >Log In</button>
         <button onclick="window.location.href = 'summary.html'" class="login-guest">Guest Log In</button>
     </div>
 </div>
