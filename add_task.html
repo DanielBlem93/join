@@ -34,7 +34,11 @@
                 </div>
                 <span class="typographyT7 displayNone">This field is required</span>
             </div>
-            <div class="addTaskCategory">
+
+
+
+
+            <div class="addTaskDropdown">
                 <span class="typography2T6">Category</span>
                 <!-- <div class="addTaskFrame72">
                     <select class="addTaskFrame14 selectBackground typography2T6">
@@ -46,21 +50,61 @@
                 </div> -->
 
 
-                <div class="dropdown typography2T6">
+                <div style="height: 51px;" class="dropdown dropdown-category typography2T6">
 
                     <div class="dropdown-content">
-                        <div class="dropdown-option dropdown-start-text">
+                        <div onclick="toggleDropdown('dropdown-category')"
+                            class="dropdown-option dropdown-start-text">
                             <span>Select task category</span>
                             <div><img src="assets/img/vector2.svg" alt=""></div>
                         </div>
                         <div class="dropdown-option">New Category</div>
-                        <div class="dropdown-option">Sales <div class="circle-pink"></div></div>
-                        <div class="dropdown-option">Backoffice <div class="circle-mint"></div></div>
+                        <div class="dropdown-option">Sales <div class="circle-pink"></div>
+                        </div>
+                        <div class="dropdown-option">Backoffice <div class="circle-mint"></div>
+                        </div>
                     </div>
                 </div>
                 <span class="typographyT7 displayNone">This field is required</span>
             </div>
-            <div class="addTaskAssignedTo">
+
+            <div class="addTaskDropdown">
+                <span class="typography2T6">Assinged to</span>
+
+                <div style="height: 51px;" class="dropdown dropdown-assinged-to typography2T6">
+
+                    <div class="dropdown-content">
+                        <div onclick="toggleDropdown('dropdown-assinged-to')"
+                            class="dropdown-option dropdown-start-text">
+                            <span>Select contacts to assign</span>
+                            <div><img src="assets/img/vector2.svg" alt=""></div>
+                        </div>
+                        <div class="dropdown-option dropdown-option-img">You
+                            <img class="check-button" src="assets/img/icons/Check button v1.svg">
+                            <img class="check-button check-button-checked"
+                                src="assets/img/icons/Check button v1 checked.svg">
+                        </div>
+                        <div class="dropdown-option dropdown-option-img">Maximilian Vogel
+                            <div>
+                                <img class="check-button" src="assets/img/icons/Check button v1.svg">
+                                <img class="check-button check-button-checked"
+                                    src="assets/img/icons/Check button v1 checked.svg">
+                            </div>
+                        </div>
+                        <div class="dropdown-option dropdown-option-img">Invite new contact<div><img
+                                    src="assets/img/icons/invite-new-contact.svg" alt=""></div>
+                        </div>
+                    </div>
+                </div>
+                <span class="typographyT7 displayNone">This field is required</span>
+            </div>
+
+
+
+
+
+
+            <!-- <div class="addTaskAssignedTo">
                 <span class="typography2T6">Assigned to</span>
                 <div class="addTaskFrame72">
                     <select class="addTaskFrame14 selectBackground typography2T6">
@@ -69,10 +113,10 @@
                         <option value="">Maximilian Vogel</option>
                         <option value="">Invite new contact</option>
                     </select>
-                    <!-- <img class="addTaskVector2" src="assets/img/vector2.svg"> -->
-                </div>
-                <span class="typographyT7 displayNone">This field is required</span>
-            </div>
+                     <img class="addTaskVector2" src="assets/img/vector2.svg"> -->
+        </div>
+        <span class="typographyT7 displayNone">This field is required</span>
+        </div>
         </div>
         <div class="addTaskVector4"><img src="./assets/img/vector4.svg"></div>
         <div class="addTaskFrame43">
