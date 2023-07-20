@@ -13,8 +13,6 @@ async function loginSignUp(){
 
     data = JSON.parse(await getItem('userName'));
 
-    console.log(data);
-
     let email = document.getElementById('signupEmail');
     let password = document.getElementById('signupPassword');
     let loginname = document.getElementById('signupName');

@@ -10,11 +10,15 @@ body{
 .contacts-content{
     display: flex;
 }
-.contacts-list{
+#contacts-list{
     width: 453px;
     height: 100vh;
     background-color: #FFFFFF;
     padding-top: 20px;
+    overflow: scroll;
+}
+::-webkit-scrollbar {
+    display: none;
 }
 .contact-list-first-latter{
     font-size: 20px;
@@ -44,12 +48,12 @@ body{
     justify-content: start;
     align-items: center;
     margin: 10px;
-
+    cursor: pointer;
 }
 .contacts-list-item-email{
     color: #29ABE2;
 }
-.active{
+.contacts-list-item:hover{
     background-color:#2A3647;
     color: #FFFFFF;
     border-radius: 10px;
@@ -110,6 +114,11 @@ body{
     font-size: 16px;
     font-weight: 400;
     cursor: pointer;
+}
+#contact-content{
+    position: relative;
+    right: -100%;
+    transition: all 0.7s ease-in-out;
 }
 .contact-body-header{
     display: flex;
@@ -199,7 +208,7 @@ display: unset;
     justify-content: center;
     align-items: center;
     z-index: 100;
-    transition: all 0.5s ease-in-out;
+    transition: all 0.7s ease-in-out;
 }
 
 .add-contacts-container{
@@ -308,6 +317,7 @@ input::placeholder{
     border: 1px solid #2A3647;
     border-radius: 10px;
     padding: 4px 16px;
+    cursor: pointer;
 }
 .add-contact img{
     margin-left: 10px;
@@ -325,6 +335,7 @@ input::placeholder{
     flex-direction: row;
     justify-content: space-evenly;
     align-items: center;
+    cursor: pointer;
 }
 .close{
     position: absolute;

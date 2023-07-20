@@ -19,44 +19,9 @@
 <div class="content">
     <div class="contacts-content">
 
-    <div class="contacts-list">
-        <div class="contact-list-first-latter">A</div>
-         <hr class="contact-list-hr">
+    <div id="contacts-list">
+        
 
-         <div class="contacts-list-item">
-            <div class="contact-list-icon">MM</div>
-            <div>
-                <div class="contacts-list-item-name">Max Musterman</div>
-                <div class="contacts-list-item-email">maxmuster@gmail.de</div>
-            </div>
-        </div>
-        <div class="contacts-list-item">
-            <div class="contact-list-icon">MM</div>
-            <div>
-                <div class="contacts-list-item-name">Max Musterman</div>
-                <div class="contacts-list-item-email">maxmuster@gmail.de</div>
-            </div>
-        </div>
-        <div class="contact-list-first-latter">B</div>
-         <hr class="contact-list-hr">
-         
-
-         <div class="contacts-list-item active">
-            <div class="contact-list-icon">MM</div>
-            <div>
-                <div class="contacts-list-item-name">Max Musterman</div>
-                <div class="contacts-list-item-email">maxmuster@gmail.de</div>
-            </div>
-        </div>
-        <div class="contacts-list-item">
-            <div class="contact-list-icon">MM</div>
-            <div>
-                <div class="contacts-list-item-name">Max Musterman</div>
-                <div class="contacts-list-item-email">maxmuster@gmail.de</div>
-            </div>
-        </div>
-        <div class="contact-list-first-latter">C</div>
-         <hr class="contact-list-hr">
     </div>
     <div class="contact">
         <div class="contact-header-title">
@@ -64,31 +29,8 @@
             <hr class="contact-header-hr">
             <div class="contact-header-title-name">Better with a team</div>
         </div>
-        <div class="contact-header">
-            <div class="contact-header-icon">MM</div>
-            <div>
-                <div class="contact-header-name">Max Musterman</div>
-                <div class="contact-header-add-task">+ Add Task</div>
-            </div>
-        </div>
-        <div class="contact-body">
-            <div class="contact-body-header">
-                <div class="contact-body-header-title">Contact Information</div>
-
-                <div class="contact-body-header-edit">
-                    <img src="./assets/img/stift-dunkel.png" alt="">
-                    Edit Contact
-                </div>
-
-            </div>
-            <div class="contact-body-item">
-                <div class="contact-body-item-title">Email</div>
-                <div class="contact-body-item-value-email">maxmuster@gmail.de</div>
-            </div>
-            <div class="contact-body-item">
-                <div class="contact-body-item-title">Phone</div>
-                <div class="contact-body-item-value">+49 1111 111 11 1</div>
-            </div>
+        <div id="contact-content">
+       
     </div>
 
     <button onclick="openModalAddContakt()" class="contact-btn">
@@ -112,15 +54,15 @@
             </div>
             <div class="add-contact-form">
                 <div class="input-container">
-                 <input type="text" name="contact_name" placeholder="Name" required>
+                 <input id="contactName" type="text" name="contact_name" placeholder="Name" required>
                  <img class="add-contact-img" src="./assets/img/member-icon-klein.png" alt="">
                 </div>
                 <div class="input-container">
-                 <input type="email" name="contact_email" placeholder="Email" required>
+                 <input id="contactEmail" type="email" name="contact_email" placeholder="Email" required>
                     <img class="add-contact-img" src="./assets/img/email-logo.png" alt="">
                 </div>
                 <div class="input-container">
-                 <input type="text" name="contact_phone" placeholder="Phone" required>
+                 <input id="contactPhone" type="text" name="contact_phone" placeholder="Phone" required>
                     <img class="add-contact-img" src="./assets/img/phone-icon.png" alt="">
                 </div>
                  <div class="btn">
@@ -128,7 +70,7 @@
                         Cansel
                         <img src="./assets/img/close-icon.png" alt="">
                     </button>
-                    <button class="create-contact" >
+                    <button onclick="createContact()" class="create-contact" >
                         Create contact
                         <img src="./assets/img/chack-icon.png" alt="">
                     </button>

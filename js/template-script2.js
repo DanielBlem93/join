@@ -4,6 +4,7 @@ async function init() {
     await includeHTML();
     await getUserName();
     await setInitials();
+    await getContacts();
 }
 
 async function includeHTML() {
