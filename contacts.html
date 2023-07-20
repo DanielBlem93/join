@@ -11,6 +11,7 @@
     <script src="js/signUp.js"></script>
     <script src="js/summary.js"></script>
     <script src="js/login.js"></script>
+    <script src="./js/add_contact.js"></script>
     <title>Contakts</title>
 </head>
 <body onload="init()">
@@ -90,11 +91,54 @@
             </div>
     </div>
 
-    <button class="contact-btn">
+    <button onclick="openModalAddContakt()" class="contact-btn">
         New contact
-        <img src="./assets/img/memberaddweiss.png" alt="">
+        <img src="./assets/img/memberaddweiss.png">
     </button>
 </div>
+</div>
+
+<div id="add-contakt-modal">
+    <div class="add-contacts-container">
+        <div class="add-contact-greeting-container">
+            <img src="./assets/img/join-icon weiss.png" alt="">
+            <h1>Add Contact</h1>
+            <p>Tasks are better with a team!</p>
+            <hr class="add-contact-hr">
+        </div>
+        <div class="add-contact-form-container">
+            <div class="contact-member-icon">
+                <img src="./assets/img/member-icon.png" alt="">
+            </div>
+            <div class="add-contact-form">
+                <div class="input-container">
+                 <input type="text" name="contact_name" placeholder="Name" required>
+                 <img class="add-contact-img" src="./assets/img/member-icon-klein.png" alt="">
+                </div>
+                <div class="input-container">
+                 <input type="email" name="contact_email" placeholder="Email" required>
+                    <img class="add-contact-img" src="./assets/img/email-logo.png" alt="">
+                </div>
+                <div class="input-container">
+                 <input type="text" name="contact_phone" placeholder="Phone" required>
+                    <img class="add-contact-img" src="./assets/img/phone-icon.png" alt="">
+                </div>
+                 <div class="btn">
+                    <button class="add-contact" >
+                        Cansel
+                        <img src="./assets/img/close-icon.png" alt="">
+                    </button>
+                    <button class="create-contact" >
+                        Create contact
+                        <img src="./assets/img/chack-icon.png" alt="">
+                    </button>
+                 </div>
+            </div>
+        </div>
+        <button onclick="closeModal()"  class="close">
+            <img  class="close-icon" src="./assets/img/close-icon.png" alt="close-icon">
+        </button>
+    </div>
 </div>
 
 </body>
