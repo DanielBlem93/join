@@ -4,9 +4,17 @@
     --background-white: #F6F7F8;
     --background-dark: #2A3647;
     --background-dark-active: #091931;
-    --background-dark-hover: #2A3D59;
     --font-color-not-active: #CDCDCD;
-    --lightblue: #29ABE2;
+    --background-dark-hover: #2A3D59;
+    --background-grey-hover: #D1D1D1;
+
+    /* choose color for dropdown */
+    --lightblue: #8AA4FF;
+    --red: #FF0000;
+    --green: #2AD300;
+    --orange: #FF8A00;
+    --purple: #E200BE;
+    --darkblue: #0038FF;
 
 }
 
@@ -120,7 +128,7 @@ nav>img {
     color: var(--font-color-not-active);
     display: flex;
     gap: 10px;
-   
+
 }
 
 .temp-reiter {
@@ -138,6 +146,7 @@ nav>img {
 .temp-reiter:hover .temp-icon-hover-img {
     display: unset;
 }
+
 .temp-reiter:hover .temp-reiter-links {
     color: white;
 }
@@ -161,17 +170,15 @@ nav>img {
 
 }
 
-#legal-notice-img{
+#legal-notice-img {
     width: 25px;
     height: 25px;
 }
 
-.content{
+.content {
     position: absolute;
     top: 89px;
     left: 232px;
     display: flex;
     z-index: 2;
 }
-
-
