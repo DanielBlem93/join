@@ -19,10 +19,12 @@ Tasks.forEach(task => {
  * @returns {Promise<void>} Returns a Promise that resolves when the operation is complete. No return value.
  */
 async function getUserName(){
+    if(window.location.href.includes('summary.html')){
     let name = document.getElementById('summaryGreetingName');
     let userName = await getItem('currentUserName');
     
     name.innerHTML = userName;
+    }
 }
 
 
