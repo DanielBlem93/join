@@ -46,3 +46,6 @@ async function setInitials() {
     initials.innerHTML = firstInitial + secondInitial;
 }
 
+
+
+

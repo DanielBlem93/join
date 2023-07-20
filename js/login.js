@@ -23,5 +23,7 @@ async function login(){
         await setItem('currentUserName', currentUserName);
         window.location.href = 'summary.html';
     }
+
+    email.value = '';
 }
     
