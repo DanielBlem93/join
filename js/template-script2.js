@@ -3,6 +3,7 @@
 async function init() {
     await includeHTML();
     await getUserName();
+    await setInitials();
 }
 
 async function includeHTML() {
