@@ -1,7 +1,9 @@
 let contacts = [];
 let contact = [];
+let contactsArray = [];
 
 function openModalAddContakt() {
+    resetModal();
     document.getElementById('add-contakt-modal').style.right = '0';
 }
 function closeModal(){
@@ -9,9 +11,11 @@ function closeModal(){
 }
 
 async function createContact(){
+  
     let contactName = document.getElementById('contactName');
     let contactEmail = document.getElementById('contactEmail');
     let contactPhone = document.getElementById('contactPhone');
+
     contact = {
         name: contactName.value,
         email: contactEmail.value,
@@ -28,11 +32,29 @@ async function createContact(){
     closeModal();
     window.location.reload();
 }
+function resetModal() {
+    console.log('resetModal');
+    document.getElementById('contactName').value = '';
+    document.getElementById('contactEmail').value = '';
+    document.getElementById('contactPhone').value = '';
+
+    let btnAdd = document.getElementById('btn-add');
+    btnAdd.classList.remove('displaynone');
+
+    let btnEdit = document.getElementById('btn-edit');
+    btnEdit.classList.add('displaynone');
+
+    let headerAddEdit = document.getElementById('header-add-edit');
+    headerAddEdit.innerHTML = 'Add';
+    let headerText = document.getElementById('header-text');
+    headerText.innerHTML = 'Tasks are better with a team!';
+}
 
 function showContact(index){
     contact = contactsArray[index];
     let contactContent = document.getElementById('contact-content');
     contactContent.style.right = '0';
+    let contactString = JSON.stringify(contact).replace(/"/g, '&quot;');
 
     let initials = getInitials(contact.name);
     
@@ -41,18 +63,22 @@ function showContact(index){
             <div class="contact-header-icon">${initials[0]}${initials[1]}</div>
             <div>
                 <div class="contact-header-name">${contact.name}</div>
-                <div class="contact-header-add-task">+ Add Task</div>
+                <div class="contact-header-add-task">
+
+                <div onclick="openModalEditContakt(${contactString})" class="contact-body-header-edit">
+                    <img src="./assets/img/edit.png" alt="">
+                    Edit
+                </div>
+                <div onclick="deleteContact(${contactString})" class="contact-body-header-edit">
+                    <img src="./assets/img/delete.png" alt="">
+                    Delete
+                </div>
+                </div>
             </div>
         </div>
         <div class="contact-body">
             <div class="contact-body-header">
                 <div class="contact-body-header-title">Contact Information</div>
-
-                <div class="contact-body-header-edit">
-                    <img src="./assets/img/stift-dunkel.png" alt="">
-                    Edit Contact
-                </div>
-
             </div>
             <div class="contact-body-item">
                 <div class="contact-body-item-title">Email</div>
@@ -68,6 +94,17 @@ function showContact(index){
 
 }
 
+
+
+async function deleteContact(contact){
+    contacts = JSON.parse(await getItem('contacts'));
+    contacts = contacts.filter(item => item.name !== contact.name);
+    await setItem('contacts', JSON.stringify(contacts));
+    getContacts();
+    window.location.reload();
+}
+
+
 function getRandomColor() {
     let r = Math.floor(Math.random() * 256);
     let g = Math.floor(Math.random() * 256);
@@ -76,7 +113,7 @@ function getRandomColor() {
 }
 
 
-let contactsArray = []; // Dieses Array wird verwendet, um auf die Kontakte zuzugreifen
+
 
 async function getContacts() {
     let contactList = document.getElementById('contacts-list');
@@ -94,9 +131,9 @@ async function getContacts() {
             : '';
 
         lastInitial = firstInitial.toUpperCase();
-        contactsArray.push(contact); // Füge den Kontakt zum Array hinzu
+        contactsArray.push(contact); 
 
-        let contactIndex = contactsArray.length - 1; // Die Indexnummer des aktuellen Kontakts
+        let contactIndex = contactsArray.length - 1;
         
         let contactBlock = /*html*/`
         <div onclick="showContact(${contactIndex})" class="contacts-list-item">
@@ -118,6 +155,7 @@ async function getContacts() {
 function getInitials(name) {
     let nameArray = name.split(' ');
     let firstInitial = nameArray[0].charAt(0);
+    if(nameArray.length === 1) return [firstInitial, ' '];
     let secondInitial = nameArray[1].charAt(0);
 
     return [firstInitial, secondInitial];
