@@ -82,6 +82,7 @@
 
 body {
     background: var(--background-white);
+    
 }
 
 
@@ -200,7 +201,8 @@ body {
 }
 
 /* Category v1 */
-.addTaskCategory {
+/* ===============Dropdown ================== */
+.addTaskDropdown {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -209,19 +211,6 @@ body {
 
 }
 
-
-.addTaskFrame72 {
-    /* layout */
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-
-    /* style */
-    border-radius: 10px;
-
-    /* position */
-    position: relative;
-}
 
 .addTaskFrame14 {
     display: flex;
@@ -250,7 +239,7 @@ body {
     justify-content: left;
     min-height: 51px;
     /* max-height: 51px; */
-    height: 204px;
+    height: 51px;
     min-width: 422px;
 
     border: 1px solid var(--background-grey-hover);
@@ -262,6 +251,16 @@ body {
     z-index: 2;
     transition: 100ms ease-in-out;
 }
+/* set heigh to open and close the dropdown menu */
+.dropdown-category{
+    /* height: 204px; */
+    height: 51px;
+}
+.dropdown-assinged-to{
+    height: 51px;
+    /* height: 204px; */
+    
+}
 
 .dropdown-start-text {
     display: flex;
@@ -269,6 +268,7 @@ body {
 
     justify-content: space-between;
     width: 100%;
+    z-index: 9;
     /* display: ; */
 }
 
@@ -282,10 +282,33 @@ body {
 .dropdown-option {
     width: 100%;
     padding: 12px 21px;
-    border-radius: 10px;
     display: flex;
     align-items: center;
     gap: 10px;
+    cursor: pointer;
+}
+.dropdown-option:hover{
+    background-color: var(--background-grey-hover);
+}
+
+.dropdown-start-text:hover{
+    background-color: unset;
+}
+
+.dropdown-option-img{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.check-button{
+    width: 20px;
+    height: 22px;
+    display: unset;
+}
+
+.check-button-checked{
+    display: none;
 }
 
 
@@ -379,15 +402,11 @@ body {
     gap: 8px;
 }
 
-.iconoirCancel {}
-
 .calendarEventFill {
     width: 28px;
     height: 28px;
     flex-shrink: 0;
 }
-
-
 
 .inputFrame {
     width: 100%;
@@ -433,6 +452,7 @@ body {
     /* nuevo */
     box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.10);
 }
+
 
 
 .buttonFramePrio {
@@ -560,7 +580,7 @@ body {
 
     /* position */
     position: absolute;
-    top: 850px;
+    top: 795px;
     left: 984px;
 }
 
