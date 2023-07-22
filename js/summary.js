@@ -10,6 +10,7 @@ Tasks.forEach(task => {
 });
 
 
+
 /**
  * This asynchronous function retrieves the current user's name from local storage and updates the element with ID 'summaryGreetingName'.
  * 

@@ -4,7 +4,14 @@ async function init() {
     await includeHTML();
     await getUserName();
     await setInitials();
+    if(window.location.pathname == '/join/contacts.html'){
     await getContacts();
+    }
+}
+
+function showLogout() {
+    let logout = document.getElementById('logout');
+    logout.classList.toggle('hidden-logout-btn');
 }
 
 async function includeHTML() {
