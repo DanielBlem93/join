@@ -3,8 +3,22 @@
 async function init() {
     await includeHTML();
     await getUserName();
+    await allUserName();
     await setInitials();
+    if(window.location.pathname == '/join/contacts.html'){
     await getContacts();
+    
+    }
+}
+
+async function allUserName(){
+    let allUsers = JSON.parse(await getItem('userName'));
+    console.log(allUsers);
+}
+
+function showLogout() {
+    let logout = document.getElementById('logout');
+    logout.classList.toggle('hidden-logout-btn');
 }
 
 async function includeHTML() {

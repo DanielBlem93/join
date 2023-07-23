@@ -109,11 +109,14 @@ body{
     font-weight: 500;
 }
 .contact-header-add-task{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: row;
     margin-top: 10px;
-    color: #29ABE2;
     font-size: 16px;
     font-weight: 400;
-    cursor: pointer;
+    gap: 50px;	
 }
 #contact-content{
     position: relative;
@@ -133,11 +136,14 @@ body{
     font-weight: 400;
 }
 .contact-body-header-edit{
+    display: flex;
+    gap: 10px;
     font-size: 16px;
     font-weight: 400;
     cursor: pointer;
 }
 .contact-body-header-edit img{
+    object-fit: cover;
     width: 15px;
 }
 .contact-body-item{
@@ -351,5 +357,8 @@ input::placeholder{
     color: #ffffff;
     font-size: 47px;
     font-weight: 500;
+}
+.displaynone{
+    display: none;
 }
 
