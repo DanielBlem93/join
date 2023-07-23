@@ -15,7 +15,7 @@
     <title>Add Task</title>
 </head>
 
-<body onload="init()">
+<body onload="init();">
 
     <div w3-include-html="assets/templates/desktop_template.html"></div>
     <main>
@@ -42,35 +42,80 @@
 
 
 
+
+
+
+
+
+
+
             <div class="addTaskDropdown">
                 <span class="typography2T6">Category</span>
-                <!-- <div class="addTaskFrame72">
-                    <select class="addTaskFrame14 selectBackground typography2T6">
-                        <option value="" selected hidden>Select task category</option>
-                        <option value="">New Category </option>
-                        <option value="">Sales <span class="circle-lightblue"></span></option>
-                        <option value="">Backoffice</option>
-                    </select> 
-                </div> -->
-
-
                 <div style="height: 51px;" class="dropdown dropdown-category typography2T6">
 
                     <div class="dropdown-content">
-                        <div onclick="toggleDropdown('dropdown-category')"
-                            class="dropdown-option dropdown-start-text">
-                            <span>Select task category</span>
-                            <div><img src="assets/img/vector2.svg" alt=""></div>
+
+
+                        <div onclick="toggleDropdown('dropdown-category');renderCategorys()" id="select-box">
+
+                            <div id="start-text" class="dropdown-option dropdown-start-text">
+                                <div id="select-task-category" style="display: unset;">Select task category</div>
+                                <div  id="select-task-category-img"><img src="assets/img/vector2.svg"></div>
+                            </div>
+
+
                         </div>
-                        <div class="dropdown-option">New Category</div>
-                        <div class="dropdown-option">Sales <div class="circle-pink"></div>
-                        </div>
-                        <div class="dropdown-option">Backoffice <div class="circle-mint"></div>
-                        </div>
+
+                        <div onclick="newCategory('flex', 'none', 'none')" class="dropdown-option ">New Category</div>
+               
+                        <div id="categorys"></div>
                     </div>
+
                 </div>
+
+                <fieldset style="display: none;" id="colors-container">
+                    <input id="lightblue" type="radio" name="color" value="lightblue" />
+                    <label class="color-circle circle-lightblue" for="lightblue"></label>
+
+                    <input id="red" type="radio" name="color" value="red" />
+                    <label for="red" class="color-circle circle-red"></label>
+
+                    <input id="green" type="radio" name="color" value="green" />
+                    <label for="green" class="color-circle circle-green"></label>
+
+                    <input id="orange" type="radio" name="color" value="orange" />
+                    <label for="orange" class="color-circle circle-orange"></label>
+
+                    <input id="purple" type="radio" name="color" value="purple" />
+                    <label for="purple" class="color-circle circle-purple"></label>
+
+                    <input id="darkblue" type="radio" name="color" value="darkblue" />
+                    <label for="darkblue" class="color-circle circle-darkblue"></label>
+
+                    <input id="mint" type="radio" name="color" value="mint" />
+                    <label for="mint" class="color-circle circle-mint"></label>
+
+                    <input id="pink" type="radio" name="color" value="pink" />
+                    <label for="pink" class="color-circle circle-pink"></label>
+                </fieldset>
+
+
+
+
                 <span class="typographyT7 displayNone">This field is required</span>
             </div>
+
+
+
+
+
+
+
+
+
+
+
+
 
             <div class="addTaskDropdown">
                 <span class="typography2T6">Assinged to</span>
@@ -83,16 +128,18 @@
                             <span>Select contacts to assign</span>
                             <div><img src="assets/img/vector2.svg" alt=""></div>
                         </div>
-                        <div class="dropdown-option dropdown-option-img">You
-                            <img class="check-button" src="assets/img/icons/Check button v1.svg">
-                            <img class="check-button check-button-checked"
-                                src="assets/img/icons/Check button v1 checked.svg">
-                        </div>
-                        <div class="dropdown-option dropdown-option-img">Maximilian Vogel
+                        <div onclick="checkButton(0)" class="dropdown-option dropdown-option-img" id="at-0">
+                            You
                             <div>
                                 <img class="check-button" src="assets/img/icons/Check button v1.svg">
-                                <img class="check-button check-button-checked"
-                                    src="assets/img/icons/Check button v1 checked.svg">
+                                <img class="check-button-checked" src="assets/img/icons/Check button v1 checked.svg">
+                            </div>
+                        </div>
+                        <div onclick="checkButton(1)" class="dropdown-option dropdown-option-img" id="at-1">
+                            Maximilian Vogel
+                            <div>
+                                <img class="check-button" src="assets/img/icons/Check button v1.svg">
+                                <img class="check-button-checked" src="assets/img/icons/Check button v1 checked.svg">
                             </div>
                         </div>
                         <div class="dropdown-option dropdown-option-img">Invite new contact<div><img
@@ -108,16 +155,11 @@
 
 
 
-            <!-- <div class="addTaskAssignedTo">
-                <span class="typography2T6">Assigned to</span>
-                <div class="addTaskFrame72">
-                    <select class="addTaskFrame14 selectBackground typography2T6">
-                        <option value="" selected hidden>Select contacts to assign</option>
-                        <option value="">You</option>
-                        <option value="">Maximilian Vogel</option>
-                        <option value="">Invite new contact</option>
-                    </select>
-                     <img class="addTaskVector2" src="assets/img/vector2.svg"> -->
+
+
+
+
+
         </div>
         <span class="typographyT7 displayNone">This field is required</span>
         </div>
