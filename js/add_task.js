@@ -1,3 +1,4 @@
+// Arrays
 let categorys = [
   {
     'category': 'Sales',
@@ -10,9 +11,11 @@ let categorys = [
 
   }
 ]
-
+// Variables
 let newCategoryStatus = false
 
+
+// Functions for Category Dropdown menu
 
 /**
  * This functions is used to open and close the dropdown menus
@@ -32,8 +35,6 @@ function toggleDropdown(menuClass) {
     }
   }
 }
-
-
 
 /**
  * Renders the categorys to the dropdown menu
@@ -141,17 +142,17 @@ function selectTaskCategory(id) {
     selectBox.innerHTML += selected.outerHTML
   }
 }
-
+/**
+ * adds the new catgeory to categorys[] and avoid not choosen colors and no text
+ */
 function addNewCategory() {
   let input = document.getElementById('new-category-input')
-  let selectBox = document.getElementById('select-box')
   let value = input.value
 
-  console.log(value)
   let selectedColor = getSelectedColor();
   if (selectedColor === null) {
     alert('choose a color')
-  } else if (value == "") {
+  } else if (value == "") {tog
     alert('Give your category a name')
   }
   else {
@@ -165,10 +166,15 @@ function addNewCategory() {
     selectTaskCategory(categorys.length - 1)
     newCategoryStatus = false
     toggleDropdown('dropdown-category')
+  
+    toggleColorPallete('none')
   }
 
 }
-
+/**
+ * 
+ * @returns the choosen cooler on the color bar and returns null if nothing is choosen
+ */
 function getSelectedColor() {
   const colors = document.getElementsByName("color");
   for (let i = 0; i < colors.length; i++) {
@@ -180,8 +186,9 @@ function getSelectedColor() {
 
 }
 
-
-
+/**
+ * adds select task category to the top if the select-box is empty
+ */
 window.addEventListener("click", function () {
   let selectBox = document.getElementById('select-box')
   if (selectBox.innerHTML == "") {
@@ -191,13 +198,31 @@ window.addEventListener("click", function () {
 </div>`
   }
 })
-
+/**
+ * deletes everthing inside of the select box
+ */
 function clearSelectBox() {
   let selectBox = document.getElementById('select-box')
   selectBox.innerHTML = ""
 }
 
+
+// Variables for Assinged to
+let contactsForAddTask = [
+
+  {
+    'first-name': 'Maximilian',
+    'last-name': 'Vogel',
+    'checked?': 'unchecked',
+    'color': 'var(--mint)'
+  }
+]
 let atChecked = false
+
+// functions for Assinged to
+
+
+
 /**
  * 
  * @param {*} id 
@@ -210,10 +235,63 @@ function checkButton(id) {
   if (atChecked) {
     checkbox.style.display = 'unset'
     checkboxChecked.style.display = 'none'
+    contactsForAddTask[id]['checked?'] = 'unchecked'
   } else {
     checkbox.style.display = 'none'
     checkboxChecked.style.display = 'unset'
+    contactsForAddTask[id]['checked?'] = 'checked'
   }
   atChecked = !atChecked
+
+}
+
+function renderContacts() {
+  let contacts = document.getElementById('contacts')
+  contacts.innerHTML = "";
+
+  for (let i = 0; i < contactsForAddTask.length; i++) {
+    let name = contactsForAddTask[i]["first-name"];
+    let lastName = contactsForAddTask[i]["last-name"]
+
+
+    contacts.innerHTML += `
+    <div onclick="checkButton(${i});renderPersons()" class="dropdown-option dropdown-option-img" id="at${i}">
+    ${name} ${lastName}
+    <div>
+        <img class="check-button" src="assets/img/icons/Check button v1.svg">
+        <img class="check-button-checked" src="assets/img/icons/Check button v1 checked.svg">
+    </div>
+</div>`
+  }
+}
+
+
+function renderPersons() {
+ 
+  let persons = document.getElementById('assinged-persons-container')
+  persons.innerHTML = "";
+
+  for (let i = 0; i < contactsForAddTask.length; i++) {
+    if (contactsForAddTask[i]["checked?"] === 'checked') {
+
+      let name = contactsForAddTask[i]["first-name"];
+      let lastName = contactsForAddTask[i]["last-name"];
+      let color = contactsForAddTask[i]["color"];
+      
+
+      name = name.charAt(0)
+      lastName = lastName.charAt(0)
+
+      persons.innerHTML = `
+      <div style="background-color: ${color}" class="assinged-person">
+                        <Span>${name}${lastName}</Span>
+                    </div>
+      `;
+    } else {
+
+
+    }
+
+  }
 
 }

@@ -265,6 +265,25 @@ body {
     /* height: 204px; */
 
 }
+#assinged-persons-container{
+    display: flex;
+    gap: 8px ;
+    margin-bottom: 21px;
+}
+
+.assinged-person{
+    height: 45px;
+    width: 45px;
+    background-color: var(--darkblue);
+    border: 1px solid white;
+    border-radius: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.2rem;
+}
 
 #select-box{
     width: 100%;
@@ -280,6 +299,7 @@ body {
     width: 100%;
     z-index: 9;
     /* display: ; */
+   
 }
 
 #input-container {
