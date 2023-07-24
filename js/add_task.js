@@ -155,7 +155,7 @@ function addNewCategory() {
   if (selectedColor === null) {
     alert('choose a color')
   } else if (value == "") {
-    tog
+    
     alert('Give your category a name')
   }
   else {
@@ -210,11 +210,11 @@ function clearSelectBox(selectbox) {
   let selectBox = document.getElementById(`${selectbox}`)
   selectBox.innerHTML = ""
 }
+//================= functions for Assinged to ========================
 
 
 // Variables for Assinged to
 let contactsForAddTask = [
-
   {
     'first-name': 'Maximilian',
     'last-name': 'Vogel',
@@ -223,8 +223,6 @@ let contactsForAddTask = [
   }
 ]
 let atChecked = false
-
-// functions for Assinged to
 
 
 
@@ -324,7 +322,7 @@ function showInviteNewContactInput() {
       <img onclick="discardAssingedTo()"
           src="assets/img/icons/dropdown-close-button.svg">
       <img src="assets/img/icons/dropdown-abtrenner.svg">
-      <img onclick="addNewCategory()" src="assets/img/icons/dropdown-check-button.svg">
+      <img onclick="" src="assets/img/icons/dropdown-check-button.svg">
   </div>
 </div>
   `;
@@ -344,3 +342,6 @@ function discardAssingedTo() {
   assingedToStatus = false
 
 }
+
+
+// ===================================
