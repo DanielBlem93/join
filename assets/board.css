@@ -158,6 +158,7 @@ button {
     padding: 20px;
     margin-top: 20px;
     margin-right: 20px;
+    cursor: pointer;
 }
 
 .todo-box-header {
@@ -249,4 +250,55 @@ button {
     height: 600px;
     width: 250px;
 
+}
+
+#showTodo {
+    position: relative;
+    background-color: rgba(0, 0, 0, 0.2);
+    height: 100vh;
+    width: 100vw;
+    top: 0;
+    left: 0;
+    z-index: 999;
+}
+.modal-content{
+    position: absolute;
+    width: 623px;
+    height: 798px;
+    background-color: white;
+    border-radius: 10px;
+   
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    
+    align-items: flex-start;
+}
+.displayNone {
+    display: none;
+}
+.modal-close{
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    cursor: pointer;
+}
+.modal-close button{
+    background-color: transparent;
+}
+.todo-delete{
+    position: absolute;
+    bottom: 40px;
+    right: 40px;
+    border-radius: 10px;
+    border: 2px solid #2A3647;
+    padding: 10px;
+    cursor: pointer;
+}
+.todo-delete img{
+    width: 30px;
+    height: 30px;
 }

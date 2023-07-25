@@ -15,6 +15,7 @@
     <script src="./js/add_contact.js"></script>
     <script src="./js/edit_contact.js"></script>
     <script src="./js/logout.js" ></script>
+    <script src="./js/create_task.js"></script>
     <title>Add Task</title>
 </head>
 
@@ -29,29 +30,18 @@
             <div class="addTaskTitle">
                 <span class="typography2T6">Title</span>
                 <div class="addTaskFrame14">
-                    <input class="typography2T6 inputFrame" placeholder="Enter a Title">
+                    <input id="title" type="text" class="typography2T6 inputFrame" placeholder="Enter a Title">
                 </div>
                 <span class="typographyT7 displayNone">This field is required</span>
             </div>
             <div class="addTaskDescription">
                 <span class="typography2T6">Description</span>
                 <div class="addTaskFrame17">
-                    <textarea class="typography2T6 textareaFrame" placeholder="Enter a Description"></textarea>
+                    <textarea id="description" class="typography2T6 textareaFrame" placeholder="Enter a Description"></textarea>
                     <img class="addTaskFrame17Recurso11" src="./assets/img/recurso-11.svg">
                 </div>
                 <span class="typographyT7 displayNone">This field is required</span>
             </div>
-
-
-
-
-
-
-
-
-
-
-
             <div class="addTaskDropdown">
                 <span class="typography2T6">Category</span>
                 <div style="height: 51px;" class="dropdown dropdown-category typography2T6">
@@ -101,23 +91,8 @@
                     <input id="pink" type="radio" name="color" value="pink" />
                     <label for="pink" class="color-circle circle-pink"></label>
                 </fieldset>
-
-
-
-
-                <span class="typographyT7 displayNone">This field is required</span>
+             <span class="typographyT7 displayNone">This field is required</span>
             </div>
-
-
-
-
-
-
-
-
-
-
-
 
 
             <div class="addTaskDropdown">
@@ -153,16 +128,6 @@
                 <span class="typographyT7 displayNone">This field is required</span>
             </div>
 
-
-
-
-
-
-
-
-
-
-
         </div>
         <span class="typographyT7 displayNone">This field is required</span>
         </div>
@@ -173,7 +138,7 @@
                 <div class="addTaskDueDate">
                     <span class="typography2T6">Due date</span>
                     <div class="addTaskFrame14">
-                        <input type="date" class="typography2T6 inputFrame" placeholder="dd/mm/yyyy">
+                        <input id="date" type="date" class="typography2T6 inputFrame" placeholder="dd/mm/yyyy">
                     </div>
                     <span class="typographyT7 displayNone">This field is required</span>
                 </div>
@@ -214,12 +179,12 @@
         </div>
         <div class="addTaskFrame35">
             <div class="addTaskFrame27">
-                <button onclick="" class="addTaskSecondary">
+                <button onclick="clearTask ()" class="addTaskSecondary">
                     <span class="typography2T6">Clear</span>
                     <img class="iconoirCancel2" src="assets/img/iconoir_cancel2.svg">
                     <img class="iconoirCancel3" src="assets/img/iconoir_cancel3.svg">
                 </button>
-                <button onclick="" class="addTaskPrimCheckBtn">
+                <button onclick="createTask()" class="addTaskPrimCheckBtn">
                     <span class="typographyPrimCheckBtn">Create Task</span>
                     <img src="assets/img/akar-icons_check.svg">
                 </button>

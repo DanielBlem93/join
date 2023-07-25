@@ -21,15 +21,15 @@
     <h1>Sign Up</h1>
     <hr class="form-hr">
     <div class="input-container">
-        <input id="signupName"  type="text" placeholder="Name">
+        <input id="signupName"  type="text" placeholder="Name" required pattern="^[a-zA-ZäöüÄÖÜß]+(\s[a-zA-ZäöüÄÖÜß]+)?$">
         <img class="login-img" src="./assets/img/member-icon-klein.png" alt="name">
     </div>
     <div class="input-container">
-        <input id="signupEmail"  type="email" placeholder="Email">
+        <input id="signupEmail"  type="email" placeholder="Email" required>
         <img class="login-img" src="./assets/img/email-logo.png" alt="email-logo">
     </div>
     <div class="input-container">
-        <input id="signupPassword" type="password" placeholder="Password">
+        <input id="signupPassword" type="password" placeholder="Password" required>
         <img class="login-img" src="./assets/img/schloss-logo.png" alt="password-logo">
     </div>   
     <div class="login-submit">

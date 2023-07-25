@@ -183,12 +183,12 @@ function getSelectedColor() {
 
 
 window.addEventListener("click", function () {
-  let selectBox = document.getElementById('select-box')
+  let selectBox = document.getElementById('select-box');
   if (selectBox.innerHTML == "") {
     selectBox.innerHTML = `  <div id="start-text" class="dropdown-option dropdown-start-text">
     <div id="select-task-category" style="display: unset;">Select task category</div>
     <div id="select-task-category-img"><img src="assets/img/vector2.svg"></div>
-</div>`
+</div>`;
   }
 })
 

@@ -27,3 +27,6 @@ async function loginSignUp(){
     window.location.href = 'index.html';
     
 }
+
+
+

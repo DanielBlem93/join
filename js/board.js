@@ -1,50 +1,51 @@
 // drag and drop
 
-let todos = [{
-    'id': 0,
-    'category': 'open',
-    'task-category': 'Design',
-    'title': 'Website redesign',
-    'text': 'Modify the contents of the main website...',
-    'done-fraction': '1/2',
-    'members': ['AM', 'AS', 'EF'],
-    'priority': 'low',
-    'selected-color': 'orange'
-}, {
-    'id': 1,
-    'category': 'progress',
-    'task-category': 'Sales',
-    'title': 'Call potential clients',
-    'text': 'Make the product presentation to prospective buyers',
-    'done-fraction': '',
-    'members': ['EF', 'AM', '+2'],
-    'priority': 'urgent',
-    'selected-color': 'purple'
+// let todos = [{
+//     'id': 1,
+//     'category': 'open',
+//     'task-category': 'Design',
+//     'title': 'Website redesign',
+//     'text': 'Modify the contents of the main website...',
+//     'done-fraction': '1/2',
+//     'members': ['AM', 'AS', 'EF'],
+//     'priority': 'low',
+//     'selected-color': 'orange'
+// },  
+// {
+//     'id': 2,
+//     'category': 'progress',
+//     'task-category': 'Sales',
+//     'title': 'Call potential clients',
+//     'text': 'Make the product presentation to prospective buyers',
+//     'done-fraction': '',
+//     'members': ['EF', 'AM', '+2'],
+//     'priority': 'urgent',
+//     'selected-color': 'purple'
 
-}, {
-    'id': 2,
-    'category': 'feedback',
-    'task-category': 'Backoffice',
-    'title': 'Accounting invoices ',
-    'text': 'Write open invoices for customer',
-    'done-fraction': '',
-    'members': ['AS', 'AM', '+3'],
-    'priority': 'medium',
-    'selected-color': 'lightblue'
+// }, 
+// {
+//     'id': 3,
+//     'category': 'feedback',
+//     'task-category': 'Backoffice',
+//     'title': 'Accounting invoices ',
+//     'text': 'Write open invoices for customer',
+//     'done-fraction': '',
+//     'members': ['AS', 'AM', '+3'],
+//     'priority': 'medium',
+//     'selected-color': 'lightblue'
 
-}]
-
+// }]
+let todos = [];
 
 let members = [{
-    'id': 0,
     'firstName': 'Anton',
     'lastName': 'Mayer',
     'email': 'anton@gmail.com',
     'selected-color': 'green',
     'abbreviation': '',
     'fullName': ''
-}, {
-    'id': 1,
+}, 
+{
     'firstName': 'Anja',
     'lastName': 'Schulz',
     'email': 'schulz@hotmail.com',
@@ -52,8 +53,8 @@ let members = [{
     'abbreviation': '',
     'fullName': ''
 
-}, {
-    'id': 2,
+}, 
+{
     'firstName': 'Eva',
     'lastName': 'Fischer',
     'email': 'fischer@gmail.com',
@@ -65,12 +66,38 @@ let members = [{
 
 let currentDraggedElement;
 
+async function addTask() {
+    let addTasks = JSON.parse(await getItem('task'));
+    console.table(addTasks);
+    for (let i = 0; i < addTasks.length; i++) {
+        let title = addTasks[i]['title'];
+        let description = addTasks[i]['description'];
+        let date = addTasks[i]['date'];
+        let category = addTasks[i]['category'];
+        todos.push({
+            'id': todos.length + 1,
+            'category': 'open',
+            'task-category': 'Design',
+            'title': title,
+            'text': description,
+            'done-fraction': '',
+            'members': '',
+            'priority': '',
+            'selected-color': '',
+            'date': date,
+        })
+    }
+    console.table(todos);
+    updateHTML();
+}
+
 /**
  * This function is used to initiate the HTML page.  
  * It will include the template for the header and navigation. 
  * In addition, the toDo divs are generated.
  */
 async function initBoard() {
+    addTask();
     init();
     updateHTML();
 }
@@ -91,6 +118,7 @@ function updateHTML() {
     styleTodos();
     generateTodoBoxFooterBar();
     styleTodoBoxFooterBar();
+
 }
 
 
@@ -107,6 +135,7 @@ function renderToDos(category) {
     for (let i = 0; i < filteredToDos.length; i++) {
         const element = filteredToDos[i];
         document.getElementById(category).innerHTML += generateToDoHTML(element);
+        generateToDoHTMLModal(i);
     }
 }
 
@@ -118,6 +147,7 @@ function renderToDos(category) {
  */
 function startDragging(id) {
     currentDraggedElement = id;
+    
 }
 
 
@@ -151,7 +181,7 @@ function movedTo(category) {
  */
 function generateToDoHTML(element) {
     return `
-    <div class="todo-box" draggable="true" ondragstart="startDragging(${element['id']})">
+    <div onclick="showTodo(${element['id']})" class="todo-box" draggable="true" ondragstart="startDragging(${element['id']})">
     <div id="todoBoxHeader${element['id']}" class="todo-box-header">
         <h4>${element['task-category']}</h4>
     </div>
@@ -226,8 +256,8 @@ function styleTodoBoxFooterBar() {
         for (let j = 0; j < todos[i]['members'].length; j++) {
             const abbreviation = todos[i]['members'][j];
             const selectedColor = searchMemberSelectedColor(abbreviation);
-                console.log(abbreviation);
-                console.log(selectedColor);
+                // console.log(abbreviation);
+                // console.log(selectedColor);
             document.getElementById(`todoBoxFooter${i}${j}`).classList.add(`bg-color-${selectedColor}`)
         }
     }
