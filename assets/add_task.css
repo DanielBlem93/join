@@ -144,11 +144,6 @@ body {
     color: #000000;
 }
 
-
-
-
-
-
 /* t7 */
 .typographyT7 {
     font-family: 'Poppins';
@@ -263,10 +258,33 @@ body {
 .dropdown-assinged-to {
     height: 51px;
     /* height: 204px; */
-
 }
 
-#select-box{
+#assinged-to-input:hover {
+    background-color: unset !important;
+}
+
+#assinged-persons-container {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 21px;
+}
+
+.assinged-person {
+    height: 45px;
+    width: 45px;
+    background-color: var(--darkblue);
+    border: 1px solid white;
+    border-radius: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.2rem;
+}
+
+#select-box {
     width: 100%;
     z-index: 3;
 
@@ -280,6 +298,7 @@ body {
     width: 100%;
     z-index: 9;
     /* display: ; */
+
 }
 
 #input-container {
@@ -287,12 +306,11 @@ body {
     justify-content: flex-end;
     width: 100%;
     z-index: 5;
-
 }
 
-#input-container:hover{
+#input-container:hover {
     background-color: unset !important;
-} 
+}
 
 .check-container {
     position: absolute;
@@ -313,7 +331,8 @@ body {
 input[type="radio"] {
     display: none;
 }
-input[type="radio"]:checked + label  {
+
+input[type="radio"]:checked+label {
     box-shadow: 0px 4px 4px 0px #00000040;
 
 }
@@ -326,8 +345,8 @@ input[type="radio"]:checked + label  {
     border-radius: 50%;
     cursor: pointer;
 }
+
 .color-circle:hover {
-    cursor: pointer;
     box-shadow: 0px 4px 4px 0px #00000040;
 }
 
@@ -339,7 +358,7 @@ input[type="radio"]:checked + label  {
     z-index: 0;
 }
 
-.category{
+.category {
     display: flex;
     width: 100%;
 }
@@ -377,6 +396,24 @@ input[type="radio"]:checked + label  {
     width: 20px;
     height: 22px;
     display: none;
+}
+
+#input-container2 {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+    z-index: 5;
+}
+
+#input-container2:hover {
+    background-color: unset !important;
+}
+
+
+#select-box2 {
+    width: 100%;
+    z-index: 3;
+    padding: 0;
 }
 
 

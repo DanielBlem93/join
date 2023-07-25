@@ -1,3 +1,4 @@
+// Arrays
 let categorys = [
   {
     'category': 'Sales',
@@ -10,9 +11,12 @@ let categorys = [
 
   }
 ]
-
+// Variables
 let newCategoryStatus = false
+let assingedToStatus = false
 
+
+// Functions for Category Dropdown menu
 
 /**
  * This functions is used to open and close the dropdown menus
@@ -22,7 +26,7 @@ let newCategoryStatus = false
  */
 function toggleDropdown(menuClass) {
   const dropdownMenu = document.getElementsByClassName(menuClass)[0];
-  if (newCategoryStatus === true) {
+  if (newCategoryStatus || assingedToStatus === true) {
     console.log('Aufklappen geblockt')
   } else {
     if (dropdownMenu.style.height === '51px') {
@@ -32,8 +36,6 @@ function toggleDropdown(menuClass) {
     }
   }
 }
-
-
 
 /**
  * Renders the categorys to the dropdown menu
@@ -56,7 +58,7 @@ function renderCategorys() {
 }
 /**
  * This function adds an input to add a new category
- * @param {string} display1 - is important for the toggleInputCategory() function
+ * @param {string} display1 - is important for the toggleInput() function
  * it will be used to change the style: display 
  */
 function newCategory(display1) {
@@ -67,11 +69,11 @@ function newCategory(display1) {
 
 /**
  * shows the inputfield and execute some comfort functions
- * @param {*} display1 -is important for the toggleInputCategory() function
+ * @param {*} display1 -is important for the toggleInput() function
  * it will be used to change the style display 
  */
 function prepareInput(display1) {
-  toggleInputCategory(display1)
+  toggleInput(display1, 'input-container')
   toggleDropdown('dropdown-category')
   document.getElementById('new-category-input').focus()
   newCategoryStatus = true
@@ -85,11 +87,12 @@ function toggleColorPallete(action) {
   colors.style.display = `${action}`
 }
 /**
- * toggles the input
- * @param {string} display1 - need flex or none to change the display style
+ * 
+ * @param {string} display1 -need flex or none to change the display style
+ * @param {string} containerID -the ID of the input you want to toggle
  */
-function toggleInputCategory(display1) {
-  let inputContainer = document.getElementById('input-container')
+function toggleInput(display1, containerId) {
+  let inputContainer = document.getElementById(`${containerId}`)
   inputContainer.style.display = `${display1}`
 }
 /**
@@ -97,7 +100,7 @@ function toggleInputCategory(display1) {
  */
 function showNewCotegory() {
   let selectBox = document.getElementById('select-box')
-  clearSelectBox()
+  clearSelectBox('select-box')
   selectBox.innerHTML = `     
   <div id="input-container" class="dropdown-option" style="display: none;">
   <input id="new-category-input" class="typography2T6 inputFrame"
@@ -114,13 +117,13 @@ function showNewCotegory() {
 
 /**
  * resets the dropdown menu when new category is open
- * @param {string} display1 -flex or none is needed for the toggleInputCategory()
+ * @param {string} display1 -flex or none is needed for the toggleInput()
  */
 function discardNewCategory(display1) {
   newCategoryStatus = false
-  toggleInputCategory(display1)
-  clearSelectBox()
-  toggleDropdown('dropdown-category')
+  toggleInput(display1, 'input-container')
+  clearSelectBox('select-box')
+
   toggleColorPallete('none')
 
 }
@@ -133,25 +136,26 @@ function selectTaskCategory(id) {
   let selected = document.getElementById(`s${id}`)
 
   if (selectBox.innerHTML.includes(`id="s${id}"`)) {
-    clearSelectBox()
+    clearSelectBox('select-box')
   } else {
     toggleDropdown('dropdown-category')
 
-    clearSelectBox()
+    clearSelectBox('select-box')
     selectBox.innerHTML += selected.outerHTML
   }
 }
-
+/**
+ * adds the new catgeory to categorys[] and avoid not choosen colors and no text
+ */
 function addNewCategory() {
   let input = document.getElementById('new-category-input')
-  let selectBox = document.getElementById('select-box')
   let value = input.value
 
-  console.log(value)
   let selectedColor = getSelectedColor();
   if (selectedColor === null) {
     alert('choose a color')
   } else if (value == "") {
+    
     alert('Give your category a name')
   }
   else {
@@ -165,10 +169,15 @@ function addNewCategory() {
     selectTaskCategory(categorys.length - 1)
     newCategoryStatus = false
     toggleDropdown('dropdown-category')
+
+    toggleColorPallete('none')
   }
 
 }
-
+/**
+ * 
+ * @returns the choosen cooler on the color bar and returns null if nothing is choosen
+ */
 function getSelectedColor() {
   const colors = document.getElementsByName("color");
   for (let i = 0; i < colors.length; i++) {
@@ -180,24 +189,43 @@ function getSelectedColor() {
 
 }
 
-
-
+/**
+ * adds select task category to the top if the select-box is empty
+ */
 window.addEventListener("click", function () {
   let selectBox = document.getElementById('select-box');
   if (selectBox.innerHTML == "") {
-    selectBox.innerHTML = `  <div id="start-text" class="dropdown-option dropdown-start-text">
+    selectBox.innerHTML = `  <div class="dropdown-option dropdown-start-text">
     <div id="select-task-category" style="display: unset;">Select task category</div>
     <div id="select-task-category-img"><img src="assets/img/vector2.svg"></div>
 </div>`;
   }
 })
 
-function clearSelectBox() {
-  let selectBox = document.getElementById('select-box')
+
+/**
+ * deletes everthing inside of the select box
+ */
+function clearSelectBox(selectbox) {
+  let selectBox = document.getElementById(`${selectbox}`)
   selectBox.innerHTML = ""
 }
+//================= functions for Assinged to ========================
 
+
+// Variables for Assinged to
+let contactsForAddTask = [
+  {
+    'first-name': 'Maximilian',
+    'last-name': 'Vogel',
+    'checked?': 'unchecked',
+    'color': 'var(--mint)'
+  }
+]
 let atChecked = false
+
+
+
 /**
  * 
  * @param {*} id 
@@ -210,10 +238,110 @@ function checkButton(id) {
   if (atChecked) {
     checkbox.style.display = 'unset'
     checkboxChecked.style.display = 'none'
+    contactsForAddTask[id]['checked?'] = 'unchecked'
   } else {
     checkbox.style.display = 'none'
     checkboxChecked.style.display = 'unset'
+    contactsForAddTask[id]['checked?'] = 'checked'
   }
   atChecked = !atChecked
 
 }
+
+function renderContacts() {
+  let contacts = document.getElementById('contacts')
+  contacts.innerHTML = "";
+
+  for (let i = 0; i < contactsForAddTask.length; i++) {
+    let name = contactsForAddTask[i]["first-name"];
+    let lastName = contactsForAddTask[i]["last-name"]
+
+
+    contacts.innerHTML += `
+    <div onclick="checkButton(${i});renderPersons()" class="dropdown-option dropdown-option-img" id="at${i}">
+    ${name} ${lastName}
+    <div>
+        <img class="check-button" src="assets/img/icons/Check button v1.svg">
+        <img class="check-button-checked" src="assets/img/icons/Check button v1 checked.svg">
+    </div>
+</div>`
+  }
+}
+
+
+function renderPersons() {
+
+  let persons = document.getElementById('assinged-persons-container')
+  persons.innerHTML = "";
+
+  for (let i = 0; i < contactsForAddTask.length; i++) {
+    if (contactsForAddTask[i]["checked?"] === 'checked') {
+
+      let name = contactsForAddTask[i]["first-name"];
+      let lastName = contactsForAddTask[i]["last-name"];
+      let color = contactsForAddTask[i]["color"];
+
+
+      name = name.charAt(0)
+      lastName = lastName.charAt(0)
+
+      persons.innerHTML = `
+      <div style="background-color: ${color}" class="assinged-person">
+                        <Span>${name}${lastName}</Span>
+                    </div>
+      `;
+    } else { }
+  }
+}
+
+window.addEventListener("click", function () {
+  let selectBox2 = document.getElementById('select-box2')
+  if (selectBox2.innerHTML == "") {
+    selectBox2.innerHTML = `   
+
+    <div class="dropdown-option dropdown-start-text">
+    <div id="select-contacts-to-assign" style="display: unset;">Select contacts to assign</div>
+    <div id="select-contacts-to-assign-img"><img src="assets/img/vector2.svg"></div>
+</div>
+    `
+  }
+})
+
+
+function showInviteNewContactInput() {
+
+  let selectBox2 = document.getElementById('select-box2')
+  clearSelectBox('select-box2')
+
+  selectBox2.innerHTML = `     
+  
+  <div id="input-container2" class="dropdown-option" style="display: none;">
+  <input id="assinged-to-input" class="typography2T6 inputFrame"
+      placeholder="Contact E-Mail" type="email">
+  <div class="check-container">
+      <img onclick="discardAssingedTo()"
+          src="assets/img/icons/dropdown-close-button.svg">
+      <img src="assets/img/icons/dropdown-abtrenner.svg">
+      <img onclick="" src="assets/img/icons/dropdown-check-button.svg">
+  </div>
+</div>
+  `;
+
+  prepareAssingedToInput()
+}
+
+function prepareAssingedToInput() {
+  toggleInput('flex', 'input-container2')
+  toggleDropdown('dropdown-assinged-to')
+  assingedToStatus = true
+  document.getElementById('assinged-to-input').focus()
+}
+
+function discardAssingedTo() {
+  clearSelectBox('select-box2')
+  assingedToStatus = false
+
+}
+
+
+// ===================================

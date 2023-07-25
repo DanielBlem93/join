@@ -47,23 +47,16 @@
                 <div style="height: 51px;" class="dropdown dropdown-category typography2T6">
 
                     <div class="dropdown-content">
-
-
                         <div onclick="toggleDropdown('dropdown-category');renderCategorys()" id="select-box">
 
-                            <div id="start-text" class="dropdown-option dropdown-start-text">
+                            <div class="dropdown-option dropdown-start-text">
                                 <div id="select-task-category" style="display: unset;">Select task category</div>
-                                <div  id="select-task-category-img"><img src="assets/img/vector2.svg"></div>
+                                <div id="select-task-category-img"><img src="assets/img/vector2.svg"></div>
                             </div>
-
-
                         </div>
-
                         <div onclick="newCategory('flex', 'none', 'none')" class="dropdown-option ">New Category</div>
-               
                         <div id="categorys"></div>
                     </div>
-
                 </div>
 
                 <fieldset style="display: none;" id="colors-container">
@@ -91,7 +84,11 @@
                     <input id="pink" type="radio" name="color" value="pink" />
                     <label for="pink" class="color-circle circle-pink"></label>
                 </fieldset>
-             <span class="typographyT7 displayNone">This field is required</span>
+
+
+
+
+                <span class="typographyT7 displayNone">This field is required</span>
             </div>
 
 
@@ -101,32 +98,63 @@
                 <div style="height: 51px;" class="dropdown dropdown-assinged-to typography2T6">
 
                     <div class="dropdown-content">
-                        <div onclick="toggleDropdown('dropdown-assinged-to')"
+
+                        <div id="select-box2" onclick="toggleDropdown('dropdown-assinged-to');renderContacts()"
                             class="dropdown-option dropdown-start-text">
-                            <span>Select contacts to assign</span>
-                            <div><img src="assets/img/vector2.svg" alt=""></div>
-                        </div>
-                        <div onclick="checkButton(0)" class="dropdown-option dropdown-option-img" id="at-0">
-                            You
-                            <div>
-                                <img class="check-button" src="assets/img/icons/Check button v1.svg">
-                                <img class="check-button-checked" src="assets/img/icons/Check button v1 checked.svg">
+                     
+
+                            
+                            <div class="dropdown-option dropdown-start-text">
+                                <div id="select-contacts-to-assign" style="display: unset;">Select contacts to assign</div>
+                                <div id="select-contacts-to-assign-img"><img src="assets/img/vector2.svg"></div>
                             </div>
-                        </div>
-                        <div onclick="checkButton(1)" class="dropdown-option dropdown-option-img" id="at-1">
-                            Maximilian Vogel
-                            <div>
-                                <img class="check-button" src="assets/img/icons/Check button v1.svg">
-                                <img class="check-button-checked" src="assets/img/icons/Check button v1 checked.svg">
+
+
+
+
+
+                            <div id="input-container2" class="dropdown-option" style="display: none;">
+                                <input id="assinged-to-input" class="typography2T6 inputFrame"
+                                    placeholder="Contact E-Mail" type="email">
+                                <div class="check-container">
+                                    <img onclick="discardNewCategory('none','unset','unset')"
+                                        src="assets/img/icons/dropdown-close-button.svg">
+                                    <img src="assets/img/icons/dropdown-abtrenner.svg">
+                                    <img onclick="addNewCategory()" src="assets/img/icons/dropdown-check-button.svg">
+                                </div>
                             </div>
+
                         </div>
-                        <div class="dropdown-option dropdown-option-img">Invite new contact<div><img
-                                    src="assets/img/icons/invite-new-contact.svg" alt=""></div>
+
+
+
+                        <div id="contacts">
+
+                        </div>
+
+                        <div onclick="showInviteNewContactInput()" class="dropdown-option dropdown-option-img">Invite new contact<div><img
+                                    src="assets/img/icons/invite-new-contact.svg"></div>
                         </div>
                     </div>
+
+
+                </div>
+
+                <div id="assinged-persons-container">
+
                 </div>
                 <span class="typographyT7 displayNone">This field is required</span>
             </div>
+
+
+
+
+
+
+
+
+
+
 
         </div>
         <span class="typographyT7 displayNone">This field is required</span>
