@@ -13,11 +13,11 @@ async function createTask(){
     await setItem('task', JSON.stringify(task));
 
 
-    console.log(title.value);
+    // console.log(title.value);
     
-    console.log(description.value);
-    console.log(categorys.category);
-    console.log(date.value);
+    // console.log(description.value);
+    // console.log(categorys.category);
+    // console.log(date.value);
 }
 function clearTask (){
     let title = document.getElementById("title");
@@ -26,5 +26,5 @@ function clearTask (){
     title.value = "";
     description.value = "";
     date.value = "";
-    console.log("cleareTask");
+    // console.log("cleareTask");
 }

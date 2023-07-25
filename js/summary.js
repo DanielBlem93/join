@@ -40,15 +40,7 @@ async function getUserName(){
  */
 
 
-async function setInitials() {
-    let initials = document.getElementById('temp-initials');
-    let userName = await getItem('currentUserName');
-    let nameArray = userName.split(' ');
-    let firstInitial = nameArray[0].charAt(0);
-    if(nameArray.length === 1) return [firstInitial, ' '];
-    let secondInitial = nameArray[1].charAt(0);
-    initials.innerHTML = firstInitial + secondInitial;
-}
+
 
 
 

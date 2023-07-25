@@ -68,7 +68,7 @@ let currentDraggedElement;
 
 async function addTask() {
     let addTasks = JSON.parse(await getItem('task'));
-    console.table(addTasks);
+    // console.table(addTasks);
     for (let i = 0; i < addTasks.length; i++) {
         let title = addTasks[i]['title'];
         let description = addTasks[i]['description'];
@@ -87,7 +87,7 @@ async function addTask() {
             'date': date,
         })
     }
-    console.table(todos);
+    // console.table(todos);
     updateHTML();
 }
 
@@ -135,7 +135,7 @@ function renderToDos(category) {
     for (let i = 0; i < filteredToDos.length; i++) {
         const element = filteredToDos[i];
         document.getElementById(category).innerHTML += generateToDoHTML(element);
-        generateToDoHTMLModal(i);
+        generateToDoHTML(i);
     }
 }
 

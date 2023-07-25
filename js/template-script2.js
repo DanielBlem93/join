@@ -1,5 +1,3 @@
-
-
 async function init() {
     await includeHTML();
     await getUserName();
@@ -7,13 +5,14 @@ async function init() {
     await setInitials();
     if(window.location.pathname == '/join/contacts.html'){
     await getContacts();
-    
     }
 }
 
 async function allUserName(){
     let allUsers = JSON.parse(await getItem('userName'));
+    let currentUserName = await getItem('currentUserName');
     console.log(allUsers);
+    console.log(currentUserName);
 }
 
 function showLogout() {
@@ -34,6 +33,19 @@ async function includeHTML() {
         }
     }
 
+}
+
+
+async function setInitials() {
+    let initials = document.getElementById('temp-initials');
+    let userName = await getItem('currentUserName');
+    let nameArray = userName.split(' ');
+
+    console.log(userName)
+    let firstInitial = nameArray[0].charAt(0);
+    if(nameArray.length === 1) return [firstInitial, ' '];
+    let secondInitial = nameArray[1].charAt(0);
+    initials.innerHTML = firstInitial + secondInitial;
 }
 
 

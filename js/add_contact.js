@@ -21,6 +21,7 @@ function closeModal(){
  */
 async function createContact(){
     let id = Math.random().toString(36).substr(2) + Date.now().toString(36);
+    
 
     const contact = {
         name: document.getElementById('contactName').value,

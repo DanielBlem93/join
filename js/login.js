@@ -1,5 +1,5 @@
 let currentUser = [];
-let currentUserName = '';
+let currentUserName;
 
 
 /**
@@ -10,20 +10,36 @@ let currentUserName = '';
  * @function
  * @returns {Promise<void>} Returns a Promise that resolves when the process is complete. No return value.
  */
-async function login(){
-    let email = document.getElementById('loginEmail');
-    let password = document.getElementById('loginPassword');
 
+
+
+
+async function login(){
+    let email = document.getElementById('loginEmail').value;
+    let password = document.getElementById('loginPassword').value;
     let data = JSON.parse(await getItem('userName'));
-    
-    currentUser = Array.isArray(data) ? data.filter(user => user.email === email.value && user.password === password.value) : [];
+    let currentUser = Array.isArray(data) ? data.filter(user => user.email === email && user.password === password) : [];
 
     if(currentUser.length > 0) {
         currentUserName = currentUser[0].name;
         await setItem('currentUserName', currentUserName);
         window.location.href = 'summary.html';
+    } else {
+        document.getElementById('loginEmail').classList.add('bg-red');
+        document.getElementById('loginPassword').classList.add('bg-red');
+        setTimeout(function () {
+            document.getElementById('loginEmail').classList.remove('bg-red');
+            document.getElementById('loginPassword').classList.remove('bg-red');
+        }, 500);
     }
-
-    email.value = '';
+    document.getElementById('loginEmail').value = '';
+    document.getElementById('loginPassword').value = '';
 }
+
+async function guestLogin(){
+    currentUserName = 'Guest';
+    await setItem('currentUserName', currentUserName);
+    window.location.href = 'summary.html';
+}
+
     
