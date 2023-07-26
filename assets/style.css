@@ -28,6 +28,10 @@
 
     /* button colors */
     --darkblueblue: rgb(9, 25, 49);
+    /* Prio-colors */
+    --prio-red: #FF3D00;
+    --prio-orange: #FFA800;
+    --prio-green: #7AE229;
 
 }
 
@@ -260,3 +264,5 @@ nav>img {
     display: flex;
     z-index: 2;
 }
+
+

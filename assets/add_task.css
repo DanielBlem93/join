@@ -255,34 +255,6 @@ body {
     height: 51px;
 }
 
-.dropdown-assinged-to {
-    height: 51px;
-    /* height: 204px; */
-}
-
-#assinged-to-input:hover {
-    background-color: unset !important;
-}
-
-#assinged-persons-container {
-    display: flex;
-    gap: 8px;
-    margin-bottom: 21px;
-}
-
-.assinged-person {
-    height: 45px;
-    width: 45px;
-    background-color: var(--darkblue);
-    border: 1px solid white;
-    border-radius: 50%;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    font-size: 1.2rem;
-}
 
 #select-box {
     width: 100%;
@@ -404,9 +376,39 @@ input[type="radio"]:checked+label {
     width: 100%;
     z-index: 5;
 }
-
+/* Assinged to */
 #input-container2:hover {
     background-color: unset !important;
+}
+
+
+.dropdown-assinged-to {
+    height: 51px;
+    /* height: 204px; */
+}
+
+#assinged-to-input:hover {
+    background-color: unset !important;
+}
+
+#assinged-persons-container {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 21px;
+}
+
+.assinged-person {
+    height: 45px;
+    width: 45px;
+    background-color: var(--darkblue);
+    border: 1px solid white;
+    border-radius: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.2rem;
 }
 
 
@@ -588,15 +590,21 @@ input[type="radio"]:checked+label {
 
 .addTaskFrame37 {
     /* layout */
+    
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 20px;
+    gap: 30px;
 
     /* design */
     cursor: pointer;
 
     /* position */
+   
+}
+
+.addTaskFrame37 label{
     position: relative;
 }
 
@@ -618,6 +626,11 @@ input[type="radio"]:checked+label {
     font-style: normal;
     font-weight: 400;
     line-height: 19.2px;
+}
+
+#subtaskContainer{
+    display: flex;
+    flex-direction: column;
 }
 
 
@@ -831,3 +844,21 @@ input[type="radio"]:checked+label {
 }
 
 /* ========================================= */
+
+
+/* JS Class */
+
+.urgent{
+    background-color: var(--prio-red);
+;
+}
+.medium{
+    background-color: var(--prio-orange);
+}
+
+.low{
+    background-color: var(--prio-red);
+}
+.white-color path {
+    fill: white;
+  }

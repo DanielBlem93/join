@@ -155,7 +155,7 @@ function addNewCategory() {
   if (selectedColor === null) {
     alert('choose a color')
   } else if (value == "") {
-    
+
     alert('Give your category a name')
   }
   else {
@@ -220,11 +220,23 @@ let contactsForAddTask = [
     'last-name': 'Vogel',
     'checked?': 'unchecked',
     'color': 'var(--mint)'
+  },
+  {
+    'first-name': 'Maxi',
+    'last-name': 'Gokl',
+    'checked?': 'unchecked',
+    'color': 'var(--mint)'
+  },
+  {
+    'first-name': 'Maximilian',
+    'last-name': 'Vogel',
+    'checked?': 'unchecked',
+    'color': 'var(--mint)'
   }
 ]
-let atChecked = false
-
-
+let emails = [
+  // 'd.blem@freenet.de'
+]
 
 /**
  * 
@@ -235,17 +247,23 @@ function checkButton(id) {
   let checkbox = document.getElementsByClassName(`check-button`)[id]
   let checkboxChecked = document.getElementsByClassName(`check-button-checked`)[id]
 
-  if (atChecked) {
+  if (checkbox.style.display === 'none') {
     checkbox.style.display = 'unset'
     checkboxChecked.style.display = 'none'
-    contactsForAddTask[id]['checked?'] = 'unchecked'
+
   } else {
     checkbox.style.display = 'none'
     checkboxChecked.style.display = 'unset'
+  }
+}
+
+function checkInJSON(id) {
+  let checkbox = document.getElementsByClassName(`check-button`)[id]
+  if (checkbox.style.display === 'unset') {
+    contactsForAddTask[id]['checked?'] = 'unchecked'
+  } else {
     contactsForAddTask[id]['checked?'] = 'checked'
   }
-  atChecked = !atChecked
-
 }
 
 function renderContacts() {
@@ -258,16 +276,17 @@ function renderContacts() {
 
 
     contacts.innerHTML += `
-    <div onclick="checkButton(${i});renderPersons()" class="dropdown-option dropdown-option-img" id="at${i}">
-    ${name} ${lastName}
-    <div>
-        <img class="check-button" src="assets/img/icons/Check button v1.svg">
-        <img class="check-button-checked" src="assets/img/icons/Check button v1 checked.svg">
-    </div>
-</div>`
-  }
-}
+    <div onclick="checkButton(${i});checkInJSON(${i});renderPersons()" class="dropdown-option dropdown-option-img" id="at${i}">
+      ${name} ${lastName}
+      <div>
+          <img class="check-button" src="assets/img/icons/Check button v1.svg">
+          <img style="display: none;" class="check-button-checked" src="assets/img/icons/Check button v1 checked.svg">
+      </div>
+    </div>`
 
+  }
+  renderEmails()
+}
 
 function renderPersons() {
 
@@ -285,7 +304,7 @@ function renderPersons() {
       name = name.charAt(0)
       lastName = lastName.charAt(0)
 
-      persons.innerHTML = `
+      persons.innerHTML += `
       <div style="background-color: ${color}" class="assinged-person">
                         <Span>${name}${lastName}</Span>
                     </div>
@@ -307,7 +326,6 @@ window.addEventListener("click", function () {
   }
 })
 
-
 function showInviteNewContactInput() {
 
   let selectBox2 = document.getElementById('select-box2')
@@ -322,7 +340,7 @@ function showInviteNewContactInput() {
       <img onclick="discardAssingedTo()"
           src="assets/img/icons/dropdown-close-button.svg">
       <img src="assets/img/icons/dropdown-abtrenner.svg">
-      <img onclick="" src="assets/img/icons/dropdown-check-button.svg">
+      <img onclick="applyNewEmail()" src="assets/img/icons/dropdown-check-button.svg">
   </div>
 </div>
   `;
@@ -343,5 +361,103 @@ function discardAssingedTo() {
 
 }
 
+function applyNewEmail() {
+  let input = document.getElementById('assinged-to-input')
 
-// ===================================
+  let vaildEmail = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+
+  if (input.value.match(vaildEmail)) {
+
+    emails.push(input.value)
+    console.log('vaild email adress')
+    renderEmails()
+    discardAssingedTo()
+
+  } else {
+    alert('Invaild E-Mail address')
+  }
+}
+
+function renderEmails() {
+  let emailscontainer = document.getElementById('emails')
+  emailscontainer.innerHTML = '<div class="dropdown-option send-email"><b>Send Email to:</b></div>'
+
+  if (emails.length > 0) {
+    for (let i = 0; i < emails.length; i++) {
+      let email = emails[i]
+      index = i + contactsForAddTask.length
+
+      emailscontainer.innerHTML += `
+      
+      <div onclick="checkButton(${index});" class="dropdown-option dropdown-option-img" id="${index}">
+        ${email}
+        <div>
+            <img style="display: none;" " class="check-button" src="assets/img/icons/Check button v1.svg">
+            <img style="display: unset;"  class="check-button-checked" src="assets/img/icons/Check button v1 checked.svg">
+        </div>
+      </div>`
+    }
+  }
+}
+
+
+// ===================================Dropdowns Ende============================
+let subtasks = []
+
+function changeColor(id, priority) {
+  let buttons = document.getElementsByClassName('addTaskFrame14Prio');
+  for (let i = 0; i < buttons.length; i++) {
+    debugger
+    const button = buttons[i];
+    const svgPath = button.querySelector('svg');
+    const isCurrentButton = button.id === id;
+
+    if (isCurrentButton) {
+      svgPath.classList.add('white-color');
+      button.querySelector('span').classList.add('txtWhite');
+      button.classList.add(priority);
+    } else {
+      svgPath.classList.remove('white-color');
+      button.querySelector('span').classList.remove('txtWhite');
+      button.classList.remove('urgent', 'medium', 'low');
+    }
+  }
+}
+
+function addNewSubtask() {
+  const inputElement = document.getElementById('newSubtaskInput');
+  const inputValue = inputElement.value.trim();
+  if (inputValue !== '') {
+
+    subtasks.push(inputValue)
+    renderSubtask()
+    inputElement.value =""
+
+  } else {
+    alert('A name for your subtask is requierd')
+  }
+
+}
+
+
+function renderSubtask() {
+
+
+  let container = document.getElementById('subtaskContainer')
+  container.innerHTML = ""
+
+  for (let i = 0; i < subtasks.length; i++) {
+    const task = subtasks[i];
+
+    container.innerHTML +=
+      `
+    <label>
+      <input type="checkbox" checked="checked">
+      <span class="checkmarkText typography2body">${task}</span>
+      <span class="checkmark"><img class="rectangle6" src="./assets/img/rectangle6.svg"></span>
+    </label
+    `
+  }
+
+
+}
