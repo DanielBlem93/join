@@ -14,13 +14,13 @@ let currentUserName;
 
 
 
-async function login(){
+async function login() {
     let email = document.getElementById('loginEmail').value;
     let password = document.getElementById('loginPassword').value;
     let data = JSON.parse(await getItem('userName'));
     let currentUser = Array.isArray(data) ? data.filter(user => user.email === email && user.password === password) : [];
 
-    if(currentUser.length > 0) {
+    if (currentUser.length > 0) {
         currentUserName = currentUser[0].name;
         await setItem('currentUserName', currentUserName);
         window.location.href = 'summary.html';
@@ -36,10 +36,20 @@ async function login(){
     document.getElementById('loginPassword').value = '';
 }
 
-async function guestLogin(){
+async function guestLogin() {
     currentUserName = 'Guest';
     await setItem('currentUserName', currentUserName);
     window.location.href = 'summary.html';
 }
 
-    
+
+/**
+ * 
+ */
+function moveLogo() {
+    document.getElementById('img-container').classList.add('movedContainer');
+    document.getElementById('logo-image').classList.add('movedImage');
+    document.getElementById('login-header').classList.add('opacity');
+    document.getElementById('login-form').classList.add('opacity');
+    document.getElementById('indexFooter').classList.add('opacity');
+}    
