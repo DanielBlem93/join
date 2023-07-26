@@ -16,12 +16,64 @@
     --purple: #E200BE;
     --darkblue: #0038FF;
 
+    /* font colors */
+    --white: rgba(251, 251, 251);
+    --black: rgba(0, 0, 0);
+    --icon: rgb(168, 168, 168);
+
+    /* background colors */
+    --darkblue: rgb(42, 54, 71);
+    --lightgrey: rgb(246, 247, 248);
+    --ligthblue: rgb(41, 171, 226);
+
+    /* button colors */
+    --darkblueblue: rgb(9, 25, 49);
+
 }
 
 * {
     box-sizing: border-box;
     margin: 0;
     font-family: 'Inter';
+}
+
+/* typography---------------- */
+
+.typo2Body {
+    font-family: 'Inter';
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 19.2px;
+}
+
+
+.typo2t6 {
+    font-family: 'Inter';
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 24px;
+}
+
+.typo2t1 {
+    font-family: 'Inter';
+    font-size: 61px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 73.2px;
+}
+
+.txtBlack {
+    color: var(--black)
+}
+
+.txtWhite {
+    color: var(--white);
+}
+
+.txtGrey {
+    color: var(--icon);
 }
 
 
@@ -85,7 +137,8 @@ header>div>span {
     color: var(--lightblue);
 
 }
-#logout{
+
+#logout {
     width: 91px;
     height: 41px;
     font-size: 21px;
@@ -103,7 +156,8 @@ header>div>span {
     cursor: pointer;
     transition: all 0.3s ease-in-out;
 }
-.hidden-logout-btn{
+
+.hidden-logout-btn {
     top: 20px;
     opacity: 0;
     z-index: 999;
