@@ -5,6 +5,7 @@ async function createTask(){
     let title = document.getElementById("title");
     let description = document.getElementById("description");
     let date = document.getElementById("date");
+    let id = 
 
     task = JSON.parse(await getItem('task'));
 
@@ -19,6 +20,7 @@ async function createTask(){
     // console.log(categorys.category);
     // console.log(date.value);
 }
+
 function clearTask (){
     let title = document.getElementById("title");
     let description = document.getElementById("description");

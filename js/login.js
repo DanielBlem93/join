@@ -10,10 +10,6 @@ let currentUserName;
  * @function
  * @returns {Promise<void>} Returns a Promise that resolves when the process is complete. No return value.
  */
-
-
-
-
 async function login(){
     let email = document.getElementById('loginEmail').value;
     let password = document.getElementById('loginPassword').value;

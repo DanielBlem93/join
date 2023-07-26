@@ -37,31 +37,31 @@
 // }]
 let todos = [];
 
-let members = [{
-    'firstName': 'Anton',
-    'lastName': 'Mayer',
-    'email': 'anton@gmail.com',
-    'selected-color': 'green',
-    'abbreviation': '',
-    'fullName': ''
-}, 
-{
-    'firstName': 'Anja',
-    'lastName': 'Schulz',
-    'email': 'schulz@hotmail.com',
-    'selected-color': 'blue',
-    'abbreviation': '',
-    'fullName': ''
+// let members = [{
+//     'firstName': 'Anton',
+//     'lastName': 'Mayer',
+//     'email': 'anton@gmail.com',
+//     'selected-color': 'green',
+//     'abbreviation': '',
+//     'fullName': ''
+// }, 
+// {
+//     'firstName': 'Anja',
+//     'lastName': 'Schulz',
+//     'email': 'schulz@hotmail.com',
+//     'selected-color': 'blue',
+//     'abbreviation': '',
+//     'fullName': ''
 
-}, 
-{
-    'firstName': 'Eva',
-    'lastName': 'Fischer',
-    'email': 'fischer@gmail.com',
-    'selected-color': 'yellow',
-    'abbreviation': '',
-    'fullName': ''
-}]
+// }, 
+// {
+//     'firstName': 'Eva',
+//     'lastName': 'Fischer',
+//     'email': 'fischer@gmail.com',
+//     'selected-color': 'yellow',
+//     'abbreviation': '',
+//     'fullName': ''
+// }];
 
 
 let currentDraggedElement;
@@ -75,7 +75,7 @@ async function addTask() {
         let date = addTasks[i]['date'];
         let category = addTasks[i]['category'];
         todos.push({
-            'id': todos.length + 1,
+            'id': todos.length,
             'category': 'open',
             'task-category': 'Design',
             'title': title,
@@ -113,12 +113,17 @@ function updateHTML() {
     renderToDos('progress');
     renderToDos('feedback');
     renderToDos('closed');
-    fullName();
-    abbreviation();
+    //fullName();
+    //abbreviation();
     styleTodos();
-    generateTodoBoxFooterBar();
-    styleTodoBoxFooterBar();
+    //generateTodoBoxFooterBar();
+    //styleTodoBoxFooterBar();
+    console.table(todos);
+    setItemTodo();
+}
 
+async function setItemTodo() {
+    await setItem('todos', JSON.stringify(todos));
 }
 
 
