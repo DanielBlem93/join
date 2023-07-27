@@ -1,21 +1,40 @@
 // Arrays
-let categorys = [
-  {
-    'category': 'Sales',
-    'color': 'pink',
-
-  },
-  {
-    'category': 'Backoffice',
-    'color': 'mint',
-
-  }
-]
+let categorys = []
+let contactsForAddTask = []
+let subtasks = []
+let emails = []
+let newTask = []
 // Variables
+let currentPriority = ""
 let newCategoryStatus = false
 let assingedToStatus = false
 
+/**
+ * presets the arrays whit values. This function can also be used to reset every array
+ */
+function initArrays() {
+  categorys = [
+    {
+      'category': 'Sales',
+      'color': 'pink',
+    },
+    {
+      'category': 'Backoffice',
+      'color': 'mint',
+    }
+  ]
+  contactsForAddTask = [
+    {
+      'first-name': 'Maximilian',
+      'last-name': 'Vogel',
+      'checked?': 'unchecked',
+      'color': 'var(--mint)'
+    },
+  ]
 
+  emails = []
+  subtasks = []
+}
 // Functions for Category Dropdown menu
 
 /**
@@ -212,35 +231,9 @@ function clearSelectBox(selectbox) {
 }
 //================= functions for Assinged to ========================
 
-
-// Variables for Assinged to
-let contactsForAddTask = [
-  {
-    'first-name': 'Maximilian',
-    'last-name': 'Vogel',
-    'checked?': 'unchecked',
-    'color': 'var(--mint)'
-  },
-  {
-    'first-name': 'Maxi',
-    'last-name': 'Gokl',
-    'checked?': 'unchecked',
-    'color': 'var(--mint)'
-  },
-  {
-    'first-name': 'Maximilian',
-    'last-name': 'Vogel',
-    'checked?': 'unchecked',
-    'color': 'var(--mint)'
-  }
-]
-let emails = [
-  // 'd.blem@freenet.de'
-]
-
 /**
- * 
- * @param {*} id 
+ * checks/unchecks the checkmark
+ * @param {string} id - the id of checkmark you clicking on 
  */
 function checkButton(id) {
 
@@ -256,7 +249,10 @@ function checkButton(id) {
     checkboxChecked.style.display = 'unset'
   }
 }
-
+/**
+ * set the contact on checked/uncheckd in the JSON array
+ * @param {id} id - the id of person you clicking on 
+ */
 function checkInJSON(id) {
   let checkbox = document.getElementsByClassName(`check-button`)[id]
   if (checkbox.style.display === 'unset') {
@@ -265,7 +261,9 @@ function checkInJSON(id) {
     contactsForAddTask[id]['checked?'] = 'checked'
   }
 }
-
+/**
+ * renders the contacts form the contactsForAddTask array into to the dropdown
+ */
 function renderContacts() {
   let contacts = document.getElementById('contacts')
   contacts.innerHTML = "";
@@ -287,7 +285,9 @@ function renderContacts() {
   }
   renderEmails()
 }
-
+/**
+ * renders the contacts under the dropdown menu to see wich persons the task is assinged to
+ */
 function renderPersons() {
 
   let persons = document.getElementById('assinged-persons-container')
@@ -312,7 +312,9 @@ function renderPersons() {
     } else { }
   }
 }
-
+/**
+ * eventlistner to fill the selcetbox if its empty with default value
+ */
 window.addEventListener("click", function () {
   let selectBox2 = document.getElementById('select-box2')
   if (selectBox2.innerHTML == "") {
@@ -325,7 +327,9 @@ window.addEventListener("click", function () {
     `
   }
 })
-
+/**
+ * shows the input on dreopdown menu
+ */
 function showInviteNewContactInput() {
 
   let selectBox2 = document.getElementById('select-box2')
@@ -347,23 +351,29 @@ function showInviteNewContactInput() {
 
   prepareAssingedToInput()
 }
-
+/**
+ * some functions to make the input available
+ */
 function prepareAssingedToInput() {
   toggleInput('flex', 'input-container2')
   toggleDropdown('dropdown-assinged-to')
   assingedToStatus = true
   document.getElementById('assinged-to-input').focus()
 }
-
+/**
+ * clears the first reiter of the dropdown
+ */
 function discardAssingedTo() {
   clearSelectBox('select-box2')
   assingedToStatus = false
 
 }
-
+/**
+ * checks and appls the email into the emails array
+ */
 function applyNewEmail() {
-  let input = document.getElementById('assinged-to-input')
 
+  let input = document.getElementById('assinged-to-input')
   let vaildEmail = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 
   if (input.value.match(vaildEmail)) {
@@ -377,7 +387,9 @@ function applyNewEmail() {
     alert('Invaild E-Mail address')
   }
 }
-
+/**
+ * renders the email form the email array into the dropdown
+ */
 function renderEmails() {
   let emailscontainer = document.getElementById('emails')
   emailscontainer.innerHTML = '<div class="dropdown-option send-email"><b>Send Email to:</b></div>'
@@ -399,15 +411,16 @@ function renderEmails() {
     }
   }
 }
-
-
 // ===================================Dropdowns Ende============================
-let subtasks = []
+/**
+ * Changes the background color of the Priority you cklicked on
+ * @param {string} id - the id of the prioritybutton 
+ * @param {string} priority - the priority you decided on
+ */
 
 function changeColor(id, priority) {
   let buttons = document.getElementsByClassName('addTaskFrame14Prio');
   for (let i = 0; i < buttons.length; i++) {
-    debugger
     const button = buttons[i];
     const svgPath = button.querySelector('svg');
     const isCurrentButton = button.id === id;
@@ -416,6 +429,7 @@ function changeColor(id, priority) {
       svgPath.classList.add('white-color');
       button.querySelector('span').classList.add('txtWhite');
       button.classList.add(priority);
+      currentPriority = priority
     } else {
       svgPath.classList.remove('white-color');
       button.querySelector('span').classList.remove('txtWhite');
@@ -424,6 +438,10 @@ function changeColor(id, priority) {
   }
 }
 
+/**
+ * pushes the text into the subtasks array and creates a new subtask
+ */
+
 function addNewSubtask() {
   const inputElement = document.getElementById('newSubtaskInput');
   const inputValue = inputElement.value.trim();
@@ -431,17 +449,18 @@ function addNewSubtask() {
 
     subtasks.push(inputValue)
     renderSubtask()
-    inputElement.value =""
+    inputElement.value = ""
 
   } else {
     alert('A name for your subtask is requierd')
   }
-
 }
 
+/**
+ * renders the subtasks from the subtasks array
+ */
 
 function renderSubtask() {
-
 
   let container = document.getElementById('subtaskContainer')
   container.innerHTML = ""
@@ -453,11 +472,95 @@ function renderSubtask() {
       `
     <label>
       <input type="checkbox" checked="checked">
-      <span class="checkmarkText typography2body">${task}</span>
+      <span class="checkmarkText typography2body subtask">${task}</span>
       <span class="checkmark"><img class="rectangle6" src="./assets/img/rectangle6.svg"></span>
     </label
     `
   }
-
-
 }
+
+/**
+ * clears the complete tasks 
+ */
+function clearTask() {
+  let title = document.getElementById('title')
+  let description = document.getElementById('description')
+  let date = document.getElementById('date')
+
+  title.value = ""
+  description.value = ""
+  date.value = ""
+  resetPriority()
+  initArrays()
+  renderPersons()
+  renderSubtask()
+  clearSelectBox('select-box')
+  clearSelectBox('select-box2')
+  newCategoryStatus = false
+  assingedToStatus = false
+}
+
+/**
+ * changes colors of prioritys back to default
+ */
+function resetPriority() {
+  let buttons = document.getElementsByClassName('addTaskFrame14Prio');
+  for (let i = 0; i < buttons.length; i++) {
+    const button = buttons[i];
+    const svgPath = button.querySelector('svg');
+
+    button.classList.remove('urgent', 'medium', 'low');
+    svgPath.classList.remove('white-color');
+    button.querySelector('span').classList.remove('txtWhite');
+  }
+}
+/**
+ * creates the task
+ */
+function createTask() {
+  let titleInput = document.getElementById('title')
+  let descriptionInput = document.getElementById('description')
+  let dateInput = document.getElementById('date')
+  let categoryInput = document.querySelector('#select-box > div')
+
+  let title = titleInput.value.trim()
+  let description = descriptionInput.value.trim()
+  let date = dateInput.value.trim()
+  let category = categoryInput.innerText.trim()
+
+  newTask = []
+  newTask = [
+    {
+      'title': `${title}`,
+      'description': `${description}`,
+      'date': `${date}`,
+      'category': `${category}`,
+      'persons': [],
+      'emails': [emails],
+      'priority': `${currentPriority}`,
+      'subtasks': [subtasks]
+    }
+  ]
+  addPersonsToNewTask()
+  alert('Created a new Task')
+  clearTask()
+}
+/**
+ * Adds the person to the new Task array as JSON
+ */
+function addPersonsToNewTask() {
+  for (let i = 0; i < contactsForAddTask.length; i++) {
+    const contact = contactsForAddTask[i];
+   
+    if (contact['checked?'] === 'checked') {
+      let firstName = contact['first-name']
+      let lastName = contact['last-name']
+      let name =
+      {
+        'name': `${firstName} ${lastName}`
+      }
+      newTask[i].persons.push(name)
+    }
+  }
+}
+

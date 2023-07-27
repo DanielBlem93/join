@@ -19,7 +19,7 @@
     <title>Add Task</title>
 </head>
 
-<body onload="init();">
+<body onload="init();initArrays()">
 
     <div w3-include-html="assets/templates/desktop_template.html"></div>
     <main>
@@ -124,16 +124,6 @@
                 <span class="typographyT7 displayNone">This field is required</span>
             </div>
 
-
-
-
-
-
-
-
-
-
-
         </div>
         <span class="typographyT7 displayNone">This field is required</span>
         </div>
@@ -214,23 +204,19 @@
                       <img class="iconoirCancel" src="./assets/img/iconoir_cancel.svg" onclick="addNewSubtask()">
                     </div>
                     <div class="addTaskFrame37" id="subtaskContainer">
-                      <label>
-                        <input type="checkbox" checked="checked">
-                        <span class="checkmarkText typography2body">Subtask&nbsp;1</span>
-                        <span class="checkmark"><img class="rectangle6" src="./assets/img/rectangle6.svg"></span>
-                      </label>
-                      <label>
+
+                      <!-- <label>
                         <input type="checkbox" checked="checked">
                         <span class="checkmarkText typography2body">Subtask&nbsp;2</span>
                         <span class="checkmark"><img class="rectangle6" src="./assets/img/rectangle6.svg"></span>
-                      </label>
+                      </label> -->
                     </div>
                   </div>
             </div>
         </div>
         <div class="addTaskFrame35">
             <div class="addTaskFrame27">
-                <button onclick="clearTask ()" class="addTaskSecondary">
+                <button onclick="clearTask()" class="addTaskSecondary">
                     <span class="typography2T6">Clear</span>
                     <img class="iconoirCancel2" src="assets/img/iconoir_cancel2.svg">
                     <img class="iconoirCancel3" src="assets/img/iconoir_cancel3.svg">
