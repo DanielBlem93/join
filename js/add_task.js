@@ -527,7 +527,8 @@ function createTask() {
   let description = descriptionInput.value.trim()
   let date = dateInput.value.trim()
   let category = categoryInput.innerText.trim()
-
+  let taskId = Math.random().toString(36).substr(2) + Date.now().toString(36);
+  console.log(category);
   newTask = []
   newTask = [
     {
@@ -538,12 +539,15 @@ function createTask() {
       'persons': [],
       'emails': [emails],
       'priority': `${currentPriority}`,
-      'subtasks': [subtasks]
+      'subtasks': [subtasks],
+      'taskID': `${taskId}`
     }
   ]
+  
   addPersonsToNewTask()
-  alert('Created a new Task')
+  //alert('Created a new Task')
   clearTask()
+  createTaskBackend(newTask);
 }
 /**
  * Adds the person to the new Task array as JSON

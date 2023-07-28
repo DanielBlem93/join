@@ -1,6 +1,7 @@
 
 function showTodo(id) {
     const todo = todos.find(t => t['id'] === id);
+    console.log(todo['id']);
     let modalTodo = document.getElementById('showTodo');
     modalTodo.classList.remove('displayNone');
     modalTodo.innerHTML = '';
@@ -18,6 +19,7 @@ function generateToDoHTMLModal(todo) {
     <h3>${todo['title']}</h3>
     <p>${todo['date']}</p>
     <p>${todo['text']}</p>
+    <p>${todo['members']}</p>
     <div onclick="deleteTodo(${todo['id']})" class="todo-delete">
             <img src="./assets/img/delete.png" alt="">
     </div>
@@ -30,15 +32,22 @@ function closeModalBord() {
 }
 
 async function deleteTodo(id) {
-    console.log(id);
-    let index = todos.findIndex(t => t['id'] === id);
-    if (index > -1) {  
-        let modalTodo = document.getElementById('showTodo');
-        modalTodo.classList.add('displayNone');
-        todos.splice(index, 1);
-        await setItem('task', JSON.stringify(todos));
-        updateHTML();
-    } else {
-        console.error('Todo with id ' + id + ' not found');
+    let taskList = JSON.parse(await getItem('task'));
+   // await setItem('task', JSON.stringify(taskList));
+
+    for (let i = 0; i < taskList.length; i++) {
+        let taskArray = taskList[i];
+        let index = taskArray.findIndex(task => task.taskID === id);
+        if (index > -1) {
+            taskArray.splice(index, 1);
+            await setItem('task', JSON.stringify(taskList));
+            await addTask();
+            updateHTML();
+            return;
+        }
     }
+
+    console.error('Todo with id ' + id + ' not found in the task file');
 }
+
+
