@@ -29,8 +29,9 @@ function generateToDoHTMLModal(todo) {
             </div>
     <h4 class="modal-category">${todo['task-category']}</h4>
     <h3 class="modal-title">${todo['title']}</h3>
+    <p class="modal-text"> ${todo['text']}</p>
     <p class="modal-date"><b>Due date:</b> ${todo['date']}</p>
-    <p class="modal-priority"><b>Priority:</b> ${todo['text']}</p>
+    <p class="modal-priority"><b>Priority:</b> <span id="priority">${todo['priority']}</span></p>
     <div class="modal-members">
         <p><b>Assigned To:</b></p>
          <p>${todo['members']}</p>
