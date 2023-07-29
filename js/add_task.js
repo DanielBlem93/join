@@ -681,6 +681,6 @@ function flyOut() {
   body.style.transform = ('translateX(100%)')
   setTimeout(() => {
     window.location.href = 'board.html'
-  }, 500);
+  }, 250);
 
 }
