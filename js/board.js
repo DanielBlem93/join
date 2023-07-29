@@ -90,7 +90,7 @@ async function addTask() {
                     'title': task.title,
                     'text': task.description,
                     'done-fraction': '',
-                    'members': task.persons[0].name,
+                    'members': task.persons && task.persons[0] && task.persons[0].name ? task.persons[0].name : 'All Employees',
                     'priority': task.priority,
                     'selected-color': '',
                     'date': task.date,
@@ -101,6 +101,7 @@ async function addTask() {
     }
     updateHTML();
 }
+
 
 
 /**
@@ -128,10 +129,12 @@ async function getStoredTodos() {
  * In addition, the toDo divs are generated.
  */
 async function initBoard() {
+    console.log(todos);
     await getStoredTodos();
     await addTask();
     init();
     updateHTML();
+    console.log(todos);
   }
   
 
