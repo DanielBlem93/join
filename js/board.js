@@ -129,12 +129,10 @@ async function getStoredTodos() {
  * In addition, the toDo divs are generated.
  */
 async function initBoard() {
-    console.log(todos);
     await getStoredTodos();
     await addTask();
     init();
     updateHTML();
-    console.log(todos);
   }
   
 
@@ -149,11 +147,11 @@ async function updateHTML() {
     renderToDos('progress');
     renderToDos('feedback');
     renderToDos('closed');
-    fullName();
-    abbreviation();
+    // fullName();
+    // abbreviation();
     styleTodos();
-    generateTodoBoxFooterBar();
-    styleTodoBoxFooterBar();
+    // generateTodoBoxFooterBar();
+    // styleTodoBoxFooterBar();
     await setItemTodo();
     //handelTodos();
 }
@@ -237,7 +235,9 @@ async function movedTo(category) {
  * @returns 
  */
 function generateToDoHTML(element) {
-    return `
+    let member = element['members'];
+
+    return /*html*/ `
     <div onclick="showTodo(${element['id']})" class="todo-box" draggable="true" ondragstart="startDragging(${element['id']})">
     <div id="todoBoxHeader${element['id']}" class="todo-box-header">
         <h4>${element['task-category']}</h4>
@@ -258,42 +258,50 @@ function generateToDoHTML(element) {
         <p>${element['done-fraction']} Done</p>
     </div>
     <div id="todoBoxFooterBar${element['id']}" class="todo-box-footer-bar">
+    <div  class="todo-box-footer">
+        <div class="todo-box-footer-right">
+            <p>${member}</p>
+        </div>
+         <div class="todo-box-footer-left">
+             <p>${element['priority']}</p>
+        </div>
+     </div> 
     </div>
     </div>
     `;
 }
 
 
-/**
- * This function is used to generate the member icons for each todo div.
- */
-function generateTodoBoxFooterBar() {
-    for (let i = 0; i < todos.length; i++) {
-        for (let j = 0; j < todos[i]['members'].length; j++) {
-            let abbreviation = todos[i]['members'][j];
-            document.getElementById(`todoBoxFooterBar${todos[i]['id']}`).innerHTML
-                += generateHTMLTodoBoxFooterBar(abbreviation, i, j);
-        }
+// /**
+//  * This function is used to generate the member icons for each todo div.
+//  */
+// function generateTodoBoxFooterBar() {
+//     for (let i = 0; i < todos.length; i++) {
+//         for (let j = 0; j < todos[i]['members'].length; j++) {
+//             let abbreviation = todos[i]['members'][j];
+//             document.getElementById(`todoBoxFooterBar${todos[i]['id']}`).innerHTML
+//                 += generateHTMLTodoBoxFooterBar(abbreviation, i, j);
+//         }
 
-    }
-}
+//     }
+// }
 
 
-/**
- * This function generates the actual HTML code for the todo-box-footer-bar. The member icons are displayed.
- * 
- * @param {string} abbreviation - This input variable is the respective name abbreviation of a member of the todo container.
- * @returns 
- */
-function generateHTMLTodoBoxFooterBar(abbreviation, i, j) {
-    return `
-    <div id="todoBoxFooter${i}${j}" class="todo-box-footer">
-        <div class="todo-box-footer-left">
-        <p>${abbreviation}</p>
-        </div>
-    </div> 
-    `
-}
+// /**
+//  * This function generates the actual HTML code for the todo-box-footer-bar. The member icons are displayed.
+//  * 
+//  * @param {string} abbreviation - This input variable is the respective name abbreviation of a member of the todo container.
+//  * @returns 
+//  */
+// function generateHTMLTodoBoxFooterBar(abbreviation, i, j) {
+//     return `
+//     <div id="todoBoxFooter${i}${j}" class="todo-box-footer">
+//         <div class="todo-box-footer-left">
+//         <p>${abbreviation}</p>
+//         </div>
+//     </div> 
+//     `
+// }
 
 /**
  * This function adds style elements to the todo divs.
@@ -306,58 +314,58 @@ function styleTodos() {
 }
 
 
-/**
- * Function that styles the Todo Box Footer Bar.
- * It iterates over every todo and every member of each todo. 
- * Then, it adds a background color to the respective member's element, based on their abbreviation.
- * 
- * @function
- * @returns {void} No return value.
- */
-function styleTodoBoxFooterBar() {
-    for (let i = 0; i < todos.length; i++) {
-        for (let j = 0; j < todos[i]['members'].length; j++) {
-            const abbreviation = todos[i]['members'][j];
-            const selectedColor = searchMemberSelectedColor(abbreviation);
-            document.getElementById(`todoBoxFooter${i}${j}`).classList.add(`bg-color-${selectedColor}`)
-        }
-    }
-}
+// /**
+//  * Function that styles the Todo Box Footer Bar.
+//  * It iterates over every todo and every member of each todo. 
+//  * Then, it adds a background color to the respective member's element, based on their abbreviation.
+//  * 
+//  * @function
+//  * @returns {void} No return value.
+//  */
+// function styleTodoBoxFooterBar() {
+//     for (let i = 0; i < todos.length; i++) {
+//         for (let j = 0; j < todos[i]['members'].length; j++) {
+//             const abbreviation = todos[i]['members'][j];
+//             const selectedColor = searchMemberSelectedColor(abbreviation);
+//             document.getElementById(`todoBoxFooter${i}${j}`).classList.add(`bg-color-${selectedColor}`)
+//         }
+//     }
+// }
 
-/**
- * Function that searches for a member's selected color based on their abbreviation.
- *
- * @function
- * @param {string} abbreviation - The abbreviation of the member to search for.
- * @returns {string} The selected color of the member with the provided abbreviation.
- */
-function searchMemberSelectedColor(abbreviation) {
-    for (let i = 0; i < members.length; i++) {
-        const element = members[i]['abbreviation'];
-        if(element == abbreviation) {
-            return members[i]['selected-color'];
-        }   
-    }
-}
+// /**
+//  * Function that searches for a member's selected color based on their abbreviation.
+//  *
+//  * @function
+//  * @param {string} abbreviation - The abbreviation of the member to search for.
+//  * @returns {string} The selected color of the member with the provided abbreviation.
+//  */
+// function searchMemberSelectedColor(abbreviation) {
+//     for (let i = 0; i < members.length; i++) {
+//         const element = members[i]['abbreviation'];
+//         if(element == abbreviation) {
+//             return members[i]['selected-color'];
+//         }   
+//     }
+// }
 
 
 
-/**
- * This function adds the full name to the string-object-members.
- */
-function fullName() {
-    for (let i = 0; i < members.length; i++) {
-        let fullName = members[i]['firstName'] + ' ' + members[i]['lastName'];
-        members[i]['fullName'] = fullName;
-    }
-}
+// /**
+//  * This function adds the full name to the string-object-members.
+//  */
+// function fullName() {
+//     for (let i = 0; i < members.length; i++) {
+//         let fullName = members[i]['firstName'] + ' ' + members[i]['lastName'];
+//         members[i]['fullName'] = fullName;
+//     }
+// }
 
-/**
- * This function adds the name abbreviation to the object-members.
- */
-function abbreviation() {
-    for (let i = 0; i < members.length; i++) {
-        let abbreviation = members[i]['firstName'].charAt(0) + members[i]['lastName'].charAt(0);
-        members[i]['abbreviation'] = abbreviation;
-    }
-}
+// /**
+//  * This function adds the name abbreviation to the object-members.
+//  */
+// function abbreviation() {
+//     for (let i = 0; i < members.length; i++) {
+//         let abbreviation = members[i]['firstName'].charAt(0) + members[i]['lastName'].charAt(0);
+//         members[i]['abbreviation'] = abbreviation;
+//     }
+// }

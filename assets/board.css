@@ -212,20 +212,30 @@ button {
 }
 
 .todo-box-footer {
-    width: 35px;
+    width: 100%;
     height: 35px;
-    color: #FFFFFF;
     /* background-color: #37ff00; */
     border-radius: 50%;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     border: 1px solid #FFFFFF;
     margin-top: 20px;
-    margin-right: -15px;
+
+}
+.todo-box-footer-right{
+    background-color: #aa5af9;
+    border-radius: 10px;
+    padding: 5px;
+    color: #ffffff;
 }
 
-
+.todo-box-footer-left{
+    background-color: #f60000;
+    border-radius: 10px;
+    padding: 5px;
+    color: #ffffff;
+}
 
 
 /*======Shows active site=====  */
