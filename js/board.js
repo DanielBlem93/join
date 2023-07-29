@@ -67,6 +67,16 @@ let todos = [];
 let currentToDos = [];
 let currentDraggedElement;
 
+/**
+ * Asynchronous function that retrieves tasks from storage, processes them, and adds them to the todos list.
+ * Each task comprises the following properties: id, category, task category, title, text, done fraction, members, priority, selected color, date, and task ID.
+ * After the tasks are added, the HTML is updated to reflect the new tasks.
+ * 
+ * @async
+ * @function
+ * @returns {Promise<void>} No return value
+ * @throws {Error} Throws an error if loading tasks or converting the resulting string to JSON fails.
+ */
 async function addTask() {
     let addTasks = JSON.parse(await getItem('task'));
     for (let taskArray of addTasks) {
@@ -91,13 +101,24 @@ async function addTask() {
     }
     updateHTML();
 }
+
+
+/**
+ * Asynchronous function that retrieves stored todos from the storage.
+ * If stored todos exist, it parses the JSON string to an object and assigns it to the 'todos' array.
+ *
+ * @async
+ * @function
+ * @returns {Promise<void>} No return value.
+ * @throws {Error} Throws an error if loading todos or parsing the resulting string fails.
+ */
 async function getStoredTodos() {
     const storedTodos = await getItem('todos');
     if (storedTodos) {
       todos = JSON.parse(storedTodos);
     }
-  }
-  
+}
+
 
 
 
@@ -125,18 +146,31 @@ async function updateHTML() {
     renderToDos('progress');
     renderToDos('feedback');
     renderToDos('closed');
-    //fullName();
-    //abbreviation();
+    fullName();
+    abbreviation();
     styleTodos();
-    //generateTodoBoxFooterBar();
-    //styleTodoBoxFooterBar();
+    generateTodoBoxFooterBar();
+    styleTodoBoxFooterBar();
     await setItemTodo();
     //handelTodos();
 }
 
+/**
+ * Asynchronous function that stores the current state of 'todos' into storage.
+ * It serializes the 'todos' array to a JSON string before storing.
+ *
+ * @async
+ * @function
+ * @returns {Promise<void>} No return value.
+ * @throws {Error} Throws an error if setting the item in storage fails.
+ */
 async function setItemTodo() {
+    //Clear task storage dont delete!!!
+    // todos = [];
+    // await setItem('task', JSON.stringify(todos));
     await setItem('todos', JSON.stringify(todos));
-  }
+}
+
   
 
 
@@ -166,7 +200,6 @@ function renderToDos(category) {
  */
 function startDragging(id) {
     currentDraggedElement = id;
-    
 }
 
 
@@ -270,18 +303,31 @@ function styleTodos() {
 }
 
 
+/**
+ * Function that styles the Todo Box Footer Bar.
+ * It iterates over every todo and every member of each todo. 
+ * Then, it adds a background color to the respective member's element, based on their abbreviation.
+ * 
+ * @function
+ * @returns {void} No return value.
+ */
 function styleTodoBoxFooterBar() {
     for (let i = 0; i < todos.length; i++) {
         for (let j = 0; j < todos[i]['members'].length; j++) {
             const abbreviation = todos[i]['members'][j];
             const selectedColor = searchMemberSelectedColor(abbreviation);
-                // console.log(abbreviation);
-                // console.log(selectedColor);
             document.getElementById(`todoBoxFooter${i}${j}`).classList.add(`bg-color-${selectedColor}`)
         }
     }
 }
 
+/**
+ * Function that searches for a member's selected color based on their abbreviation.
+ *
+ * @function
+ * @param {string} abbreviation - The abbreviation of the member to search for.
+ * @returns {string} The selected color of the member with the provided abbreviation.
+ */
 function searchMemberSelectedColor(abbreviation) {
     for (let i = 0; i < members.length; i++) {
         const element = members[i]['abbreviation'];
@@ -290,6 +336,7 @@ function searchMemberSelectedColor(abbreviation) {
         }   
     }
 }
+
 
 
 /**
