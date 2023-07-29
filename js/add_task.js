@@ -578,84 +578,78 @@ function addPersonsToNewTask() {
 // =============== Checking inputs ===================================
 
 function checkRequierdInputs() {
+  let checkInputTitle = checkInput('title');
+  let checkInputDescription = checkInput('description');
+  let checkInputDate = checkInput('date');
+  let checkCategorys = checkCategory();
+  let checkPrios = checkPrio();
 
-  let checkInputTitle = checkInput('title')
-  let checkInputDescription = checkInput('description')
-  let checkInputDate = checkInput('date')
-  let checkCategorys = checkCategory()
-  let checkPrios = checkPrio()
-
-  if (checkInputTitle && checkInputDescription && checkInputDate
-    && checkCategorys && checkPrios) {
-    console.log('All good')
-    return true
+  if (checkInputTitle && checkInputDescription && checkInputDate && checkCategorys && checkPrios) {
+    console.log('All good');
+    return true;
   } else {
-    alert('Fill all requierd fields')
+    alert('Fill all required fields');
+    return false;
   }
 }
 
 function checkCategory() {
-  let categoryInput = document.querySelector('#select-box > div')
-  let category = categoryInput.innerText.trim()
+  let categoryInput = document.querySelector('#select-box > div');
+  let category = categoryInput.innerText.trim();
 
   if (category === 'Select task category') {
-    showIsRequiered(2, 'remove')
-    return false
+    showIsRequiered(2, 'remove');
+    return false;
   } else {
     if (newCategoryStatus === true) {
-      showIsRequiered(2, 'remove')
-      return false
+      showIsRequiered(2, 'remove');
+      return false;
     } else {
-      showIsRequiered(2, 'add')
-      return true
+      showIsRequiered(2, 'add');
+      return true;
     }
   }
 }
 
 function checkInput(inputs) {
+  let input = document.getElementById(inputs);
+  let inputValue = input.value.trim();
+  let index = getRequiredIndex(inputs);
 
-  let input = document.getElementById(`${inputs}`)
-  let inputValue = input.value.trim()
-  let number = getRequierdText(inputs)
   if (inputValue.length > 0) {
-    showIsRequiered(number, 'add')
-    return true
+    showIsRequiered(index, 'add');
+    return true;
   } else {
-    showIsRequiered(number,'remove')
-    return false
+    showIsRequiered(index, 'remove');
+    return false;
   }
 }
 
-function getRequierdText(inputs) {
+function getRequiredIndex(inputs) {
+  const inputMappings = {
+    'title': 0,
+    'description': 1,
+    'date': 3
+  };
 
-  switch (inputs) {
-
-    case 'title':
-      return 0;
-
-    case 'description':
-      return 1
-
-    case 'date':
-      return 3
-  }
+  return inputMappings[inputs] || 0; // Fallback to 0 if inputs is not found in the object
 }
 
 function checkPrio() {
   if (currentPriority.length > 0) {
-    showIsRequiered(4, 'add')
-    return true
+    showIsRequiered(4, 'add');
+    return true;
   } else {
-    showIsRequiered(4, 'remove')
-    return false
+    showIsRequiered(4, 'remove');
+    return false;
   }
 }
 
 function showIsRequiered(index, action) {
-
-  let requierd = document.getElementsByClassName('is-required')[index]
-  requierd.classList[action]('displayNone')
+  let required = document.getElementsByClassName('is-required')[index];
+  required.classList[action]('displayNone');
 }
+
 
 // =========================Animations ===========================
 
