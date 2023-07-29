@@ -1,71 +1,7 @@
-// drag and drop
-
-// let todos = [{
-//     'id': 1,
-//     'category': 'open',
-//     'task-category': 'Design',
-//     'title': 'Website redesign',
-//     'text': 'Modify the contents of the main website...',
-//     'done-fraction': '1/2',
-//     'members': ['AM', 'AS', 'EF'],
-//     'priority': 'low',
-//     'selected-color': 'orange'
-// },  
-// {
-//     'id': 2,
-//     'category': 'progress',
-//     'task-category': 'Sales',
-//     'title': 'Call potential clients',
-//     'text': 'Make the product presentation to prospective buyers',
-//     'done-fraction': '',
-//     'members': ['EF', 'AM', '+2'],
-//     'priority': 'urgent',
-//     'selected-color': 'purple'
-
-// }, 
-// {
-//     'id': 3,
-//     'category': 'feedback',
-//     'task-category': 'Backoffice',
-//     'title': 'Accounting invoices ',
-//     'text': 'Write open invoices for customer',
-//     'done-fraction': '',
-//     'members': ['AS', 'AM', '+3'],
-//     'priority': 'medium',
-//     'selected-color': 'lightblue'
-
-// }]
-
-
-// let members = [{
-//     'firstName': 'Anton',
-//     'lastName': 'Mayer',
-//     'email': 'anton@gmail.com',
-//     'selected-color': 'green',
-//     'abbreviation': '',
-//     'fullName': ''
-// }, 
-// {
-//     'firstName': 'Anja',
-//     'lastName': 'Schulz',
-//     'email': 'schulz@hotmail.com',
-//     'selected-color': 'blue',
-//     'abbreviation': '',
-//     'fullName': ''
-
-// }, 
-// {
-//     'firstName': 'Eva',
-//     'lastName': 'Fischer',
-//     'email': 'fischer@gmail.com',
-//     'selected-color': 'yellow',
-//     'abbreviation': '',
-//     'fullName': ''
-// }];
-
 let todos = [];
 let currentToDos = [];
 let currentDraggedElement;
+
 
 /**
  * Asynchronous function that retrieves tasks from storage, processes them, and adds them to the todos list.
@@ -103,7 +39,6 @@ async function addTask() {
 }
 
 
-
 /**
  * Asynchronous function that retrieves stored todos from the storage.
  * If stored todos exist, it parses the JSON string to an object and assigns it to the 'todos' array.
@@ -121,8 +56,6 @@ async function getStoredTodos() {
 }
 
 
-
-
 /**
  * This function is used to initiate the HTML page.  
  * It will include the template for the header and navigation. 
@@ -133,9 +66,8 @@ async function initBoard() {
     await addTask();
     init();
     updateHTML();
-  }
+}
   
-
 
 /**
  * This function contains the subfunctions for rendering the four subboards: open, progress, feedback and closed.
@@ -147,14 +79,10 @@ async function updateHTML() {
     renderToDos('progress');
     renderToDos('feedback');
     renderToDos('closed');
-    // fullName();
-    // abbreviation();
     styleTodos();
-    // generateTodoBoxFooterBar();
-    // styleTodoBoxFooterBar();
     await setItemTodo();
-    //handelTodos();
 }
+
 
 /**
  * Asynchronous function that stores the current state of 'todos' into storage.
@@ -171,8 +99,6 @@ async function setItemTodo() {
     // await setItem('task', JSON.stringify(todos));
     await setItem('todos', JSON.stringify(todos));
 }
-
-  
 
 
 /**
@@ -224,18 +150,41 @@ async function movedTo(category) {
     todos[currentDraggedElement]['category'] = category;
     updateHTML();
     await setItemTodo();
-  }
-  
+}
 
 
 /**
- * This function is used to generate and return the specific HTML-Code of each todo-Div.
- * 
- * @param {string} element - This is the object with the filtered todo divs
- * @returns 
+ * This function adds style elements to the todo divs.
+ */
+function styleTodos() {
+    for (let i = 0; i < todos.length; i++) {
+        const selectedColor = todos[i]['selected-color'];
+        document.getElementById(`todoBoxHeader${todos[i]['id']}`).classList.add(`bg-cat-color-${selectedColor}`);
+    }
+}
+
+
+/**
+ * Generates an HTML string for a todo box element with various details about a task.
+ *
+ * This function expects an `element` object that includes the following properties:
+ * - id: A unique identifier for the todo task.
+ * - members: A string representing the task's assigned member.
+ * - priority: A string representing the task's priority level.
+ * - task-category: A string representing the task's category.
+ * - title: A string representing the task's title.
+ * - text: A string representing the task's description.
+ * - done-fraction: A string representing the percentage of the task that has been completed.
+ *
+ * It uses the `getFirstTwoLetters` and `generatePrioIcon` functions to process the `members` and `priority` data.
+ *
+ * @param {Object} element - The todo task object to be processed.
+ * @returns {string} An HTML string for a todo box element.
  */
 function generateToDoHTML(element) {
     let member = element['members'];
+    let letters = getFirstTwoLetters(member);
+    let prioImg = generatePrioIcon(element['priority']);
 
     return /*html*/ `
     <div onclick="showTodo(${element['id']})" class="todo-box" draggable="true" ondragstart="startDragging(${element['id']})">
@@ -260,10 +209,10 @@ function generateToDoHTML(element) {
     <div id="todoBoxFooterBar${element['id']}" class="todo-box-footer-bar">
     <div  class="todo-box-footer">
         <div class="todo-box-footer-right">
-            <p>${member}</p>
+            ${letters}
         </div>
          <div class="todo-box-footer-left">
-             <p>${element['priority']}</p>
+             ${prioImg}
         </div>
      </div> 
     </div>
@@ -272,100 +221,45 @@ function generateToDoHTML(element) {
 }
 
 
-// /**
-//  * This function is used to generate the member icons for each todo div.
-//  */
-// function generateTodoBoxFooterBar() {
-//     for (let i = 0; i < todos.length; i++) {
-//         for (let j = 0; j < todos[i]['members'].length; j++) {
-//             let abbreviation = todos[i]['members'][j];
-//             document.getElementById(`todoBoxFooterBar${todos[i]['id']}`).innerHTML
-//                 += generateHTMLTodoBoxFooterBar(abbreviation, i, j);
-//         }
-
-//     }
-// }
-
-
-// /**
-//  * This function generates the actual HTML code for the todo-box-footer-bar. The member icons are displayed.
-//  * 
-//  * @param {string} abbreviation - This input variable is the respective name abbreviation of a member of the todo container.
-//  * @returns 
-//  */
-// function generateHTMLTodoBoxFooterBar(abbreviation, i, j) {
-//     return `
-//     <div id="todoBoxFooter${i}${j}" class="todo-box-footer">
-//         <div class="todo-box-footer-left">
-//         <p>${abbreviation}</p>
-//         </div>
-//     </div> 
-//     `
-// }
-
 /**
- * This function adds style elements to the todo divs.
+ * Extracts the first two letters from a given string and converts them to uppercase.
+ *
+ * @param {string} member - The string from which to extract the first two letters.
+ * @returns {string} The first two letters of the input string in uppercase, or undefined if input is not a string.
  */
-function styleTodos() {
-    for (let i = 0; i < todos.length; i++) {
-        const selectedColor = todos[i]['selected-color'];
-        document.getElementById(`todoBoxHeader${todos[i]['id']}`).classList.add(`bg-cat-color-${selectedColor}`);
+function getFirstTwoLetters(member) {
+    if (member !== undefined && typeof member === 'string') {
+        return member.slice(0, 2).toUpperCase();
     }
 }
 
 
-// /**
-//  * Function that styles the Todo Box Footer Bar.
-//  * It iterates over every todo and every member of each todo. 
-//  * Then, it adds a background color to the respective member's element, based on their abbreviation.
-//  * 
-//  * @function
-//  * @returns {void} No return value.
-//  */
-// function styleTodoBoxFooterBar() {
-//     for (let i = 0; i < todos.length; i++) {
-//         for (let j = 0; j < todos[i]['members'].length; j++) {
-//             const abbreviation = todos[i]['members'][j];
-//             const selectedColor = searchMemberSelectedColor(abbreviation);
-//             document.getElementById(`todoBoxFooter${i}${j}`).classList.add(`bg-color-${selectedColor}`)
-//         }
-//     }
-// }
-
-// /**
-//  * Function that searches for a member's selected color based on their abbreviation.
-//  *
-//  * @function
-//  * @param {string} abbreviation - The abbreviation of the member to search for.
-//  * @returns {string} The selected color of the member with the provided abbreviation.
-//  */
-// function searchMemberSelectedColor(abbreviation) {
-//     for (let i = 0; i < members.length; i++) {
-//         const element = members[i]['abbreviation'];
-//         if(element == abbreviation) {
-//             return members[i]['selected-color'];
-//         }   
-//     }
-// }
+/**
+ * Generates an HTML string for an image element that refers to a priority icon.
+ *
+ * @param {string} prio - The name of the priority level, which corresponds to the filename of the icon.
+ * @returns {string} An HTML string for an image element.
+ */
+function generatePrioIcon(prio) {
+    return /*html*/ `
+    <img src="./assets/img/icons/${prio}.png" alt="${prio}">
+    `;
+}
 
 
-
-// /**
-//  * This function adds the full name to the string-object-members.
-//  */
-// function fullName() {
-//     for (let i = 0; i < members.length; i++) {
-//         let fullName = members[i]['firstName'] + ' ' + members[i]['lastName'];
-//         members[i]['fullName'] = fullName;
-//     }
-// }
-
-// /**
-//  * This function adds the name abbreviation to the object-members.
-//  */
-// function abbreviation() {
-//     for (let i = 0; i < members.length; i++) {
-//         let abbreviation = members[i]['firstName'].charAt(0) + members[i]['lastName'].charAt(0);
-//         members[i]['abbreviation'] = abbreviation;
-//     }
-// }
+/**
+ * Filters the global `todos` array based on a search string and updates the HTML of the corresponding category
+ * for each matched todo item.
+ */
+function searchTodos() {
+    let searchString = document.getElementById('searchInput').value.toLowerCase();
+    let searchedTodos = todos.filter(todo => 
+        todo.title.toLowerCase().includes(searchString) || 
+        todo.text.toLowerCase().includes(searchString));
+    ['open', 'progress', 'feedback', 'closed'].forEach(category => 
+        document.getElementById(category).innerHTML = ''
+    );
+    for (let todo of searchedTodos) {
+        document.getElementById(todo.category).innerHTML += generateToDoHTML(todo);
+    }
+}

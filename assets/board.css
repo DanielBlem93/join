@@ -225,15 +225,8 @@ button {
 }
 .todo-box-footer-right{
     background-color: #aa5af9;
-    border-radius: 10px;
-    padding: 5px;
-    color: #ffffff;
-}
-
-.todo-box-footer-left{
-    background-color: #f60000;
-    border-radius: 10px;
-    padding: 5px;
+    border-radius: 50%;
+    padding: 10px;
     color: #ffffff;
 }
 
