@@ -4,5 +4,5 @@ async function logout(){
     currentUserName = '';
     await setItem('currentUserName', currentUserName);
     //console.log(currentUserName);
-    window.location.href = '/join/index.html';
+    window.location.href = 'index.html';
 }

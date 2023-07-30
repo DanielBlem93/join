@@ -159,7 +159,12 @@ button {
     margin-top: 20px;
     margin-right: 20px;
     cursor: pointer;
+    transition: ease-in-out 200ms;
 }
+.todo-box:hover{
+    transform: rotate(2deg);
+
+} 
 
 .todo-box-header {
     display: inline-block;
