@@ -45,9 +45,11 @@ async function guestLogin() {
  * 
  */
 function moveLogo() {
+    if(window.location.href.includes('index.html')) {
     document.getElementById('img-container').classList.add('movedContainer');
     document.getElementById('logo-image').classList.add('movedImage');
     document.getElementById('login-header').classList.add('opacity');
     document.getElementById('login-form').classList.add('opacity');
     document.getElementById('indexFooter').classList.add('opacity');
+    }
 }    

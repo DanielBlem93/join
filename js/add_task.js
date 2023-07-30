@@ -46,7 +46,7 @@ function initArrays() {
 function toggleDropdown(menuClass) {
   const dropdownMenu = document.getElementsByClassName(menuClass)[0];
   if (newCategoryStatus || assingedToStatus === true) {
-    console.log('Aufklappen geblockt')
+
   } else {
     if (dropdownMenu.style.height === '51px') {
       dropdownMenu.style.height = 'fit-content';
@@ -172,10 +172,10 @@ function addNewCategory() {
 
   let selectedColor = getSelectedColor();
   if (selectedColor === null) {
-    alert('choose a color')
+    showWarning('Please give your category a color')
   } else if (value == "") {
 
-    alert('Give your category a name')
+    showWarning('Please give your category a name')
   }
   else {
     categorys.push(
@@ -383,12 +383,12 @@ function applyNewEmail() {
   if (input.value.match(vaildEmail)) {
 
     emails.push(input.value)
-    console.log('vaild email adress')
+ 
     renderEmails()
     discardAssingedTo()
 
   } else {
-    alert('Invaild E-Mail address')
+    showWarning('This email is invaild')
   }
 }
 /**
@@ -456,7 +456,7 @@ function addNewSubtask() {
     inputElement.value = ""
 
   } else {
-    alert('A name for your subtask is requierd')
+    showWarning('Please give your Subtask a title')
   }
 }
 
@@ -585,10 +585,9 @@ function checkRequierdInputs() {
   let checkPrios = checkPrio();
 
   if (checkInputTitle && checkInputDescription && checkInputDate && checkCategorys && checkPrios) {
-    console.log('All good');
     return true;
   } else {
-    alert('Fill all required fields');
+   showWarning('Please fill out all required fields')
     return false;
   }
 }
@@ -650,31 +649,53 @@ function showIsRequiered(index, action) {
   required.classList[action]('displayNone');
 }
 
+function showWarning(text){
+  let massageBox= document.getElementById('created-task-massage-text')
+  let img = document.querySelector('#created-task-massage > img')
+  img.style.display = 'none'
+
+  flyIn('flex')
+  massageBox.innerText= `${text}`
+
+  setTimeout(() => {
+    flyIn('none')
+  }, 3000);
+  setTimeout(() => {
+    massageBox.innerText= `Task added to board`
+  }, 3100); 
+  
+
+}
 
 // =========================Animations ===========================
 
 function animations() {
-  flyIn()
+  flyIn('flex')
   setTimeout(() => {
-    flyOut()
+    flyOutBody()
+    setTimeout(() => {
+      swapToBoard()
+    }, 250);
   }, 1000);
+
 }
 
-function flyIn() {
+function flyIn(display) {
   let massage = document.getElementById('created-task-massage-container')
 
-  massage.style.display = 'flex'
+  massage.style.display = `${display}`
   setTimeout(() => {
-    massage.classList.add('flyIn')
+    massage.classList.toggle('flyIn')
   }, 10);
 
 }
 
-function flyOut() {
+function flyOutBody() {
   let body = document.getElementsByTagName('body')[0]
   body.style.transform = ('translateX(100%)')
-  setTimeout(() => {
-    window.location.href = 'board.html'
-  }, 250);
-
 }
+function swapToBoard() {
+  window.location.href = 'board.html'
+}
+
+

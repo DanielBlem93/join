@@ -846,11 +846,11 @@ input[type="radio"]:checked+label {
     color: white;
 
     position: absolute;
-    left: 620px;
+    left: 690px;
     bottom: -130px;
 
     transition: 300ms;
-
+z-index: 9999;
 }
 
 #created-task-massage {
@@ -865,6 +865,9 @@ input[type="radio"]:checked+label {
 #created-task-massage img {
     width: 30px;
     height: 30px;
+}
+#created-task-massage-text{
+    text-align: center;
 }
 
 
@@ -905,7 +908,7 @@ input[type="radio"]:checked+label {
 }
 
 .flyIn {
-    bottom: 78px !important;
+    bottom: 425px !important;
 }
 
 body{
