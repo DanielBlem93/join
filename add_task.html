@@ -86,7 +86,7 @@
                     <label for="pink" class="color-circle circle-pink"></label>
                 </fieldset>
 
-                
+
                 <span class="is-required displayNone ">This field is required</span>
             </div>
 
@@ -125,15 +125,14 @@
             </div>
 
         </div>
-        </div>
-        </div>
         <div class="addTaskVector4"><img src="./assets/img/vector4.svg"></div>
         <div class="addTaskFrame43">
             <div class="addTaskFrame39">
                 <div class="addTaskDueDate">
                     <span class="typography2T6">Due date</span>
                     <div class="addTaskFrame14">
-                        <input id="date" type="date" class="typography2T6 inputFrame" placeholder="dd/mm/yyyy" min="2023-07-30">
+                        <input id="date" type="date" class="typography2T6 inputFrame" placeholder="dd/mm/yyyy"
+                            min="2023-07-30">
                     </div>
                     <span class="is-required displayNone">This field is required</span>
                 </div>
@@ -145,6 +144,7 @@
                         <button id="addTaskBtnUrgent" onclick="changeColor('addTaskBtnUrgent','urgent')"
                             class="addTaskFrame14Prio buttonFramePrio">
                             <span class="typography2T6">Urgent</span>
+
                             <svg width="21" height="15" viewBox="0 0 21 15" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <g id="Prio alta" clip-path="url(#clip0_70119_2621)">
@@ -171,6 +171,7 @@
                         <button id="addTaskBtnMedium" onclick="changeColor('addTaskBtnMedium', 'medium')"
                             class="addTaskFrame14Prio buttonFramePrio">
                             <span class="typography2T6">Medium</span>
+
                             <svg width="20" height="15" viewBox="0 0 20 15" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <g id="Prio baja">
@@ -191,6 +192,7 @@
                         <button id="addTaskBtnLow" onclick="changeColor('addTaskBtnLow', 'low')"
                             class="addTaskFrame14Prio buttonFramePrio">
                             <span class="typography2T6">Low</span>
+
                             <svg width="20" height="9" viewBox="0 0 20 9" xmlns="http://www.w3.org/2000/svg">
                                 <g id="Prio media" clip-path="url(#clip0_70119_2628)">
                                     <g id="Capa 2">
@@ -222,14 +224,7 @@
                         <input id="newSubtaskInput" class="typography2T6 inputFrame" placeholder="Add new Subtasks">
                         <img class="iconoirCancel" src="./assets/img/iconoir_cancel.svg" onclick="addNewSubtask()">
                     </div>
-                    <div class="addTaskFrame37" id="subtaskContainer">
-
-                        <!-- <label>
-                        <input type="checkbox" checked="checked">
-                        <span class="checkmarkText typography2body">Subtask&nbsp;2</span>
-                        <span class="checkmark"><img class="rectangle6" src="./assets/img/rectangle6.svg"></span>
-                      </label> -->
-                    </div>
+                    <div class="addTaskFrame37" id="subtaskContainer"></div>
                 </div>
             </div>
         </div>
@@ -246,14 +241,14 @@
                 </button>
             </div>
         </div>
-        
+
     </main>
     <div style="display: none;" id="created-task-massage-container">
         <div id="created-task-massage">
-            <span>Task added to board</span> 
+            <span id="created-task-massage-text">Task added to board</span>
             <img src="assets/img/hover/board-hover.png">
         </div>
-        
+
     </div>
     <script src="js/add_task.js"></script>
 </body>
