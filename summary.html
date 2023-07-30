@@ -14,10 +14,11 @@
     <script src="js/login.js"></script>
     <script src="./js/add_contact.js"></script>
     <script src="./js/edit_contact.js"></script>
+    <script src="./js/board.js"></script>
     <script src="./js/logout.js"></script>
     <title>Summary</title>
 </head>
-<body onload="init()">
+<body onload="init(); getTasksData()">
     <div w3-include-html="assets/templates/desktop_template.html"></div>
 <div class="content">
     <div class="summary-content">
@@ -30,17 +31,17 @@
         <div class="summary-body">
             <div class="summary-tasks">
                 <div onclick="window.location.href = 'board.html'" class="summary-task">
-                    <h1>3</h1>
+                    <h1 id="task-in-board">0</h1>
                     <p>Tasks in 
                         Board</p>
                 </div>
                 <div onclick="window.location.href = 'board.html'" class="summary-task">
-                    <h1>2</h1>
+                    <h1 id="task-in-progress">2</h1>
                     <p>Tasks In
                         Progress</p>
                 </div>
                 <div onclick="window.location.href = 'board.html'" class="summary-task">
-                    <h1>2</h1>
+                    <h1 id="task-in-feedback">2</h1>
                     <p>Awaiting
                         Feedback</p>
                 </div>
@@ -50,12 +51,12 @@
                         <img src="./assets/img/urgent.svg" alt="">
                     </div>
                     <div class="summary-display">
-                    <h1>1</h1>
+                    <h1 id="task-urgent">1</h1>
                     <p>Urgent</p>
                 </div>
                 <hr class="summary-date-hr">
                 <div>
-                    <h2>October 16, 2022</h2>
+                    <h2 id="urgent-date">October 16, 2022</h2>
                     <p>Upcoming Deadline</p>
                 </div>
             </div>
@@ -65,7 +66,7 @@
                         <img class="summary-todo-icon-stift" src="./assets/img/stift.svg" alt="">
                     </div>
                     <div class="summary-display">
-                        <h1>1</h1>
+                        <h1 id="task-todo">1</h1>
                         <p>Todo</p>
                     </div>
                 </div>
@@ -74,7 +75,7 @@
                         <img  src="./assets/img/chack.svg" alt="">
                     </div>
                     <div class="summary-display">
-                        <h1>1</h1>
+                        <h1 id="task-done">1</h1>
                         <p>Done</p>
                     </div>
                 </div>

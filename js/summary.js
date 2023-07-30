@@ -28,16 +28,43 @@ async function getUserName(){
     }
 }
 
+/**
+ * Filters tasks based on a provided property and value, and then updates the text content of a specified HTML element.
+ *
+ * @param {string} taskProperty - The property of the task objects to filter by.
+ * @param {string} taskValue - The value of the property to filter tasks by.
+ * @param {string} elementId - The id of the HTML element whose text content should be updated.
+ * @returns {Promise<void>}
+ */
+async function filterAndDisplay(taskProperty, taskValue, elementId) {
+    const tasks = JSON.parse(await getItem('todos'));
+    const filteredTasks = tasks.filter(task => task[taskProperty] === taskValue);
+    const element = document.getElementById(elementId);
+    element.innerText = filteredTasks.length;
+}
 
 /**
- * An asynchronous function for setting the initials of a username.
- * The username is retrieved from local storage and the initials are set in the DOM element with id 'temp-initials'.
+ * Retrieves task data, filters tasks by various categories and updates respective HTML elements with the count of tasks in each category.
+ * Additionally, it logs all tasks to the console and updates the 'task-in-board' HTML element with the total task count.
  *
- * @async
- * @function
- * @returns {Promise<void>} Returns a Promise that is fulfilled when the username has been retrieved and the initials have been set.
- * @throws {Error} If the username cannot be retrieved from local storage or if the username is not in the proper format.
+ * @returns {Promise<void>}
  */
+async function getTasksData() {
+    await filterAndDisplay('category', 'progress', 'task-in-progress');
+    await filterAndDisplay('category', 'feedback', 'task-in-feedback');
+    await filterAndDisplay('priority', 'urgent', 'task-urgent');
+    await filterAndDisplay('category', 'open', 'task-todo');
+    await filterAndDisplay('category', 'closed', 'task-done');
+
+    const tasks = JSON.parse(await getItem('todos'));
+    let tasksInBoard = document.getElementById('task-in-board');
+    tasksInBoard.innerText = tasks.length;
+}
+
+
+
+
+
 
 
 

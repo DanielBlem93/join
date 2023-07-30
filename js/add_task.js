@@ -76,7 +76,7 @@ function renderCategorys() {
 
 }
 /**
- * This function adds an input to add a new category
+ * This function adds an input to addNewCcategory
  * @param {string} display1 - is important for the toggleInput() function
  * it will be used to change the style: display 
  */
@@ -327,6 +327,7 @@ window.addEventListener("click", function () {
     `
   }
 })
+
 /**
  * shows the input on dreopdown menu
  */
@@ -351,6 +352,7 @@ function showInviteNewContactInput() {
 
   prepareAssingedToInput()
 }
+
 /**
  * some functions to make the input available
  */
@@ -360,6 +362,7 @@ function prepareAssingedToInput() {
   assingedToStatus = true
   document.getElementById('assinged-to-input').focus()
 }
+
 /**
  * clears the first reiter of the dropdown
  */
@@ -368,6 +371,7 @@ function discardAssingedTo() {
   assingedToStatus = false
 
 }
+
 /**
  * checks and appls the email into the emails array
  */
@@ -514,6 +518,7 @@ function resetPriority() {
     button.querySelector('span').classList.remove('txtWhite');
   }
 }
+
 /**
  * creates the task
  */
@@ -527,31 +532,38 @@ function createTask() {
   let description = descriptionInput.value.trim()
   let date = dateInput.value.trim()
   let category = categoryInput.innerText.trim()
+  let taskId = Math.random().toString(36).substr(2) + Date.now().toString(36);
 
-  newTask = []
-  newTask = [
-    {
-      'title': `${title}`,
-      'description': `${description}`,
-      'date': `${date}`,
-      'category': `${category}`,
-      'persons': [],
-      'emails': [emails],
-      'priority': `${currentPriority}`,
-      'subtasks': [subtasks]
-    }
-  ]
-  addPersonsToNewTask()
-  alert('Created a new Task')
-  clearTask()
+  if (checkRequierdInputs()) {
+
+    newTask = []
+    newTask = [
+      {
+        'title': `${title}`,
+        'description': `${description}`,
+        'date': `${date}`,
+        'category': `${category}`,
+        'persons': [], // {'name': `${firstName} ${lastName}`}
+        'emails': [emails],
+        'priority': `${currentPriority}`,
+        'subtasks': [subtasks],
+        'taskID': `${taskId}`
+      }
+    ]
+    addPersonsToNewTask()
+    clearTask()
+    createTaskBackend(newTask);
+    animations()
+  }
 }
+
 /**
  * Adds the person to the new Task array as JSON
  */
 function addPersonsToNewTask() {
   for (let i = 0; i < contactsForAddTask.length; i++) {
     const contact = contactsForAddTask[i];
-   
+
     if (contact['checked?'] === 'checked') {
       let firstName = contact['first-name']
       let lastName = contact['last-name']
@@ -563,4 +575,106 @@ function addPersonsToNewTask() {
     }
   }
 }
+// =============== Checking inputs ===================================
 
+function checkRequierdInputs() {
+  let checkInputTitle = checkInput('title');
+  let checkInputDescription = checkInput('description');
+  let checkInputDate = checkInput('date');
+  let checkCategorys = checkCategory();
+  let checkPrios = checkPrio();
+
+  if (checkInputTitle && checkInputDescription && checkInputDate && checkCategorys && checkPrios) {
+    console.log('All good');
+    return true;
+  } else {
+    alert('Fill all required fields');
+    return false;
+  }
+}
+
+function checkCategory() {
+  let categoryInput = document.querySelector('#select-box > div');
+  let category = categoryInput.innerText.trim();
+
+  if (category === 'Select task category') {
+    showIsRequiered(2, 'remove');
+    return false;
+  } else {
+    if (newCategoryStatus === true) {
+      showIsRequiered(2, 'remove');
+      return false;
+    } else {
+      showIsRequiered(2, 'add');
+      return true;
+    }
+  }
+}
+
+function checkInput(inputs) {
+  let input = document.getElementById(inputs);
+  let inputValue = input.value.trim();
+  let index = getRequiredIndex(inputs);
+
+  if (inputValue.length > 0) {
+    showIsRequiered(index, 'add');
+    return true;
+  } else {
+    showIsRequiered(index, 'remove');
+    return false;
+  }
+}
+
+function getRequiredIndex(inputs) {
+  const inputMappings = {
+    'title': 0,
+    'description': 1,
+    'date': 3
+  };
+
+  return inputMappings[inputs] || 0; // Fallback to 0 if inputs is not found in the object
+}
+
+function checkPrio() {
+  if (currentPriority.length > 0) {
+    showIsRequiered(4, 'add');
+    return true;
+  } else {
+    showIsRequiered(4, 'remove');
+    return false;
+  }
+}
+
+function showIsRequiered(index, action) {
+  let required = document.getElementsByClassName('is-required')[index];
+  required.classList[action]('displayNone');
+}
+
+
+// =========================Animations ===========================
+
+function animations() {
+  flyIn()
+  setTimeout(() => {
+    flyOut()
+  }, 1000);
+}
+
+function flyIn() {
+  let massage = document.getElementById('created-task-massage-container')
+
+  massage.style.display = 'flex'
+  setTimeout(() => {
+    massage.classList.add('flyIn')
+  }, 10);
+
+}
+
+function flyOut() {
+  let body = document.getElementsByTagName('body')[0]
+  body.style.transform = ('translateX(100%)')
+  setTimeout(() => {
+    window.location.href = 'board.html'
+  }, 250);
+
+}
