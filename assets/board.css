@@ -164,7 +164,12 @@ button {
 
 .todo-box:hover {
     transform: rotate(2deg);
+
 }
+.todo-box:hover{
+    transform: rotate(2deg);
+
+} 
 
 .todo-box-header {
     display: inline-block;
