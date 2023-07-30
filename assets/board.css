@@ -150,7 +150,7 @@ button {
     justify-content: space-between;
 }
 
-.todo-box {
+.todo-box{
     width: 250px;
     /* height: 100%; */
     background-color: #FFFFFF;
@@ -159,6 +159,11 @@ button {
     margin-top: 20px;
     margin-right: 20px;
     cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+
+.todo-box:hover {
+    transform: rotate(2deg);
 }
 
 .todo-box-header {

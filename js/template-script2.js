@@ -3,9 +3,6 @@ async function init() {
     await getUserName();
     await allUserName();
     await setInitials();
-    if(window.location.pathname == '/join/contacts.html'){
-    await getContacts();
-    }
 }
 
 async function allUserName(){
