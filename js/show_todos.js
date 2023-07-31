@@ -21,26 +21,52 @@ function showTodo(id) {
  * @param {Object} todo - The todo object.
  * @returns {string} HTML string representing the todo.
  */
+
+
 function generateToDoHTMLModal(todo) {
+    let subtasksHTML = '';
+    if (todo.subtasks && todo.subtasks.length > 0) {
+        todo.subtasks.forEach((subtask, index) => {
+            console.log(subtask);
+            subtasksHTML += /*html*/`
+                <div class="todo-subtask">
+                    <input type="checkbox" id="subtask${index}" ${subtask.done ? 'checked' : ''} onclick="toggleSubtask(${todo.id}, ${index})">
+                    <label for="subtask${index}">${subtask}</label>
+                </div>
+            `;
+        });
+    }
+
     return /*html*/ `
     <div class="modal-content">
-            <div onclick="closeModalBord()" class="modal-close">
-                <img src="./assets/img/close-icon.png" alt="">
-            </div>
-    <h4 class="modal-category">${todo['task-category']}</h4>
-    <h3 class="modal-title">${todo['title']}</h3>
-    <p class="modal-text"> ${todo['text']}</p>
-    <p class="modal-date"><b>Due date:</b> ${todo['date']}</p>
-    <p class="modal-priority"><b>Priority:</b> <span id="priority">${todo['priority']}</span></p>
-    <div class="modal-members">
-        <p><b>Assigned To:</b></p>
-         <p>${todo['members']}</p>
-    </div>
-    <div onclick="deleteTodo(${todo['id']})" class="todo-delete">
+        <div onclick="closeModalBord()" class="modal-close">
+            <img src="./assets/img/close-icon.png" alt="">
+        </div>
+        <h4 class="modal-category">${todo['task-category']}</h4>
+        <h3 class="modal-title">${todo['title']}</h3>
+        <p class="modal-text"> ${todo['text']}</p>
+        <p class="modal-date"><b>Due date:</b> ${todo['date']}</p>
+        <div class="modal-tasks"> ${subtasksHTML}</div>
+        <p class="modal-priority"><b>Priority:</b> <span id="priority">${todo['priority']}</span></p>
+        <div class="modal-members">
+            <p><b>Assigned To:</b></p>
+            <p>${todo['members']}</p>
+        </div>
+        <div onclick="deleteTodo(${todo['id']})" class="todo-delete">
             <img src="./assets/img/delete.png" alt="">
-    </div>
+        </div>
     </div>`;
 }
+
+function toggleSubtask(todoId, subtaskId) {
+    let todo = todos.find(t => t.id === todoId);
+    if (todo && todo.subtasks && todo.subtasks[subtaskId]) {
+        todo.subtasks[subtaskId].done = !todo.subtasks[subtaskId].done;
+        updateHTML();
+    }
+}
+
+
 
 /**
  * Hides the modal.

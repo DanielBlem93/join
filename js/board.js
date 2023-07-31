@@ -15,7 +15,7 @@ let currentDraggedElement;
  */
 async function addTask() {
     let addTasks = JSON.parse(await getItem('task'));
-
+    console.log(addTasks);
     if(!addTasks || addTasks.length === 0) {
         return;
     }
@@ -34,7 +34,7 @@ async function addTask() {
                     'done-fraction': '',
                     'members': members,
                     'priority': task.priority,
-                    'selected-color': '',
+                    'subtasks': task.subtasks ? task.subtasks : [],
                     'date': task.date,
                     'taskID': task.taskID
                 })
@@ -194,10 +194,19 @@ function generateToDoHTML(element) {
     let members = element['members'];
     let letters = getFirstTwoLetters(members);
     let prioImg = generatePrioIcon(element['priority']);
+    let color = getRandomColor();
+
+    // Calculate the progress based on the subtasks
+    let progress = 0;
+    let progressLabel = '';
+    if (element['subtasks'] && element['subtasks'].length > 0) {
+        progress = element['subtasks'].filter(subtask => subtask.done).length / element['subtasks'].length;
+        progressLabel = `${element['subtasks'].filter(subtask => subtask.done).length}/${element['subtasks'].length}`;
+    }
 
     return /*html*/ `
     <div onclick="showTodo(${element['id']})" class="todo-box" draggable="true" ondragstart="startDragging(${element['id']})">
-    <div id="todoBoxHeader${element['id']}" class="todo-box-header">
+    <div id="todoBoxHeader${element['id']}" class="todo-box-header" style="background-color:${color};">
         <h4>${element['task-category']}</h4>
     </div>
 
@@ -210,10 +219,10 @@ function generateToDoHTML(element) {
     </div>
 
     <div class="todo-box-progress">
-        <div class="todo-box-progress-bar">
+        <div class="todo-box-progress-bar" style="width: ${progress * 100}%">
             <div class="todo-box-progress-bar-fill"></div>
         </div>
-        <p>${element['done-fraction']} Done</p>
+        <p>${progressLabel} Done</p>
     </div>
     <div id="todoBoxFooterBar${element['id']}" class="todo-box-footer-bar">
     <div  class="todo-box-footer">
@@ -228,6 +237,7 @@ function generateToDoHTML(element) {
     </div>
     `;
 }
+
 
 
 /**
