@@ -15,6 +15,12 @@ let currentDraggedElement;
  */
 async function addTask() {
     let addTasks = JSON.parse(await getItem('task'));
+
+    if(!addTasks || addTasks.length === 0) {
+        console.log("No tasks to add.");
+        return;
+    }
+    
     for (let taskArray of addTasks) {
         for (let task of taskArray) {
             let existingTask = todos.find(t => t.taskID === task.taskID);
@@ -37,6 +43,7 @@ async function addTask() {
     }
     updateHTML();
 }
+
 
 
 /**
