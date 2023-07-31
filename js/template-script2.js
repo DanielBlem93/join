@@ -4,6 +4,7 @@ async function init() {
     await allUserName();
     await setInitials();
     await allUsers();
+    activeLink();
 }
 
 async function allUserName(){
@@ -42,5 +43,21 @@ async function setInitials() {
     let secondInitial = nameArray[1].charAt(0);
     initials.innerHTML = firstInitial + secondInitial;
 }
+
+function activeLink() {
+    let links = document.querySelectorAll('.nav-mobile-reiter');
+    let path = window.location.pathname;
+    let page = path.split('/').pop();
+    
+    links.forEach(link => {
+        if (link.getAttribute('data-page') === page) {
+            link.classList.add('active');
+        } else {
+            link.classList.remove('active');
+        }
+    });
+}
+
+
 
 

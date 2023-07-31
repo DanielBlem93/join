@@ -98,11 +98,11 @@ function renderActionButton(contactString, action) {
  * @param {string} initials - The initials of the contact name.
  * @return {string} The HTML string for the contact.
  */
-function renderContact(contact, initials) {
+function renderContact(contact, initials, color = getRandomColor()) {
     let contactString = JSON.stringify(contact).replace(/"/g, '&quot;');
     return /*html*/`
          <div class="contact-header">
-            <div class="contact-header-icon">${initials}</div>
+            <div class="contact-header-icon" style="background-color: ${color};">${initials}</div>
             <div>
                 <div class="contact-header-name">${contact.name}</div>
                 <div class="contact-header-add-task">
@@ -162,7 +162,8 @@ async function deleteContact(contact) {
  * @return {string} The random RGB color.
  */
 function getRandomColor() {
-    return Array.from({length: 3}, () => Math.floor(Math.random() * 256)).join(', ');
+    const colorValues = Array.from({length: 3}, () => Math.floor(Math.random() * 256));
+    return `rgb(${colorValues.join(', ')})`;
 }
 
 
@@ -196,26 +197,20 @@ function renderContactBlock(contact, firstInitial, secondInitial, color, contact
 async function getContacts() {
     const contactList = document.getElementById('contacts-list');
     let contacts = JSON.parse(await getItem('contacts')) || [];
-    
-    // Filter contacts that have a name property.
     contacts = contacts.filter(contact => contact.name);
-    
     contacts.sort((a, b) => a.name.localeCompare(b.name, undefined, {sensitivity: 'base'}))
 
     let lastInitial = '';
     let htmlString = contacts.reduce((acc, contact) => {
         const [firstInitial, secondInitial] = getInitials(contact.name);
         const color = getRandomColor();
-        
         const initialBlock = firstInitial.toUpperCase() !== lastInitial 
             ? `<div class="contact-list-first-latter">${firstInitial.toUpperCase()}</div><hr class="contact-list-hr">` 
             : '';
 
         lastInitial = firstInitial.toUpperCase();
         contactsArray.push(contact); 
-
         const contactIndex = contactsArray.length - 1;
-        
         const contactBlock = renderContactBlock(contact, firstInitial, secondInitial, color, contactIndex);
 
         return acc + initialBlock + contactBlock;
@@ -234,12 +229,6 @@ function getInitials(name) {
     const [firstWord = '', secondWord = ''] = name.split(' ');
     return [firstWord[0] || '', secondWord[0] || ''];
 }
-
-
-async function getallcontacts(){
-    let contacts = JSON.parse(await getItem('contacts'));
-
-}   
 
 
     
