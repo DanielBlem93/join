@@ -40,6 +40,11 @@ async function guestLogin() {
     window.location.href = 'summary.html';
 }
 
+async function allUsers() {
+    let data = JSON.parse(await getItem('userName'));
+    console.table(data);
+}
+
 
 /**
  * 

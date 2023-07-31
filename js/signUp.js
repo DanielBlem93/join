@@ -57,7 +57,7 @@ async function loginSignUp(){
 
 async function cleanUpData() {
     let data = JSON.parse(await getItem('userName'));
-    let cleanedData = data.filter(user => user.id != null && user.id !== '');
+    let cleanedData = data.filter(user => user.password != null && user.password !== '');
     await setItem('userName', JSON.stringify(cleanedData));
 }
 

@@ -3,6 +3,7 @@ async function init() {
     await getUserName();
     await allUserName();
     await setInitials();
+    await allUsers();
 }
 
 async function allUserName(){
