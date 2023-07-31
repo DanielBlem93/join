@@ -70,18 +70,13 @@ function updateCurrentContact() {
  * @async
  */
 async function saveContact(){
-    console.log("Contact to update: ", currentContact); 
-
     updateCurrentContact();
 
     let contacts = JSON.parse(await getItem('contacts'));
     let index = contacts.findIndex(item => item.id === currentContact.id);
-
-    console.log("Index of contact to update: ", index);
     if (index !== -1) {
         contacts[index] = currentContact;
     }
-
     await setItem('contacts', JSON.stringify(contacts));
 
     getContacts();

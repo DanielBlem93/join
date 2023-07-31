@@ -17,7 +17,6 @@ async function addTask() {
     let addTasks = JSON.parse(await getItem('task'));
 
     if(!addTasks || addTasks.length === 0) {
-        console.log("No tasks to add.");
         return;
     }
     
