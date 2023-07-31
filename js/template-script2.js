@@ -8,9 +8,9 @@ async function init() {
 
 async function allUserName(){
     let allUsers = JSON.parse(await getItem('userName'));
-    let currentUserName = await getItem('currentUserName');
-    // console.log(allUsers);
-    // console.log(currentUserName);
+    currentUserName = await getItem('currentUserName');
+    console.log(allUsers);
+    console.log(currentUserName);
 }
 
 function showLogout() {
