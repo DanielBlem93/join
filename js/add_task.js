@@ -10,7 +10,7 @@ let newCategoryStatus = false
 let assingedToStatus = false
 
 /**
- * presets the arrays whit values. This function can also be used to reset every array
+ * pre sets the arrays whit values. This function can also be used to reset every array
  */
 function initArrays() {
   categorys = [
@@ -24,14 +24,6 @@ function initArrays() {
     }
   ]
   getContaktfromBackend();
-  // contactsForAddTask = [
-  //   {
-  //     'first-name': 'Maximilian',
-  //     'last-name': 'Vogel',
-  //     'checked?': 'unchecked',
-  //     'color': 'var(--mint)'
-  //   },
-  // ]
 
   emails = []
   subtasks = []
@@ -66,9 +58,11 @@ function toggleDropdown(menuClass) {
 
   } else {
     if (dropdownMenu.style.height === '51px') {
-      dropdownMenu.style.height = 'fit-content';
+      dropdownMenu.style.height = '204px';
+      dropdownMenu.style.overflow = 'scroll'
     } else {
       dropdownMenu.style.height = '51px';
+      dropdownMenu.style.overflow = 'hidden'
     }
   }
 }

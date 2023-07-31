@@ -58,6 +58,7 @@
 
 body {
     background: var(--background-white);
+    overflow-x: hidden;
 }
 
 
@@ -122,7 +123,7 @@ input::placeholder {
     border: none;
 }
 
-button {
+.board-button {
     width: 137px;
     height: 51px;
     background-color: #2A3647;
@@ -150,7 +151,7 @@ button {
     justify-content: space-between;
 }
 
-.todo-box{
+.todo-box {
     width: 250px;
     /* height: 100%; */
     background-color: #FFFFFF;
@@ -166,7 +167,7 @@ button {
     transform: rotate(2deg);
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
- 
+
 
 .todo-box-header {
     display: inline-block;
@@ -229,18 +230,20 @@ button {
     margin-top: 20px;
 
 }
-.todo-box-footer-right{
+
+.todo-box-footer-right {
     border-radius: 50%;
     padding: 10px;
     display: flex;
     flex-direction: row;
 
 }
-.todo-icon-name{
+
+.todo-icon-name {
     border-radius: 50%;
     color: #FFFFFF;
     background-color: #800080;
-    
+
     width: 35px;
     height: 35px;
     display: flex;
@@ -285,7 +288,8 @@ button {
     left: 0;
     z-index: 999;
 }
-.modal-content{
+
+.modal-content {
     position: absolute;
     width: 623px;
     height: 798px;
@@ -293,26 +297,30 @@ button {
     border-radius: 10px;
     top: 50%;
     left: 50%;
-    transform: translate(-50%,-50%);
+    transform: translate(-50%, -50%);
     padding: 40px;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
 }
+
 .displayNone {
     display: none;
 }
-.modal-close{
+
+.modal-close {
     position: absolute;
     top: 20px;
     right: 20px;
     cursor: pointer;
 }
-.modal-close button{
+
+.modal-close button {
     background-color: transparent;
 }
-.todo-delete{
+
+.todo-delete {
     position: absolute;
     bottom: 40px;
     right: 40px;
@@ -321,11 +329,13 @@ button {
     padding: 10px;
     cursor: pointer;
 }
-.todo-delete img{
+
+.todo-delete img {
     width: 30px;
     height: 30px;
 }
-.modal-category{
+
+.modal-category {
     font-size: 1.5rem;
     font-weight: 400;
     color: #fff;
@@ -334,31 +344,36 @@ button {
     border-radius: 10px;
     margin-left: 20px;
 }
-.modal-title{
+
+.modal-title {
     font-size: 2rem;
     font-weight: 900;
     color: #2A3647;
     margin: 20px;
 }
-.modal-text{
+
+.modal-text {
     font-size: 1.5rem;
     font-weight: 400;
     color: #2A3647;
     margin: 20px;
 }
-.modal-date{
+
+.modal-date {
     font-size: 1.5rem;
     font-weight: 400;
     color: #2A3647;
     margin: 20px;
 }
-.modal-priority{
+
+.modal-priority {
     font-size: 1.5rem;
     font-weight: 400;
     color: #2A3647;
     margin: 20px;
 }
-.modal-members{
+
+.modal-members {
     font-size: 1.5rem;
     font-weight: 400;
     color: #2A3647;
@@ -367,12 +382,84 @@ button {
     flex-direction: column;
     gap: 20px;
 }
-#priority{
+
+#priority {
     background-color: #ff0000;
     padding: 10px 30px;
     color: #fff;
     border-radius: 10px;
     margin-left: 20px;
     text-shadow: rgba(0, 0, 0, 0.2) 0px 0px 2px;
-    box-shadow: rgba(0, 0, 0, 0.2)  0px 0px 2px;
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 0px 2px;
+}
+
+/* ==============Add Task Popup ================ */
+
+#addTaskPopup {
+    position: absolute;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+    text-align: center;
+
+    width: 100%;
+    height: 100%;
+
+    z-index: 999999999999999999999999999999999999999;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 125ms ease-in;
+    transform: translateX(2000px);
+
+}
+.popupAnimation{
+    transform: translateX(0px) !important;
+}
+
+#addTaskPopupContainer {
+    position: relative;
+    width: 70%;
+    height: 90%;
+    background-color: var(--background-white);
+    border-radius: 20px;
+}
+
+main {
+    position: absolute;
+    top: -130px;
+
+    left: -170px;
+
+}
+
+#add-task-close-button {
+    height: 70px;
+    width: 70px;
+    position: absolute;
+    left: 1426px;
+    top: 135px;
+    cursor: pointer;
+}
+
+
+
+.add-task-button {
+    margin-left: 0 !important;
+    background-color: var(--white);
+}
+
+.typography2T6 {
+    padding: 0;
+}
+
+.typography2T6::placeholder {
+    font-size: 20px;
+}
+
+#description::placeholder {
+    font-size: 20px;
+    opacity: 0.5;
 }

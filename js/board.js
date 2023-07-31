@@ -291,3 +291,15 @@ function searchTodos() {
         document.getElementById(todo.category).innerHTML += generateToDoHTML(todo);
     }
 }
+
+
+// ========================== Add Task ==============================
+
+
+function showAddTaskPopup(color){
+    let popup = document.getElementById('addTaskPopup')
+    popup.classList.toggle('popupAnimation')
+    setTimeout(() => {
+       popup.style.backgroundColor = `${color}` 
+    }, 125);
+}
