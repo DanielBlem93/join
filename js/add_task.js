@@ -24,9 +24,8 @@ function initArrays() {
     }
   ]
   getContaktfromBackend();
-
-  emails = []
-  subtasks = []
+  emails = [];
+  subtasks = [];
 }
 async function getContaktfromBackend() {
   let tasks = JSON.parse(await getItem('contacts'));
@@ -492,6 +491,7 @@ function renderSubtask() {
     </label
     `
   }
+  console.log(subtasks);
 }
 
 /**
@@ -558,7 +558,7 @@ async function createTask() {
       'persons': persons, // Füge persons hinzu
       'emails': [emails],
       'priority': currentPriority,
-      'subtasks': [subtasks],
+      'subtasks': subtasks,
       'taskID': taskId
     }];
 
