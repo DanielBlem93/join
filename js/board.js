@@ -24,6 +24,7 @@ async function addTask() {
         for (let task of taskArray) {
             let existingTask = todos.find(t => t.taskID === task.taskID);
             if (!existingTask) {
+                let members = (task.persons && task.persons.length > 0) ? task.persons.map(person => person.name) : ['All Employees'];
                 todos.push({
                     'id': todos.length,
                     'category': 'open',
@@ -31,7 +32,7 @@ async function addTask() {
                     'title': task.title,
                     'text': task.description,
                     'done-fraction': '',
-                    'members': task.persons && task.persons[0] && task.persons[0].name ? task.persons[0].name : 'All Employees',
+                    'members': members,
                     'priority': task.priority,
                     'selected-color': '',
                     'date': task.date,
@@ -42,6 +43,7 @@ async function addTask() {
     }
     updateHTML();
 }
+
 
 
 
@@ -72,6 +74,7 @@ async function initBoard() {
     await addTask();
     init();
     updateHTML();
+    console.log(todos);
 }
   
 
@@ -188,8 +191,8 @@ function styleTodos() {
  * @returns {string} An HTML string for a todo box element.
  */
 function generateToDoHTML(element) {
-    let member = element['members'];
-    let letters = getFirstTwoLetters(member);
+    let members = element['members'];
+    let letters = getFirstTwoLetters(members);
     let prioImg = generatePrioIcon(element['priority']);
 
     return /*html*/ `
@@ -214,9 +217,9 @@ function generateToDoHTML(element) {
     </div>
     <div id="todoBoxFooterBar${element['id']}" class="todo-box-footer-bar">
     <div  class="todo-box-footer">
-        <div class="todo-box-footer-right">
-            ${letters}
-        </div>
+    <div class="todo-box-footer-right" >
+        ${letters}
+    </div>
          <div class="todo-box-footer-left">
              ${prioImg}
         </div>
@@ -233,10 +236,29 @@ function generateToDoHTML(element) {
  * @param {string} member - The string from which to extract the first two letters.
  * @returns {string} The first two letters of the input string in uppercase, or undefined if input is not a string.
  */
-function getFirstTwoLetters(member) {
-    if (member !== undefined && typeof member === 'string') {
-        return member.slice(0, 2).toUpperCase();
+
+function getFirstTwoLetters(members) {
+    let randomColor = getRandomColor();
+    let letterDivs = '';
+    if (Array.isArray(members)) {
+        members.slice(0,2).forEach(member => { // limit to 2 names
+            if (typeof member === 'string') {
+                let firstTwoLetters = member.slice(0, 2).toUpperCase();
+                letterDivs += `<div class="todo-icon-name" style="background-color:${getRandomColor()};">${firstTwoLetters}</div>`;
+            }
+        });
+
+        // if there are more than 2 names, show the number of remaining names
+        if (members.length > 2) {
+            letterDivs += `<div class="todo-icon-name" style="background-color:${getRandomColor()};">+${members.length - 2}</div>`;
+        }
     }
+    return letterDivs;
+}
+
+function getRandomColor() {
+    const colorValues = Array.from({length: 3}, () => Math.floor(Math.random() * 256));
+    return `rgb(${colorValues.join(', ')})`;
 }
 
 

@@ -23,17 +23,34 @@ function initArrays() {
       'color': 'mint',
     }
   ]
-  contactsForAddTask = [
-    {
-      'first-name': 'Maximilian',
-      'last-name': 'Vogel',
-      'checked?': 'unchecked',
-      'color': 'var(--mint)'
-    },
-  ]
+  getContaktfromBackend();
+  // contactsForAddTask = [
+  //   {
+  //     'first-name': 'Maximilian',
+  //     'last-name': 'Vogel',
+  //     'checked?': 'unchecked',
+  //     'color': 'var(--mint)'
+  //   },
+  // ]
 
   emails = []
   subtasks = []
+}
+async function getContaktfromBackend() {
+  let tasks = JSON.parse(await getItem('contacts'));
+  tasks.forEach(task => {
+    let names = task.name.split(" ");
+
+    let contact = {
+      'first-name': names[0],
+      'last-name': names[1],
+      'checked?': 'unchecked',
+      'color': 'var(--mint)'
+    };
+    contactsForAddTask.push(contact);
+  });
+
+  return contactsForAddTask;
 }
 // Functions for Category Dropdown menu
 
@@ -519,62 +536,62 @@ function resetPriority() {
   }
 }
 
+
 /**
  * creates the task
  */
-function createTask() {
-  let titleInput = document.getElementById('title')
-  let descriptionInput = document.getElementById('description')
-  let dateInput = document.getElementById('date')
-  let categoryInput = document.querySelector('#select-box > div')
-
-  let title = titleInput.value.trim()
-  let description = descriptionInput.value.trim()
-  let date = dateInput.value.trim()
-  let category = categoryInput.innerText.trim()
+async function createTask() {
+  let titleInput = document.getElementById('title');
+  let descriptionInput = document.getElementById('description');
+  let dateInput = document.getElementById('date');
+  let categoryInput = document.querySelector('#select-box > div');
+  let persons = await addPersonsToNewTask();
+  let title = titleInput.value.trim();
+  let description = descriptionInput.value.trim();
+  let date = dateInput.value.trim();
+  let category = categoryInput.innerText.trim();
   let taskId = Math.random().toString(36).substr(2) + Date.now().toString(36);
+  
+
 
   if (checkRequierdInputs()) {
+    // Erstelle zunächst das neue Aufgabenobjekt
+    newTask = [{
+      'title': title,
+      'description': description,
+      'date': date,
+      'category': category,
+      'persons': persons, // Füge persons hinzu
+      'emails': [emails],
+      'priority': currentPriority,
+      'subtasks': [subtasks],
+      'taskID': taskId
+    }];
 
-    newTask = []
-    newTask = [
-      {
-        'title': `${title}`,
-        'description': `${description}`,
-        'date': `${date}`,
-        'category': `${category}`,
-        'persons': [], // {'name': `${firstName} ${lastName}`}
-        'emails': [emails],
-        'priority': `${currentPriority}`,
-        'subtasks': [subtasks],
-        'taskID': `${taskId}`
-      }
-    ]
-    addPersonsToNewTask()
-    clearTask()
+    clearTask();
     createTaskBackend(newTask);
-    animations()
+    animations();
   }
 }
 
-/**
- * Adds the person to the new Task array as JSON
- */
-function addPersonsToNewTask() {
+async function addPersonsToNewTask() {
+  let persons = [];
+  
   for (let i = 0; i < contactsForAddTask.length; i++) {
     const contact = contactsForAddTask[i];
 
     if (contact['checked?'] === 'checked') {
-      let firstName = contact['first-name']
-      let lastName = contact['last-name']
-      let name =
-      {
-        'name': `${firstName} ${lastName}`
-      }
-      newTask[i].persons.push(name)
+      let firstName = contact['first-name'];
+      let lastName = contact['last-name'];
+      let name = {'name': `${firstName} ${lastName}`};
+
+      persons.push(name); 
     }
   }
+  
+  return persons; 
 }
+
 // =============== Checking inputs ===================================
 
 function checkRequierdInputs() {

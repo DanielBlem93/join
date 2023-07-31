@@ -65,7 +65,6 @@ async function guestLogin() {
  */
 async function allUsers() {
     let data = JSON.parse(await getItem('userName'));
-    console.table(data);
 }
 
 /**
