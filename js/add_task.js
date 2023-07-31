@@ -593,7 +593,10 @@ async function addPersonsToNewTask() {
 }
 
 // =============== Checking inputs ===================================
-
+/**
+ * Checks every input. 
+ * @returns true if all inputs aren't empty false if minimum one is empty
+ */
 function checkRequierdInputs() {
   let checkInputTitle = checkInput('title');
   let checkInputDescription = checkInput('description');
@@ -608,7 +611,10 @@ function checkRequierdInputs() {
     return false;
   }
 }
-
+/**
+ * shows a message that this field is requierd if no category is selected
+ * @returns 
+ */
 function checkCategory() {
   let categoryInput = document.querySelector('#select-box > div');
   let category = categoryInput.innerText.trim();
@@ -626,7 +632,11 @@ function checkCategory() {
     }
   }
 }
-
+/**
+ * checks if the input is empty and shows a message if it is
+ * @param {string} inputs - the id of the input 
+ * @returns -true if the input is filled and false if not
+ */
 function checkInput(inputs) {
   let input = document.getElementById(inputs);
   let inputValue = input.value.trim();
@@ -640,7 +650,11 @@ function checkInput(inputs) {
     return false;
   }
 }
-
+/**
+ * Is important to show the right "This filed is required" text
+ * @param {string} inputs -the id of the input
+ * @returns -the index for the right "This filed is required" text position
+ */
 function getRequiredIndex(inputs) {
   const inputMappings = {
     'title': 0,
@@ -651,6 +665,11 @@ function getRequiredIndex(inputs) {
   return inputMappings[inputs] || 0; // Fallback to 0 if inputs is not found in the object
 }
 
+
+/**
+ * checks if a priority is selected
+ * @returns - true if its selected and false if not
+ */
 function checkPrio() {
   if (currentPriority.length > 0) {
     showIsRequiered(4, 'add');
@@ -660,12 +679,19 @@ function checkPrio() {
     return false;
   }
 }
-
+/**
+ * 
+ * @param {string} index - the index for the right "This filed is required" text position 
+ * @param {string} action - 'add' or 'remove' for the classlist
+ */
 function showIsRequiered(index, action) {
   let required = document.getElementsByClassName('is-required')[index];
   required.classList[action]('displayNone');
 }
-
+/**
+ * Shows a Messagebox 
+ * @param {string} text -the text you want to show in the Messagebox
+ */
 function showWarning(text){
   let massageBox= document.getElementById('created-task-massage-text')
   let img = document.querySelector('#created-task-massage > img')
@@ -681,11 +707,12 @@ function showWarning(text){
     massageBox.innerText= `Task added to board`
   }, 3100); 
   
-
 }
 
 // =========================Animations ===========================
-
+/**
+ * A animation order when you press on add task
+ */
 function animations() {
   flyIn('flex')
   setTimeout(() => {
@@ -696,7 +723,10 @@ function animations() {
   }, 1000);
 
 }
-
+/**
+ * 
+ * @param {string} display - 'none ' or 'unset' to fly the messagebox in
+ */
 function flyIn(display) {
   let massage = document.getElementById('created-task-massage-container')
 
@@ -706,11 +736,16 @@ function flyIn(display) {
   }, 10);
 
 }
-
+/**
+ * swipes the body to the right
+ */
 function flyOutBody() {
   let body = document.getElementsByTagName('body')[0]
   body.style.transform = ('translateX(100%)')
 }
+/**
+ * Getting redirected to the board.html
+ */
 function swapToBoard() {
   window.location.href = 'board.html'
 }
