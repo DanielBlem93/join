@@ -52,16 +52,53 @@ async function loginSignUp(){
     email.value = '';
     password.value = '';
     loginname.value = '';
-    window.location.href = 'index.html';  
+    replaceButtonWithImageAndRedirect();
 }
 
+/**
+ * Replaces a login button with an image and redirects to another page after a delay.
+ * This function assumes that there is a button with ID 'loginButton' and an image with ID 'loginImage' in the HTML.
+ *
+ * @function
+ */
+function replaceButtonWithImageAndRedirect() {
+    // Hole den Anmeldeknopf und das Bild
+    let button = document.getElementById('loginButton');
+    let image = document.getElementById('loginImage');
+
+    // Verstecke den Knopf und zeige das Bild
+    button.style.display = 'none';
+    image.style.display = 'block';
+
+    // Leite nach einer Verzögerung von 2 Sekunden auf eine andere Seite um
+    setTimeout(() => {
+        window.location.href = 'index.html';
+    }, 2000);
+}
+
+
+/**
+ * Asynchronously cleans up user data, removing any users where the password field is null or empty.
+ * This function retrieves the data, filters out invalid users, and then saves the cleaned data back.
+ *
+ * @async
+ * @function
+ * @returns {Promise<void>} A Promise that resolves when the data cleaning process is complete. No return value.
+ */
 async function cleanUpData() {
     let data = JSON.parse(await getItem('userName'));
     let cleanedData = data.filter(user => user.password != null && user.password !== '');
     await setItem('userName', JSON.stringify(cleanedData));
 }
 
-
+/**
+ * Displays an error message for a specified duration.
+ * This function sets the text content of an HTML element to a specified message, and then clears the message after a delay.
+ *
+ * @function
+ * @param {string} elementId - The ID of the HTML element where the error message is to be displayed.
+ * @param {string} message - The error message to be displayed.
+ */
 function displayError(elementId, message) {
     let element = document.getElementById(elementId);
     element.textContent = message;
@@ -70,6 +107,17 @@ function displayError(elementId, message) {
     }, 2000);
 }
 
+/**
+ * Validates user input, ensuring that the email, password, and username fields are not empty, 
+ * and that the username contains both a first and last name.
+ * This function displays an error message under the relevant input field if a field is invalid.
+ *
+ * @function
+ * @param {HTMLInputElement} email - The email input element.
+ * @param {HTMLInputElement} password - The password input element.
+ * @param {HTMLInputElement} loginname - The username input element.
+ * @returns {boolean} Returns true if all input fields are valid, false otherwise.
+ */
 function validateInput(email, password, loginname) {
     let isValid = true;
     if (email.value === '') {

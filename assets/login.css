@@ -202,6 +202,7 @@ label {
 .login-link {
     text-decoration: none;
     color: #29ABE2;
+    cursor: pointer;
 }
 
 .login-submit {
@@ -246,6 +247,20 @@ label {
     background-color: #29ABE2;
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 }
+
+@keyframes slideInFromRight {
+    0% {
+        transform: translateX(100%);
+    }
+    100% {
+        transform: translateX(0);
+    }
+}
+
+#loginImage {
+    animation: slideInFromRight 1s;
+}
+
 .form-hr {
     width: 150px;
     height: 3px;
@@ -293,6 +308,20 @@ label {
 .forgot-password-btn:hover{
     background-color: #29ABE2;
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+
+.success-image {
+    display: none;
+    width: 246px;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out; 
+}
+
+.show {
+    display: block;
+    opacity: 1;
 }
 
 .new-pw {
