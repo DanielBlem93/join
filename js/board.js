@@ -19,12 +19,15 @@ async function addTask() {
     if(!addTasks || addTasks.length === 0) {
         return;
     }
-    
+
     for (let taskArray of addTasks) {
         for (let task of taskArray) {
             let existingTask = todos.find(t => t.taskID === task.taskID);
             if (!existingTask) {
                 let members = (task.persons && task.persons.length > 0) ? task.persons.map(person => person.name) : ['All Employees'];
+                
+                let subtasksWithCompletion = task.subtasks ? task.subtasks.map(subtask => ({ subtask, isComplete: false })) : [];
+                
                 todos.push({
                     'id': todos.length,
                     'category': 'open',
@@ -34,7 +37,7 @@ async function addTask() {
                     'done-fraction': '',
                     'members': members,
                     'priority': task.priority,
-                    'subtasks': task.subtasks ? task.subtasks : [],
+                    'subtasks': subtasksWithCompletion,
                     'date': task.date,
                     'taskID': task.taskID
                 })
@@ -196,13 +199,12 @@ function generateToDoHTML(element) {
     let prioImg = generatePrioIcon(element['priority']);
     let color = getRandomColor();
 
-    // Calculate the progress based on the subtasks
     let progress = 0;
     let progressLabel = '';
-    if (element['subtasks'] && element['subtasks'].length > 0) {
-        progress = element['subtasks'].filter(subtask => subtask.done).length / element['subtasks'].length;
-        progressLabel = `${element['subtasks'].filter(subtask => subtask.done).length}/${element['subtasks'].length}`;
-    }
+        if (element['subtasks'] && element['subtasks'].length > 0) {
+            progress = element['subtasks'].filter(subtaskObj => subtaskObj.isComplete).length / element['subtasks'].length;
+            progressLabel = `${element['subtasks'].filter(subtaskObj => subtaskObj.isComplete).length}/${element['subtasks'].length}`;
+        }
 
     return /*html*/ `
     <div onclick="showTodo(${element['id']})" class="todo-box" draggable="true" ondragstart="startDragging(${element['id']})">
@@ -219,8 +221,8 @@ function generateToDoHTML(element) {
     </div>
 
     <div class="todo-box-progress">
-        <div class="todo-box-progress-bar" style="width: ${progress * 100}%">
-            <div class="todo-box-progress-bar-fill"></div>
+        <div class="todo-box-progress-bar">
+            <div class="todo-box-progress-bar-fill" style="width: ${progress * 100}%"></div>
         </div>
         <p>${progressLabel} Done</p>
     </div>

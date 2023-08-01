@@ -26,12 +26,12 @@ function showTodo(id) {
 function generateToDoHTMLModal(todo) {
     let subtasksHTML = '';
     if (todo.subtasks && todo.subtasks.length > 0) {
-        todo.subtasks.forEach((subtask, index) => {
-            console.log(subtask);
+        todo.subtasks.forEach((subtaskObj, index) => {
+            console.log(subtaskObj.subtask);
             subtasksHTML += /*html*/`
                 <div class="todo-subtask">
-                    <input type="checkbox" id="subtask${index}" ${subtask.done ? 'checked' : ''} onclick="toggleSubtask(${todo.id}, ${index})">
-                    <label for="subtask${index}">${subtask}</label>
+                    <input type="checkbox" id="subtask${index}" ${subtaskObj.isComplete ? 'checked' : ''} onclick="toggleSubtask(${todo.id}, ${index})">
+                    <label for="subtask${index}">${subtaskObj.subtask}</label>
                 </div>
             `;
         });
@@ -61,7 +61,7 @@ function generateToDoHTMLModal(todo) {
 function toggleSubtask(todoId, subtaskId) {
     let todo = todos.find(t => t.id === todoId);
     if (todo && todo.subtasks && todo.subtasks[subtaskId]) {
-        todo.subtasks[subtaskId].done = !todo.subtasks[subtaskId].done;
+        todo.subtasks[subtaskId].isComplete = !todo.subtasks[subtaskId].isComplete;
         updateHTML();
     }
 }
