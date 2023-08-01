@@ -863,7 +863,10 @@ input[type="radio"]:checked+label {
     color: white;
 
     position: absolute;
-    left: 690px;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
     bottom: -130px;
 
     transition: 300ms;
@@ -921,7 +924,7 @@ input[type="radio"]:checked+label {
 }
 
 .low {
-    background-color: var(--prio-red) !important;
+    background-color: var(--prio-green) !important;
 }
 
 .white-color path {
@@ -930,6 +933,7 @@ input[type="radio"]:checked+label {
 
 .flyIn {
     bottom: 425px !important;
+  
 }
 
 body {
