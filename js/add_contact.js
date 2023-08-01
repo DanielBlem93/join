@@ -19,24 +19,84 @@ function closeModal(){
  * Refreshes the page to reflect the changes.
  * @async
  */
-async function createContact(){
-    let id = Math.random().toString(36).substr(2) + Date.now().toString(36);
-    
+async function createContact() {
+    let id = generateId();
 
+    // Get inputs
+    let nameInput = document.getElementById('contactName');
+    let emailInput = document.getElementById('contactEmail');
+    let phoneInput = document.getElementById('contactPhone');
+
+    // Remove error messages if exist
+    clearErrorMessages();
+
+    // Validation
+    if (!isValidName(nameInput.value)) {
+        displayError(nameInput, 'Please enter first and last name separated by a space.');
+        return;
+    }
+
+    if (!isValidEmail(emailInput.value)) {
+        displayError(emailInput, 'Please enter a valid email address.');
+        return;
+    }
+
+    if (!isValidPhone(phoneInput.value)) {
+        displayError(phoneInput, 'Please enter only numbers for the phone.');
+        return;
+    }
+
+    // Create new contact if all validations are successful
     const contact = {
-        name: document.getElementById('contactName').value,
-        email: document.getElementById('contactEmail').value,
-        phone: document.getElementById('contactPhone').value,
+        name: nameInput.value,
+        email: emailInput.value,
+        phone: phoneInput.value,
         id: id
     }
 
-    let contacts = JSON.parse(await getItem('contacts')) || [];
-    contacts.push(contact);
-    await setItem('contacts', JSON.stringify(contacts));
+    await addContact(contact);
     getContacts();
     closeModal();
     window.location.reload();
 }
+
+function generateId() {
+    return Math.random().toString(36).substr(2) + Date.now().toString(36);
+}
+
+function clearErrorMessages() {
+    document.querySelectorAll('.error-message').forEach(el => el.remove());
+}
+
+function isValidName(name) {
+    let nameRegex = /^[a-z]+\s[a-z]+$/i;
+    return nameRegex.test(name);
+}
+
+function isValidEmail(email) {
+    let emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+}
+
+function isValidPhone(phone) {
+    let phoneRegex = /^\d+$/;
+    return phoneRegex.test(phone);
+}
+
+function displayError(inputElement, message) {
+    let errorMessage = document.createElement('div');
+    errorMessage.className = 'error-message';
+    errorMessage.style.color = 'red';
+    errorMessage.textContent = message;
+    inputElement.parentNode.insertBefore(errorMessage, inputElement.nextSibling);
+}
+
+async function addContact(contact) {
+    let contacts = JSON.parse(await getItem('contacts')) || [];
+    contacts.push(contact);
+    await setItem('contacts', JSON.stringify(contacts));
+}
+
 /**
  * Sets the value of an HTML element.
  * @param {string} id - The ID of the HTML element.

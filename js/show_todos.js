@@ -22,7 +22,6 @@ function showTodo(id) {
  * @returns {string} HTML string representing the todo.
  */
 
-
 function generateToDoHTMLModal(todo) {
     let subtasksHTML = '';
     if (todo.subtasks && todo.subtasks.length > 0) {
@@ -34,6 +33,16 @@ function generateToDoHTMLModal(todo) {
                     <label for="subtask${index}">${subtaskObj.subtask}</label>
                 </div>
             `;
+        });
+    }
+
+    let membersHTML = '';
+    if (todo.members && todo.members.length > 0) {
+        todo.members.forEach((member) => {
+            let color = getRandomColor();
+            let names = member.split(' ');
+            let initials = names[0][0] + names[1][0];
+            membersHTML += `<p class="modalMember"><span class="initMember" style="background-color:${color}";>${initials}</span>  ${member}</p>`;
         });
     }
 
@@ -50,13 +59,14 @@ function generateToDoHTMLModal(todo) {
         <p class="modal-priority"><b>Priority:</b> <span id="priority">${todo['priority']}</span></p>
         <div class="modal-members">
             <p><b>Assigned To:</b></p>
-            <p>${todo['members']}</p>
+            ${membersHTML}
         </div>
         <div onclick="deleteTodo(${todo['id']})" class="todo-delete">
             <img src="./assets/img/delete.png" alt="">
         </div>
-    </div>`;
+    `;
 }
+
 
 function toggleSubtask(todoId, subtaskId) {
     let todo = todos.find(t => t.id === todoId);
