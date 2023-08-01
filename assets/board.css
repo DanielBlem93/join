@@ -286,7 +286,7 @@ input::placeholder {
     width: 100vw;
     top: 0;
     left: 0;
-    z-index: 999;
+    z-index: 333;
 }
 
 .modal-content {
@@ -323,14 +323,27 @@ input::placeholder {
 .todo-delete {
     position: absolute;
     bottom: 40px;
-    right: 40px;
-    border-radius: 10px;
+    right: 70px;
+    border-radius: 10px 0 0 10px;
     border: 2px solid #2A3647;
     padding: 10px;
     cursor: pointer;
 }
+.todo-edit{
+    position: absolute;
+    bottom: 40px;
+    right: 20px;
+    border-radius:0  10px 10px 0 ;
+    background-color: #2A3647;
+    padding: 12px;
+    cursor: pointer;
+}
 
 .todo-delete img {
+    width: 30px;
+    height: 30px;
+}
+.todo-edit img{
     width: 30px;
     height: 30px;
 }
@@ -426,21 +439,83 @@ input::placeholder {
     box-shadow: rgba(0, 0, 0, 0.2) 0px 0px 2px;
 }
 
+#editTodoModal {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    right: -200%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.2);
+    z-index: 899;
+    transition: 225ms ease-in;
+}
+.editTodoBox{
+    position: relative;
+    margin: 50px;
+    width: 40rem;
+    height: auto;
+    background-color: white;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;    
+    align-items: flex-start;
+    padding: 20px;
+}
+.modal-title-edit{
+    font-weight: 300;
+    color: #2A3647;
+    margin: 10px;
+}
+.editPrio{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 10px;
+}
+.prio{
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+}
+.prio:hover{
+    box-shadow:  0px 4px 4px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+}
+.editClose{
+    position: absolute;
+    border: none;
+    background-color: transparent;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+}
+.editOk{
+    position: absolute;
+    padding: 10px 20px;
+    border-radius: 10px;
+    border: none;
+    background-color: #2A3647;
+    color: white;
+    bottom: 50px;
+    right: 50px;
+    cursor: pointer;
+}
+    
+
 /* ==============Add Task Popup ================ */
 
 #addTaskPopup {
-    position: absolute;
+    position: fixed;
     margin-left: auto;
     margin-right: auto;
     left: 0;
     right: 0;
     text-align: center;
-
     width: 100%;
     height: 100%;
-
-    z-index: 999999999999999999999999999999999999999;
-
+    z-index: 999;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -464,7 +539,7 @@ main {
     position: absolute;
     top: -130px;
 
-    left: -170px;
+    left: -324px;
 
 }
 

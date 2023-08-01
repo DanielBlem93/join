@@ -15,7 +15,6 @@ let currentDraggedElement;
  */
 async function addTask() {
     let addTasks = JSON.parse(await getItem('task'));
-    console.log(addTasks);
     if(!addTasks || addTasks.length === 0) {
         return;
     }
@@ -76,8 +75,8 @@ async function initBoard() {
     await getStoredTodos();
     await addTask();
     init();
+    initArrays();
     updateHTML();
-    console.log(todos);
 }
   
 

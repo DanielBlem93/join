@@ -555,7 +555,7 @@ async function createTask() {
       'description': description,
       'date': date,
       'category': category,
-      'persons': persons, // Füge persons hinzu
+      'persons': persons, 
       'emails': [emails],
       'priority': currentPriority,
       'subtasks': subtasks,
