@@ -268,6 +268,20 @@ input::placeholder {
 
 }
 
+#temp-add-task {
+    background-color: unset !important;
+}
+
+#temp-add-task p {
+    color: var(--font-color-not-active) !important;
+}
+
+#add-task-icon-img-hover {
+    display: none !important;
+
+}
+
+
 /* ========================================= */
 
 
@@ -539,7 +553,7 @@ main {
     position: absolute;
     top: -130px;
 
-    left: -324px;
+    left: -175px;
 
 }
 
@@ -571,3 +585,5 @@ main {
     font-size: 20px;
     opacity: 0.5;
 }
+
+

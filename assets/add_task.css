@@ -908,17 +908,20 @@ input[type="radio"]:checked+label {
 
 /* For JS usage */
 
+.txtWhite{
+    color: white;
+}
+
 .urgent {
-    background-color: var(--prio-red);
-    ;
+    background-color: var(--prio-red) !important;
 }
 
 .medium {
-    background-color: var(--prio-orange);
+    background-color: var(--prio-orange) !important;
 }
 
 .low {
-    background-color: var(--prio-red);
+    background-color: var(--prio-red) !important;
 }
 
 .white-color path {

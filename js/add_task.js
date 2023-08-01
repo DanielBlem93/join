@@ -1,6 +1,6 @@
 // Arrays
-let categorys = []
 let contactsForAddTask = []
+let categorys = []
 let subtasks = []
 let emails = []
 let newTask = []
@@ -433,6 +433,7 @@ function renderEmails() {
  */
 
 function changeColor(id, priority) {
+
   let buttons = document.getElementsByClassName('addTaskFrame14Prio');
   for (let i = 0; i < buttons.length; i++) {
     const button = buttons[i];
@@ -743,5 +744,4 @@ function flyOutBody() {
 function swapToBoard() {
   window.location.href = 'board.html'
 }
-
 
