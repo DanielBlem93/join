@@ -15,7 +15,7 @@ body{
     align-items: start;
     gap: 70px;
 }
-.content{
+.sum-content{
     position: relative;
     z-index: -2;
 }
@@ -203,4 +203,269 @@ div.summary-task:hover{
 
 #summary-icon-img-hover{
 display: unset;
+}
+
+
+@media (max-width: 1000px) {
+    #content-summary{
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    .sum-content{
+        position: static;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    .summary-content{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    .summary-container{
+        display: flex;
+        flex-direction: column-reverse;
+        justify-content: center;
+        align-items: center;
+        gap: 70px;
+    }
+    .summary-haeder{
+        width: 500px;
+    }
+    .summary-h1{
+        font-size: 45px; 
+    }
+
+    .summary-trenner{
+        height: 45px; 
+    }
+
+    .summary-p{
+        font-size: 18px; 
+        line-height: 26px; 
+    }
+}
+
+
+@media (max-width: 786px){
+    .summary-body{
+        gap: 10px;
+    }
+    h1{
+        line-height: inherit;
+    }
+    .summary-greeting{
+        display: none;
+    }
+    .summary-haeder{
+        width: 400px;
+    }
+    .summary-h1{
+        font-size: 38px; 
+    }
+
+    .summary-trenner{
+        height: 38px; 
+    }
+
+    .summary-p{
+        font-size: 16px; 
+        line-height: 23px; 
+    }
+    .summary-tasks{
+        width: 400px;
+        height: 120px;
+    }
+    .summary-task{
+        width: 120px;
+        height: 120px;
+        align-items: center;
+        justify-content: center;
+        gap: 20px;
+        text-align: center;
+    }
+    .summary-tasks h1{
+        font-size: 30px;
+        line-height: 20px;
+    }
+    .summary-tasks p{
+        font-size: 14px;
+    }
+    .summary-date{
+        width: 400px;
+        height: 120px;
+    }
+    .summary-icon-urgent img{
+        width: 30px;
+        height: 30px;
+    }
+    .summary-display h1{
+        font-size: 30px;
+    }
+    .summary-display h2{
+        font-size: 20px;
+    }
+    .summary-display p{
+        font-size: 14px;
+    }
+    .summary-data h1{
+        font-size: 30px;
+    }
+    .summary-data p{
+        font-size: 14px;
+    }
+    .summary-date-hr{
+        height: 40px;
+    }
+    .summary-todos{
+        width: 400px;
+    }
+    .summary-todo{
+        width: 180px;
+        height: 120px;
+    }
+    .summary-todo-icon{
+        width: 40px;
+        height: 40px;
+    }
+    .summary-todo-icon img{
+        width: 30px;
+        height: 30px;
+    }
+    .summary-todo-icon-stift{
+        width: 30px;
+        height: 30px;
+    }
+    .summary-icon-urgent{
+        width: 40px;
+        height: 40px;
+    }
+
+}
+
+@media (max-width: 480px) {
+    .summary-body{
+        padding: 20px;
+    }
+    .summary-haeder{
+        width: 100%;
+        justify-content: space-evenly;
+    }
+    .summary-h1{
+        font-size: 20px; 
+    }
+
+    .summary-trenner{
+        height: 20px; 
+    }
+
+    .summary-p{
+        font-size: 14px; 
+        line-height: 10px; 
+    }
+    .summary-tasks{
+        width: 320px;
+    }
+    .summary-task{
+        width: 80px;
+        height: 80px;
+    }
+    .summary-tasks h1{
+        font-size: 20px;
+        line-height: 10px;
+    }
+    .summary-tasks p{
+        font-size: 10px;
+    }
+    .summary-icon-urgent img{
+        width: 20px;
+        height: 20px;
+    }
+    .summary-date{
+        width: 320px;
+        height: 80px;
+    }
+    .summary-display h1{
+        font-size: 20px;
+    }
+    .summary-display h2{
+        font-size: 10px;
+    }
+    .summary-display p{
+        font-size: 10px;
+    }
+    .summary-data h1{
+        font-size: 20px;
+    }
+    .summary-data p{
+        font-size: 10px;
+    }
+    #urgent-date{
+        font-size: 10px;
+    }
+    p{
+        font-size: 10px;
+    }
+    .summary-date-hr{
+        height: 20px;
+    }
+    .summary-todos{
+        width: 320px;
+        height: 120px;
+    }
+    .summary-todo{
+        width: 120px;
+        height: 80px;
+    }   
+    .summary-todo-icon{
+        width: 30px;
+        height: 30px;
+    }
+    .summary-todo-icon img{
+        width: 20px;
+        height: 20px;
+    }
+    .summary-todo-icon-stift{
+        width: 20px;
+        height: 20px;
+    }
+    .summary-icon-urgent{
+        width: 30px;
+        height: 30px;
+    }
+    .summary-greeting-p{
+        font-size: 30px;
+    }
+    .summary-greeting-h2{
+        font-size: 40px;
+    }
+    .summary-greeting-h1{
+        font-size: 40px;
+    }
+    .summary-greeting-h3{
+        font-size: 30px;
+    }
+
+}
+
+
+@media (max-width: 320px) {
+    .summary-trenner{
+        height: 20px; 
+    }
+    .summary-tasks{
+        width: 300px;
+    }
+    .summary-date{
+        width: 300px;
+    }
+    .summary-todos{
+        width: 300px;
+        height: 100px;
+    }
 }
