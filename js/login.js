@@ -75,11 +75,15 @@ async function allUsers() {
  * @returns {Promise<void>} Returns a Promise that resolves when the process is complete. No return value.
  */
 function moveLogo() {
-    if(window.location.href.includes('index.html')) {
-    document.getElementById('img-container').classList.add('movedContainer');
-    document.getElementById('logo-image').classList.add('movedImage');
-    document.getElementById('login-header').classList.add('opacity');
-    document.getElementById('login-form').classList.add('opacity');
-    document.getElementById('indexFooter').classList.add('opacity');
+    if (window.location.href.includes('index.html')) {
+        document.getElementById('loginOverlay').classList.add('opacity-none');
+        document.getElementById('img-container').classList.add('movedContainer');
+        document.getElementById('logo-image').classList.add('movedImage');
+        document.getElementById('img-container-mobile').classList.add('movedContainer');
+        document.getElementById('logo-image-mobile').classList.add('movedImage');
+        document.getElementById('login-header').classList.add('opacity');
+        document.getElementById('login-form').classList.add('opacity');
+        document.getElementById('indexFooter').classList.add('opacity');
+        
     }
 }    
