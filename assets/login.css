@@ -50,13 +50,15 @@ button {
 
 .movedContainer {
     width: 100px !important;
-    top: 77px;
-    left: 80px;
+    top: 37px;
+    left: 38px;
 }
 
 .movedImage {
     width: 100px !important;
 }
+
+
 
 /* helpers------------------- */
 
@@ -292,104 +294,42 @@ label {
     text-decoration: none;
 }
 
-/* responsive----------- */
 
+/* login responsive----------- */
 
-@media (max-width: 1366px) {
-    .login-header-signup {
-        padding-right: 77px;
-    }
-}
-
-@media (max-width: 1200px) {
-    .login-header-signup {
-        flex-direction: column;
-        gap: 16px;
-    }
-}
-
-@media (max-width: 1080px) {
-    .login-header-signup {
-        padding-right: 16px;
-    }
-
-    .movedContainer {
-        left: 16px;
-    }
-}
-
-@media (max-width: 940px) {
-    .login-form {
-        padding: 36px 36px;
-    }
-}
-
-@media (max-width: 800px) {
-    .indexFooter {
-        top: 16px;
-    }
-
-    .movedContainer {
-        top: 16px;
-        left: 16px;
-    }
-
-    .login-header {
-        top: 16px;
-    }
-
-    .content-login {
-        justify-content: start;
-        padding-top: 180px;
-    }
-}
-
-
-
-@media (max-width: 516px) {
-    .login-header {
-        left: 0px;
-        width: 100%;
-    }
-
-    .login-header-signup {
-        flex-direction: row;
-        gap: 16px;
-    }
-
-    .indexFooter {
-        top: 150px;
-        left: 16px;
+/* mobile-version */
+@media (max-width: 1000px) {
+    .movedImage {
+        width: 64px !important;
     }
 
     .login-form {
-        padding: 16px;
+        width: 396px;
+    }
+
+    .typo2t1 {
+        font-family: 'Inter' !important;
+        font-size: 47px !important;
+        font-style: normal !important;
+        font-weight: 700 !important;
+        line-height: 56.4px !important;
     }
 
     .input-container {
-        width: 100%;
+        width: 364px;
     }
-}
 
-@media (max-width: 402px) {
+    .login-header {
+        width: auto;
+        top: 778px;
+        left: calc(50% - 124px);
+    }
+
     .login-header-signup {
-        flex-direction: column;
-        gap: 16px;
-    }
-}
-
-@media (max-width: 380px) {
-    .login-form {
-        width: 100%;
+        padding-right: 0px;
     }
 
-    .login-remember {
-        width: 100%;
-        flex-direction: column-reverse;
-    }
-
-    .login-submit {
-        width: 100%;
-        gap: 8px;
+    .indexFooter {
+        bottom: 22px;
     }
 }
