@@ -15,10 +15,18 @@ let currentDraggedElement;
  */
 async function addTask() {
     let addTasks = JSON.parse(await getItem('task'));
+    if(!addTasks || addTasks.length === 0) {
+        return;
+    }
+
     for (let taskArray of addTasks) {
         for (let task of taskArray) {
             let existingTask = todos.find(t => t.taskID === task.taskID);
             if (!existingTask) {
+                let members = (task.persons && task.persons.length > 0) ? task.persons.map(person => person.name) : ['All Employees'];
+                
+                let subtasksWithCompletion = task.subtasks ? task.subtasks.map(subtask => ({ subtask, isComplete: false })) : [];
+                
                 todos.push({
                     'id': todos.length,
                     'category': 'open',
@@ -26,9 +34,9 @@ async function addTask() {
                     'title': task.title,
                     'text': task.description,
                     'done-fraction': '',
-                    'members': task.persons && task.persons[0] && task.persons[0].name ? task.persons[0].name : 'All Employees',
+                    'members': members,
                     'priority': task.priority,
-                    'selected-color': '',
+                    'subtasks': subtasksWithCompletion,
                     'date': task.date,
                     'taskID': task.taskID
                 })
@@ -37,6 +45,8 @@ async function addTask() {
     }
     updateHTML();
 }
+
+
 
 
 /**
@@ -65,6 +75,7 @@ async function initBoard() {
     await getStoredTodos();
     await addTask();
     init();
+    initArrays();
     updateHTML();
 }
   
@@ -182,13 +193,21 @@ function styleTodos() {
  * @returns {string} An HTML string for a todo box element.
  */
 function generateToDoHTML(element) {
-    let member = element['members'];
-    let letters = getFirstTwoLetters(member);
+    let members = element['members'];
+    let letters = getFirstTwoLetters(members);
     let prioImg = generatePrioIcon(element['priority']);
+    let color = getRandomColor();
+
+    let progress = 0;
+    let progressLabel = '';
+        if (element['subtasks'] && element['subtasks'].length > 0) {
+            progress = element['subtasks'].filter(subtaskObj => subtaskObj.isComplete).length / element['subtasks'].length;
+            progressLabel = `${element['subtasks'].filter(subtaskObj => subtaskObj.isComplete).length}/${element['subtasks'].length}`;
+        }
 
     return /*html*/ `
     <div onclick="showTodo(${element['id']})" class="todo-box" draggable="true" ondragstart="startDragging(${element['id']})">
-    <div id="todoBoxHeader${element['id']}" class="todo-box-header">
+    <div id="todoBoxHeader${element['id']}" class="todo-box-header" style="background-color:${color};">
         <h4>${element['task-category']}</h4>
     </div>
 
@@ -202,15 +221,15 @@ function generateToDoHTML(element) {
 
     <div class="todo-box-progress">
         <div class="todo-box-progress-bar">
-            <div class="todo-box-progress-bar-fill"></div>
+            <div class="todo-box-progress-bar-fill" style="width: ${progress * 100}%"></div>
         </div>
-        <p>${element['done-fraction']} Done</p>
+        <p>${progressLabel} Done</p>
     </div>
     <div id="todoBoxFooterBar${element['id']}" class="todo-box-footer-bar">
     <div  class="todo-box-footer">
-        <div class="todo-box-footer-right">
-            ${letters}
-        </div>
+    <div class="todo-box-footer-right" >
+        ${letters}
+    </div>
          <div class="todo-box-footer-left">
              ${prioImg}
         </div>
@@ -221,16 +240,36 @@ function generateToDoHTML(element) {
 }
 
 
+
 /**
  * Extracts the first two letters from a given string and converts them to uppercase.
  *
  * @param {string} member - The string from which to extract the first two letters.
  * @returns {string} The first two letters of the input string in uppercase, or undefined if input is not a string.
  */
-function getFirstTwoLetters(member) {
-    if (member !== undefined && typeof member === 'string') {
-        return member.slice(0, 2).toUpperCase();
+
+function getFirstTwoLetters(members) {
+    let randomColor = getRandomColor();
+    let letterDivs = '';
+    if (Array.isArray(members)) {
+        members.slice(0,2).forEach(member => { // limit to 2 names
+            if (typeof member === 'string') {
+                let firstTwoLetters = member.slice(0, 2).toUpperCase();
+                letterDivs += `<div class="todo-icon-name" style="background-color:${getRandomColor()};">${firstTwoLetters}</div>`;
+            }
+        });
+
+        // if there are more than 2 names, show the number of remaining names
+        if (members.length > 2) {
+            letterDivs += `<div class="todo-icon-name" style="background-color:${getRandomColor()};">+${members.length - 2}</div>`;
+        }
     }
+    return letterDivs;
+}
+
+function getRandomColor() {
+    const colorValues = Array.from({length: 3}, () => Math.floor(Math.random() * 256));
+    return `rgb(${colorValues.join(', ')})`;
 }
 
 
@@ -262,4 +301,16 @@ function searchTodos() {
     for (let todo of searchedTodos) {
         document.getElementById(todo.category).innerHTML += generateToDoHTML(todo);
     }
+}
+
+
+// ========================== Add Task ==============================
+
+
+function showAddTaskPopup(color){
+    let popup = document.getElementById('addTaskPopup')
+    popup.classList.toggle('popupAnimation')
+    setTimeout(() => {
+       popup.style.backgroundColor = `${color}` 
+    }, 125);
 }

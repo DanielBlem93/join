@@ -7,6 +7,7 @@
 body {
     background-color: var(--background-white);
     width: 100%;
+    height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -79,7 +80,15 @@ button {
     opacity: 0.0;
     transition: opacity 1s ease-in-out 500ms;
 }
-
+.header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 100px;
+    padding: 100px;
+    background-color: var(--white);
+}
 
 .login-header-signup {
     padding-right: 122px;
@@ -195,6 +204,7 @@ label {
 .login-link {
     text-decoration: none;
     color: #29ABE2;
+    cursor: pointer;
 }
 
 .login-submit {
@@ -219,7 +229,7 @@ label {
     position: relative;
     width: 652px;
     height: 557px;
-    display: inline-flex;
+    display: flex;
     padding: 36px 109px;
     flex-direction: column;
     align-items: center;
@@ -235,8 +245,32 @@ label {
     font-size: 21px;
     font-weight: 700;
 }
+.signup-btn:hover{
+    background-color: #29ABE2;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+@keyframes slideInFromRight {
+    0% {
+        transform: translateX(100%);
+    }
+    100% {
+        transform: translateX(0);
+    }
+}
+
+#loginImage {
+    animation: slideInFromRight 1s;
+}
 
 .form-hr {
+    width: 150px;
+    height: 3px;
+    border-radius: 3px;
+    background-color: #29ABE2;
+    border: none;
+}
+.hr{
     width: 150px;
     height: 3px;
     border-radius: 3px;
@@ -252,8 +286,8 @@ label {
 }
 
 .forgot-password {
+    position: relative;
     width: 826px;
-    height: 459px;
     display: inline-flex;
     padding: 36px 109px;
     flex-direction: column;
@@ -263,16 +297,51 @@ label {
     background: var(--white, #FFF);
     box-shadow: 0px 0px 14px 3px rgba(0, 0, 0, 0.04);
 }
+.forgot-password h1{
+    font-size: 3rem;
+    font-weight: 700;
+    color: #2A3647;
+}
 
 .forgot-password-btn {
     width: 246px;
     height: 51px;
 }
+.forgot-password-btn:hover{
+    background-color: #29ABE2;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+
+.success-image {
+    display: none;
+    width: 246px;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out; 
+}
+
+.show {
+    display: block;
+    opacity: 1;
+}
 
 .new-pw {
     position: relative;
     width: 826px;
-    height: 459px;
+    display: inline-flex;
+    padding: 36px 109px;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+    border-radius: 30px;
+    background: var(--white, #FFF);
+    box-shadow: 0px 0px 14px 3px rgba(0, 0, 0, 0.04);
+}
+.new-pw h1{
+    font-size: 3rem;
+    font-weight: 700;
+    color: #2A3647;
 }
 
 .bg-red {
@@ -292,6 +361,10 @@ label {
 
 .indexFooter a {
     text-decoration: none;
+}
+.input-error {
+    color: red;
+    font-size: 0.8em;
 }
 
 

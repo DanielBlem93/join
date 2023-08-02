@@ -1,4 +1,13 @@
+/** 
+ * An array to store the details of the current user.
+ * @type {Array} 
+ */
 let currentUser = [];
+
+/** 
+ * A string to store the name of the current user.
+ * @type {string}
+ */
 let currentUserName;
 
 
@@ -10,7 +19,6 @@ let currentUserName;
  * @function
  * @returns {Promise<void>} Returns a Promise that resolves when the process is complete. No return value.
  */
-
 async function login() {
 
     let email = document.getElementById('loginEmail').value;
@@ -34,15 +42,37 @@ async function login() {
     document.getElementById('loginPassword').value = '';
 }
 
+/**
+ * This asynchronous function allows guest users to login by simply setting the current user name as 'Guest'.
+ * It then redirects the user to 'summary.html'.
+ * 
+ * @async
+ * @function
+ * @returns {Promise<void>} Returns a Promise that resolves when the process is complete. No return value.
+ */
 async function guestLogin() {
     currentUserName = 'Guest';
     await setItem('currentUserName', currentUserName);
     window.location.href = 'summary.html';
 }
 
+/**
+ * This asynchronous function retrieves all users and displays their information in a console table.
+ * 
+ * @async
+ * @function
+ * @returns {Promise<void>} Returns a Promise that resolves when the process is complete. No return value.
+ */
+async function allUsers() {
+    let data = JSON.parse(await getItem('userName'));
+}
 
 /**
+ * This asynchronous function retrieves all users and displays their information in a console table.
  * 
+ * @async
+ * @function
+ * @returns {Promise<void>} Returns a Promise that resolves when the process is complete. No return value.
  */
 function moveLogo() {
     if(window.location.href.includes('index.html')) {

@@ -1,6 +1,6 @@
 // Arrays
-let categorys = []
 let contactsForAddTask = []
+let categorys = []
 let subtasks = []
 let emails = []
 let newTask = []
@@ -10,7 +10,7 @@ let newCategoryStatus = false
 let assingedToStatus = false
 
 /**
- * presets the arrays whit values. This function can also be used to reset every array
+ * pre sets the arrays whit values. This function can also be used to reset every array
  */
 function initArrays() {
   categorys = [
@@ -23,17 +23,25 @@ function initArrays() {
       'color': 'mint',
     }
   ]
-  contactsForAddTask = [
-    {
-      'first-name': 'Maximilian',
-      'last-name': 'Vogel',
+  getContaktfromBackend();
+  emails = [];
+  subtasks = [];
+}
+async function getContaktfromBackend() {
+  let tasks = JSON.parse(await getItem('contacts'));
+  tasks.forEach(task => {
+    let names = task.name.split(" ");
+
+    let contact = {
+      'first-name': names[0],
+      'last-name': names[1],
       'checked?': 'unchecked',
       'color': 'var(--mint)'
-    },
-  ]
+    };
+    contactsForAddTask.push(contact);
+  });
 
-  emails = []
-  subtasks = []
+  return contactsForAddTask;
 }
 // Functions for Category Dropdown menu
 
@@ -49,9 +57,11 @@ function toggleDropdown(menuClass) {
 
   } else {
     if (dropdownMenu.style.height === '51px') {
-      dropdownMenu.style.height = 'fit-content';
+      dropdownMenu.style.height = '204px';
+      dropdownMenu.style.overflow = 'scroll'
     } else {
       dropdownMenu.style.height = '51px';
+      dropdownMenu.style.overflow = 'hidden'
     }
   }
 }
@@ -423,6 +433,7 @@ function renderEmails() {
  */
 
 function changeColor(id, priority) {
+
   let buttons = document.getElementsByClassName('addTaskFrame14Prio');
   for (let i = 0; i < buttons.length; i++) {
     const button = buttons[i];
@@ -481,6 +492,7 @@ function renderSubtask() {
     </label
     `
   }
+  console.log(subtasks);
 }
 
 /**
@@ -519,64 +531,67 @@ function resetPriority() {
   }
 }
 
+
 /**
  * creates the task
  */
-function createTask() {
-  let titleInput = document.getElementById('title')
-  let descriptionInput = document.getElementById('description')
-  let dateInput = document.getElementById('date')
-  let categoryInput = document.querySelector('#select-box > div')
-
-  let title = titleInput.value.trim()
-  let description = descriptionInput.value.trim()
-  let date = dateInput.value.trim()
-  let category = categoryInput.innerText.trim()
+async function createTask() {
+  let titleInput = document.getElementById('title');
+  let descriptionInput = document.getElementById('description');
+  let dateInput = document.getElementById('date');
+  let categoryInput = document.querySelector('#select-box > div');
+  let persons = await addPersonsToNewTask();
+  let title = titleInput.value.trim();
+  let description = descriptionInput.value.trim();
+  let date = dateInput.value.trim();
+  let category = categoryInput.innerText.trim();
   let taskId = Math.random().toString(36).substr(2) + Date.now().toString(36);
+  
+
 
   if (checkRequierdInputs()) {
+    // Erstelle zunächst das neue Aufgabenobjekt
+    newTask = [{
+      'title': title,
+      'description': description,
+      'date': date,
+      'category': category,
+      'persons': persons, 
+      'emails': [emails],
+      'priority': currentPriority,
+      'subtasks': subtasks,
+      'taskID': taskId
+    }];
 
-    newTask = []
-    newTask = [
-      {
-        'title': `${title}`,
-        'description': `${description}`,
-        'date': `${date}`,
-        'category': `${category}`,
-        'persons': [], // {'name': `${firstName} ${lastName}`}
-        'emails': [emails],
-        'priority': `${currentPriority}`,
-        'subtasks': [subtasks],
-        'taskID': `${taskId}`
-      }
-    ]
-    addPersonsToNewTask()
-    clearTask()
+    clearTask();
     createTaskBackend(newTask);
-    animations()
+    animations();
   }
 }
 
-/**
- * Adds the person to the new Task array as JSON
- */
-function addPersonsToNewTask() {
+async function addPersonsToNewTask() {
+  let persons = [];
+  
   for (let i = 0; i < contactsForAddTask.length; i++) {
     const contact = contactsForAddTask[i];
 
     if (contact['checked?'] === 'checked') {
-      let firstName = contact['first-name']
-      let lastName = contact['last-name']
-      let name =
-      {
-        'name': `${firstName} ${lastName}`
-      }
-      newTask[i].persons.push(name)
+      let firstName = contact['first-name'];
+      let lastName = contact['last-name'];
+      let name = {'name': `${firstName} ${lastName}`};
+
+      persons.push(name); 
     }
   }
+  
+  return persons; 
 }
-// =============== Checking inputs ===================================
 
+// =============== Checking inputs ===================================
+/**
+ * Checks every input. 
+ * @returns true if all inputs aren't empty false if minimum one is empty
+ */
 function checkRequierdInputs() {
   let checkInputTitle = checkInput('title');
   let checkInputDescription = checkInput('description');
@@ -591,7 +606,10 @@ function checkRequierdInputs() {
     return false;
   }
 }
-
+/**
+ * shows a message that this field is requierd if no category is selected
+ * @returns 
+ */
 function checkCategory() {
   let categoryInput = document.querySelector('#select-box > div');
   let category = categoryInput.innerText.trim();
@@ -609,7 +627,11 @@ function checkCategory() {
     }
   }
 }
-
+/**
+ * checks if the input is empty and shows a message if it is
+ * @param {string} inputs - the id of the input 
+ * @returns -true if the input is filled and false if not
+ */
 function checkInput(inputs) {
   let input = document.getElementById(inputs);
   let inputValue = input.value.trim();
@@ -623,7 +645,11 @@ function checkInput(inputs) {
     return false;
   }
 }
-
+/**
+ * Is important to show the right "This filed is required" text
+ * @param {string} inputs -the id of the input
+ * @returns -the index for the right "This filed is required" text position
+ */
 function getRequiredIndex(inputs) {
   const inputMappings = {
     'title': 0,
@@ -634,6 +660,11 @@ function getRequiredIndex(inputs) {
   return inputMappings[inputs] || 0; // Fallback to 0 if inputs is not found in the object
 }
 
+
+/**
+ * checks if a priority is selected
+ * @returns - true if its selected and false if not
+ */
 function checkPrio() {
   if (currentPriority.length > 0) {
     showIsRequiered(4, 'add');
@@ -643,12 +674,19 @@ function checkPrio() {
     return false;
   }
 }
-
+/**
+ * 
+ * @param {string} index - the index for the right "This filed is required" text position 
+ * @param {string} action - 'add' or 'remove' for the classlist
+ */
 function showIsRequiered(index, action) {
   let required = document.getElementsByClassName('is-required')[index];
   required.classList[action]('displayNone');
 }
-
+/**
+ * Shows a Messagebox 
+ * @param {string} text -the text you want to show in the Messagebox
+ */
 function showWarning(text){
   let massageBox= document.getElementById('created-task-massage-text')
   let img = document.querySelector('#created-task-massage > img')
@@ -664,11 +702,12 @@ function showWarning(text){
     massageBox.innerText= `Task added to board`
   }, 3100); 
   
-
 }
 
 // =========================Animations ===========================
-
+/**
+ * A animation order when you press on add task
+ */
 function animations() {
   flyIn('flex')
   setTimeout(() => {
@@ -679,7 +718,10 @@ function animations() {
   }, 1000);
 
 }
-
+/**
+ * 
+ * @param {string} display - 'none ' or 'unset' to fly the messagebox in
+ */
 function flyIn(display) {
   let massage = document.getElementById('created-task-massage-container')
 
@@ -689,13 +731,17 @@ function flyIn(display) {
   }, 10);
 
 }
-
+/**
+ * swipes the body to the right
+ */
 function flyOutBody() {
   let body = document.getElementsByTagName('body')[0]
   body.style.transform = ('translateX(100%)')
 }
+/**
+ * Getting redirected to the board.html
+ */
 function swapToBoard() {
   window.location.href = 'board.html'
 }
-
 

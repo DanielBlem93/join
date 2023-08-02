@@ -58,6 +58,7 @@
 
 body {
     background: var(--background-white);
+    overflow-x: hidden;
 }
 
 
@@ -90,7 +91,7 @@ body {
     position: relative;
 }
 
-input {
+#searchInput {
     width: 100%;
     height: 100%;
     border-radius: 10px;
@@ -98,7 +99,7 @@ input {
     padding: 13px 21px;
 }
 
-input::placeholder {
+#searchInput ::placeholder {
     font-size: 16px;
     font-weight: 400;
     line-height: 19px;
@@ -122,7 +123,7 @@ input::placeholder {
     border: none;
 }
 
-button {
+.board-button {
     width: 137px;
     height: 51px;
     background-color: #2A3647;
@@ -159,12 +160,14 @@ button {
     margin-top: 20px;
     margin-right: 20px;
     cursor: pointer;
-    transition: ease-in-out 200ms;
+    transition: all 0.2s ease-in-out;
 }
-.todo-box:hover{
-    transform: rotate(2deg);
 
-} 
+.todo-box:hover {
+    transform: rotate(2deg);
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
 
 .todo-box-header {
     display: inline-block;
@@ -224,15 +227,30 @@ button {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border: 1px solid #FFFFFF;
     margin-top: 20px;
 
 }
-.todo-box-footer-right{
-    background-color: #aa5af9;
+
+.todo-box-footer-right {
     border-radius: 50%;
     padding: 10px;
-    color: #ffffff;
+    display: flex;
+    flex-direction: row;
+
+}
+
+.todo-icon-name {
+    border-radius: 50%;
+    color: #FFFFFF;
+    background-color: #800080;
+
+    width: 35px;
+    height: 35px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-left: -10px;
 }
 
 
@@ -250,6 +268,20 @@ button {
 
 }
 
+#temp-add-task {
+    background-color: unset !important;
+}
+
+#temp-add-task p {
+    color: var(--font-color-not-active) !important;
+}
+
+#add-task-icon-img-hover {
+    display: none !important;
+
+}
+
+
 /* ========================================= */
 
 
@@ -262,80 +294,123 @@ button {
 }
 
 #showTodo {
-    position: relative;
-    background-color: rgba(0, 0, 0, 0.2);
+    position: fixed;
+    background-color: rgba(0, 0, 0, 0.4);
     height: 100vh;
     width: 100vw;
     top: 0;
     left: 0;
-    z-index: 999;
+    z-index: 333;
 }
-.modal-content{
+
+.modal-content {
     position: absolute;
     width: 623px;
     height: 798px;
     background-color: white;
-    border-radius: 10px;
+    border-radius: 30px;
     top: 50%;
     left: 50%;
-    transform: translate(-50%,-50%);
+    transform: translate(-50%, -50%);
     padding: 40px;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
 }
+
 .displayNone {
     display: none;
 }
-.modal-close{
+
+.modal-close {
+
     position: absolute;
     top: 20px;
     right: 20px;
     cursor: pointer;
 }
-.modal-close button{
+
+.modal-close button {
     background-color: transparent;
 }
-.todo-delete{
+
+.todo-delete {
     position: absolute;
     bottom: 40px;
-    right: 40px;
-    border-radius: 10px;
+    right: 70px;
+    border-radius: 10px 0 0 10px;
     border: 2px solid #2A3647;
     padding: 10px;
     cursor: pointer;
 }
-.todo-delete img{
+.todo-edit{
+    position: absolute;
+    bottom: 40px;
+    right: 20px;
+    border-radius:0  10px 10px 0 ;
+    background-color: #2A3647;
+    padding: 12px;
+    cursor: pointer;
+}
+
+.todo-delete img {
     width: 30px;
     height: 30px;
 }
-.modal-category{
+.todo-edit img{
+    width: 30px;
+    height: 30px;
+}
+
+.modal-category {
     font-size: 1.5rem;
     font-weight: 400;
     color: #fff;
     background-color: #dcdf0d;
-    padding: 14px 20px;
+    padding: 3px 40px;
     border-radius: 10px;
     margin-left: 20px;
+
 }
-.modal-title{
-    font-size: 2rem;
+
+
+
+.modal-title {
+    font-size: 4rem;
     font-weight: 900;
     color: #2A3647;
     margin: 20px;
 }
-.modal-text{
+
+.modal-text {
     font-size: 1.5rem;
     font-weight: 400;
     color: #2A3647;
     margin: 20px;
 }
-.modal-date{
+
+.modal-date {
     font-size: 1.5rem;
     font-weight: 400;
     color: #2A3647;
     margin: 20px;
+}
+.modal-tasks{
+    display: flex;
+    width: 100%;
+    
+
+    gap: 20px;
+    margin: 20px;
+}
+.todo-subtask{
+    color: #2A3647;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
 }
 .modal-priority{
     font-size: 1.5rem;
@@ -343,7 +418,8 @@ button {
     color: #2A3647;
     margin: 20px;
 }
-.modal-members{
+
+.modal-members {
     font-size: 1.5rem;
     font-weight: 400;
     color: #2A3647;
@@ -351,13 +427,171 @@ button {
     display: flex;
     flex-direction: column;
     gap: 20px;
+    overflow: scroll;
 }
-#priority{
+
+.modal-members::-webkit-scrollbar{
+    display: none;
+}
+.modalMember{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 10px;
+}
+.initMember{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    color: #FFFFFF;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+#priority {
     background-color: #ff0000;
-    padding: 10px 30px;
+    padding: 3px 30px;
     color: #fff;
     border-radius: 10px;
     margin-left: 20px;
     text-shadow: rgba(0, 0, 0, 0.2) 0px 0px 2px;
-    box-shadow: rgba(0, 0, 0, 0.2)  0px 0px 2px;
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 0px 2px;
 }
+
+#editTodoModal {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    right: -200%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.2);
+    z-index: 899;
+    transition: 225ms ease-in;
+}
+.editTodoBox{
+    position: relative;
+    margin: 50px;
+    width: 40rem;
+    height: auto;
+    background-color: white;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;    
+    align-items: flex-start;
+    padding: 20px;
+}
+.modal-title-edit{
+    font-weight: 300;
+    color: #2A3647;
+    margin: 10px;
+}
+.editPrio{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 10px;
+}
+.prio{
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+}
+.prio:hover{
+    box-shadow:  0px 4px 4px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+}
+.editClose{
+    position: absolute;
+    border: none;
+    background-color: transparent;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+}
+.editOk{
+    position: absolute;
+    padding: 10px 20px;
+    border-radius: 10px;
+    border: none;
+    background-color: #2A3647;
+    color: white;
+    bottom: 50px;
+    right: 50px;
+    cursor: pointer;
+}
+    
+
+/* ==============Add Task Popup ================ */
+
+#addTaskPopup {
+    position: fixed;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+    text-align: center;
+    width: 100%;
+    height: 100%;
+    z-index: 999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 125ms ease-in;
+    transform: translateX(2000px);
+
+}
+.popupAnimation{
+    transform: translateX(0px) !important;
+}
+
+#addTaskPopupContainer {
+    position: relative;
+    width: 70%;
+    height: 90%;
+    background-color: var(--background-white);
+    border-radius: 20px;
+}
+
+main {
+    position: absolute;
+    top: -130px;
+
+    left: -175px;
+
+}
+
+#add-task-close-button {
+    height: 70px;
+    width: 70px;
+    position: absolute;
+    left: 1426px;
+    top: 135px;
+    cursor: pointer;
+}
+
+
+
+.add-task-button {
+    margin-left: 0 !important;
+    background-color: var(--white);
+}
+
+.typography2T6 {
+    padding: 0;
+}
+
+.typography2T6::placeholder {
+    font-size: 20px;
+}
+
+#description::placeholder {
+    font-size: 20px;
+    opacity: 0.5;
+}
+
+
