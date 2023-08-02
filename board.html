@@ -46,7 +46,7 @@
                 <div class="board-body drag-area board-todo">
                     <div class="board-body-haeder">
                         <h3>Todo</h3>
-                        <img src="./assets/img/add-icon.png">
+                        <img onclick="showAddTaskPopup('rgba(0, 0, 0, 0.322)')" style="cursor: pointer;"  src="./assets/img/add-icon.png">
                     </div>
                     <div id="open" class="drag-area" ondrop="movedTo('open')" ondragover="allowDrop(event)">
                     </div>
@@ -54,7 +54,7 @@
                 <div class="board-body drag-area board-in-progress">
                     <div class="board-body-haeder">
                         <h3>In progress</h3>
-                        <img src="./assets/img/add-icon.png" alt="">
+                        <img onclick="showAddTaskPopup('rgba(0, 0, 0, 0.322)')" style="cursor: pointer;"  src="./assets/img/add-icon.png" alt="">
                     </div>
                     <div id="progress" class="drag-area" ondrop="movedTo('progress')" ondragover="allowDrop(event)">
                     </div>
@@ -62,7 +62,7 @@
                 <div class="board-body drag-area board-feedback">
                     <div class="board-body-haeder">
                         <h3>Awaiting Feedback</h3>
-                        <img src="./assets/img/add-icon.png" alt="">
+                        <img onclick="showAddTaskPopup('rgba(0, 0, 0, 0.322)')"  style="cursor: pointer;" src="./assets/img/add-icon.png" alt="">
                     </div>
                     <div id="feedback" class="drag-area" ondrop="movedTo('feedback')" ondragover="allowDrop(event)">
                     </div>
@@ -70,7 +70,7 @@
                 <div class="board-body drag-area board-done">
                     <div class="board-body-haeder">
                         <h3>Done</h3>
-                        <img src="./assets/img/add-icon.png" alt="">
+                        <img onclick="showAddTaskPopup('rgba(0, 0, 0, 0.322)')" style="cursor: pointer;" src="./assets/img/add-icon.png" alt="">
                     </div>
                     <div id="closed" class="drag-area" ondrop="movedTo('closed')" ondragover="allowDrop(event)">
                     </div>
