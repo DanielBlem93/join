@@ -368,6 +368,7 @@ label {
 }
 
 
+
 /* login responsive----------- */
 
 /* mobile-version */
@@ -377,7 +378,13 @@ label {
     }
 
     .login-form {
+        position: absolute;
+        top: 188px;
         width: 396px;
+        width: 396px;
+        padding: 32px 0px;
+        gap: 32px;
+
     }
 
     .typo2t1 {
