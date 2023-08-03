@@ -67,23 +67,60 @@ async function allUsers() {
     let data = JSON.parse(await getItem('userName'));
 }
 
-/**
- * This asynchronous function retrieves all users and displays their information in a console table.
- * 
- * @async
- * @function
- * @returns {Promise<void>} Returns a Promise that resolves when the process is complete. No return value.
- */
+
+// ---move Logo
+
 function moveLogo() {
     if (window.location.href.includes('index.html')) {
-        document.getElementById('loginOverlay').classList.add('opacity-none');
+    if (getMql() == false) {
+        console.log('Desktop');
+        hideOverlay();
+        hideLogMobile();
+        document.getElementById('img-container').classList.add('movedContainer');
+        document.getElementById('logo-image').classList.add('movedImage');
+        
+        document.getElementById('login-header').classList.add('opacity');
+        document.getElementById('login-form').classList.add('opacity');
+        document.getElementById('indexFooter').classList.add('opacity');
+    } else {
+        console.log('Mobile');
+        showOverlay();
+        setTimeout(hideOverlay, 2000);
+        document.getElementById('loginOverlay').classList.add('loginOverlayMobile');
+
         document.getElementById('img-container').classList.add('movedContainer');
         document.getElementById('logo-image').classList.add('movedImage');
         document.getElementById('img-container-mobile').classList.add('movedContainer');
         document.getElementById('logo-image-mobile').classList.add('movedImage');
+        document.getElementById('img-container-mobile').classList.add('opacity-none');
+        document.getElementById('logo-image-mobile').classList.add('opacity-none');
+        
         document.getElementById('login-header').classList.add('opacity');
         document.getElementById('login-form').classList.add('opacity');
         document.getElementById('indexFooter').classList.add('opacity');
+    };
         
     }
-}    
+}
+
+function hideLogMobile() {
+    document.getElementById('img-container-mobile').classList.add('display-none');
+}
+
+function showLogMobile() {
+    document.getElementById('img-container-mobile').classList.remove('display-none');
+}
+
+function hideOverlay() {
+    document.getElementById('loginOverlay').classList.add('display-none');
+}
+
+function showOverlay() {
+    document.getElementById('loginOverlay').classList.remove('display-none');
+}
+
+function getMql() {
+    let mql = window.matchMedia("(max-width: 1000px)");
+    console.log(mql.matches);
+    return mql.matches;
+}

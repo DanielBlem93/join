@@ -41,12 +41,13 @@ button {
     width: 274px;
     transition: width 1s ease-in-out 500ms, top 1s ease-in-out 500ms, left 1s ease-in-out 500ms;
     display: flex;
+    opacity: 1.0;
 }
-
 
 .img-container img {
     width: 274px;
     transition: width 1s ease-in-out 500ms;
+    opacity: 1.0;
 }
 
 .img-container-mobile {
@@ -54,16 +55,20 @@ button {
     top: calc(50% - 117px);
     left: calc(50% - 137px);
     width: 274px;
-    transition: width 1s ease-in-out 500ms, top 1s ease-in-out 500ms, left 1s ease-in-out 500ms;
     display: flex;
-    z-index: -1;
+    opacity: 1.0;
+    transition: all 1s ease-in-out 500ms;
+    z-index: 101;
 }
 
 .img-container-mobile img {
     width: 274px;
     transition: width 1s ease-in-out 500ms;
-    z-index: -1;
+    opacity: 1.0;
+    transition: all 1s ease-in-out 500ms;
+    z-index: 101;
 }
+
 
 .movedContainer {
     width: 100px !important;
@@ -413,10 +418,13 @@ label {
     right: 0px;
     bottom: 0px;
     background-color: var(--darkblue);
-    z-index: -1;
-    opacity: 0.0;
+    opacity: 1.0;
     transition: opacity 1s ease-in-out 500ms;
+    z-index: 100;
+}
 
+.loginOverlayMobile {
+    opacity: 0.0;
 }
 
 
@@ -424,6 +432,7 @@ label {
 
 /* mobile-version */
 @media (max-width: 1000px) {
+
     .movedImage {
         width: 64px !important;
     }
@@ -464,32 +473,13 @@ label {
         bottom: 22px;
     }
 
-    .loginOverlay {
-        z-index: 100;
-        opacity: 1.0;
-    }
-
-    .img-container-mobile {
-        z-index: 101;
-    }
-
-    .img-container-mobile img {
-        z-index: 101;
-    }
+    /* .img-container-mobile { */
+        /* opacity: 0.0 !important; */
+        /* z-index: 101; */
+    /* } */
     
-    .img-container {
-        z-index: 110;
-        transition: z-index 1s ease-in-out 500ms
-    }
-    
-    .img-container img {
-        z-index: 110;
-        transition: z-index 1s ease-in-out 500ms
-    }
-    
-    .loginOverlay {
-        z-index: -1;
-        transition: z-index 1s ease-in-out 500ms
-
-    }
+    /* .logo-image-mobile { */
+        /* opacity: 0.0 !important; */
+        /* z-index: 101; */
+    /* } */
 }
