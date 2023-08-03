@@ -84,25 +84,52 @@
 
 body {
     background: var(--background-white);
-
 }
 
-/* Frame 40 */
-.addTaskFrame40 {
+main {
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+#options {
+    position: relative;
+    display: flex;
+    gap: 128px;
+}
+
+#left-side {
+    position: relative;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    position: absolute;
-    top: 171px;
-    left: 355px;
+    gap: 14px;
+    ;
 }
 
-.addTaskFrame40 {
-    width: 466px;
-    height: 78px;
+#right-side {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
+    ;
 }
 
-.typography2t1 {
+.headline-container {
+    width: 363px;
+    display: flex;
+   
+
+}
+
+.headline-container2 {
+    opacity: 0;
+}
+
+.headline {
     font-family: 'Inter';
     font-size: 61px;
     font-weight: 700;
@@ -112,16 +139,14 @@ body {
 
 
 /* Frame 38 */
-.addTaskFrame38 {
+.left-side {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     gap: 14px;
-    position: absolute;
     width: 422px;
     height: 501px;
-    left: 355px;
-    top: 290px;
+
 }
 
 /* Title V1 */
@@ -134,7 +159,7 @@ body {
     height: 102px;
 }
 
-.typography2T6 {
+.captions {
     font-family: 'Inter';
     font-style: normal;
     font-weight: 400;
@@ -165,7 +190,7 @@ body {
 }
 
 /* Frame 17 */
-.addTaskFrame17 {
+.textarea-container {
     display: flex;
     flex-direction: row;
     align-items: flex-start;
@@ -188,16 +213,6 @@ body {
     padding: 0px;
 }
 
-/* Recurso 1 1 */
-.addTaskFrame17Recurso11 {
-    position: absolute;
-    width: 18.9px;
-    height: 18.9px;
-    left: 398px;
-    top: 124px;
-    /* ursprünglich top: 95px; */
-}
-
 /* Category v1 */
 /* ===============Dropdown ================== */
 .addTaskDropdown {
@@ -211,7 +226,7 @@ body {
 }
 
 
-.addTaskFrame14 {
+.input-container {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -258,7 +273,7 @@ body {
     /* Firefox */
 }
 
-.dropdown::-webkit-scrollbar{
+.dropdown::-webkit-scrollbar {
     display: none;
 }
 
@@ -401,7 +416,7 @@ input[type="radio"]:checked+label {
     /* height: 204px; */
 }
 
-.send-email:hover{
+.send-email:hover {
     background-color: unset;
     cursor: auto;
 }
@@ -439,7 +454,7 @@ input[type="radio"]:checked+label {
 }
 
 
-.addTaskFrame14 option {
+.input-container option {
     border: 1px solid transparent;
     border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
 }
@@ -476,51 +491,23 @@ input[type="radio"]:checked+label {
     height: 83px;
 }
 
-/* Frame 16 */
-/* verstehe den border-radius nicht, habe hier auch Frame 14 gesetzt */
-.addTaskFrame16 {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    padding: 18px 21px;
-    gap: 10px;
-    width: 422px;
-    height: 51px;
-    border-radius: 0px 0px 10px 10px;
-}
 
 /* Vector 4 */
 .addTaskVector4 {
     position: absolute;
+    left: 0;
+    right: 0;
+    top: 90px;
+
+    margin-right: auto;
+    margin-left: auto;
     width: 0px;
     height: 551px;
-    left: 836px;
-    top: 290px;
     border: 1px solid #D1D1D1;
 }
 
 /* -------------------------------------- */
 
-.addTaskFrame43 {
-    /* layout */
-    display: inline-flex;
-    flex-direction: column;
-    align-items: flex-end;
-    gap: 175px;
-
-    /* position */
-    position: absolute;
-    top: 290px;
-    left: 895px;
-}
-
-.addTaskFrame39 {
-    /* layout */
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 14px;
-}
 
 .addTaskDueDate {
     display: flex;
@@ -541,17 +528,6 @@ input[type="radio"]:checked+label {
     outline: none;
 }
 
-/* Frame 28 */
-
-.addTaskFrame28 {
-    /* layout */
-    display: flex;
-    height: 113px;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 8px;
-}
-
 .addTaskPriority {
     /* layout */
     display: flex;
@@ -562,7 +538,7 @@ input[type="radio"]:checked+label {
     flex-shrink: 0;
 }
 
-.addTaskFrame14Prio {
+.input-containerPrio {
     /* layout */
     display: flex;
     width: 136px;
@@ -610,7 +586,7 @@ input[type="radio"]:checked+label {
 }
 
 
-.addTaskFrame37 {
+.subtaskContainer {
     /* layout */
 
     display: flex;
@@ -626,7 +602,7 @@ input[type="radio"]:checked+label {
 
 }
 
-.addTaskFrame37 label {
+.subtaskContainer label {
     position: relative;
 }
 
@@ -658,11 +634,11 @@ input[type="radio"]:checked+label {
 
 /* customized checkbox */
 /* Customize the label (the container) */
-/* with .addTaskFrame37*/
+/* with .subtaskContainer*/
 
 /* Hide the browser's default checkbox */
-.addTaskFrame37 input {
-    position: absolute;
+.subtaskContainer input {
+
     opacity: 0;
     cursor: pointer;
     height: 0;
@@ -689,42 +665,23 @@ input[type="radio"]:checked+label {
 /* Create the checkmark/indicator (hidden when not checked) */
 .checkmark:after {
     content: url(./img/rectangle6checked.svg);
-    /* position */
-    position: absolute;
-    top: 0px;
-    left: 0px;
+
 
     /* layout */
     display: none;
 }
 
 /* Show the checkmark when checked */
-.addTaskFrame37 input:checked~.checkmark:after {
+.subtaskContainer input:checked~.checkmark:after {
     display: block;
 }
 
 /* Hide the image "empty-Box" when checked */
-.addTaskFrame37 input:checked~.checkmark img {
+.subtaskContainer input:checked~.checkmark img {
     display: none;
 }
 
-/* Frame 35 */
-
-.addTaskFrame35 {
-    /* layout */
-    display: inline-flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    align-items: center;
-    gap: 4px;
-
-    /* position */
-    position: absolute;
-    top: 795px;
-    left: 984px;
-}
-
-.addTaskFrame27 {
+.buttons-container {
     /* layout */
     display: flex;
     justify-content: center;
@@ -854,7 +811,7 @@ input[type="radio"]:checked+label {
     display: flex;
     align-items: center;
     justify-content: center;
-
+    position: fixed;
     width: 326px;
     height: 75px;
     border-radius: 20px;
@@ -862,15 +819,14 @@ input[type="radio"]:checked+label {
     box-shadow: 0px 0px 4px 0px #0000001A;
     color: white;
 
-    position: absolute;
     left: 0;
     right: 0;
     margin-left: auto;
     margin-right: auto;
-    bottom: -130px;
 
     transition: 300ms;
     z-index: 9999;
+
 }
 
 #created-task-massage {
@@ -911,7 +867,7 @@ input[type="radio"]:checked+label {
 
 /* For JS usage */
 
-.txtWhite{
+.txtWhite {
     color: white;
 }
 
@@ -932,12 +888,169 @@ input[type="radio"]:checked+label {
 }
 
 .flyIn {
-    bottom: 425px !important;
-  
+
+    top: 50vh;
+    bottom: 50vh;
+
 }
 
 body {
     /* transform: translateX(100%); */
 
     transition: 500ms;
+}
+
+
+/* ================ Responsive ========================== */
+
+@media(max-width: 1450px) {
+    main {
+        justify-content: end;
+    }
+}
+
+@media(max-width: 1333px) {
+
+    #options {
+        margin-top: 364px;
+        margin-right: 64px;
+
+    }
+
+    .left-side {
+        height: unset;
+        gap: 0;
+    }
+
+    #assinged-to-dropdown {
+        display: none;
+    }
+
+    .mobile-dropdown {
+        display: flex !important;
+    }
+
+    main {
+        justify-content: center;
+    }
+
+
+    #options {
+        flex-direction: column;
+        gap: 0;
+    }
+
+    .headline-container2 {
+        display: none;
+    }
+
+    .addTaskVector4 {
+        display: none;
+    }
+
+    .addTaskDropdown {
+        margin: 0;
+
+    }
+
+    .addTaskDropdown:last-of-type {
+        margin-top: 12px;
+    }
+
+    .buttons-container {
+        width: 422px;
+        justify-content: space-between;
+    }
+}
+
+@media(max-width: 1024px) {
+
+    #pseudo-header{
+        position: sticky;
+        top: 0;
+        width: 100%;
+        height: 120px;
+
+    }
+    .headline-container {
+        padding-top: 128px;
+      
+    }
+
+    #options {
+        margin-right: 0;
+    }
+
+    .left-side {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+    }
+
+    #right-side {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding-bottom: 200px;
+    }
+}
+
+@media(max-width: 515px) {
+
+    .headline-container {
+        margin-left: auto;
+        margin-right: auto;
+        justify-content: center;
+    }
+
+    .left-side>div {
+        width: 363px;
+        min-width: 363px;
+
+    }
+
+    .left-side>div>div {
+        width: 363px;
+        min-width: 363px;
+    }
+
+    #right-side>div {
+        width: 363px;
+        min-width: 363px;
+
+    }
+
+    #right-side>div>div {
+        width: 363px;
+        min-width: 363px;
+
+    }
+
+}
+
+@media(max-width: 450px){
+
+    .left-side>div {
+        width: 310px;
+        min-width: 310px;
+
+    }
+
+    .left-side>div>div {
+        width: 310px;
+        min-width: 310px;
+    }
+
+    #right-side>div {
+        width: 310px;
+        min-width: 310px;
+
+    }
+
+    #right-side>div>div {
+        width: 310px;
+        min-width: 310px;
+
+    }
 }

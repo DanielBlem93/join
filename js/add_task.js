@@ -434,7 +434,7 @@ function renderEmails() {
 
 function changeColor(id, priority) {
 
-  let buttons = document.getElementsByClassName('addTaskFrame14Prio');
+  let buttons = document.getElementsByClassName('input-containerPrio');
   for (let i = 0; i < buttons.length; i++) {
     const button = buttons[i];
     const svgPath = button.querySelector('svg');
