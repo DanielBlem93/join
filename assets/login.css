@@ -324,8 +324,8 @@ label {
 
 .back {
     position: absolute;
-    top: 40px;
-    left: 30px;
+    top: 20px;
+    left: 20px;
     cursor: pointer;
 }
 
@@ -516,4 +516,74 @@ label {
         justify-content: left;
         gap: 32px;
     }
+}
+/* =======SignUpMobile========== */
+@media (max-width: 1000px) {
+    .sign-up-form{
+        width: 70%;
+    }
+    .sign-up-form h1{
+        font-size: 3rem;
+    }
+    .forgot-password{
+        width: 70%;
+    }
+    .forgot-password h1{
+        font-size: 3rem;
+    }
+    .new-pw{
+        width: 70%;
+    }
+    .new-pw h1{
+        font-size: 3rem;
+    }
+}
+@media (max-width: 600px) {
+    .sign-up-form{
+        width: 80%;
+    }
+    .sign-up-form h1{
+        font-size: 2rem;
+    }
+    .forgot-password{
+        width: 80%;
+    }
+    .forgot-password h1{
+        font-size: 2rem;
+        text-align: center;
+    }
+    .new-pw{
+        width: 80%;
+    }
+    .new-pw h1{
+        font-size: 2rem;
+    }
+}
+@media (max-width: 500px) {
+    .sign-up-form{
+        width: 90%;
+        padding: 36px 30px;
+    }
+    .sign-up-form h1{
+        font-size: 1.5rem;
+    }
+    .input-container{
+        width: 100%;
+    }
+    .forgot-password{
+        width: 90%;
+        padding: 36px 30px;
+    }
+    .forgot-password h1{
+        font-size: 1.5rem;
+    }
+    .new-pw{
+        width: 90%;
+        padding: 36px 30px;
+    }
+    .new-pw h1{
+        font-size: 1.5rem;
+    }
+
+
 }
