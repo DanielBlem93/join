@@ -58,6 +58,13 @@
     line-height: 19.2px;
 }
 
+.typo2BodyV2 {
+    font-family: 'Inter';
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+}
+
 .typoBtnLogin {
     font-family: 'Inter';
     font-size: 16px;
