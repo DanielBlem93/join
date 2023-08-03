@@ -70,57 +70,106 @@ async function allUsers() {
 
 // ---move Logo
 
+/**
+ * This function returns "true" if the viewport is less than or equal to 1000 pixels wide, 
+ * and will say "false" if the window is wider than that.
+ * 
+ * @returns 
+ */
+function getMql() {
+    let mql = window.matchMedia("(max-width: 1000px)");
+    return mql.matches;
+}
+
+
+/**
+ * This function enables the responsive initial animation of the logo.
+ */
 function moveLogo() {
     if (window.location.href.includes('index.html')) {
-    if (getMql() == false) {
-        console.log('Desktop');
-        hideOverlay();
-        hideLogMobile();
-        document.getElementById('img-container').classList.add('movedContainer');
-        document.getElementById('logo-image').classList.add('movedImage');
-        
-        document.getElementById('login-header').classList.add('opacity');
-        document.getElementById('login-form').classList.add('opacity');
-        document.getElementById('indexFooter').classList.add('opacity');
-    } else {
-        console.log('Mobile');
-        showOverlay();
-        setTimeout(hideOverlay, 2000);
-        document.getElementById('loginOverlay').classList.add('loginOverlayMobile');
-
-        document.getElementById('img-container').classList.add('movedContainer');
-        document.getElementById('logo-image').classList.add('movedImage');
-        document.getElementById('img-container-mobile').classList.add('movedContainer');
-        document.getElementById('logo-image-mobile').classList.add('movedImage');
-        document.getElementById('img-container-mobile').classList.add('opacity-none');
-        document.getElementById('logo-image-mobile').classList.add('opacity-none');
-        
-        document.getElementById('login-header').classList.add('opacity');
-        document.getElementById('login-form').classList.add('opacity');
-        document.getElementById('indexFooter').classList.add('opacity');
-    };
-        
+        if (getMql() == false) {
+            hideOverlay();
+            hideLogoMobile();
+            moveLogoDesktop();
+            showContent();
+        } else {
+            showOverlay();
+            hideOverlayAgain();
+            moveLogoDesktop();
+            moveLogoMobile();
+            showContent();
+        };   
     }
 }
 
-function hideLogMobile() {
+
+/**
+ * This function enables the movement of the mobile version logo.
+ */
+function moveLogoMobile(){
+    document.getElementById('img-container-mobile').classList.add('movedContainer');
+    document.getElementById('logo-image-mobile').classList.add('movedImage');
+    document.getElementById('img-container-mobile').classList.add('opacity-none');
+    document.getElementById('logo-image-mobile').classList.add('opacity-none');
+}
+
+
+/**
+ * This function makes the dark mobile-background disappear after two seconds 
+ * so that the fields are functional.
+ */
+function hideOverlayAgain() {
+    setTimeout(hideOverlay, 2000);
+    document.getElementById('loginOverlay').classList.add('loginOverlayMobile');
+}
+
+
+/**
+ * This function ensures that the elements of the page become visible.
+ */
+function showContent() {
+    document.getElementById('login-header').classList.add('opacity');
+    document.getElementById('login-form').classList.add('opacity');
+    document.getElementById('indexFooter').classList.add('opacity');
+}
+
+
+/**
+ * This function ensures the movement of the standard version logo
+ */
+function moveLogoDesktop() {
+    document.getElementById('img-container').classList.add('movedContainer');
+    document.getElementById('logo-image').classList.add('movedImage');
+}
+
+
+/**
+ * This function hides the mobile version of the logo.
+ */
+function hideLogoMobile() {
     document.getElementById('img-container-mobile').classList.add('display-none');
 }
 
-function showLogMobile() {
+
+/**
+ * This function shows the mobile version of the logo.
+ */
+function showLogoMobile() {
     document.getElementById('img-container-mobile').classList.remove('display-none');
 }
 
+
+/**
+ * This function hides the mobile background.
+ */
 function hideOverlay() {
     document.getElementById('loginOverlay').classList.add('display-none');
 }
 
+
+/**
+ * This function shows the mobile background.
+ */
 function showOverlay() {
     document.getElementById('loginOverlay').classList.remove('display-none');
-}
-
-function getMql() {
-    let mql = window.matchMedia("(max-width: 1000px)");
-    console.log(mql.matches);
-    return mql.matches;
 }
