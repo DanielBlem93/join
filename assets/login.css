@@ -24,6 +24,14 @@ button {
     cursor: pointer;
 }
 
+::placeholder {
+    font-family: 'Inter' !important;
+    font-size: 20px !important;
+    font-style: normal !important;
+    font-weight: 400 !important;
+    line-height: 24px !important;
+}
+
 .content-login {
     height: 100vh;
     display: flex;
@@ -92,15 +100,6 @@ button {
     opacity: 0.0 !important;
 }
 
-.behind {
-    z-index: -1 !important;
-}
-
-.inFront101 {
-    z-index: 101 !important;
-}
-
-
 /* ------------------- */
 
 .login-header {
@@ -143,6 +142,15 @@ button {
 }
 
 
+.btn-login {
+    width: 91px;
+    height: 51px;
+}
+
+.btn-login:hover {
+    background: var(--ligthblue);
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
 /* -------------------- */
 .form-container {
     display: flex;
@@ -252,7 +260,6 @@ label {
 .login-guest {
     width: 151px;
     height: 51px;
-    font-size: 19px;
     background-color: #FFFFFF;
     color: #2A3647;
     border: 1px solid #2A3647;
@@ -444,7 +451,6 @@ label {
         width: 396px;
         padding: 32px 0px;
         gap: 32px;
-
     }
 
     .typo2t1 {
@@ -471,15 +477,20 @@ label {
 
     .indexFooter {
         bottom: 22px;
+
     }
 
-    /* .img-container-mobile { */
-        /* opacity: 0.0 !important; */
-        /* z-index: 101; */
-    /* } */
-    
-    /* .logo-image-mobile { */
-        /* opacity: 0.0 !important; */
-        /* z-index: 101; */
-    /* } */
+    .login-submit {
+        flex-direction: column;
+        gap: 21px;
+    }
+
+    .btn-login {
+        width: 180px;
+    }
+
+    .login-guest {
+        width: 180px;
+
+    }
 }
