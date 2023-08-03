@@ -192,15 +192,52 @@ function renderContact(contact, initials, color = getRandomColor()) {
  * Shows the selected contact in a right panel.
  * @param {number} index - The index of the contact in the contacts array.
  */
-function showContact(index){
+function applyStyles(element, styles) {
+    Object.assign(element.style, styles);
+}
+
+function resetStyles(element) {
+    element.removeAttribute('style');
+}
+
+function showContact(index) {
+    const contactMobile = document.getElementById('contact-m');
     const contact = contactsArray[index];
     const contactContent = document.getElementById('contact-content');
-    contactContent.style.right = '0';
-    const initials = getInitials(contact.name);
-    const initial = initials.join('');
+    const back = document.getElementById('back-to-contancts');
     
-    contactContent.innerHTML = renderContact(contact, initial);
+    contactContent.style.right = '0';
+    contactContent.innerHTML = renderContact(contact, getInitials(contact.name).join(''));
+    
+    if(window.innerWidth <= 1024) {
+        applyStyles(contactMobile, {
+            display: 'flex',
+            width: '100%',
+            height: '100%',
+            position: 'fixed',
+            left: '0',
+            right: '0',
+            top: '0',
+            zIndex: '1100',
+            backgroundColor: '#F6F7F8',
+            alignItems: 'center',
+            justifyContent: 'center'
+        });
+
+        applyStyles(back, {
+            display: 'block',
+            position: 'absolute',
+            top: '120px',
+            right: '60px'
+        });
+        
+        back.addEventListener('click', () => {
+            resetStyles(contactMobile);
+            resetStyles(back);
+        });
+    }
 }
+
 
 
 

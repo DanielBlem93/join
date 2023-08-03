@@ -206,7 +206,7 @@ display: unset;
 
 }
 
-/** ADD CONTACTS **/
+/**=========== ADD CONTACTS ===================**/
 
 #add-contakt-modal{ 
     position: fixed;
@@ -224,8 +224,8 @@ display: unset;
 
 .add-contacts-container{
     position: relative;
-    width: 1212px;
-    height: 594px;
+    width: 80%;
+    height: 70%;
     background-color: #FFFFFF;
     border-radius: 30px;
     box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.25);
@@ -237,7 +237,7 @@ display: unset;
 .add-contact-greeting-container{
     position: absolute;
     left: 0;
-    width: 463px;
+    width: 40%;
     height: 100%;
     background-color: #2A3647;
     border-radius: 30px 0px 0px 30px;
@@ -366,4 +366,174 @@ input::placeholder{
 .displaynone{
     display: none;
 }
+#back-to-contancts{
+    display: none;
+    cursor: pointer;
+}
+/* ======Mobile======= */
 
+@media (max-width: 1400px){
+    .add-contact-form-container{
+        flex-direction: column;
+        margin-right: 100px;
+    }
+}
+
+@media (max-width: 1300px){
+    .contact{
+        left: 60%;
+    }
+    .contact-header-title{
+        width: 400px;
+    }
+    .contact-header-title-icon{
+        font-size: 40px;
+    }
+}
+@media (max-width: 1200px){
+    .close{
+        background-color: #BDBDBD;
+        border-radius: 50%;
+        width: 30px;
+        height: 30px;
+        z-index: 3;
+    }
+    .contact-header-title{
+        width: 300px;
+    }
+    .contact-header-title-icon{
+        font-size: 20px;
+    }
+    .contact-header-icon{
+        width: 80px;
+        height: 80px;
+        font-size: 30px;
+    }
+    .contact-header-name{
+        font-size: 30px;
+    }
+    
+    .add-contacts-container{
+        width: 60%;
+        height: 90%;
+    }
+    .add-contact-form{
+        align-items: center;
+        margin: auto;
+    }
+    .add-contact-greeting-container{
+        width: 100%;
+        height: 40%;
+        top: 0;
+        border-radius: 30px 30px 0 0;
+    }
+    .add-contact-greeting-container h1{
+        font-size: 40px;
+    }
+    .add-contact-form-container{
+        margin: auto;
+        margin-bottom: 20px;
+    }
+    .contact-member-icon{
+        z-index: 3;
+        margin-bottom: -30px;
+    }
+
+}   
+@media (max-width: 1150px){
+    .contact{
+        left: 64%;
+    }   
+}
+@media (max-width: 1100px){
+    .contact{
+        left: 68%;
+    }   
+}
+@media (max-width: 1024px){
+    .contact{
+        display: none;
+    }   
+    .content{
+        position: static;
+        top: auto;
+        left: auto;
+    }
+    #contakt-mobiel{
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+}
+@media (max-width: 1024px){
+    .btn-deskription{
+        display: none;
+    }
+    
+    .contact-btn{
+        position: fixed;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        bottom: 120px;
+        right: 20px;
+    }
+}
+@media (max-height: 800px){
+    .contact-member-icon{
+        display: none;
+    }   
+}
+@media (max-width: 748px){
+    .add-contact-form{
+        width: 100%;
+        margin-left: 60px;
+        margin-right: 60px;
+    }
+    .input-container{
+        width: 80%;
+    }  
+    .add-contact{
+        width: 100%;
+        font-size: 15px;
+    }
+   .create-contact{
+        width: 100%;
+        font-size: 15px;
+   }
+}
+@media (max-width: 600px){
+    #contacts-list{
+        width: 100%;
+        display: flex;
+        align-items: flex-start;
+        flex-direction: column;
+    }
+    .contacts-list-item{
+        width: 90%;
+    }
+    .add-contacts-container{
+        width: 100%;
+        height: 100%;
+        border-radius: 0;
+    }
+    .add-contact-greeting-container{
+        border-radius: 0;
+    }
+    #back-to-contancts{
+        right: 20px;
+    }
+}
+@media (max-width: 500px){
+    .contact-header-add-task{
+        gap: 20px;
+    }
+    .contact-header-name{
+        font-size: 20px;
+    }
+}
