@@ -205,6 +205,7 @@ div.summary-task:hover{
 display: unset;
 }
 
+/*==============  Mobil  ====================*/
 
 @media (max-width: 1000px) {
     #content-summary{
@@ -233,6 +234,13 @@ display: unset;
         justify-content: center;
         align-items: center;
         gap: 70px;
+    }
+    .summary-task{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        align-content: flex-start;
     }
     .summary-haeder{
         width: 500px;
@@ -280,18 +288,18 @@ display: unset;
     .summary-tasks{
         width: 400px;
         height: 120px;
+        align-content: flex-start;
     }
     .summary-task{
         width: 120px;
         height: 120px;
         align-items: center;
-        justify-content: center;
-        gap: 20px;
+        justify-content: flex-start;
         text-align: center;
     }
     .summary-tasks h1{
         font-size: 30px;
-        line-height: 20px;
+        margin-top: 10px;
     }
     .summary-tasks p{
         font-size: 14px;
@@ -377,7 +385,6 @@ display: unset;
     }
     .summary-tasks h1{
         font-size: 20px;
-        line-height: 10px;
     }
     .summary-tasks p{
         font-size: 10px;
@@ -459,13 +466,13 @@ display: unset;
         height: 20px; 
     }
     .summary-tasks{
-        width: 300px;
+        width: 280px;
     }
     .summary-date{
-        width: 300px;
+        width: 280px;
     }
     .summary-todos{
-        width: 300px;
+        width: 280px;
         height: 100px;
     }
 }
