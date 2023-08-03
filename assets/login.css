@@ -415,6 +415,13 @@ label {
     font-size: 0.8em;
 }
 
+.login-remember-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    gap: 32px;
+}
+
 
 /* overlay-------------------- */
 
