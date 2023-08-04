@@ -535,10 +535,13 @@ label {
 
     .forgot-password {
         width: 70%;
+        padding: 36px 30px;
+        text-align: center;
     }
 
     .forgot-password h1 {
         font-size: 3rem;
+        
     }
 
     .new-pw {
@@ -561,6 +564,7 @@ label {
 
     .forgot-password {
         width: 80%;
+        padding: 36px 30px;
     }
 
     .forgot-password h1 {

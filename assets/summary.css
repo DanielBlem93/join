@@ -90,7 +90,7 @@ h1{
 div.summary-task:hover{
     background-color: #2A3647;
     color: #FFFFFF;
-    transform: scale(1.1);
+    transform: scale(1.03);
     cursor: pointer;
 }
 
@@ -109,7 +109,7 @@ div.summary-task:hover{
 .summary-date:hover{
     background-color: #2A3647;
     color: #FFFFFF;
-    transform: scale(1.1);
+    transform: scale(1.03);
     cursor: pointer;
 }
 
@@ -155,7 +155,7 @@ div.summary-task:hover{
 .summary-todo:hover{
     background-color: #2A3647;
     color: #FFFFFF;
-    transform: scale(1.1);
+    transform: scale(1.03);
     cursor: pointer;
 }
 .summary-todo-icon{
@@ -244,6 +244,7 @@ display: unset;
     }
     .summary-haeder{
         width: 500px;
+        margin-bottom: 10px;
     }
     .summary-h1{
         font-size: 45px; 
@@ -363,6 +364,7 @@ display: unset;
     .summary-haeder{
         width: 100%;
         justify-content: space-evenly;
+        margin-bottom: -10px;
     }
     .summary-h1{
         font-size: 20px; 
