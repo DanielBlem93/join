@@ -15,6 +15,13 @@ let currentEmail;
  */
 async function resetMail() {
     let email = document.getElementById('resetEmail');
+
+    // Validate input
+    if (email.value === '') {
+        displayError('emailError', 'Please fill out the email field.');
+        return;
+    }
+
     let data = JSON.parse(await getItem('userName'));
     let currentUser = Array.isArray(data) ? data.filter(user => user.email === email.value) : [];
     
@@ -29,13 +36,11 @@ async function resetMail() {
             window.location.href = 'newpassword.html';
         }, 2000);
     } else {
-        email.classList.add('bg-red');
-        setTimeout(function () {
-            email.classList.remove('bg-red');
-            email.value = '';
-        }, 500);
+        displayError('emailError', 'E-Mail nicht gefunden');
+        email.value = '';
     }
 }
+
 
 
 

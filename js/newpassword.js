@@ -31,15 +31,10 @@ function showSuccessAndRedirect(button, image) {
  * @param {HTMLInputElement} confirm - The input field for the password confirmation.
  */
 function showErrorAndReset(newPw, confirm) {
-    newPw.classList.add('bg-red');
-    confirm.classList.add('bg-red');
-
-    setTimeout(function () {
-        newPw.classList.remove('bg-red');
-        confirm.classList.remove('bg-red');
-        newPw.value = '';
-        confirm.value = '';
-    }, 2000);
+    displayError('newPwError', 'Die Passwörter stimmen nicht überein');
+    displayError('confirmError', 'Die Passwörter stimmen nicht überein');
+    newPw.value = '';
+    confirm.value = '';
 }
 
 /**
@@ -52,6 +47,12 @@ async function reset() {
     const button = document.getElementById('submitButton');
     const image = document.getElementById('successImage');
 
+    if (newPw.value === '' || confirm.value === '') {
+        if (newPw.value === '') displayError('newPwError', 'Please fill out the password field.');
+        if (confirm.value === '') displayError('confirmError', 'Please fill out the password confirmation field.');
+        return;
+    }
+
     if (newPw.value === confirm.value) {
         await updatePassword(email, newPw.value);
         showSuccessAndRedirect(button, image);
@@ -59,4 +60,5 @@ async function reset() {
         showErrorAndReset(newPw, confirm);
     }
 }
+
 

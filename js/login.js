@@ -10,7 +10,6 @@ let currentUser = [];
  */
 let currentUserName;
 
-
 /**
  * This asynchronous function handles user login. It retrieves user input (email and password), checks it against stored users,
  * and redirects to 'summary.html' if a match is found. The name of the logged in user is also stored locally.
@@ -20,27 +19,53 @@ let currentUserName;
  * @returns {Promise<void>} Returns a Promise that resolves when the process is complete. No return value.
  */
 async function login() {
+    let email = document.getElementById('loginEmail');
+    let password = document.getElementById('loginPassword');
 
-    let email = document.getElementById('loginEmail').value;
-    let password = document.getElementById('loginPassword').value;
+    // Validate input
+    if (!validateInput(email, password)) {
+        // If the input is not valid, stop execution of the function
+        return;
+    }
+
     let data = JSON.parse(await getItem('userName'));
-    let currentUser = Array.isArray(data) ? data.filter(user => user.email === email && user.password === password) : [];
+    let currentUser = Array.isArray(data) ? data.filter(user => user.email === email.value && user.password === password.value) : [];
 
     if (currentUser.length > 0) {
         currentUserName = currentUser[0].name;
         await setItem('currentUserName', currentUserName);
         window.location.href = 'summary.html';
     } else {
-        document.getElementById('loginEmail').classList.add('bg-red');
-        document.getElementById('loginPassword').classList.add('bg-red');
-        setTimeout(function () {
-            document.getElementById('loginEmail').classList.remove('bg-red');
-            document.getElementById('loginPassword').classList.remove('bg-red');
-        }, 500);
+        displayError('emailError', 'Ungültige E-Mail oder Passwort');
+        displayError('passwordError', 'Ungültige E-Mail oder Passwort');
     }
-    document.getElementById('loginEmail').value = '';
-    document.getElementById('loginPassword').value = '';
+    email.value = '';
+    password.value = '';
 }
+
+
+/**
+ * Validates user input, ensuring that the email and password fields are not empty. 
+ * This function displays an error message under the relevant input field if a field is invalid.
+ *
+ * @function
+ * @param {HTMLInputElement} email - The email input element.
+ * @param {HTMLInputElement} password - The password input element.
+ * @returns {boolean} Returns true if all input fields are valid, false otherwise.
+ */
+function validateInput(email, password) {
+    let isValid = true;
+    if (email.value === '') {
+        displayError('emailError', 'Please fill out the email field.');
+        isValid = false;
+    }
+    if (password.value === '') {
+        displayError('passwordError', 'Please fill out the password field.');
+        isValid = false;
+    }
+    return isValid;
+}
+
 
 /**
  * This asynchronous function allows guest users to login by simply setting the current user name as 'Guest'.
