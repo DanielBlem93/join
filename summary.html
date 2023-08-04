@@ -4,16 +4,24 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/gif" href="./assets/img/join-icon weiss.png">
     <link rel="stylesheet" href="./assets/fonts.css">
     <link rel="stylesheet" href="./assets/summary.css">
     <link rel="stylesheet" href="./assets/style.css">
     <script src="js/template-script2.js"></script>
-
+    <script src="js/db-connect.js"></script>
+    <script src="js/signUp.js"></script>
+    <script src="js/summary.js"></script>
+    <script src="js/login.js"></script>
+    <script src="./js/add_contact.js"></script>
+    <script src="./js/edit_contact.js"></script>
+    <script src="./js/board.js"></script>
+    <script src="./js/logout.js"></script>
     <title>Summary</title>
 </head>
-<body onload="init()">
+<body onload="init(); getTasksData()">
     <div w3-include-html="assets/templates/desktop_template.html"></div>
-<div class="content">
+<div id="content-summary" class="content">
     <div class="summary-content">
     <div class="summary-haeder">
         <h1 class="summary-h1">Summary</h1>
@@ -23,52 +31,52 @@
     <div class="summary-container">
         <div class="summary-body">
             <div class="summary-tasks">
-                <div class="summary-task">
-                    <h1>3</h1>
+                <div onclick="window.location.href = 'board.html'" class="summary-task">
+                    <h1 id="task-in-board">0</h1>
                     <p>Tasks in 
                         Board</p>
                 </div>
-                <div class="summary-task">
-                    <h1>2</h1>
+                <div onclick="window.location.href = 'board.html'" class="summary-task">
+                    <h1 id="task-in-progress">2</h1>
                     <p>Tasks In
                         Progress</p>
                 </div>
-                <div class="summary-task">
-                    <h1>2</h1>
+                <div onclick="window.location.href = 'board.html'" class="summary-task">
+                    <h1 id="task-in-feedback">2</h1>
                     <p>Awaiting
                         Feedback</p>
                 </div>
             </div>
-            <div class="summary-date">
+            <div onclick="window.location.href = 'board.html'"  class="summary-date">
                     <div class="summary-icon-urgent">
                         <img src="./assets/img/urgent.svg" alt="">
                     </div>
                     <div class="summary-display">
-                    <h1>1</h1>
+                    <h1 id="task-urgent">1</h1>
                     <p>Urgent</p>
                 </div>
                 <hr class="summary-date-hr">
                 <div>
-                    <h2>October 16, 2022</h2>
+                    <h2 id="urgent-date">October 16, 2022</h2>
                     <p>Upcoming Deadline</p>
                 </div>
             </div>
-            <div class="summary-todos">
-                <div class="summary-todo">
+            <div onclick="window.location.href = 'board.html'"  class="summary-todos">
+                <div onclick="window.location.href = 'board.html'" class="summary-todo">
                     <div class="summary-todo-icon">
                         <img class="summary-todo-icon-stift" src="./assets/img/stift.svg" alt="">
                     </div>
                     <div class="summary-display">
-                        <h1>1</h1>
+                        <h1 id="task-todo">1</h1>
                         <p>Todo</p>
                     </div>
                 </div>
-                <div class="summary-todo">
+                <div onclick="window.location.href = 'board.html'"  class="summary-todo">
                     <div class="summary-todo-icon">
                         <img  src="./assets/img/chack.svg" alt="">
                     </div>
                     <div class="summary-display">
-                        <h1>1</h1>
+                        <h1 id="task-done">1</h1>
                         <p>Done</p>
                     </div>
                 </div>
@@ -76,12 +84,11 @@
         </div>
         <div class="summary-greeting">
             <p class="summary-greeting-p">Good morning,</p>
-            <h2 class="summary-greeting-h2">Sofia Müller</h2>
+            <h2 id="summaryGreetingName" class="summary-greeting-h2">Guest</h2>
         </div>
     </div>
 
 </div>
 </div>
-
 </body>
 </html>
