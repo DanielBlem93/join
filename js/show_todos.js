@@ -99,15 +99,15 @@ async function editTodo (id) {
     editTodoBox.innerHTML += /*html*/ `
         <div class="addTaskTitle">
                 <span class="typography2T6">Title</span>
-                <div class="addTaskFrame14">
-                    <input id="title" type="text" class="typography2T6 inputFrame" placeholder="Enter a Title" value="${todo['title']}">
+                <div class=" input-container">
+                    <input id="title" type="text" class="captions inputFrame" placeholder="Enter a Title" value="${todo['title']}">
                 </div>
                 <span class="is-required displayNone">This field is required</span>
             </div>
         <div class="addTaskDescription">
                 <span class="typography2T6">Description</span>
-                <div class="addTaskFrame17">
-                    <textarea id="description" class="typography2T6 textareaFrame"
+                <div class="textarea-container">
+                    <textarea id="description" class="captions textareaFrame"
                         placeholder="Enter a Description">${todo['text']}</textarea>
                     <img class="addTaskFrame17Recurso11" src="./assets/img/recurso-11.svg">
                 </div>
@@ -115,8 +115,8 @@ async function editTodo (id) {
             </div>
             <div class="addTaskDueDate">
                     <span class="typography2T6">Due date</span>
-                    <div class="addTaskFrame14">
-                        <input id="date" type="date" class="typography2T6 inputFrame" placeholder="dd/mm/yyyy"
+                    <div class=" input-container">
+                        <input id="date" type="date" class="captions inputFrame" placeholder="dd/mm/yyyy"
                             min="2023-01-01" value="${todo['date']}">
                     </div>
                     <span class="is-required displayNone">This field is required</span>
@@ -126,7 +126,7 @@ async function editTodo (id) {
 
                     <div class="addTaskPriority">
                         <button id="addTaskBtnUrgent" onclick="changeColor('addTaskBtnUrgent','urgent')"
-                            class="addTaskFrame14Prio buttonFramePrio">
+                            class="input-containerPrio buttonFramePrio">
                             <span class="typography2T6">Urgent</span>
                             <svg width="21" height="15" viewBox="0 0 21 15" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
@@ -151,7 +151,7 @@ async function editTodo (id) {
                             </svg>
                         </button>
                         <button id="addTaskBtnMedium" onclick="changeColor('addTaskBtnMedium', 'medium')"
-                            class="addTaskFrame14Prio buttonFramePrio">
+                            class="input-containerPrio buttonFramePrio">
                             <span class="typography2T6">Medium</span>
                             <svg width="20" height="9" viewBox="0 0 20 9" xmlns="http://www.w3.org/2000/svg">
                                 <g id="Prio media" clip-path="url(#clip0_70119_2628)">
@@ -175,7 +175,7 @@ async function editTodo (id) {
                             </svg>
                         </button>
                         <button id="addTaskBtnLow" onclick="changeColor('addTaskBtnLow', 'low')"
-                            class="addTaskFrame14Prio buttonFramePrio">
+                            class="input-containerPrio buttonFramePrio">
                             <span class="typography2T6">Low</span>
                             <svg width="20" height="15" viewBox="0 0 20 15" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">

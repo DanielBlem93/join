@@ -167,15 +167,15 @@ header>div>span {
 #logout {
     width: 91px;
     height: 41px;
-    font-size: 21px;
+    font-size: 16px;
     position: absolute;
-    right: 200px;
-    top: 25px;
+    right: 100px;
+    top: 100px;
     background-color: var(--background-dark);
     color: var(--background-white);
     border: none;
     padding: 4px 16px;
-    border-radius: 4px;
+    border-radius: 14px 0px 14px 14px;
     display: flex;
     align-items: center;
     justify-content: center;

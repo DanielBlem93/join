@@ -1053,4 +1053,91 @@ body {
         min-width: 310px;
 
     }
+    #select-contacts-to-assign{
+        font-size: 14px;
+    }
+    #select-task-category{
+        font-size: 14px;
+    }
+}
+
+@media(max-width: 400px) {
+
+    .left-side>div {
+        width: 280px;
+        min-width: 280px;
+
+    }
+
+    .left-side>div>div {
+        width: 280px;
+        min-width: 280px;
+    }
+
+    #right-side>div {
+        width: 280px;
+        min-width: 280px;
+
+    }
+
+    #right-side>div>div {
+        width: 280px;
+        min-width: 280px;
+
+    }
+}
+
+@media(max-width: 350px) {
+
+    .left-side>div {
+        width: 250px;
+        min-width: 250px;
+
+    }
+
+    .left-side>div>div {
+        width: 250px;
+        min-width: 250px;
+    }
+
+    #right-side>div {
+        width: 250px;
+        min-width: 250px;
+
+    }
+
+    #right-side>div>div {
+        width: 250px;
+        min-width: 250px;
+
+    }
+}
+
+@media(max-width: 320px) {
+
+    .left-side>div {
+        width: 220px;
+        min-width: 220px;
+
+    }
+
+    .left-side>div>div {
+        width: 220px;
+        min-width: 220px;
+    }
+
+    #right-side>div {
+        width: 220px;
+        min-width: 220px;
+
+    }
+
+    #right-side>div>div {
+        width: 220px;
+        min-width: 220px;
+
+    }
+    #select-contacts-to-assign{
+        font-size: 12px;
+    }
 }
