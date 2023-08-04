@@ -518,6 +518,9 @@ label {
         justify-content: left;
         gap: 32px;
     }
+    a{
+        display: none;
+    }
 }
 
 /* =======SignUpMobile========== */
