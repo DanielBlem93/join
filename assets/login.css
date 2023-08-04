@@ -518,7 +518,7 @@ label {
         justify-content: left;
         gap: 32px;
     }
-    a{
+    .indexFooter{
         display: none;
     }
 }

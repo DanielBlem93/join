@@ -560,7 +560,8 @@ async function createTask() {
       'emails': [emails],
       'priority': currentPriority,
       'subtasks': subtasks,
-      'taskID': taskId
+      'taskID': taskId,
+      // 'color': color
     }];
 
     clearTask();

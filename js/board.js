@@ -249,7 +249,6 @@ function generateToDoHTML(element) {
  */
 
 function getFirstTwoLetters(members) {
-    let randomColor = getRandomColor();
     let letterDivs = '';
     if (Array.isArray(members)) {
         members.slice(0,2).forEach(member => { // limit to 2 names
