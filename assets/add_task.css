@@ -93,11 +93,14 @@ main {
     align-items: center;
     justify-content: center;
     position: relative;
+
 }
 
 #options {
+
     position: relative;
     display: flex;
+    align-items: center;
     gap: 128px;
 }
 
@@ -119,9 +122,9 @@ main {
 }
 
 .headline-container {
-    width: 363px;
+    width: 100%;
     display: flex;
-   
+
 
 }
 
@@ -139,7 +142,7 @@ main {
 
 
 /* Frame 38 */
-.left-side {
+#left-side {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -904,22 +907,33 @@ body {
 /* ================ Responsive ========================== */
 
 @media(max-width: 1450px) {
+
     main {
-        justify-content: end;
+        justify-content: center;
+        left: 116px;
+        overflow-y: scroll;
+
     }
 }
 
 @media(max-width: 1333px) {
 
     #options {
-        margin-top: 364px;
-        margin-right: 64px;
+
+        width: 100%;
+        height: 75%;
+
 
     }
 
-    .left-side {
+    #left-side {
         height: unset;
         gap: 0;
+
+    }
+
+    #right-side {
+        padding-bottom: 50px;
     }
 
     #assinged-to-dropdown {
@@ -965,26 +979,30 @@ body {
 
 @media(max-width: 1024px) {
 
-    #pseudo-header{
-        position: sticky;
-        top: 0;
-        width: 100%;
-        height: 120px;
+    .headline-container {
+        padding-top: 32px;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 20px;
 
     }
-    .headline-container {
-        padding-top: 128px;
-      
+
+    main {
+        justify-content: center;
+        left: unset
     }
+
+
 
     #options {
         margin-right: 0;
     }
 
-    .left-side {
+    #left-side {
         display: flex;
         align-items: center;
         justify-content: center;
+        width: 100% !important;
 
     }
 
@@ -992,152 +1010,45 @@ body {
         display: flex;
         align-items: center;
         justify-content: center;
-        padding-bottom: 200px;
+        padding-bottom: 100px;
+        width: 100%;
     }
 }
 
-@media(max-width: 515px) {
-
-    .headline-container {
+@media(max-width: 450px) {
+    .marginLRauto {
         margin-left: auto;
         margin-right: auto;
-        justify-content: center;
     }
 
-    .left-side>div {
-        width: 363px;
-        min-width: 363px;
-
-    }
-
-    .left-side>div>div {
-        width: 363px;
-        min-width: 363px;
-    }
-
-    #right-side>div {
-        width: 363px;
-        min-width: 363px;
+    .width95 {
+        width: 95%;
+        min-width: 0;
 
     }
 
-    #right-side>div>div {
-        width: 363px;
-        min-width: 363px;
-
-    }
 
 }
 
-@media(max-width: 450px){
-
-    .left-side>div {
-        width: 310px;
-        min-width: 310px;
-
-    }
-
-    .left-side>div>div {
-        width: 310px;
-        min-width: 310px;
-    }
-
-    #right-side>div {
-        width: 310px;
-        min-width: 310px;
-
-    }
-
-    #right-side>div>div {
-        width: 310px;
-        min-width: 310px;
-
-    }
-    #select-contacts-to-assign{
-        font-size: 14px;
-    }
-    #select-task-category{
-        font-size: 14px;
-    }
-}
 
 @media(max-width: 400px) {
 
-    .left-side>div {
-        width: 280px;
-        min-width: 280px;
 
+    .addTaskPriority {
+        align-items: baseline;
+        flex-direction: column;
+        height: 212px;
+        align-items: center;
     }
 
-    .left-side>div>div {
-        width: 280px;
-        min-width: 280px;
+    .addTaskPriority button {
+        width: 100%
     }
 
-    #right-side>div {
-        width: 280px;
-        min-width: 280px;
-
-    }
-
-    #right-side>div>div {
-        width: 280px;
-        min-width: 280px;
-
-    }
 }
 
 @media(max-width: 350px) {
-
-    .left-side>div {
-        width: 250px;
-        min-width: 250px;
-
-    }
-
-    .left-side>div>div {
-        width: 250px;
-        min-width: 250px;
-    }
-
-    #right-side>div {
-        width: 250px;
-        min-width: 250px;
-
-    }
-
-    #right-side>div>div {
-        width: 250px;
-        min-width: 250px;
-
-    }
-}
-
-@media(max-width: 320px) {
-
-    .left-side>div {
-        width: 220px;
-        min-width: 220px;
-
-    }
-
-    .left-side>div>div {
-        width: 220px;
-        min-width: 220px;
-    }
-
-    #right-side>div {
-        width: 220px;
-        min-width: 220px;
-
-    }
-
-    #right-side>div>div {
-        width: 220px;
-        min-width: 220px;
-
-    }
-    #select-contacts-to-assign{
-        font-size: 12px;
-    }
+   body *{
+    font-size: 16px;
+   }
 }
