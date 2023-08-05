@@ -41,6 +41,7 @@ function updateContactFormFields(contact) {
  */
 function openModalEditContakt(contact){
     currentContact = contact;
+    console.log(currentContact);
 
     setElementRightProperty('add-contakt-modal', '0');
     updateContactFormFields(currentContact);
@@ -72,11 +73,17 @@ function updateCurrentContact() {
 async function saveContact(){
     updateCurrentContact();
 
+    if (!validateContact(currentContact)) {
+        return;
+    }
+
     let contacts = JSON.parse(await getItem('contacts'));
     let index = contacts.findIndex(item => item.id === currentContact.id);
     if (index !== -1) {
         contacts[index] = currentContact;
     }
+
+    
     await setItem('contacts', JSON.stringify(contacts));
 
     getContacts();
@@ -84,3 +91,58 @@ async function saveContact(){
     currentContact = null; 
     window.location.reload();
 }
+
+function isValidName(name) {
+    // Nur Buchstaben und Leerzeichen erlauben
+    const regex = /^[a-z]+\s[a-z]+$/i;
+    return regex.test(name);
+}
+
+function isValidEmail(email) {
+    // Einfache E-Mail-Validierung
+    const regex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+    return regex.test(email);
+}
+
+function isValidPhone(phone) {
+    // Nur Zahlen erlauben, Sie können dies an die gewünschte Länge anpassen
+    const regex = /^\d+$/;
+    return regex.test(phone);
+}
+
+function validateContact(contact) {
+    let isValid = true;
+    
+    // Name validieren
+    if (!isValidName(contact.name)) {
+        document.getElementById('contactNameError').innerText = 'Ungültiger Name.';
+        document.getElementById('contactNameError').style.display = 'block';
+        document.getElementById('contactNameError').style.color = 'red';
+        isValid = false;
+    } else {
+        document.getElementById('contactNameError').style.display = 'none';
+    }
+    
+    // E-Mail validieren
+    if (!isValidEmail(contact.email)) {
+        document.getElementById('contactEmailError').innerText = 'Ungültige E-Mail-Adresse.';
+        document.getElementById('contactEmailError').style.display = 'block';
+        document.getElementById('contactEmailError').style.color = 'red';
+        isValid = false;
+    } else {
+        document.getElementById('contactEmailError').style.display = 'none';
+    }
+
+    // Telefonnummer validieren
+    if (!isValidPhone(contact.phone)) {
+        document.getElementById('contactPhoneError').innerText = 'Ungültige Telefonnummer.';
+        document.getElementById('contactPhoneError').style.display = 'block';
+        document.getElementById('contactPhoneError').style.color = 'red';
+        isValid = false;
+    } else {
+        document.getElementById('contactPhoneError').style.display = 'none';
+    }
+    
+    return isValid;
+}
+

@@ -3,6 +3,7 @@ let contact = [];
 let contactsArray = [];
 let currentContact = null;
 
+
 function openModalAddContakt() {
     resetModal();
     document.getElementById('add-contakt-modal').style.right = '0';
@@ -21,8 +22,9 @@ function closeModal(){
  */
 async function createContact() {
     let id = generateId();
+    let colorIcon = getRandomColor();
 
-    // Get inputs
+
     let nameInput = document.getElementById('contactName');
     let emailInput = document.getElementById('contactEmail');
     let phoneInput = document.getElementById('contactPhone');
@@ -51,7 +53,8 @@ async function createContact() {
         name: nameInput.value,
         email: emailInput.value,
         phone: phoneInput.value,
-        id: id
+        id: id,
+        colorIcon: colorIcon
     }
 
     await addContact(contact);
@@ -162,7 +165,7 @@ function renderContact(contact, initials, color = getRandomColor()) {
     let contactString = JSON.stringify(contact).replace(/"/g, '&quot;');
     return /*html*/`
          <div class="contact-header">
-            <div class="contact-header-icon" style="background-color: ${color};">${initials}</div>
+            <div class="contact-header-icon" style="background-color: ${contact.colorIcon};">${initials}</div>
             <div>
                 <div class="contact-header-name">${contact.name}</div>
                 <div class="contact-header-add-task">
@@ -247,12 +250,18 @@ function showContact(index) {
  * @async
  */
 async function deleteContact(contact) {
-    let contacts = JSON.parse(await getItem('contacts')) || [];
-    contacts = contacts.filter(item => item.name !== contact.name);
-    await setItem('contacts', JSON.stringify(contacts));
-    getContacts();
-    window.location.reload();
+    try {
+        let contacts = JSON.parse(await getItem('contacts')) || [];
+        contacts = contacts.filter(item => item.id !== contact.id);
+        await setItem('contacts', JSON.stringify(contacts));
+        getContacts();
+        console.log('Contact deleted!');
+        window.location.reload();
+    } catch (error) {
+        console.error("Error deleting contact:", error);
+    }
 }
+
 
 /**
  * Generates a random RGB color.
@@ -277,7 +286,7 @@ function getRandomColor() {
 function renderContactBlock(contact, firstInitial, secondInitial, color, contactIndex) {
     return /*html*/`
         <div onclick="showContact(${contactIndex})" class="contacts-list-item">
-            <div class="contact-list-icon" style="background-color: ${color};">
+            <div class="contact-list-icon" style="background-color: ${contact.colorIcon};">
                 ${firstInitial.toUpperCase()}${secondInitial.toUpperCase()}    
             </div>
             <div>
@@ -314,6 +323,7 @@ async function getContacts() {
     }, '');
 
     contactList.innerHTML = htmlString;
+    console.log('Contacts loaded!:', contacts);
 }
 
 
