@@ -161,6 +161,7 @@ header>div>span {
     justify-content: center;
     height: 49px;
     width: 49px;
+    margin-right: 20px;
     border: 3px solid var(--background-dark);
     border-radius: 100%;
     color: var(--lightblue);
