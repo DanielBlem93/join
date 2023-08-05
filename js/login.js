@@ -8,7 +8,7 @@ let currentUser = [];
  * A string to store the name of the current user.
  * @type {string}
  */
-let currentUserName;
+let currentUserName = '';
 
 /**
  * This asynchronous function handles user login. It retrieves user input (email and password), checks it against stored users,

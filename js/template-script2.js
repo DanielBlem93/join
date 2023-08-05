@@ -1,10 +1,18 @@
 async function init() {
+    
     await includeHTML();
     await getUserName();
     await allUserName();
     await setInitials();
     await allUsers();
+    validateName();
     activeLink();
+}
+
+function validateName() {
+    if (currentUserName === 'noaccess') {
+        window.location.href = 'index.html';
+    }
 }
 
 async function allUserName(){
@@ -57,6 +65,8 @@ function activeLink() {
         }
     });
 }
+
+
 
 
 

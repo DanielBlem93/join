@@ -1,3 +1,6 @@
+
+
+
 /**
  * For each task element with the class 'summary-task', an event listener is added. 
  * When a task element is clicked, the user is redirected to the 'board.html' page.
