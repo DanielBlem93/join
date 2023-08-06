@@ -33,8 +33,10 @@ function generateSubtaskHTML(subtaskObj, index, todoId) {
     return subtaskHTML;
 }
 
-function generateMemberHTML(member) {
-    let color = getRandomColor();
+async function generateMemberHTML(member) {
+    let color = await getColorForName(member);
+    
+    console.log(color);
     let names = member.split(' ');
     let initials = names[0][0] + names[1][0];
     let memberHTML = `<p class="modalMember"><span class="initMember" style="background-color:${color}";>${initials}</span>  ${member}</p>`;
@@ -51,7 +53,7 @@ function generateToDoHTMLModal(todo) {
     let imgTodosPriorities = todo['priority'] === 'urgent' ? './assets/img/urgent.svg' : todo['priority'] === 'medium' ? './assets/img/akar-icons_chek.svg' : todo['priority'] === 'low' ? './assets/img/low.svg' : './assets/img/low.svg';
     let membersHTML = '';
     if (todo.members && todo.members.length > 0) {
-        membersHTML = todo.members.map(member => generateMemberHTML(member)).join('');
+        membersHTML = todo.members.map(member =>  generateMemberHTML(member)).join('');
     }
 
     let todoHTML = /*html*/ `

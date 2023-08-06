@@ -746,3 +746,23 @@ function swapToBoard() {
   window.location.href = 'board.html'
 }
 
+
+// =========================Date ==================================
+
+document.addEventListener('DOMContentLoaded', function() {
+  let heute = new Date();
+  let formattedDate = formatDate(heute);
+
+  let datumInput = document.getElementById('date');
+  datumInput.value = formattedDate;
+  datumInput.min = formattedDate;
+});
+
+function formatDate(date) {
+  let day = ("0" + date.getDate()).slice(-2);
+  let month = ("0" + (date.getMonth() + 1)).slice(-2);
+  let year = date.getFullYear();
+
+  return year + '-' + month + '-' + day;
+}
+

@@ -117,7 +117,7 @@ async function setItemTodo() {
  * 
  * @param {string} category - This parameter stands for the category of a todo and at the same time for the name of the subboard to which it belongs.
  */
-function renderToDos(category) {
+async function renderToDos(category) {
     
     let filteredToDos = todos.filter(t => t['category'] == category);
 
@@ -125,8 +125,8 @@ function renderToDos(category) {
 
     for (let i = 0; i < filteredToDos.length; i++) {
         const element = filteredToDos[i];
-        document.getElementById(category).innerHTML += generateToDoHTML(element);
-        generateToDoHTML(i);
+        document.getElementById(category).innerHTML += await generateToDoHTML(element);
+        await generateToDoHTML(i);
     }  
 }
 
@@ -192,9 +192,9 @@ function styleTodos() {
  * @param {Object} element - The todo task object to be processed.
  * @returns {string} An HTML string for a todo box element.
  */
-function generateToDoHTML(element) {
+async function generateToDoHTML(element) {
     let members = element['members'];
-    let letters = getFirstTwoLetters(members);
+    let letters = await getFirstTwoLetters(members);
     let prioImg = generatePrioIcon(element['priority']);
     let color = getRandomColor();
 
@@ -241,6 +241,8 @@ function generateToDoHTML(element) {
 
 
 
+
+
 /**
  * Extracts the first two letters from a given string and converts them to uppercase.
  *
@@ -248,23 +250,41 @@ function generateToDoHTML(element) {
  * @returns {string} The first two letters of the input string in uppercase, or undefined if input is not a string.
  */
 
-function getFirstTwoLetters(members) {
+async function getColorForName(name) {
+    const contactNames = JSON.parse(await getItem('contacts'));
+    const contact = contactNames.find(contact => contact.name === name);
+    //console.log(contact.colorIcon);
+    if (contact) {
+        return contact.colorIcon;
+    }
+    return '#FFFFFF';  // Standardfarbe, falls der Name nicht gefunden wird
+}
+
+async function getFirstTwoLetters(members) {
     let letterDivs = '';
     if (Array.isArray(members)) {
-        members.slice(0,2).forEach(member => { // limit to 2 names
+        for (let i = 0; i < Math.min(members.length, 2); i++) {
+            let member = members[i];
+            //console.log(member);
             if (typeof member === 'string') {
                 let firstTwoLetters = member.slice(0, 2).toUpperCase();
-                letterDivs += `<div class="todo-icon-name" style="background-color:${getRandomColor()};">${firstTwoLetters}</div>`;
+                let color = await getColorForName(member);
+                //console.log(color);
+                
+                letterDivs += `<div class="todo-icon-name" style="background-color:${color};">${firstTwoLetters}</div>`;
             }
-        });
+        }
 
         // if there are more than 2 names, show the number of remaining names
         if (members.length > 2) {
-            letterDivs += `<div class="todo-icon-name" style="background-color:${getRandomColor()};">+${members.length - 2}</div>`;
+            // Sie könnten auch eine Farbe für diesen zusätzlichen "Mehr"-Marker festlegen
+            let defaultColor = '#FFFFFF';  
+            letterDivs += `<div class="todo-icon-name" style="background-color:${defaultColor};">+${members.length - 2}</div>`;
         }
     }
     return letterDivs;
 }
+
 
 function getRandomColor() {
     const colorValues = Array.from({length: 3}, () => Math.floor(Math.random() * 256));
@@ -313,3 +333,10 @@ function showAddTaskPopup(color){
        popup.style.backgroundColor = `${color}` 
     }, 125);
 }
+
+// addColor();
+
+// async function addColor(){
+//     let contaktNamen = JSON.parse(await getItem('contacts'));
+//     console.log(contaktNamen[0]['colorIcon']);
+// }

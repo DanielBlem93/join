@@ -3,6 +3,13 @@ let contact = [];
 let contactsArray = [];
 let currentContact = null;
 
+// removeAllContakts();
+
+// async function removeAllContakts() {
+//     await setItem('contacts', JSON.stringify([]));
+//     getContacts();
+// }
+
 
 function openModalAddContakt() {
     resetModal();
