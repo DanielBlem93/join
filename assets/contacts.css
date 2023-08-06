@@ -515,7 +515,7 @@ input::placeholder{
         flex-direction: column;
     }
     .contacts-list-item{
-        width: 90%;
+        width: 100%;
     }
     .add-contacts-container{
         width: 100%;
@@ -527,6 +527,11 @@ input::placeholder{
     }
     #back-to-contancts{
         right: 20px;
+    }
+    .contact-list-hr{
+        width: 100%;
+        margin-bottom: 5px;
+        padding: 1px;
     }
 }
 @media (max-width: 500px){

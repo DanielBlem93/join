@@ -47,6 +47,8 @@ function generateToDoHTMLModal(todo) {
         subtasksHTML = todo.subtasks.map((subtaskObj, index) => generateSubtaskHTML(subtaskObj, index, todo.id)).join('');
     }
 
+    let colorTodosPriorities = todo['priority'] === 'urgent' ? '#FF0000' : todo['priority'] === 'medium' ? '#FFA800' : todo['priority'] === 'low' ? '#7AE229' : '#321313';
+    let imgTodosPriorities = todo['priority'] === 'urgent' ? './assets/img/urgent.svg' : todo['priority'] === 'medium' ? './assets/img/akar-icons_chek.svg' : todo['priority'] === 'low' ? './assets/img/low.svg' : './assets/img/low.svg';
     let membersHTML = '';
     if (todo.members && todo.members.length > 0) {
         membersHTML = todo.members.map(member => generateMemberHTML(member)).join('');
@@ -62,7 +64,12 @@ function generateToDoHTMLModal(todo) {
         <p class="modal-text"> ${todo['text']}</p>
         <p class="modal-date"><b>Due date:</b> ${todo['date']}</p>
         <div class="modal-tasks"> ${subtasksHTML}</div>
-        <p class="modal-priority"><b>Priority:</b> <span id="priority">${todo['priority']}</span></p>
+        <p class="modal-priority"><b>Priority:</b> 
+
+           <span style="background-color: ${colorTodosPriorities};" id="priority">${todo['priority']}
+            <img style="width: 20px;" src="${imgTodosPriorities}" alt="">
+            </span>
+        </p>
         <div class="modal-members">
             <p><b>Assigned To:</b></p>
             ${membersHTML}
