@@ -7,9 +7,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/gif" href="./assets/img/join-icon weiss.png">
     <link rel="stylesheet" href="./assets/fonts.css">
-    <link rel="stylesheet" href="./assets/board.css">
     <link rel="stylesheet" href="./assets/style.css">
     <link rel="stylesheet" href="assets/add_task.css">
+    <link rel="stylesheet" href="./assets/board.css">
     <script src="js/template-script2.js"></script>
     <script src="js/db-connect.js"></script>
     <script src="js/signUp.js"></script>
@@ -39,14 +39,16 @@
                         <img class="search-img" src="./assets/img/search-icon-schwarz.png">
                         <hr class="search-img-hr">
                     </div>
-                    <button onclick="showAddTaskPopup('rgba(0, 0, 0, 0.322)')" id="addTaskOnBoard" class="board-button"><span id="btn-add-board">Add Task</span> +</button>
+                    <button onclick="showAddTaskPopup('rgba(0, 0, 0, 0.322)')" id="addTaskOnBoard"
+                        class="board-button"><span id="btn-add-board">Add Task</span> +</button>
                 </div>
             </div>
             <div class="board-body-container">
                 <div class="board-body drag-area board-todo">
                     <div class="board-body-haeder">
                         <h3>Todo</h3>
-                        <img onclick="showAddTaskPopup('rgba(0, 0, 0, 0.322)')" style="cursor: pointer;"  src="./assets/img/add-icon.png">
+                        <img onclick="showAddTaskPopup('rgba(0, 0, 0, 0.322)')" style="cursor: pointer;"
+                            src="./assets/img/add-icon.png">
                     </div>
                     <div id="open" class="drag-area" ondrop="movedTo('open')" ondragover="allowDrop(event)">
                         <div class="platzhalter"></div>
@@ -55,7 +57,8 @@
                 <div class="board-body drag-area board-in-progress">
                     <div class="board-body-haeder">
                         <h3>In progress</h3>
-                        <img onclick="showAddTaskPopup('rgba(0, 0, 0, 0.322)')" style="cursor: pointer;"  src="./assets/img/add-icon.png" alt="">
+                        <img onclick="showAddTaskPopup('rgba(0, 0, 0, 0.322)')" style="cursor: pointer;"
+                            src="./assets/img/add-icon.png" alt="">
                     </div>
                     <div id="progress" class="drag-area" ondrop="movedTo('progress')" ondragover="allowDrop(event)">
                         <div class="platzhalter"></div>
@@ -64,7 +67,8 @@
                 <div class="board-body drag-area board-feedback">
                     <div class="board-body-haeder">
                         <h3>Awaiting Feedback</h3>
-                        <img onclick="showAddTaskPopup('rgba(0, 0, 0, 0.322)')"  style="cursor: pointer;" src="./assets/img/add-icon.png" alt="">
+                        <img onclick="showAddTaskPopup('rgba(0, 0, 0, 0.322)')" style="cursor: pointer;"
+                            src="./assets/img/add-icon.png" alt="">
                     </div>
                     <div id="feedback" class="drag-area" ondrop="movedTo('feedback')" ondragover="allowDrop(event)">
                         <div class="platzhalter"></div>
@@ -73,7 +77,8 @@
                 <div class="board-body drag-area board-done">
                     <div class="board-body-haeder">
                         <h3>Done</h3>
-                        <img onclick="showAddTaskPopup('rgba(0, 0, 0, 0.322)')" style="cursor: pointer;" src="./assets/img/add-icon.png" alt="">
+                        <img onclick="showAddTaskPopup('rgba(0, 0, 0, 0.322)')" style="cursor: pointer;"
+                            src="./assets/img/add-icon.png" alt="">
                     </div>
                     <div id="closed" class="drag-area" ondrop="movedTo('closed')" ondragover="allowDrop(event)">
                         <div class="platzhalter"></div>
@@ -83,7 +88,7 @@
         </div>
     </div>
     </div>
-    
+
     <div id="showTodo" class="displayNone"></div>
 
 
@@ -94,140 +99,145 @@
 
 
 
-    <div id="addTaskPopup"  style="display: flex;">
+    <div id="addTaskPopup" style="display: flex;">
         <div class="popupAnimation" id="addTaskPopupContainer">
-            <img onclick="showAddTaskPopup('rgba(0, 0, 0, 0.00)')" id="add-task-close-button" src="assets/img/icons/dropdown-close-button.svg" >
+            <img onclick="showAddTaskPopup('rgba(0, 0, 0, 0.00)')" id="add-task-close-button"
+            src="assets/img/icons/dropdown-close-button.svg">
 
             <main>
+              
                 <section id="options">
-                    
+
                     <div id="left-side">
-                        <div id="pseudo-header"></div>
                         <div class="headline-container">
                             <span class="headline">Add Task</span>
                         </div>
-                        <div class="left-side">
-                            <div class="addTaskTitle">
-                                <span class="captions">Title</span>
-                                <div class="input-container">
-                                    <input id="title" type="text" class="captions inputFrame" placeholder="Enter a Title">
-                                </div>
-                                <span class="is-required displayNone">This field is required</span>
+                        <div class="addTaskTitle width95">
+                            <span  class="captions">Title</span>
+                            <div class="input-container width95">
+                                <input id="title" type="text" class="captions inputFrame" placeholder="Enter a Title">
                             </div>
-                            <div class="addTaskDescription">
-                                <span class="captions">Description</span>
-                                <div class="textarea-container">
-                                    <textarea id="description" class="captions textareaFrame"
-                                        placeholder="Enter a Description"></textarea>
-                                </div>
-                                <span class="is-required displayNone">This field is required</span>
+                            <span class="is-required displayNone">This field is required</span>
+                        </div>
+                        <div class="addTaskDescription width95">
+                            <span class="captions">Description</span>
+                            <div class="textarea-container width95">
+                                <textarea id="description" class="captions width95 textareaFrame"
+                                    placeholder="Enter a Description"></textarea>
                             </div>
-                            <div class="addTaskDropdown">
-                                <span class="captions">Category</span>
-                                <div style="height: 51px;" class="dropdown dropdown-category captions">
-        
-                                    <div class="dropdown-content">
-                                        <div onclick="toggleDropdown('dropdown-category');renderCategorys()" id="select-box">
-        
-                                            <div class="dropdown-option dropdown-start-text">
-                                                <div id="select-task-category" style="display: unset;">Select task category
-                                                </div>
-                                                <div id="select-task-category-img"><img src="assets/img/vector2.svg"></div>
+                            <span class="is-required displayNone">This field is required</span>
+                        </div>
+                        <div class="addTaskDropdown width95">
+                            <span class="captions">Category</span>
+                            <div style="height: 51px;" class="dropdown dropdown-category captions width95 ">
+
+                                <div class="dropdown-content ">
+                                    <div onclick="toggleDropdown('dropdown-category');renderCategorys()"
+                                        id="select-box">
+
+                                        <div class="dropdown-option dropdown-start-text">
+                                            <div id="select-task-category" style="display: unset;">Select task category
                                             </div>
-                                        </div>
-                                        <div onclick="newCategory('flex', 'none', 'none')" class="dropdown-option ">New Category
-                                        </div>
-                                        <div id="categorys"></div>
-                                    </div>
-                                </div>
-        
-                                <fieldset style="display: none;" id="colors-container">
-                                    <input id="lightblue" type="radio" name="color" value="lightblue" />
-                                    <label class="color-circle circle-lightblue" for="lightblue"></label>
-        
-                                    <input id="red" type="radio" name="color" value="red" />
-                                    <label for="red" class="color-circle circle-red"></label>
-        
-                                    <input id="green" type="radio" name="color" value="green" />
-                                    <label for="green" class="color-circle circle-green"></label>
-        
-                                    <input id="orange" type="radio" name="color" value="orange" />
-                                    <label for="orange" class="color-circle circle-orange"></label>
-        
-                                    <input id="purple" type="radio" name="color" value="purple" />
-                                    <label for="purple" class="color-circle circle-purple"></label>
-        
-                                    <input id="darkblue" type="radio" name="color" value="darkblue" />
-                                    <label for="darkblue" class="color-circle circle-darkblue"></label>
-        
-                                    <input id="mint" type="radio" name="color" value="mint" />
-                                    <label for="mint" class="color-circle circle-mint"></label>
-        
-                                    <input id="pink" type="radio" name="color" value="pink" />
-                                    <label for="pink" class="color-circle circle-pink"></label>
-                                </fieldset>
-        
-        
-                                <span class="is-required displayNone ">This field is required</span>
-                            </div>
-        
-                            <div class="addTaskDropdown">
-                                <span class="captions">Assinged to</span>
-                                <div style="height: 51px;" class="dropdown dropdown-assinged-to captions">
-                                    <div class="dropdown-content">
-                                        <div id="select-box2" onclick="toggleDropdown('dropdown-assinged-to');renderContacts()"
-                                            class="dropdown-option dropdown-start-text">
-                                            <div class="dropdown-option dropdown-start-text">
-                                                <div id="select-contacts-to-assign" style="display: unset;">Select contacts to
-                                                    assign
-                                                </div>
-                                                <div id="select-contacts-to-assign-img"><img src="assets/img/vector2.svg"></div>
-                                            </div>
-        
-                                            <div id="input-container2" class="dropdown-option" style="display: none;">
-                                                <input id="assinged-to-input" class="captions inputFrame"
-                                                    placeholder="Contact E-Mail" type="email">
-                                                <div class="check-container">
-                                                    <img onclick="" src="assets/img/icons/dropdown-close-button.svg">
-                                                    <img src="assets/img/icons/dropdown-abtrenner.svg">
-                                                    <img onclick="addNewCategory()"
-                                                        src="assets/img/icons/dropdown-check-button.svg">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div id="contacts"></div>
-                                        <div id="emails"></div>
-        
-                                        <div onclick="showInviteNewContactInput()" class="dropdown-option dropdown-option-img">
-                                            Invite
-                                            new contact<div><img src="assets/img/icons/invite-new-contact.svg"></div>
+                                            <div id="select-task-category-img"><img src="assets/img/vector2.svg"></div>
                                         </div>
                                     </div>
+                                    <div onclick="newCategory('flex', 'none', 'none')" class="dropdown-option ">New
+                                        Category
+                                    </div>
+                                    <div id="categorys"></div>
                                 </div>
-                                <div id="assinged-persons-container">
+                            </div>
+
+                            <fieldset style="display: none;" id="colors-container">
+                                <input id="lightblue" type="radio" name="color" value="lightblue" />
+                                <label class="color-circle circle-lightblue" for="lightblue"></label>
+
+                                <input id="red" type="radio" name="color" value="red" />
+                                <label for="red" class="color-circle circle-red"></label>
+
+                                <input id="green" type="radio" name="color" value="green" />
+                                <label for="green" class="color-circle circle-green"></label>
+
+                                <input id="orange" type="radio" name="color" value="orange" />
+                                <label for="orange" class="color-circle circle-orange"></label>
+
+                                <input id="purple" type="radio" name="color" value="purple" />
+                                <label for="purple" class="color-circle circle-purple"></label>
+
+                                <input id="darkblue" type="radio" name="color" value="darkblue" />
+                                <label for="darkblue" class="color-circle circle-darkblue"></label>
+
+                                <input id="mint" type="radio" name="color" value="mint" />
+                                <label for="mint" class="color-circle circle-mint"></label>
+
+                                <input id="pink" type="radio" name="color" value="pink" />
+                                <label for="pink" class="color-circle circle-pink"></label>
+                            </fieldset>
+
+
+                            <span class="is-required displayNone ">This field is required</span>
+                        </div>
+
+                        <div class="addTaskDropdown width95">
+                            <span class="captions">Assinged to</span>
+                            <div style="height: 51px;" class="dropdown dropdown-assinged-to captions width95">
+                                <div class="dropdown-content ">
+                                    <div id="select-box2"
+                                        onclick="toggleDropdown('dropdown-assinged-to');renderContacts()"
+                                        class="dropdown-option dropdown-start-text">
+                                        <div class="dropdown-option dropdown-start-text">
+                                            <div id="select-contacts-to-assign" style="display: unset;">Select contacts
+                                                to
+                                                assign
+                                            </div>
+                                            <div id="select-contacts-to-assign-img"><img src="assets/img/vector2.svg">
+                                            </div>
+                                        </div>
+
+                                        <div id="input-container2 width95" class="dropdown-option" style="display: none;">
+                                            <input id="assinged-to-input width95" class="captions inputFrame"
+                                                placeholder="Contact E-Mail" type="email">
+                                            <div class="check-container">
+                                                <img onclick="" src="assets/img/icons/dropdown-close-button.svg">
+                                                <img src="assets/img/icons/dropdown-abtrenner.svg">
+                                                <img onclick="addNewCategory()"
+                                                    src="assets/img/icons/dropdown-check-button.svg">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id="contacts"></div>
+                                    <div id="emails"></div>
+
+                                    <div onclick="showInviteNewContactInput()"
+                                        class="dropdown-option dropdown-option-img">
+                                        Invite
+                                        new contact<div><img src="assets/img/icons/invite-new-contact.svg"></div>
+                                    </div>
                                 </div>
+                            </div>
+                            <div id="assinged-persons-container">
                             </div>
                         </div>
                     </div>
                     <div class="addTaskVector4"><img src="./assets/img/vector4.svg"></div>
-        
+
                     <div id="right-side">
                         <div class="headline-container2">
                             <span class="headline">Add Task</span>
                         </div>
-        
-                        <div class="addTaskDueDate">
+
+                        <div class="addTaskDueDate width95">
                             <span class="captions">Due date</span>
-                            <div class="input-container">
+                            <div class="input-container width95">
                                 <input id="date" type="date" class="captions inputFrame" placeholder="dd/mm/yyyy"
                                     min="2023-01-01">
                             </div>
                             <span class="is-required displayNone">This field is required</span>
                         </div>
-                        <div class="priority-container">
+                        <div class="priority-container width95">
                             <span class="captions">Prio</span>
-        
-                            <div class="addTaskPriority">
+
+                            <div class="addTaskPriority width95">
                                 <button id="addTaskBtnUrgent" onclick="changeColor('addTaskBtnUrgent','urgent')"
                                     class="input-containerPrio buttonFramePrio">
                                     <span class="captions">Urgent</span>
@@ -299,16 +309,17 @@
                             </div>
                             <span class="is-required displayNone">This field is required</span>
                         </div>
-                        <div class="addTaskSubtasks">
+                        <div class="addTaskSubtasks width95">
                             <span class="captions">Subtasks</span>
-                            <div class="input-container ">
+                            <div class="input-container width95">
                                 <input id="newSubtaskInput" class="captions inputFrame" placeholder="Add new Subtasks">
-                                <img class="iconoirCancel" src="./assets/img/iconoir_cancel.svg" onclick="addNewSubtask()">
+                                <img class="iconoirCancel" src="./assets/img/iconoir_cancel.svg"
+                                    onclick="addNewSubtask()">
                             </div>
                             <div class="subtaskContainer" id="subtaskContainer"></div>
                         </div>
-        
-                        <div class="buttons-container">
+
+                        <div class="buttons-container width95">
                             <button onclick="clearTask()" class="addTaskSecondary">
                                 <span class="captions">Clear</span>
                                 <img class="iconoirCancel2" src="assets/img/iconoir_cancel2.svg">
@@ -319,9 +330,9 @@
                                 <img src="assets/img/akar-icons_check.svg">
                             </button>
                         </div>
-        
+
                     </div>
-                  
+
                     <div style="display: none;" id="created-task-massage-container">
                         <div id="created-task-massage">
                             <span id="created-task-massage-text">Task added to board</span>
@@ -330,15 +341,11 @@
                     </div>
                 </section>
             </main>
-        
-            <div style="display: none;" id="created-task-massage-container">
-                <div id="created-task-massage">
-                    <span id="created-task-massage-text">Task added to board</span>
-                    <img src="assets/img/hover/board-hover.png">
-                </div>
-        
+
+           
             </div>
-    <script src="js/add_task.js"></script>
+        </div>
+            <script src="js/add_task.js"></script>
 </body>
 
 </html>

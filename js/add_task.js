@@ -132,7 +132,7 @@ function showNewCotegory() {
   clearSelectBox('select-box')
   selectBox.innerHTML = `     
   <div id="input-container" class="dropdown-option" style="display: none;">
-  <input id="new-category-input" class="typography2T6 inputFrame"
+  <input id="new-category-input" class="caption inputFrame"
       placeholder="New Category Name" type="text">
   <div class="check-container">
       <img onclick="discardNewCategory('none','unset','unset')"
@@ -349,7 +349,7 @@ function showInviteNewContactInput() {
   selectBox2.innerHTML = `     
   
   <div id="input-container2" class="dropdown-option" style="display: none;">
-  <input id="assinged-to-input" class="typography2T6 inputFrame"
+  <input id="assinged-to-input" class="caption inputFrame"
       placeholder="Contact E-Mail" type="email">
   <div class="check-container">
       <img onclick="discardAssingedTo()"

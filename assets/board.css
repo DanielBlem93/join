@@ -624,12 +624,17 @@ body {
 
 
 /* ==================RESPONSIVE=========================== */
-@media(max-width:1440px) {
-    main{
-        justify-content: center !important;
-    }
+@media(max-width:1450px) {
     #addTaskPopupContainer {
-      width: 80%;
+        
+      width: 90%;
+    }
+    main{
+        position: fixed;
+        margin-left: auto;
+        margin-right: auto;
+        left: 0;
+        right: 0;
     }
     .board-body-container{
         width: 100%;
@@ -667,23 +672,24 @@ body {
 }
 
 @media(max-width:1333px) {
-    #options {
-        margin-top: 167px !important;
-        margin-right: 0 !important;
-
-    }
-
+ 
     #addTaskPopupContainer {
         overflow-y: scroll;
     }
-    #addTaskPopupContainer::-webkit-scrollbar {
-        display: none;
-    } 
 
+    #addTaskPopupContainer::-webkit-scrollbar {
+        display: none ;
+    } 
+    main::-webkit-scrollbar {
+        display: none ;
+    } 
+  
     .buttons-container{
         margin-bottom: 50px !important;
     }
-    
+    .input-container{
+        width: 422px
+    }
     
 }
 
@@ -736,9 +742,7 @@ body {
     .board-header h1{
         margin-bottom: -80px;
     }
-    .input-container{
-        width: 100%!important;
-    }
+   
     #btn-add-board{
         display: none;
     }
@@ -746,4 +750,49 @@ body {
         width: 50px;
         height: 50px;
     }
+
+    .width95{
+        width: 95%;
+    }
+}
+
+
+@media(max-width: 450px) {
+    .marginLRauto {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .width95 {
+        width: 95%;
+        min-width: 0;
+
+    }
+    #right-side{
+        padding-bottom: 0;
+    }
+
+}
+
+
+@media(max-width: 400px) {
+
+
+    .addTaskPriority {
+        align-items: baseline;
+        flex-direction: column;
+        height: 212px;
+        align-items: center;
+    }
+
+    .addTaskPriority button {
+        width: 100%
+    }
+
+}
+
+@media(max-width: 350px) {
+   body *{
+    font-size: 16px;
+   }
 }
