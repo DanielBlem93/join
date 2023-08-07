@@ -31,12 +31,11 @@ async function getContaktfromBackend() {
   let tasks = JSON.parse(await getItem('contacts'));
   tasks.forEach(task => {
     let names = task.name.split(" ");
-
     let contact = {
       'first-name': names[0],
       'last-name': names[1],
       'checked?': 'unchecked',
-      'color': 'var(--mint)'
+      'color': task.colorIcon,
     };
     contactsForAddTask.push(contact);
   });
@@ -547,7 +546,7 @@ async function createTask() {
   let category = categoryInput.innerText.trim();
   let taskId = Math.random().toString(36).substr(2) + Date.now().toString(36);
   
-
+ console.log(persons);
 
   if (checkRequierdInputs()) {
     // Erstelle zunächst das neue Aufgabenobjekt
@@ -575,13 +574,15 @@ async function addPersonsToNewTask() {
   
   for (let i = 0; i < contactsForAddTask.length; i++) {
     const contact = contactsForAddTask[i];
-
+      console.log(contact);
     if (contact['checked?'] === 'checked') {
       let firstName = contact['first-name'];
       let lastName = contact['last-name'];
-      let name = {'name': `${firstName} ${lastName}`};
+      let color = contact['color'];
+      let name = {'name': `${firstName} ${lastName} ${color}`};
 
       persons.push(name); 
+      console.log(persons);
     }
   }
   

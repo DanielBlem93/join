@@ -428,6 +428,15 @@ body {
     font-weight: 400;
     color: #2A3647;
     margin: 20px;
+    display: flex;
+}
+
+#priority{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
 }
 
 .modal-members {

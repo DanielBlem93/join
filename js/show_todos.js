@@ -33,15 +33,20 @@ function generateSubtaskHTML(subtaskObj, index, todoId) {
     return subtaskHTML;
 }
 
-async function generateMemberHTML(member) {
-    let color = await getColorForName(member);
-    
-    console.log(color);
-    let names = member.split(' ');
-    let initials = names[0][0] + names[1][0];
-    let memberHTML = `<p class="modalMember"><span class="initMember" style="background-color:${color}";>${initials}</span>  ${member}</p>`;
+function generateMemberHTML(member) {
+    // Zerlege den String, um den Namen und die Farbe zu extrahieren.
+    let splitMember = member.split(' rgb(');
+    let name = splitMember[0];
+    let color = splitMember[1] ? "rgb(" + splitMember[1] : getRandomColor(); // Falls kein RGB-Wert angegeben ist, nutzen Sie getRandomColor.
+
+    // Zerlege den Namen, um die Initialen zu extrahieren.
+    let names = name.split(' ');
+    let initials = names[0][0] + (names[1] ? names[1][0] : ''); // Fügt das erste Zeichen des zweiten Namens hinzu, falls vorhanden.
+
+    let memberHTML = `<p class="modalMember"><span class="initMember" style="background-color:${color}">${initials}</span> ${name}</p>`;
     return memberHTML;
 }
+
 
 function generateToDoHTMLModal(todo) {
     let subtasksHTML = '';
@@ -50,7 +55,7 @@ function generateToDoHTMLModal(todo) {
     }
 
     let colorTodosPriorities = todo['priority'] === 'urgent' ? '#FF0000' : todo['priority'] === 'medium' ? '#FFA800' : todo['priority'] === 'low' ? '#7AE229' : '#321313';
-    let imgTodosPriorities = todo['priority'] === 'urgent' ? './assets/img/urgent.svg' : todo['priority'] === 'medium' ? './assets/img/akar-icons_chek.svg' : todo['priority'] === 'low' ? './assets/img/low.svg' : './assets/img/low.svg';
+    let imgTodosPriorities = todo['priority'] === 'urgent' ? './assets/img/urgent.svg' : todo['priority'] === 'medium' ? './assets/img/mediumweiss.png' : todo['priority'] === 'low' ? './assets/img/lowweiss.png' : './assets/img/lowweiss.png';
     let membersHTML = '';
     if (todo.members && todo.members.length > 0) {
         membersHTML = todo.members.map(member =>  generateMemberHTML(member)).join('');
