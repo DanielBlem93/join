@@ -38,12 +38,13 @@ async function addTask() {
                     'priority': task.priority,
                     'subtasks': subtasksWithCompletion,
                     'date': task.date,
-                    'taskID': task.taskID
+                    'taskID': task.taskID,
+                    'task-color': task.color
                 })
             }
         }
     }
-   
+  
     updateHTML();
 }
 
@@ -198,8 +199,7 @@ function generateToDoHTML(element) {
     let members = element['members'];
     let letters = getFirstTwoLetters(members);
     let prioImg = generatePrioIcon(element['priority']);
-    let color = getRandomColor();
-
+    let color = getColorVariable(element['task-color']);
 
     let progress = 0;
     let progressLabel = '';
@@ -241,6 +241,21 @@ function generateToDoHTML(element) {
     </div>
     `;
 }
+
+function getColorVariable(colorName) {
+    switch (colorName) {
+        case 'lightblue': return 'var(--lightblue)';
+        case 'red': return 'var(--red)';
+        case 'green': return 'var(--green)';
+        case 'orange': return 'var(--orange)';
+        case 'purple': return 'var(--purple)';
+        case 'darkblue': return 'var(--darkblue)';
+        case 'mint': return 'var(--mint)';
+        case 'pink': return 'var(--pink)';
+        default: return 'var(--lightblue)'; // Fallback-Wert
+    }
+}
+
 
 
 

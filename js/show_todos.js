@@ -50,6 +50,7 @@ function generateMemberHTML(member) {
 
 function generateToDoHTMLModal(todo) {
     let subtasksHTML = '';
+    let color = getColorVariable(todo['task-color']);
     if (todo.subtasks && todo.subtasks.length > 0) {
         subtasksHTML = todo.subtasks.map((subtaskObj, index) => generateSubtaskHTML(subtaskObj, index, todo.id)).join('');
     }
@@ -66,7 +67,7 @@ function generateToDoHTMLModal(todo) {
         <div onclick="closeModalBord()" class="modal-close">
             <img src="./assets/img/close-icon.png" alt="">
         </div>
-        <h4 class="modal-category">${todo['task-category']}</h4>
+        <h4 style="background-color: ${color}" class="modal-category">${todo['task-category']}</h4>
         <h3 class="modal-title">${todo['title']}</h3>
         <p class="modal-text"> ${todo['text']}</p>
         <p class="modal-date"><b>Due date:</b> ${todo['date']}</p>

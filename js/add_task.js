@@ -76,6 +76,7 @@ function renderCategorys() {
     let categoryName = categorys[i].category;
     let categoryColor = categorys[i].color
 
+
     categorysContainer.innerHTML += ` 
     
     <div onclick="selectTaskCategory(${i})" id="s${i}" class="dropdown-option category">${categoryName} <div class="circle-${categoryColor}"></div>
@@ -200,6 +201,7 @@ function addNewCategory() {
 
     toggleColorPallete('none')
   }
+
 
 }
 /**
@@ -491,7 +493,7 @@ function renderSubtask() {
     </label
     `
   }
-  console.log(subtasks);
+
 }
 
 /**
@@ -545,9 +547,15 @@ async function createTask() {
   let date = dateInput.value.trim();
   let category = categoryInput.innerText.trim();
   let taskId = Math.random().toString(36).substr(2) + Date.now().toString(36);
-  
- console.log(persons);
 
+  let color;
+  for (let cat of categorys) {
+    if (cat.category === category) {
+      color = cat.color;
+      break; 
+    }
+  }
+  
   if (checkRequierdInputs()) {
     // Erstelle zunächst das neue Aufgabenobjekt
     newTask = [{
@@ -560,7 +568,7 @@ async function createTask() {
       'priority': currentPriority,
       'subtasks': subtasks,
       'taskID': taskId,
-      // 'color': color
+      'color': color
     }];
 
     clearTask();
@@ -574,7 +582,7 @@ async function addPersonsToNewTask() {
   
   for (let i = 0; i < contactsForAddTask.length; i++) {
     const contact = contactsForAddTask[i];
-      console.log(contact);
+
     if (contact['checked?'] === 'checked') {
       let firstName = contact['first-name'];
       let lastName = contact['last-name'];
@@ -582,7 +590,6 @@ async function addPersonsToNewTask() {
       let name = {'name': `${firstName} ${lastName} ${color}`};
 
       persons.push(name); 
-      console.log(persons);
     }
   }
   
