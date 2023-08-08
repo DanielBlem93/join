@@ -19,7 +19,7 @@ async function addTask() {
     let addTasks = JSON.parse(await getItem('task'));
     let popup = document.getElementById('addTaskPopup');
     let selectedCategory = popup.dataset.category || 'open';
-    if(!addTasks || addTasks.length === 0) {
+    if (!addTasks || addTasks.length === 0) {
         return;
     }
 
@@ -28,7 +28,7 @@ async function addTask() {
             let existingTask = todos.find(t => t.taskID === task.taskID);
             if (!existingTask) {
                 let members = (task.persons && task.persons.length > 0) ? task.persons.map(person => person.name) : ['All Employees rgb(200, 200, 120)'];
-                
+
                 let subtasksWithCompletion = task.subtasks ? task.subtasks.map(subtask => ({ subtask, isComplete: false })) : [];
 
                 todos.push({
@@ -122,16 +122,17 @@ async function setItemTodo() {
  * @param {string} category - This parameter stands for the category of a todo and at the same time for the name of the subboard to which it belongs.
  */
 function renderToDos(category) {
-    
+
     let filteredToDos = todos.filter(t => t['category'] == category);
+    const nextPosition = category + (filteredToDos.length - 1);
 
     document.getElementById(category).innerHTML = '';
 
     for (let i = 0; i < filteredToDos.length; i++) {
         const element = filteredToDos[i];
-        document.getElementById(category).innerHTML += generateToDoHTML(element);
+        document.getElementById(category).innerHTML += generateToDoHTML(element, category, i, nextPosition);
         generateToDoHTML(i);
-    }  
+    }
 }
 
 
@@ -141,7 +142,6 @@ function renderToDos(category) {
  * @param {number} id - This is the number of the currently dragged todo div (= ID)
  */
 function startDragging(id, cat) {
-    console.log(id, cat);
     currentDraggedElement = id;
     currentDraggedCategory = cat;
 }
@@ -198,23 +198,22 @@ function styleTodos() {
  * @param {Object} element - The todo task object to be processed.
  * @returns {string} An HTML string for a todo box element.
  */
-function generateToDoHTML(element) {
+function generateToDoHTML(element, category, i, nextPosition) {
     let members = element['members'];
     let letters = getFirstTwoLetters(members);
     let prioImg = generatePrioIcon(element['priority']);
     let color = getColorVariable(element['task-color']);
-    console.log(element);
     let progress = 0;
     let progressLabel = '';
-        if (element['subtasks'] && element['subtasks'].length > 0) {
-            progress = element['subtasks'].filter(subtaskObj => subtaskObj.isComplete).length / element['subtasks'].length;
-            progressLabel = `${element['subtasks'].filter(subtaskObj => subtaskObj.isComplete).length}/${element['subtasks'].length}`;
-        }
+    if (element['subtasks'] && element['subtasks'].length > 0) {
+        progress = element['subtasks'].filter(subtaskObj => subtaskObj.isComplete).length / element['subtasks'].length;
+        progressLabel = `${element['subtasks'].filter(subtaskObj => subtaskObj.isComplete).length}/${element['subtasks'].length}`;
+    }
     let displayUp = element['category'] === 'open' ? 'none' : 'block';
     let displayDown = element['category'] === 'closed' ? 'none' : 'block';
 
     return /*html*/ `
-    <div  class="todo-box" draggable="true" ondragstart="startDragging(${element['id']})">
+    <div  class="todo-box" draggable="true" ondragstart="startDragging(${element['id']}, '${category}')">
     <div class="chegeCategory">
         <img id="up" onclick="upCategory(${element['id']})" src="./assets/img/up.png" style="display: ${displayUp}">
         <br>
@@ -351,7 +350,7 @@ function searchTodos() {
  * @example
  * showAddTaskPopup('#FF5733', 'work'); // Sets the popup background color to '#FF5733' and associates it with the 'work' category.
  */
-function showAddTaskPopup(color, category){
+function showAddTaskPopup(color, category) {
     selectedCategory = category;
     let popup = document.getElementById('addTaskPopup');
     popup.dataset.category = category;
@@ -370,7 +369,7 @@ function showAddTaskPopup(color, category){
  */
 function upCategory(elementId) {
     let todo = todos[elementId];
-    
+
     let currentCategoryIndex = categoriesOrder.indexOf(todo.category);
     if (currentCategoryIndex > 0) {
         todo.category = categoriesOrder[currentCategoryIndex - 1];
@@ -387,10 +386,22 @@ function upCategory(elementId) {
  */
 function downCategory(elementId) {
     let todo = todos[elementId];
-    
+
     let currentCategoryIndex = categoriesOrder.indexOf(todo.category);
     if (currentCategoryIndex < categoriesOrder.length - 1) {
         todo.category = categoriesOrder[currentCategoryIndex + 1];
         updateHTML();
+    }
+}
+
+
+function highlight(currentCat) {
+    let empty = document.getElementById(currentCat).innerHTML;
+    if (currentDraggedCategory == currentCat) {
+    } else {
+        if (!empty == "") {
+            let nextPlaceId = document.getElementById(currentCat + '0').innerHTML;
+            document.getElementById(nextPlaceId).classList.remove('display-none');
+        }
     }
 }
