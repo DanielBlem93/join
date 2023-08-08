@@ -304,6 +304,7 @@ body {
 /* drag and drop */
 
 .drag-area {
+    position: relative;
     height: 600px;
     width: 250px;
 
@@ -660,6 +661,12 @@ body {
     border-radius: 10px;
     background-color: var(--background-white);
     border: 5px solid var(--icon);
+}
+
+.emptyFrame {
+    position: absolute;
+    top: 32px;
+    left: 0px;
 }
 
 

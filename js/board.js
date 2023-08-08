@@ -120,8 +120,9 @@ async function setItemTodo() {
  * This function is used to filter todos by category with subsequent generation of todo div elements.
  * 
  * @param {string} category - This parameter stands for the category of a todo and at the same time for the name of the subboard to which it belongs.
- */
+*/
 function renderToDos(category) {
+    document.getElementById(category + 'EmptyFrame').classList.add('display-none');
 
     let filteredToDos = todos.filter(t => t['category'] == category);
     const nextPosition = category + (filteredToDos.length - 1);
@@ -167,6 +168,17 @@ async function movedTo(category) {
     todos[currentDraggedElement]['category'] = category;
     updateHTML();
     await setItemTodo();
+    hideEmptyFrame(category);
+}
+
+
+/**
+ * This function hides the placeholder frame for a task.
+ * 
+ * @param {*} category - This value is the category associated with the task.
+ */
+function hideEmptyFrame(category) {
+    document.getElementById(category + 'EmptyFrame').classList.add('display-none');
 }
 
 
@@ -400,12 +412,14 @@ function downCategory(elementId) {
  * @param {*} currentCat - This value determines the category over which a task is dragged.
  */
 function highlight(currentCat) {
-    // console.log('nach:', currentCat, 'von: ', currentDraggedCategory);
     let empty = document.getElementById(currentCat).innerHTML;
     if (currentDraggedCategory !== currentCat) {
         if (!empty == "") {
             let nextPlaceId = document.getElementById(currentCat + '0').innerHTML;
             document.getElementById(nextPlaceId).classList.remove('display-none');
         }
-    } 
+        if (empty == "") {
+            document.getElementById(currentCat + 'EmptyFrame').classList.remove('display-none');
+        }
+    }
 }
