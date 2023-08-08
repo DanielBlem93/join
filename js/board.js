@@ -1,6 +1,7 @@
 let todos = [];
 let currentToDos = [];
 let currentDraggedElement;
+let selectedCategory = null;
 
 
 /**
@@ -15,6 +16,8 @@ let currentDraggedElement;
  */
 async function addTask() {
     let addTasks = JSON.parse(await getItem('task'));
+    let popup = document.getElementById('addTaskPopup');
+    let selectedCategory = popup.dataset.category || 'open';
     if(!addTasks || addTasks.length === 0) {
         return;
     }
@@ -29,7 +32,7 @@ async function addTask() {
                 
                 todos.push({
                     'id': todos.length,
-                    'category': 'open',
+                    'category': task.status,
                     'task-category': task.category,
                     'title': task.title,
                     'text': task.description,
@@ -44,7 +47,7 @@ async function addTask() {
             }
         }
     }
-  
+
     updateHTML();
 }
 
@@ -335,8 +338,12 @@ function searchTodos() {
 // ========================== Add Task ==============================
 
 
-function showAddTaskPopup(color){
-    let popup = document.getElementById('addTaskPopup')
+function showAddTaskPopup(color, category){
+
+    console.log(category);
+    selectedCategory = category;
+    let popup = document.getElementById('addTaskPopup');
+    popup.dataset.category = category;
     popup.classList.toggle('popupAnimation')
     setTimeout(() => {
        popup.style.backgroundColor = `${color}` 

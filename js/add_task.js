@@ -548,6 +548,9 @@ async function createTask() {
   let category = categoryInput.innerText.trim();
   let taskId = Math.random().toString(36).substr(2) + Date.now().toString(36);
 
+  //console.log(selectedCategory);
+  debugger;
+
   let color;
   for (let cat of categorys) {
     if (cat.category === category) {
@@ -559,6 +562,7 @@ async function createTask() {
   if (checkRequierdInputs()) {
     // Erstelle zunächst das neue Aufgabenobjekt
     newTask = [{
+      'status': selectedCategory || 'open',
       'title': title,
       'description': description,
       'date': date,
