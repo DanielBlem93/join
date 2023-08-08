@@ -394,14 +394,18 @@ function downCategory(elementId) {
     }
 }
 
-
+/**
+ * This function provides the hover effect when the tasks are dragged over a category.
+ * 
+ * @param {*} currentCat - This value determines the category over which a task is dragged.
+ */
 function highlight(currentCat) {
+    // console.log('nach:', currentCat, 'von: ', currentDraggedCategory);
     let empty = document.getElementById(currentCat).innerHTML;
-    if (currentDraggedCategory == currentCat) {
-    } else {
+    if (currentDraggedCategory !== currentCat) {
         if (!empty == "") {
             let nextPlaceId = document.getElementById(currentCat + '0').innerHTML;
             document.getElementById(nextPlaceId).classList.remove('display-none');
         }
-    }
+    } 
 }
