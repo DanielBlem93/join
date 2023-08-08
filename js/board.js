@@ -2,6 +2,7 @@ let todos = [];
 let currentToDos = [];
 let currentDraggedElement;
 let selectedCategory = null;
+const categoriesOrder = ['open', 'progress', 'feedback', 'closed'];
 
 
 /**
@@ -200,16 +201,23 @@ function generateToDoHTML(element) {
     let letters = getFirstTwoLetters(members);
     let prioImg = generatePrioIcon(element['priority']);
     let color = getColorVariable(element['task-color']);
-
+    console.log(element);
     let progress = 0;
     let progressLabel = '';
         if (element['subtasks'] && element['subtasks'].length > 0) {
             progress = element['subtasks'].filter(subtaskObj => subtaskObj.isComplete).length / element['subtasks'].length;
             progressLabel = `${element['subtasks'].filter(subtaskObj => subtaskObj.isComplete).length}/${element['subtasks'].length}`;
         }
+    let displayUp = element['category'] === 'open' ? 'none' : 'block';
+    let displayDown = element['category'] === 'closed' ? 'none' : 'block';
 
     return /*html*/ `
-    <div onclick="showTodo(${element['id']})" class="todo-box" draggable="true" ondragstart="startDragging(${element['id']})">
+    <div  class="todo-box" draggable="true" ondragstart="startDragging(${element['id']})">
+    <div class="chegeCategory">
+        <img id="up" onclick="upCategory(${element['id']})" src="./assets/img/up.png" style="display: ${displayUp}">
+        <br>
+        <img id="down" onclick="downCategory(${element['id']})" src="./assets/img/down.png" style="display: ${displayDown}">
+    </div>
     <div id="todoBoxHeader${element['id']}" class="todo-box-header" style="background-color:${color};">
         <h4>${element['task-category']}</h4>
     </div>
@@ -218,7 +226,7 @@ function generateToDoHTML(element) {
         <h3>${element['title']}</h3>
     </div>
 
-    <div class="todo-box-body">
+    <div onclick="showTodo(${element['id']})" class="todo-box-body">
         <p>${element['text']}</p>
     </div>
 
@@ -347,4 +355,38 @@ function showAddTaskPopup(color, category){
     setTimeout(() => {
        popup.style.backgroundColor = `${color}` 
     }, 125);
+}
+
+
+/**
+ * Moves the category of the specified todo element one step up in the predefined category order.
+ * If the todo is already in the topmost category, no changes will be made.
+ *
+ * @param {number} elementId - The ID of the todo element to be moved up in category.
+ */
+function upCategory(elementId) {
+    let todo = todos[elementId];
+    
+    let currentCategoryIndex = categoriesOrder.indexOf(todo.category);
+    if (currentCategoryIndex > 0) {
+        todo.category = categoriesOrder[currentCategoryIndex - 1];
+        updateHTML();
+    }
+}
+
+
+/**
+ * Moves the category of the specified todo element one step down in the predefined category order.
+ * If the todo is already in the bottommost category, no changes will be made.
+ *
+ * @param {number} elementId - The ID of the todo element to be moved down in category.
+ */
+function downCategory(elementId) {
+    let todo = todos[elementId];
+    
+    let currentCategoryIndex = categoriesOrder.indexOf(todo.category);
+    if (currentCategoryIndex < categoriesOrder.length - 1) {
+        todo.category = categoriesOrder[currentCategoryIndex + 1];
+        updateHTML();
+    }
 }
