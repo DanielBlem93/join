@@ -329,7 +329,7 @@ function renderPersons() {
 window.addEventListener("click", function () {
   let selectBox2 = document.getElementById('select-box2')
   if (selectBox2.innerHTML == "") {
-    selectBox2.innerHTML = `   
+    selectBox2.innerHTML =/*html*/ `   
 
     <div class="dropdown-option dropdown-start-text">
     <div id="select-contacts-to-assign" style="display: unset;">Select contacts to assign</div>
@@ -347,7 +347,7 @@ function showInviteNewContactInput() {
   let selectBox2 = document.getElementById('select-box2')
   clearSelectBox('select-box2')
 
-  selectBox2.innerHTML = `     
+  selectBox2.innerHTML = /*html*/ `     
   
   <div id="input-container2" class="dropdown-option" style="display: none;">
   <input id="assinged-to-input" class="caption inputFrame"
@@ -547,9 +547,6 @@ async function createTask() {
   let date = dateInput.value.trim();
   let category = categoryInput.innerText.trim();
   let taskId = Math.random().toString(36).substr(2) + Date.now().toString(36);
-
-  //console.log(selectedCategory);
-  debugger;
 
   let color;
   for (let cat of categorys) {

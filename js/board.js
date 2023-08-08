@@ -26,7 +26,7 @@ async function addTask() {
         for (let task of taskArray) {
             let existingTask = todos.find(t => t.taskID === task.taskID);
             if (!existingTask) {
-                let members = (task.persons && task.persons.length > 0) ? task.persons.map(person => person.name) : ['All Employees'];
+                let members = (task.persons && task.persons.length > 0) ? task.persons.map(person => person.name) : ['All Employees rgb(200, 200, 120)'];
                 
                 let subtasksWithCompletion = task.subtasks ? task.subtasks.map(subtask => ({ subtask, isComplete: false })) : [];
                 
@@ -47,7 +47,7 @@ async function addTask() {
             }
         }
     }
-
+    // setItemTodo();
     updateHTML();
 }
 

@@ -111,6 +111,8 @@ async function editTodo (id) {
     editTodoBox.classList.add('editTodoBox');
     editTodoModal.appendChild(editTodoBox);
 
+    console.log(todo);
+
     editTodoBox.innerHTML += /*html*/ `
         <div class="addTaskTitle">
                 <span class="typography2T6">Title</span>
@@ -263,7 +265,8 @@ let addPersonsToNewTodo = () => {
         if (contact['checked?'] === 'checked') {
             let firstName = contact['first-name'];
             let lastName = contact['last-name'];
-            let fullName = `${firstName} ${lastName}`;
+            let color = contact['color'];
+            let fullName = `${firstName} ${lastName} ${color}`;
     
             persons.push(fullName);
         }
