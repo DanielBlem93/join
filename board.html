@@ -15,12 +15,12 @@
     <script src="js/signUp.js"></script>
     <script src="js/summary.js"></script>
     <script src="js/login.js"></script>
-    
+
     <script src="./js/add_contact.js"></script>
     <script src="./js/edit_contact.js"></script>
     <script src="./js/create_task.js"></script>
     <script src="./js/logout.js"></script>
-    
+
     <title>Board</title>
 </head>
 
@@ -35,52 +35,60 @@
                 <div class="board-header-search">
                     <div class="input-container">
                         <input type="text" id="searchInput" oninput="searchTodos()" placeholder="Search for tasks...">
-
                         <img class="search-img" src="./assets/img/search-icon-schwarz.png">
                         <hr class="search-img-hr">
                     </div>
                     <button onclick="showAddTaskPopup('rgba(0, 0, 0, 0.322)')" id="addTaskOnBoard"
-                        class="board-button"><span id="btn-add-board">Add Task</span> +</button>
+                    class="board-button"><span id="btn-add-board">Add Task</span> +</button>
                 </div>
             </div>
             <div class="board-body-container">
+                
                 <div class="board-body drag-area board-todo">
                     <div class="board-body-haeder">
                         <h3>Todo</h3>
                         <img onclick="showAddTaskPopup('rgba(0, 0, 0, 0.322)')" style="cursor: pointer;"
-                            src="./assets/img/add-icon.png">
+                        src="./assets/img/add-icon.png">
                     </div>
-                    <div id="open" class="drag-area" ondrop="movedTo('open')" ondragover="allowDrop(event)">
-                        <div class="platzhalter"></div>
+                    <div id="open" class="drag-area" ondrop="movedTo('open')"
+                    ondragover="allowDrop(event); highlight('open')">
+                    <div id="boardNextPosition" class="nextPosition"></div>
+                    <div class="platzhalter"></div>
                     </div>
                 </div>
+
                 <div class="board-body drag-area board-in-progress">
                     <div class="board-body-haeder">
                         <h3>In progress</h3>
                         <img onclick="showAddTaskPopup('rgba(0, 0, 0, 0.322)')" style="cursor: pointer;"
                             src="./assets/img/add-icon.png" alt="">
                     </div>
-                    <div id="progress" class="drag-area" ondrop="movedTo('progress')" ondragover="allowDrop(event)">
+                    <div id="progress" class="drag-area" ondrop="movedTo('progress')"
+                        ondragover="allowDrop(event); highlight('progress')">
                         <div class="platzhalter"></div>
                     </div>
                 </div>
+
                 <div class="board-body drag-area board-feedback">
                     <div class="board-body-haeder">
                         <h3>Awaiting Feedback</h3>
                         <img onclick="showAddTaskPopup('rgba(0, 0, 0, 0.322)')" style="cursor: pointer;"
                             src="./assets/img/add-icon.png" alt="">
                     </div>
-                    <div id="feedback" class="drag-area" ondrop="movedTo('feedback')" ondragover="allowDrop(event)">
+                    <div id="feedback" class="drag-area" ondrop="movedTo('feedback')"
+                        ondragover="allowDrop(event); highlight('feedback')">
                         <div class="platzhalter"></div>
                     </div>
                 </div>
+
                 <div class="board-body drag-area board-done">
                     <div class="board-body-haeder">
                         <h3>Done</h3>
                         <img onclick="showAddTaskPopup('rgba(0, 0, 0, 0.322)')" style="cursor: pointer;"
                             src="./assets/img/add-icon.png" alt="">
                     </div>
-                    <div id="closed" class="drag-area" ondrop="movedTo('closed')" ondragover="allowDrop(event)">
+                    <div id="closed" class="drag-area" ondrop="movedTo('closed')"
+                        ondragover="allowDrop(event); highlight('closed')">
                         <div class="platzhalter"></div>
                     </div>
                 </div>
@@ -102,10 +110,10 @@
     <div id="addTaskPopup" style="display: flex;">
         <div class="popupAnimation" id="addTaskPopupContainer">
             <img onclick="showAddTaskPopup('rgba(0, 0, 0, 0.00)')" id="add-task-close-button"
-            src="assets/img/icons/dropdown-close-button.svg">
+                src="assets/img/icons/dropdown-close-button.svg">
 
             <main>
-              
+
                 <section id="options">
 
                     <div id="left-side">
@@ -113,7 +121,7 @@
                             <span class="headline">Add Task</span>
                         </div>
                         <div class="addTaskTitle width95">
-                            <span  class="captions">Title</span>
+                            <span class="captions">Title</span>
                             <div class="input-container width95">
                                 <input id="title" type="text" class="captions inputFrame" placeholder="Enter a Title">
                             </div>
@@ -194,7 +202,8 @@
                                             </div>
                                         </div>
 
-                                        <div id="input-container2 width95" class="dropdown-option" style="display: none;">
+                                        <div id="input-container2 width95" class="dropdown-option"
+                                            style="display: none;">
                                             <input id="assinged-to-input width95" class="captions inputFrame"
                                                 placeholder="Contact E-Mail" type="email">
                                             <div class="check-container">
@@ -342,12 +351,12 @@
                 </section>
             </main>
 
-           
-            </div>
+
         </div>
-        <script src="./js/board.js"></script>
-        <script src="./js/show_todos.js"></script>
-            <script src="js/add_task.js"></script>
+    </div>
+    <script src="./js/board.js"></script>
+    <script src="./js/show_todos.js"></script>
+    <script src="js/add_task.js"></script>
 </body>
 
 </html>

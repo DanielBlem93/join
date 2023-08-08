@@ -1,6 +1,7 @@
 let todos = [];
 let currentToDos = [];
 let currentDraggedElement;
+let currentDraggedCategory;
 
 
 /**
@@ -15,7 +16,7 @@ let currentDraggedElement;
  */
 async function addTask() {
     let addTasks = JSON.parse(await getItem('task'));
-    if(!addTasks || addTasks.length === 0) {
+    if (!addTasks || addTasks.length === 0) {
         return;
     }
 
@@ -24,9 +25,9 @@ async function addTask() {
             let existingTask = todos.find(t => t.taskID === task.taskID);
             if (!existingTask) {
                 let members = (task.persons && task.persons.length > 0) ? task.persons.map(person => person.name) : ['All Employees'];
-                
+
                 let subtasksWithCompletion = task.subtasks ? task.subtasks.map(subtask => ({ subtask, isComplete: false })) : [];
-                
+
                 todos.push({
                     'id': todos.length,
                     'category': 'open',
@@ -61,7 +62,7 @@ async function addTask() {
 async function getStoredTodos() {
     const storedTodos = await getItem('todos');
     if (storedTodos) {
-      todos = JSON.parse(storedTodos);
+        todos = JSON.parse(storedTodos);
     }
 }
 
@@ -78,7 +79,7 @@ async function initBoard() {
     initArrays();
     updateHTML();
 }
-  
+
 
 /**
  * This function contains the subfunctions for rendering the four subboards: open, progress, feedback and closed.
@@ -118,16 +119,17 @@ async function setItemTodo() {
  * @param {string} category - This parameter stands for the category of a todo and at the same time for the name of the subboard to which it belongs.
  */
 async function renderToDos(category) {
-    
+
     let filteredToDos = todos.filter(t => t['category'] == category);
 
     document.getElementById(category).innerHTML = '';
 
     for (let i = 0; i < filteredToDos.length; i++) {
         const element = filteredToDos[i];
-        document.getElementById(category).innerHTML += await generateToDoHTML(element);
-        await generateToDoHTML(i);
-    }  
+        const nextPosition = category + (filteredToDos.length - 1);
+        document.getElementById(category).innerHTML += await generateToDoHTML(element, category, i, nextPosition);
+        // await generateToDoHTML(i);
+    }
 }
 
 
@@ -136,8 +138,10 @@ async function renderToDos(category) {
  * 
  * @param {number} id - This is the number of the currently dragged todo div (= ID)
  */
-function startDragging(id) {
+function startDragging(id, cat) {
+    console.log(id, cat);
     currentDraggedElement = id;
+    currentDraggedCategory = cat;
 }
 
 
@@ -170,7 +174,7 @@ async function movedTo(category) {
 function styleTodos() {
     for (let i = 0; i < todos.length; i++) {
         const selectedColor = todos[i]['selected-color'];
-        document.getElementById(`todoBoxHeader${todos[i]['id']}`).classList.add(`bg-cat-color-${selectedColor}`);
+        // document.getElementById(`todoBoxHeader${todos[i]['id']}`).classList.add(`bg-cat-color-${selectedColor}`);
     }
 }
 
@@ -192,7 +196,9 @@ function styleTodos() {
  * @param {Object} element - The todo task object to be processed.
  * @returns {string} An HTML string for a todo box element.
  */
-async function generateToDoHTML(element) {
+async function generateToDoHTML(element, category, i, nextPosition) {
+    // console.log(element['id']);
+    // console.log(category);
     let members = element['members'];
     let letters = await getFirstTwoLetters(members);
     let prioImg = generatePrioIcon(element['priority']);
@@ -200,42 +206,44 @@ async function generateToDoHTML(element) {
 
     let progress = 0;
     let progressLabel = '';
-        if (element['subtasks'] && element['subtasks'].length > 0) {
-            progress = element['subtasks'].filter(subtaskObj => subtaskObj.isComplete).length / element['subtasks'].length;
-            progressLabel = `${element['subtasks'].filter(subtaskObj => subtaskObj.isComplete).length}/${element['subtasks'].length}`;
-        }
+    if (element['subtasks'] && element['subtasks'].length > 0) {
+        progress = element['subtasks'].filter(subtaskObj => subtaskObj.isComplete).length / element['subtasks'].length;
+        progressLabel = `${element['subtasks'].filter(subtaskObj => subtaskObj.isComplete).length}/${element['subtasks'].length}`;
+    }
 
     return /*html*/ `
-    <div onclick="showTodo(${element['id']})" class="todo-box" draggable="true" ondragstart="startDragging(${element['id']})">
-    <div id="todoBoxHeader${element['id']}" class="todo-box-header" style="background-color:${color};">
-        <h4>${element['task-category']}</h4>
-    </div>
-
-    <div class="todo-box-title">
-        <h3>${element['title']}</h3>
-    </div>
-
-    <div class="todo-box-body">
-        <p>${element['text']}</p>
-    </div>
-
-    <div class="todo-box-progress">
-        <div class="todo-box-progress-bar">
-            <div class="todo-box-progress-bar-fill" style="width: ${progress * 100}%"></div>
+    <div onclick="showTodo(${element['id']})" class="todo-box" draggable="true" ondragstart="startDragging(${element['id']}, '${category}')">
+        <div id="todoBoxHeader${element['id']}" class="todo-box-header" style="background-color:${color};">
+            <h4>${element['task-category']}</h4>
         </div>
-        <p>${progressLabel} Done</p>
-    </div>
-    <div id="todoBoxFooterBar${element['id']}" class="todo-box-footer-bar">
-    <div  class="todo-box-footer">
-    <div class="todo-box-footer-right" >
-        ${letters}
-    </div>
-         <div class="todo-box-footer-left">
-             ${prioImg}
+
+        <div class="todo-box-title">
+            <h3>${element['title']}</h3>
         </div>
-     </div> 
+
+        <div class="todo-box-body">
+            <p>${element['text']}</p>
+        </div>
+
+        <div class="todo-box-progress">
+            <div class="todo-box-progress-bar">
+                <div class="todo-box-progress-bar-fill" style="width: ${progress * 100}%"></div>
+            </div>
+            <p>${progressLabel} Done</p>
+        </div>
+
+        <div id="todoBoxFooterBar${element['id']}" class="todo-box-footer-bar">
+            <div  class="todo-box-footer">
+                <div class="todo-box-footer-right" >
+                    ${letters}
+                </div>
+                <div class="todo-box-footer-left">
+                    ${prioImg}
+                </div>
+            </div> 
+        </div>
     </div>
-    </div>
+    <div id="${category}${i}" class="nextPosition display-none">${nextPosition}</div>
     `;
 }
 
@@ -270,7 +278,7 @@ async function getFirstTwoLetters(members) {
                 let firstTwoLetters = member.slice(0, 2).toUpperCase();
                 let color = await getColorForName(member);
                 //console.log(color);
-                
+
                 letterDivs += `<div class="todo-icon-name" style="background-color:${color};">${firstTwoLetters}</div>`;
             }
         }
@@ -278,7 +286,7 @@ async function getFirstTwoLetters(members) {
         // if there are more than 2 names, show the number of remaining names
         if (members.length > 2) {
             // Sie könnten auch eine Farbe für diesen zusätzlichen "Mehr"-Marker festlegen
-            let defaultColor = '#FFFFFF';  
+            let defaultColor = '#FFFFFF';
             letterDivs += `<div class="todo-icon-name" style="background-color:${defaultColor};">+${members.length - 2}</div>`;
         }
     }
@@ -287,7 +295,7 @@ async function getFirstTwoLetters(members) {
 
 
 function getRandomColor() {
-    const colorValues = Array.from({length: 3}, () => Math.floor(Math.random() * 256));
+    const colorValues = Array.from({ length: 3 }, () => Math.floor(Math.random() * 256));
     return `rgb(${colorValues.join(', ')})`;
 }
 
@@ -311,10 +319,10 @@ function generatePrioIcon(prio) {
  */
 function searchTodos() {
     let searchString = document.getElementById('searchInput').value.toLowerCase();
-    let searchedTodos = todos.filter(todo => 
-        todo.title.toLowerCase().includes(searchString) || 
+    let searchedTodos = todos.filter(todo =>
+        todo.title.toLowerCase().includes(searchString) ||
         todo.text.toLowerCase().includes(searchString));
-    ['open', 'progress', 'feedback', 'closed'].forEach(category => 
+    ['open', 'progress', 'feedback', 'closed'].forEach(category =>
         document.getElementById(category).innerHTML = ''
     );
     for (let todo of searchedTodos) {
@@ -326,11 +334,11 @@ function searchTodos() {
 // ========================== Add Task ==============================
 
 
-function showAddTaskPopup(color){
+function showAddTaskPopup(color) {
     let popup = document.getElementById('addTaskPopup')
     popup.classList.toggle('popupAnimation')
     setTimeout(() => {
-       popup.style.backgroundColor = `${color}` 
+        popup.style.backgroundColor = `${color}`
     }, 125);
 }
 
@@ -340,3 +348,23 @@ function showAddTaskPopup(color){
 //     let contaktNamen = JSON.parse(await getItem('contacts'));
 //     console.log(contaktNamen[0]['colorIcon']);
 // }
+
+
+
+
+/**
+ * 
+ * 
+ * @param {string} currentCat 
+ */
+function highlight(currentCat) {
+    let empty = document.getElementById(currentCat).innerHTML;
+    if (currentDraggedCategory == currentCat) {
+    } else {
+        if (!empty == "") {
+            let nextPlaceId = document.getElementById(currentCat + '0').innerHTML;
+            document.getElementById(nextPlaceId).classList.remove('display-none');
+        }
+    }
+}
+
