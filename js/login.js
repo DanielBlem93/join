@@ -4,11 +4,13 @@
  */
 let currentUser = [];
 
+
 /** 
  * A string to store the name of the current user.
  * @type {string}
  */
 let currentUserName = '';
+
 
 /**
  * This asynchronous function handles user login. It retrieves user input (email and password), checks it against stored users,
@@ -81,6 +83,7 @@ async function guestLogin() {
     window.location.href = 'summary.html';
 }
 
+
 /**
  * This asynchronous function retrieves all users and displays their information in a console table.
  * 
@@ -92,8 +95,6 @@ async function allUsers() {
     let data = JSON.parse(await getItem('userName'));
 }
 
-
-// ---move Logo
 
 /**
  * This function returns "true" if the viewport is less than or equal to 1000 pixels wide, 

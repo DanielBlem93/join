@@ -24,6 +24,7 @@ function validateInput(email, password, loginname) {
     return true;
 }
 
+
 /**
  * This asynchronous function handles user signup. It retrieves user input (name, email, and password), 
  * stores the new user details, and redirects to 'index.html' once the process is complete. 
@@ -54,6 +55,7 @@ async function loginSignUp(){
     loginname.value = '';
     replaceButtonWithImageAndRedirect();
 }
+
 
 /**
  * Replaces a login button with an image and redirects to another page after a delay.
@@ -91,6 +93,7 @@ async function cleanUpData() {
     await setItem('userName', JSON.stringify(cleanedData));
 }
 
+
 /**
  * Displays an error message for a specified duration.
  * This function sets the text content of an HTML element to a specified message, and then clears the message after a delay.
@@ -106,6 +109,7 @@ function displayError(elementId, message) {
         element.textContent = '';
     }, 2000);
 }
+
 
 /**
  * Validates user input, ensuring that the email, password, and username fields are not empty, 
@@ -135,9 +139,3 @@ function validateInput(email, password, loginname) {
     }
     return isValid;
 }
-
-
-
-
-
-

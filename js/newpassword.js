@@ -11,6 +11,7 @@ async function updatePassword(email, newPw) {
     await setItem('userName', JSON.stringify(data));
 }
 
+
 /**
  * Shows the success message and redirects the user to the home page after 2 seconds.
  * @param {HTMLElement} button - The submit button of the form.
@@ -25,6 +26,7 @@ function showSuccessAndRedirect(button, image) {
     }, 2000);
 }
 
+
 /**
  * Shows an error if the passwords do not match and resets the form.
  * @param {HTMLInputElement} newPw - The input field for the new password.
@@ -36,6 +38,7 @@ function showErrorAndReset(newPw, confirm) {
     newPw.value = '';
     confirm.value = '';
 }
+
 
 /**
  * This function checks if the passwords match and updates the password or shows an error accordingly.
@@ -60,5 +63,3 @@ async function reset() {
         showErrorAndReset(newPw, confirm);
     }
 }
-
-

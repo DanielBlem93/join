@@ -52,8 +52,6 @@ async function addTask() {
 }
 
 
-
-
 /**
  * Asynchronous function that retrieves stored todos from the storage.
  * If stored todos exist, it parses the JSON string to an object and assigns it to the 'todos' array.
@@ -82,7 +80,6 @@ async function initBoard() {
     init();
     initArrays();
     updateHTML();
-    console.log(todos);
 }
   
 
@@ -245,6 +242,17 @@ function generateToDoHTML(element) {
     `;
 }
 
+
+/**
+ * Retrieves the CSS variable representation of a specified color name.
+ * 
+ * @param {string} colorName - The name of the color for which the CSS variable should be retrieved.
+ * @returns {string} - The CSS variable representation of the color. Returns 'var(--lightblue)' as a fallback if the color name is not recognized.
+ * 
+ * @example
+ * // Assuming CSS variables are set like: --lightblue: #ADD8E6;
+ * const cssVar = getColorVariable('lightblue'); // returns 'var(--lightblue)'
+ */
 function getColorVariable(colorName) {
     switch (colorName) {
         case 'lightblue': return 'var(--lightblue)';
@@ -260,18 +268,12 @@ function getColorVariable(colorName) {
 }
 
 
-
-
-
-
 /**
  * Extracts the first two letters from a given string and converts them to uppercase.
  *
  * @param {string} member - The string from which to extract the first two letters.
  * @returns {string} The first two letters of the input string in uppercase, or undefined if input is not a string.
  */
-
-
 function getFirstTwoLetters(members) {
     let letterDivs = '';
 
@@ -294,13 +296,6 @@ function getFirstTwoLetters(members) {
     }
 
     return letterDivs;
-}
-
-
-
-function getRandomColor() {
-    const colorValues = Array.from({length: 3}, () => Math.floor(Math.random() * 256));
-    return `rgb(${colorValues.join(', ')})`;
 }
 
 
@@ -335,12 +330,16 @@ function searchTodos() {
 }
 
 
-// ========================== Add Task ==============================
-
-
+/**
+ * Displays the "Add Task" popup with a specific color and assigns a category to it.
+ * 
+ * @param {string} color - The background color to be applied to the popup after an animation delay.
+ * @param {string} category - The category to be associated with the popup task.
+ * 
+ * @example
+ * showAddTaskPopup('#FF5733', 'work'); // Sets the popup background color to '#FF5733' and associates it with the 'work' category.
+ */
 function showAddTaskPopup(color, category){
-
-    console.log(category);
     selectedCategory = category;
     let popup = document.getElementById('addTaskPopup');
     popup.dataset.category = category;
@@ -349,4 +348,3 @@ function showAddTaskPopup(color, category){
        popup.style.backgroundColor = `${color}` 
     }, 125);
 }
-
