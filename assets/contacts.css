@@ -509,7 +509,7 @@ input::placeholder{
 }
 @media (max-width: 600px){
     #contacts-list{
-        width: 100%;
+        width: 400px;
         display: flex;
         align-items: flex-start;
         flex-direction: column;
@@ -542,3 +542,9 @@ input::placeholder{
         font-size: 20px;
     }
 }
+@media (max-width: 400px){
+    #contacts-list{
+        width: 300px;
+    }
+}
+

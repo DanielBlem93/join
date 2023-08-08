@@ -331,7 +331,6 @@ async function deleteContact(contact) {
         contacts = contacts.filter(item => item.id !== contact.id);
         await setItem('contacts', JSON.stringify(contacts));
         getContacts();
-        console.log('Contact deleted!');
         window.location.reload();
     } catch (error) {
         console.error("Error deleting contact:", error);
@@ -399,7 +398,6 @@ async function getContacts() {
     }, '');
 
     contactList.innerHTML = htmlString;
-    console.log('Contacts loaded!:', contacts);
 }
 
 
