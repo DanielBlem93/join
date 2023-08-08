@@ -11,4 +11,3 @@ async function logout(){
     await setItem('currentUserName', currentUserName);
     window.location.href = 'index.html';
 }
-

@@ -156,14 +156,26 @@ body {
 
 .todo-box {
     width: 250px;
+    position: relative;
     /* height: 100%; */
     background-color: #FFFFFF;
     border-radius: 10px;
     padding: 20px;
     margin-top: 20px;
     margin-right: 20px;
-    cursor: pointer;
+    /* cursor: pointer; */
     transition: all 0.2s ease-in-out;
+}
+.chegeCategory{
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    cursor: pointer;
 }
 
 .todo-box:hover {
@@ -192,6 +204,7 @@ body {
 
 .todo-box-body {
     color: #D1D1D1;
+    cursor: pointer;
 }
 
 .todo-box-progress {
@@ -428,6 +441,15 @@ body {
     font-weight: 400;
     color: #2A3647;
     margin: 20px;
+    display: flex;
+}
+
+#priority{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
 }
 
 .modal-members {
@@ -624,7 +646,9 @@ body {
     font-size: 20px;
     opacity: 0.5;
 }
-
+.chegeCategory{
+    display: none;
+}
 
 /* higtlight */
 
@@ -754,6 +778,7 @@ body {
         justify-content: center;
     }
     .drag-area{
+        height: auto;
         flex-basis: 100%;
         width: 100%;
     }
@@ -771,6 +796,9 @@ body {
 
     .width95{
         width: 95%;
+    }
+    .chegeCategory{
+        display: block;
     }
 }
 

@@ -1,7 +1,8 @@
 let todos = [];
 let currentToDos = [];
 let currentDraggedElement;
-let currentDraggedCategory;
+let selectedCategory = null;
+const categoriesOrder = ['open', 'progress', 'feedback', 'closed'];
 
 
 /**
@@ -16,7 +17,9 @@ let currentDraggedCategory;
  */
 async function addTask() {
     let addTasks = JSON.parse(await getItem('task'));
-    if (!addTasks || addTasks.length === 0) {
+    let popup = document.getElementById('addTaskPopup');
+    let selectedCategory = popup.dataset.category || 'open';
+    if(!addTasks || addTasks.length === 0) {
         return;
     }
 
@@ -24,13 +27,13 @@ async function addTask() {
         for (let task of taskArray) {
             let existingTask = todos.find(t => t.taskID === task.taskID);
             if (!existingTask) {
-                let members = (task.persons && task.persons.length > 0) ? task.persons.map(person => person.name) : ['All Employees'];
-
+                let members = (task.persons && task.persons.length > 0) ? task.persons.map(person => person.name) : ['All Employees rgb(200, 200, 120)'];
+                
                 let subtasksWithCompletion = task.subtasks ? task.subtasks.map(subtask => ({ subtask, isComplete: false })) : [];
 
                 todos.push({
                     'id': todos.length,
-                    'category': 'open',
+                    'category': task.status,
                     'task-category': task.category,
                     'title': task.title,
                     'text': task.description,
@@ -39,15 +42,15 @@ async function addTask() {
                     'priority': task.priority,
                     'subtasks': subtasksWithCompletion,
                     'date': task.date,
-                    'taskID': task.taskID
+                    'taskID': task.taskID,
+                    'task-color': task.color
                 })
             }
         }
     }
+    // setItemTodo();
     updateHTML();
 }
-
-
 
 
 /**
@@ -118,18 +121,17 @@ async function setItemTodo() {
  * 
  * @param {string} category - This parameter stands for the category of a todo and at the same time for the name of the subboard to which it belongs.
  */
-async function renderToDos(category) {
-
+function renderToDos(category) {
+    
     let filteredToDos = todos.filter(t => t['category'] == category);
 
     document.getElementById(category).innerHTML = '';
 
     for (let i = 0; i < filteredToDos.length; i++) {
         const element = filteredToDos[i];
-        const nextPosition = category + (filteredToDos.length - 1);
-        document.getElementById(category).innerHTML += await generateToDoHTML(element, category, i, nextPosition);
-        // await generateToDoHTML(i);
-    }
+        document.getElementById(category).innerHTML += generateToDoHTML(element);
+        generateToDoHTML(i);
+    }  
 }
 
 
@@ -196,34 +198,39 @@ function styleTodos() {
  * @param {Object} element - The todo task object to be processed.
  * @returns {string} An HTML string for a todo box element.
  */
-async function generateToDoHTML(element, category, i, nextPosition) {
-    // console.log(element['id']);
-    // console.log(category);
+function generateToDoHTML(element) {
     let members = element['members'];
-    let letters = await getFirstTwoLetters(members);
+    let letters = getFirstTwoLetters(members);
     let prioImg = generatePrioIcon(element['priority']);
-    let color = getRandomColor();
-
+    let color = getColorVariable(element['task-color']);
+    console.log(element);
     let progress = 0;
     let progressLabel = '';
-    if (element['subtasks'] && element['subtasks'].length > 0) {
-        progress = element['subtasks'].filter(subtaskObj => subtaskObj.isComplete).length / element['subtasks'].length;
-        progressLabel = `${element['subtasks'].filter(subtaskObj => subtaskObj.isComplete).length}/${element['subtasks'].length}`;
-    }
+        if (element['subtasks'] && element['subtasks'].length > 0) {
+            progress = element['subtasks'].filter(subtaskObj => subtaskObj.isComplete).length / element['subtasks'].length;
+            progressLabel = `${element['subtasks'].filter(subtaskObj => subtaskObj.isComplete).length}/${element['subtasks'].length}`;
+        }
+    let displayUp = element['category'] === 'open' ? 'none' : 'block';
+    let displayDown = element['category'] === 'closed' ? 'none' : 'block';
 
     return /*html*/ `
-    <div onclick="showTodo(${element['id']})" class="todo-box" draggable="true" ondragstart="startDragging(${element['id']}, '${category}')">
-        <div id="todoBoxHeader${element['id']}" class="todo-box-header" style="background-color:${color};">
-            <h4>${element['task-category']}</h4>
-        </div>
+    <div  class="todo-box" draggable="true" ondragstart="startDragging(${element['id']})">
+    <div class="chegeCategory">
+        <img id="up" onclick="upCategory(${element['id']})" src="./assets/img/up.png" style="display: ${displayUp}">
+        <br>
+        <img id="down" onclick="downCategory(${element['id']})" src="./assets/img/down.png" style="display: ${displayDown}">
+    </div>
+    <div id="todoBoxHeader${element['id']}" class="todo-box-header" style="background-color:${color};">
+        <h4>${element['task-category']}</h4>
+    </div>
 
         <div class="todo-box-title">
             <h3>${element['title']}</h3>
         </div>
 
-        <div class="todo-box-body">
-            <p>${element['text']}</p>
-        </div>
+    <div onclick="showTodo(${element['id']})" class="todo-box-body">
+        <p>${element['text']}</p>
+    </div>
 
         <div class="todo-box-progress">
             <div class="todo-box-progress-bar">
@@ -248,7 +255,29 @@ async function generateToDoHTML(element, category, i, nextPosition) {
 }
 
 
-
+/**
+ * Retrieves the CSS variable representation of a specified color name.
+ * 
+ * @param {string} colorName - The name of the color for which the CSS variable should be retrieved.
+ * @returns {string} - The CSS variable representation of the color. Returns 'var(--lightblue)' as a fallback if the color name is not recognized.
+ * 
+ * @example
+ * // Assuming CSS variables are set like: --lightblue: #ADD8E6;
+ * const cssVar = getColorVariable('lightblue'); // returns 'var(--lightblue)'
+ */
+function getColorVariable(colorName) {
+    switch (colorName) {
+        case 'lightblue': return 'var(--lightblue)';
+        case 'red': return 'var(--red)';
+        case 'green': return 'var(--green)';
+        case 'orange': return 'var(--orange)';
+        case 'purple': return 'var(--purple)';
+        case 'darkblue': return 'var(--darkblue)';
+        case 'mint': return 'var(--mint)';
+        case 'pink': return 'var(--pink)';
+        default: return 'var(--lightblue)'; // Fallback-Wert
+    }
+}
 
 
 /**
@@ -257,46 +286,28 @@ async function generateToDoHTML(element, category, i, nextPosition) {
  * @param {string} member - The string from which to extract the first two letters.
  * @returns {string} The first two letters of the input string in uppercase, or undefined if input is not a string.
  */
-
-async function getColorForName(name) {
-    const contactNames = JSON.parse(await getItem('contacts'));
-    const contact = contactNames.find(contact => contact.name === name);
-    //console.log(contact.colorIcon);
-    if (contact) {
-        return contact.colorIcon;
-    }
-    return '#FFFFFF';  // Standardfarbe, falls der Name nicht gefunden wird
-}
-
-async function getFirstTwoLetters(members) {
+function getFirstTwoLetters(members) {
     let letterDivs = '';
+
     if (Array.isArray(members)) {
         for (let i = 0; i < Math.min(members.length, 2); i++) {
             let member = members[i];
-            //console.log(member);
-            if (typeof member === 'string') {
-                let firstTwoLetters = member.slice(0, 2).toUpperCase();
-                let color = await getColorForName(member);
-                //console.log(color);
+            let splitMember = member.split(' rgb(');
+            let name = splitMember[0];
+            let color = splitMember[1].replace(')', '');
 
-                letterDivs += `<div class="todo-icon-name" style="background-color:${color};">${firstTwoLetters}</div>`;
+            if (name) {
+                let firstTwoLetters = name.slice(0, 2).toUpperCase();
+                letterDivs += `<div class="todo-icon-name" style="background-color:rgb(${color});">${firstTwoLetters}</div>`;
             }
         }
-
-        // if there are more than 2 names, show the number of remaining names
         if (members.length > 2) {
-            // Sie könnten auch eine Farbe für diesen zusätzlichen "Mehr"-Marker festlegen
-            let defaultColor = '#FFFFFF';
+            let defaultColor = '#000000';
             letterDivs += `<div class="todo-icon-name" style="background-color:${defaultColor};">+${members.length - 2}</div>`;
         }
     }
+
     return letterDivs;
-}
-
-
-function getRandomColor() {
-    const colorValues = Array.from({ length: 3 }, () => Math.floor(Math.random() * 256));
-    return `rgb(${colorValues.join(', ')})`;
 }
 
 
@@ -331,40 +342,55 @@ function searchTodos() {
 }
 
 
-// ========================== Add Task ==============================
-
-
-function showAddTaskPopup(color) {
-    let popup = document.getElementById('addTaskPopup')
+/**
+ * Displays the "Add Task" popup with a specific color and assigns a category to it.
+ * 
+ * @param {string} color - The background color to be applied to the popup after an animation delay.
+ * @param {string} category - The category to be associated with the popup task.
+ * 
+ * @example
+ * showAddTaskPopup('#FF5733', 'work'); // Sets the popup background color to '#FF5733' and associates it with the 'work' category.
+ */
+function showAddTaskPopup(color, category){
+    selectedCategory = category;
+    let popup = document.getElementById('addTaskPopup');
+    popup.dataset.category = category;
     popup.classList.toggle('popupAnimation')
     setTimeout(() => {
         popup.style.backgroundColor = `${color}`
     }, 125);
 }
 
-// addColor();
-
-// async function addColor(){
-//     let contaktNamen = JSON.parse(await getItem('contacts'));
-//     console.log(contaktNamen[0]['colorIcon']);
-// }
-
-
-
 
 /**
- * 
- * 
- * @param {string} currentCat 
+ * Moves the category of the specified todo element one step up in the predefined category order.
+ * If the todo is already in the topmost category, no changes will be made.
+ *
+ * @param {number} elementId - The ID of the todo element to be moved up in category.
  */
-function highlight(currentCat) {
-    let empty = document.getElementById(currentCat).innerHTML;
-    if (currentDraggedCategory == currentCat) {
-    } else {
-        if (!empty == "") {
-            let nextPlaceId = document.getElementById(currentCat + '0').innerHTML;
-            document.getElementById(nextPlaceId).classList.remove('display-none');
-        }
+function upCategory(elementId) {
+    let todo = todos[elementId];
+    
+    let currentCategoryIndex = categoriesOrder.indexOf(todo.category);
+    if (currentCategoryIndex > 0) {
+        todo.category = categoriesOrder[currentCategoryIndex - 1];
+        updateHTML();
     }
 }
 
+
+/**
+ * Moves the category of the specified todo element one step down in the predefined category order.
+ * If the todo is already in the bottommost category, no changes will be made.
+ *
+ * @param {number} elementId - The ID of the todo element to be moved down in category.
+ */
+function downCategory(elementId) {
+    let todo = todos[elementId];
+    
+    let currentCategoryIndex = categoriesOrder.indexOf(todo.category);
+    if (currentCategoryIndex < categoriesOrder.length - 1) {
+        todo.category = categoriesOrder[currentCategoryIndex + 1];
+        updateHTML();
+    }
+}

@@ -40,8 +40,3 @@ async function resetMail() {
         email.value = '';
     }
 }
-
-
-
-
-

@@ -1,6 +1,3 @@
-
-
-
 /**
  * For each task element with the class 'summary-task', an event listener is added. 
  * When a task element is clicked, the user is redirected to the 'board.html' page.
@@ -11,7 +8,6 @@ Tasks.forEach(task => {
         window.location.href = 'board.html';
     })
 });
-
 
 
 /**
@@ -31,6 +27,7 @@ async function getUserName(){
     }
 }
 
+
 /**
  * Filters tasks based on a provided property and value, and then updates the text content of a specified HTML element.
  *
@@ -45,6 +42,7 @@ async function filterAndDisplay(taskProperty, taskValue, elementId) {
     const element = document.getElementById(elementId);
     element.innerText = filteredTasks.length;
 }
+
 
 /**
  * Retrieves task data, filters tasks by various categories and updates respective HTML elements with the count of tasks in each category.
@@ -63,15 +61,3 @@ async function getTasksData() {
     let tasksInBoard = document.getElementById('task-in-board');
     tasksInBoard.innerText = tasks.length;
 }
-
-
-
-
-
-
-
-
-
-
-
-

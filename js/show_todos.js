@@ -14,6 +14,7 @@ function showTodo(id) {
     modalTodo.innerHTML += generateToDoHTMLModal(todo); 
 }
 
+
 /**
  * Generates HTML for the modal view of a todo.
  *
@@ -21,7 +22,6 @@ function showTodo(id) {
  * @param {Object} todo - The todo object.
  * @returns {string} HTML string representing the todo.
  */
-
 function generateSubtaskHTML(subtaskObj, index, todoId) {
     let isChecked = subtaskObj.isComplete ? 'checked' : '';
     let subtaskHTML = /*html*/ `
@@ -33,24 +33,63 @@ function generateSubtaskHTML(subtaskObj, index, todoId) {
     return subtaskHTML;
 }
 
-async function generateMemberHTML(member) {
-    let color = await getColorForName(member);
-    
-    console.log(color);
-    let names = member.split(' ');
-    let initials = names[0][0] + names[1][0];
-    let memberHTML = `<p class="modalMember"><span class="initMember" style="background-color:${color}";>${initials}</span>  ${member}</p>`;
+
+/**
+ * Generates the HTML representation for a member with initials and a background color.
+ * The member string is expected to have the format "Name rgb(color)".
+ * If the color is not provided, a random color is used.
+ *
+ * @param {string} member - The member string in the format "Name rgb(color)".
+ * @returns {string} The HTML representation of the member.
+ * 
+ * @example
+ * // returns '<p class="modalMember"><span class="initMember" style="background-color:rgb(255,0,0)">JS</span> John Smith</p>'
+ * generateMemberHTML('John Smith rgb(255,0,0)');
+ * 
+ * @example
+ * // Assuming getRandomColor() returns 'rgb(100,100,100)' 
+ * // returns '<p class="modalMember"><span class="initMember" style="background-color:rgb(100,100,100)">JS</span> John Smith</p>'
+ * generateMemberHTML('John Smith');
+ */
+function generateMemberHTML(member) {
+    let splitMember = member.split(' rgb(');
+    let name = splitMember[0];
+    let color = splitMember[1] ? "rgb(" + splitMember[1] : getRandomColor(); 
+
+    let names = name.split(' ');
+    let initials = names[0][0] + (names[1] ? names[1][0] : ''); 
+
+    let memberHTML = `<p class="modalMember"><span class="initMember" style="background-color:${color}">${initials}</span> ${name}</p>`;
     return memberHTML;
 }
 
+
+/**
+ * Generates the HTML representation for a to-do item inside a modal.
+ * The function takes into account the task color, subtasks, priority, 
+ * and assigned members to render a detailed representation of the to-do.
+ * 
+ * @param {object} todo - An object representing the to-do item. The object should have properties:
+ *   - `task-color`: The color associated with the task.
+ *   - `subtasks`: An array of subtask objects.
+ *   - `priority`: The priority level ('urgent', 'medium', 'low', etc.).
+ *   - `task-category`: The category of the task.
+ *   - `title`: The title of the task.
+ *   - `text`: The detailed text of the task.
+ *   - `date`: The due date for the task.
+ *   - `members`: An array of members associated with the task.
+ *   - `id`: The unique identifier for the task.
+ * @returns {string} The HTML representation of the to-do inside a modal.
+ */
 function generateToDoHTMLModal(todo) {
     let subtasksHTML = '';
+    let color = getColorVariable(todo['task-color']);
     if (todo.subtasks && todo.subtasks.length > 0) {
         subtasksHTML = todo.subtasks.map((subtaskObj, index) => generateSubtaskHTML(subtaskObj, index, todo.id)).join('');
     }
 
     let colorTodosPriorities = todo['priority'] === 'urgent' ? '#FF0000' : todo['priority'] === 'medium' ? '#FFA800' : todo['priority'] === 'low' ? '#7AE229' : '#321313';
-    let imgTodosPriorities = todo['priority'] === 'urgent' ? './assets/img/urgent.svg' : todo['priority'] === 'medium' ? './assets/img/akar-icons_chek.svg' : todo['priority'] === 'low' ? './assets/img/low.svg' : './assets/img/low.svg';
+    let imgTodosPriorities = todo['priority'] === 'urgent' ? './assets/img/urgent.svg' : todo['priority'] === 'medium' ? './assets/img/mediumweiss.png' : todo['priority'] === 'low' ? './assets/img/lowweiss.png' : './assets/img/lowweiss.png';
     let membersHTML = '';
     if (todo.members && todo.members.length > 0) {
         membersHTML = todo.members.map(member =>  generateMemberHTML(member)).join('');
@@ -61,7 +100,7 @@ function generateToDoHTMLModal(todo) {
         <div onclick="closeModalBord()" class="modal-close">
             <img src="./assets/img/close-icon.png" alt="">
         </div>
-        <h4 class="modal-category">${todo['task-category']}</h4>
+        <h4 style="background-color: ${color}" class="modal-category">${todo['task-category']}</h4>
         <h3 class="modal-title">${todo['title']}</h3>
         <p class="modal-text"> ${todo['text']}</p>
         <p class="modal-date"><b>Due date:</b> ${todo['date']}</p>
@@ -87,6 +126,13 @@ function generateToDoHTMLModal(todo) {
 }
 
 
+/**
+ * Toggles the completion status of a specific subtask within a todo.
+ * After toggling, the HTML is updated to reflect the change.
+ *
+ * @param {number|string} todoId - The ID of the parent todo item.
+ * @param {number|string} subtaskId - The index or ID of the subtask within the todo's subtasks array.
+ */
 function toggleSubtask(todoId, subtaskId) {
     let todo = todos.find(t => t.id === todoId);
     if (todo && todo.subtasks && todo.subtasks[subtaskId]) {
@@ -96,6 +142,23 @@ function toggleSubtask(todoId, subtaskId) {
 }
 
 
+/**
+ * Asynchronously edits a Todo item by its ID.
+ * 
+ * This function retrieves the list of contacts from storage, finds the Todo item by its ID,
+ * and then presents a modal that allows users to modify various properties of the Todo item,
+ * such as title, description, due date, and priority.
+ * 
+ * @async
+ * @function
+ * @param {number|string} id - The ID of the Todo item to edit.
+ * @throws Will throw an error if the 'contacts' item is not found in storage.
+ * @returns {void}
+ * @example
+ * 
+ * editTodo(5);  // Opens a modal to edit the Todo with ID 5
+ * 
+ */
 async function editTodo (id) {
     let contacts = JSON.parse(await getItem('contacts'));
     let todo = todos[id];
@@ -104,6 +167,8 @@ async function editTodo (id) {
     const editTodoBox = document.createElement('div');
     editTodoBox.classList.add('editTodoBox');
     editTodoModal.appendChild(editTodoBox);
+
+    console.log(todo);
 
     editTodoBox.innerHTML += /*html*/ `
         <div class="addTaskTitle">
@@ -222,6 +287,20 @@ async function editTodo (id) {
 }
 
 
+/**
+ * Updates a specific todo item with new values from the DOM inputs.
+ * After updating, the todo item is saved (using setItemTodo),
+ * reflected in the UI, and the edit modal is closed.
+ * 
+ * @async
+ * @param {number} id - The index or ID of the todo item to update.
+ * @returns {void} - Nothing is returned; however, potential side effects include updating global state, updating the DOM, and logging.
+ * @throws {Error} - Logs an error if a todo with the given index is not found.
+ * 
+ * @example
+ * // Assuming there's a todo with ID 5 and you've updated the respective fields in the DOM
+ * saveTodo(5);
+ */
 async function saveTodo(id) {
     let index = id;
     let todo = todos[index]; 
@@ -240,7 +319,6 @@ async function saveTodo(id) {
     todo.date = dateInput.value;
     todo.priority = currentPriority;
     todo.members = persons;
-    console.log(todo.members);
     await setItemTodo();
     showTodo(id);
     updateHTML();
@@ -248,6 +326,18 @@ async function saveTodo(id) {
 }
 
 
+/**
+ * Retrieves and formats a list of persons based on the 'contactsForAddTask' data.
+ * Only contacts marked as 'checked' are added to the list, and their information
+ * is combined into a full name string (first name, last name, and color).
+ * 
+ * @returns {string[]} - An array of formatted full names of selected persons.
+ * 
+ * @example
+ * // Assuming contactsForAddTask has been populated and some are marked as 'checked'
+ * const personsForTodo = addPersonsToNewTodo();
+ * console.log(personsForTodo); // ["John Doe Blue", "Jane Smith Red", ...]
+ */
 let addPersonsToNewTodo = () => {
     let persons = [];
     
@@ -257,7 +347,8 @@ let addPersonsToNewTodo = () => {
         if (contact['checked?'] === 'checked') {
             let firstName = contact['first-name'];
             let lastName = contact['last-name'];
-            let fullName = `${firstName} ${lastName}`;
+            let color = contact['color'];
+            let fullName = `${firstName} ${lastName} ${color}`;
     
             persons.push(fullName);
         }
@@ -266,8 +357,16 @@ let addPersonsToNewTodo = () => {
 }
 
 
-
-
+/**
+ * Generates and returns a HTML template string for the contact dropdown within the task.
+ * This function provides an interface for assigning contacts to a task.
+ * 
+ * @returns {string} - HTML template string representing the contact dropdown interface.
+ * 
+ * @example
+ * const contactDropdownHTML = getContaktFromStor();
+ * document.getElementById('someElementId').innerHTML = contactDropdownHTML;
+ */
 function getContaktFromStor () {
 return /*html*/`
     <div class="addTaskDropdown">
@@ -307,12 +406,21 @@ return /*html*/`
 `;
 }
 
+
+/**
+ * Closes the edit todo modal by adjusting its position off-screen and clearing its content.
+ * Specifically, the function accesses the 'editTodoModal' element by its ID, moves it off-screen
+ * to the right by setting its 'right' style property, and then clears its innerHTML.
+ * 
+ * @example
+ * // Usage typically in response to some event like a button click
+ * closeEditModal();
+ */
 function closeEditModal() {
     let editTodoModal = document.getElementById('editTodoModal');
     editTodoModal.style.right = '-200%';
     editTodoModal.innerHTML = '';
 }
-
 
 
 /**
@@ -325,6 +433,7 @@ function closeModalBord() {
     let modalTodo = document.getElementById('showTodo');
     modalTodo.classList.add('displayNone');
 }
+
 
 /**
  * Deletes a todo based on its id and updates the local storage.
@@ -347,6 +456,3 @@ async function deleteTodo(todo) {
     closeModalBord();
     initBoard();
 }
-
-
-
