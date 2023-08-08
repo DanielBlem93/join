@@ -19,5 +19,3 @@ async function createTaskBackend(newTask) {
     task.push(newTask);
     await setItem('task', JSON.stringify(task));
 }
-
-

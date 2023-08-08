@@ -31,12 +31,11 @@ async function getContaktfromBackend() {
   let tasks = JSON.parse(await getItem('contacts'));
   tasks.forEach(task => {
     let names = task.name.split(" ");
-
     let contact = {
       'first-name': names[0],
       'last-name': names[1],
       'checked?': 'unchecked',
-      'color': 'var(--mint)'
+      'color': task.colorIcon,
     };
     contactsForAddTask.push(contact);
   });
@@ -76,6 +75,7 @@ function renderCategorys() {
   for (let i = 0; i < categorys.length; i++) {
     let categoryName = categorys[i].category;
     let categoryColor = categorys[i].color
+
 
     categorysContainer.innerHTML += ` 
     
@@ -132,7 +132,7 @@ function showNewCotegory() {
   clearSelectBox('select-box')
   selectBox.innerHTML = `     
   <div id="input-container" class="dropdown-option" style="display: none;">
-  <input id="new-category-input" class="typography2T6 inputFrame"
+  <input id="new-category-input" class="caption inputFrame"
       placeholder="New Category Name" type="text">
   <div class="check-container">
       <img onclick="discardNewCategory('none','unset','unset')"
@@ -201,6 +201,7 @@ function addNewCategory() {
 
     toggleColorPallete('none')
   }
+
 
 }
 /**
@@ -328,7 +329,7 @@ function renderPersons() {
 window.addEventListener("click", function () {
   let selectBox2 = document.getElementById('select-box2')
   if (selectBox2.innerHTML == "") {
-    selectBox2.innerHTML = `   
+    selectBox2.innerHTML =/*html*/ `   
 
     <div class="dropdown-option dropdown-start-text">
     <div id="select-contacts-to-assign" style="display: unset;">Select contacts to assign</div>
@@ -346,10 +347,10 @@ function showInviteNewContactInput() {
   let selectBox2 = document.getElementById('select-box2')
   clearSelectBox('select-box2')
 
-  selectBox2.innerHTML = `     
+  selectBox2.innerHTML = /*html*/ `     
   
   <div id="input-container2" class="dropdown-option" style="display: none;">
-  <input id="assinged-to-input" class="typography2T6 inputFrame"
+  <input id="assinged-to-input" class="caption inputFrame"
       placeholder="Contact E-Mail" type="email">
   <div class="check-container">
       <img onclick="discardAssingedTo()"
@@ -492,7 +493,7 @@ function renderSubtask() {
     </label
     `
   }
-  console.log(subtasks);
+
 }
 
 /**
@@ -546,12 +547,19 @@ async function createTask() {
   let date = dateInput.value.trim();
   let category = categoryInput.innerText.trim();
   let taskId = Math.random().toString(36).substr(2) + Date.now().toString(36);
+
+  let color;
+  for (let cat of categorys) {
+    if (cat.category === category) {
+      color = cat.color;
+      break; 
+    }
+  }
   
-
-
   if (checkRequierdInputs()) {
     // Erstelle zunächst das neue Aufgabenobjekt
     newTask = [{
+      'status': selectedCategory || 'open',
       'title': title,
       'description': description,
       'date': date,
@@ -560,7 +568,8 @@ async function createTask() {
       'emails': [emails],
       'priority': currentPriority,
       'subtasks': subtasks,
-      'taskID': taskId
+      'taskID': taskId,
+      'color': color
     }];
 
     clearTask();
@@ -578,7 +587,8 @@ async function addPersonsToNewTask() {
     if (contact['checked?'] === 'checked') {
       let firstName = contact['first-name'];
       let lastName = contact['last-name'];
-      let name = {'name': `${firstName} ${lastName}`};
+      let color = contact['color'];
+      let name = {'name': `${firstName} ${lastName} ${color}`};
 
       persons.push(name); 
     }
@@ -745,3 +755,22 @@ function swapToBoard() {
   window.location.href = 'board.html'
 }
 
+
+// =========================Date ==================================
+
+document.addEventListener('DOMContentLoaded', function() {
+  let heute = new Date();
+  let formattedDate = formatDate(heute);
+
+  let datumInput = document.getElementById('date');
+  datumInput.value = formattedDate;
+  datumInput.min = formattedDate;
+});
+
+function formatDate(date) {
+  let day = ("0" + date.getDate()).slice(-2);
+  let month = ("0" + (date.getMonth() + 1)).slice(-2);
+  let year = date.getFullYear();
+
+  return year + '-' + month + '-' + day;
+}

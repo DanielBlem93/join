@@ -3,13 +3,30 @@ let contact = [];
 let contactsArray = [];
 let currentContact = null;
 
+// removeAllContakts();
+// async function removeAllContakts() {
+//     await setItem('contacts', JSON.stringify([]));
+//     getContacts();
+// }
+
+
+/**
+ * Opens the "add-contact" modal by adjusting its position on the screen.
+ * Prior to opening, it resets the modal to its initial state.
+ */
 function openModalAddContakt() {
     resetModal();
     document.getElementById('add-contakt-modal').style.right = '0';
 }
+
+
+/**
+ * Closes the "add-contact" modal by moving it off the visible screen area.
+ */
 function closeModal(){
     document.getElementById('add-contakt-modal').style.right = '-200%';
 }
+
 
 /**
  * Creates a new contact and stores it in LocalStorage.
@@ -21,16 +38,12 @@ function closeModal(){
  */
 async function createContact() {
     let id = generateId();
-
-    // Get inputs
+    let colorIcon = getRandomColor();
     let nameInput = document.getElementById('contactName');
     let emailInput = document.getElementById('contactEmail');
     let phoneInput = document.getElementById('contactPhone');
-
-    // Remove error messages if exist
     clearErrorMessages();
 
-    // Validation
     if (!isValidName(nameInput.value)) {
         displayError(nameInput, 'Please enter first and last name separated by a space.');
         return;
@@ -45,13 +58,12 @@ async function createContact() {
         displayError(phoneInput, 'Please enter only numbers for the phone.');
         return;
     }
-
-    // Create new contact if all validations are successful
     const contact = {
         name: nameInput.value,
         email: emailInput.value,
         phone: phoneInput.value,
-        id: id
+        id: id,
+        colorIcon: colorIcon
     }
 
     await addContact(contact);
@@ -60,29 +72,67 @@ async function createContact() {
     window.location.reload();
 }
 
+
+/**
+ * Generates a unique identifier by combining a random string and the current timestamp.
+ * 
+ * @returns {string} A unique string identifier.
+ */
 function generateId() {
     return Math.random().toString(36).substr(2) + Date.now().toString(36);
 }
 
+
+/**
+ * Clears all elements with the class name "error-message" from the DOM.
+ */
 function clearErrorMessages() {
     document.querySelectorAll('.error-message').forEach(el => el.remove());
 }
 
+
+/**
+ * Checks if the provided name is valid, consisting of two words (presumably first and last name).
+ * 
+ * @param {string} name - The name to be validated.
+ * @returns {boolean} `true` if the name is valid, `false` otherwise.
+ */
 function isValidName(name) {
     let nameRegex = /^[a-z]+\s[a-z]+$/i;
     return nameRegex.test(name);
 }
 
+
+/**
+ * Checks if the provided email address is valid.
+ * 
+ * @param {string} email - The email to be validated.
+ * @returns {boolean} `true` if the email is valid, `false` otherwise.
+ */
 function isValidEmail(email) {
     let emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
 }
 
+
+/**
+ * Checks if the provided phone number is valid (only contains digits).
+ * 
+ * @param {string} phone - The phone number to be validated.
+ * @returns {boolean} `true` if the phone number is valid, `false` otherwise.
+ */
 function isValidPhone(phone) {
     let phoneRegex = /^\d+$/;
     return phoneRegex.test(phone);
 }
 
+
+/**
+ * Displays an error message next to the specified input element.
+ * 
+ * @param {Element} inputElement - The DOM element (input field) where the error occurred.
+ * @param {string} message - The error message to be displayed.
+ */
 function displayError(inputElement, message) {
     let errorMessage = document.createElement('div');
     errorMessage.className = 'error-message';
@@ -91,11 +141,21 @@ function displayError(inputElement, message) {
     inputElement.parentNode.insertBefore(errorMessage, inputElement.nextSibling);
 }
 
+
+/**
+ * Adds a new contact to the storage (presumably local storage).
+ * Retrieves the current list of contacts, adds the new contact, and then updates the storage.
+ * 
+ * @param {Object} contact - The contact object to be added.
+ * @requires getItem - A function that retrieves a stored item by its key.
+ * @requires setItem - A function that stores an item by its key.
+ */
 async function addContact(contact) {
     let contacts = JSON.parse(await getItem('contacts')) || [];
     contacts.push(contact);
     await setItem('contacts', JSON.stringify(contacts));
 }
+
 
 /**
  * Sets the value of an HTML element.
@@ -105,6 +165,7 @@ async function addContact(contact) {
 function setValue(id, value) {
     document.getElementById(id).value = value;
 }
+
 
 /**
  * Toggles a class for an HTML element.
@@ -116,6 +177,7 @@ function toggleClass(id, className, shouldAdd) {
     const element = document.getElementById(id);
     shouldAdd ? element.classList.add(className) : element.classList.remove(className);
 }
+
 
 /**
  * Resets the modal by clearing input fields and toggling visibility of buttons.
@@ -152,6 +214,7 @@ function renderActionButton(contactString, action) {
     `;
 }
 
+
 /**
  * Renders a contact.
  * @param {Object} contact - The contact to render.
@@ -162,7 +225,7 @@ function renderContact(contact, initials, color = getRandomColor()) {
     let contactString = JSON.stringify(contact).replace(/"/g, '&quot;');
     return /*html*/`
          <div class="contact-header">
-            <div class="contact-header-icon" style="background-color: ${color};">${initials}</div>
+            <div class="contact-header-icon" style="background-color: ${contact.colorIcon};">${initials}</div>
             <div>
                 <div class="contact-header-name">${contact.name}</div>
                 <div class="contact-header-add-task">
@@ -196,10 +259,26 @@ function applyStyles(element, styles) {
     Object.assign(element.style, styles);
 }
 
+
 function resetStyles(element) {
     element.removeAttribute('style');
 }
 
+
+/**
+ * Displays a specific contact's details based on the provided index.
+ * Adjusts the view and styling based on the current window width (responsive design).
+ * 
+ * @param {number} index - The index of the contact in the contactsArray to be displayed.
+ * 
+ * @requires applyStyles - A function that sets multiple styles to a given DOM element.
+ * @requires resetStyles - A function that resets styles of a given DOM element.
+ * @requires getInitials - A function that retrieves the initials of a provided name.
+ * @requires renderContact - A function that renders contact details.
+ * 
+ * @example
+ * showContact(5); // Displays the details of the contact at index 5.
+ */
 function showContact(index) {
     const contactMobile = document.getElementById('contact-m');
     const contact = contactsArray[index];
@@ -247,12 +326,17 @@ function showContact(index) {
  * @async
  */
 async function deleteContact(contact) {
-    let contacts = JSON.parse(await getItem('contacts')) || [];
-    contacts = contacts.filter(item => item.name !== contact.name);
-    await setItem('contacts', JSON.stringify(contacts));
-    getContacts();
-    window.location.reload();
+    try {
+        let contacts = JSON.parse(await getItem('contacts')) || [];
+        contacts = contacts.filter(item => item.id !== contact.id);
+        await setItem('contacts', JSON.stringify(contacts));
+        getContacts();
+        window.location.reload();
+    } catch (error) {
+        console.error("Error deleting contact:", error);
+    }
 }
+
 
 /**
  * Generates a random RGB color.
@@ -277,7 +361,7 @@ function getRandomColor() {
 function renderContactBlock(contact, firstInitial, secondInitial, color, contactIndex) {
     return /*html*/`
         <div onclick="showContact(${contactIndex})" class="contacts-list-item">
-            <div class="contact-list-icon" style="background-color: ${color};">
+            <div class="contact-list-icon" style="background-color: ${contact.colorIcon};">
                 ${firstInitial.toUpperCase()}${secondInitial.toUpperCase()}    
             </div>
             <div>
@@ -326,11 +410,3 @@ function getInitials(name) {
     const [firstWord = '', secondWord = ''] = name.split(' ');
     return [firstWord[0] || '', secondWord[0] || ''];
 }
-
-
-    
- 
-
-
-
-

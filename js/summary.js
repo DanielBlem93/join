@@ -10,7 +10,6 @@ Tasks.forEach(task => {
 });
 
 
-
 /**
  * This asynchronous function retrieves the current user's name from local storage and updates the element with ID 'summaryGreetingName'.
  * 
@@ -28,6 +27,7 @@ async function getUserName(){
     }
 }
 
+
 /**
  * Filters tasks based on a provided property and value, and then updates the text content of a specified HTML element.
  *
@@ -42,6 +42,7 @@ async function filterAndDisplay(taskProperty, taskValue, elementId) {
     const element = document.getElementById(elementId);
     element.innerText = filteredTasks.length;
 }
+
 
 /**
  * Retrieves task data, filters tasks by various categories and updates respective HTML elements with the count of tasks in each category.
@@ -60,15 +61,3 @@ async function getTasksData() {
     let tasksInBoard = document.getElementById('task-in-board');
     tasksInBoard.innerText = tasks.length;
 }
-
-
-
-
-
-
-
-
-
-
-
-

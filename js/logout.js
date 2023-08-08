@@ -7,8 +7,7 @@
  * @returns {Promise<void>} Returns a Promise that resolves when the process is complete. No return value.
  */
 async function logout(){
-    currentUserName = await getItem('currentUserName');
-    currentUserName = '';
+    currentUserName = 'noaccess';
     await setItem('currentUserName', currentUserName);
     window.location.href = 'index.html';
 }

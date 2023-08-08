@@ -187,6 +187,7 @@ button {
     border-radius: 8px;
     padding: 4px 16px;
     color: #FFFFFF;
+    
 }
 
 
@@ -518,7 +519,7 @@ label {
         justify-content: left;
         gap: 32px;
     }
-    a{
+    .indexFooter{
         display: none;
     }
 }

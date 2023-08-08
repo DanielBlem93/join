@@ -8,9 +8,9 @@
     <link rel="stylesheet" href="./assets/fonts.css">
     <link rel="stylesheet" href="./assets/login.css">
     <link rel="stylesheet" href="./assets/style.css">
-    <script src="./js/script.js"></script>
     <script src="./js/db-connect.js"></script>
     <script src="./js/signUp.js"></script>
+    <script src="./js/logout.js"></script>
     <script src="./js/login.js"></script>
     <script src="./js/summary.js"></script>
     <script src="./js/board.js"></script>
@@ -30,8 +30,7 @@
         <div id="login-header" class="login-header">
             <div class="login-header-signup">
                 <p class="typo2t6">Not a Join user?</p>
-                <button onclick="window.location.href = 'signup.html'" class="btn-login-singup typoBtnLogin">Sign
-                    up</button>
+                <button onclick="window.location.href = 'signup.html'" class="btn-login-singup typoBtnLogin">Sign up</button>
             </div>
         </div>
 
@@ -43,10 +42,12 @@
             <div class="login-remember-content">
                 <div class="input-container">
                     <input class="typo2t6" id="loginEmail" type="email" placeholder="Email" required>
+                    <div id="emailError" class="input-error"></div>
                     <img class="login-img" src="./assets/img/email-logo.png" alt="email-logo">
                 </div>
                 <div class="input-container">
                     <input class="typo2t6" id="loginPassword" type="password" placeholder="Password" required>
+                    <div id="passwordError" class="input-error"></div>
                     <img class="login-img" src="./assets/img/schloss-logo.png" alt="password-logo">
                 </div>
                 <div class="login-remember">
@@ -64,8 +65,8 @@
             </div>
         </div>
         <div id="indexFooter" class="indexFooter">
-            <a href=""><span class="typo2Body txtGrey">Privacy Policy</span></a>
-            <a href=""><span class="typo2Body txtGrey">Legal notice</span></a>
+            <a href="legal_notice.html"><span class="typo2Body txtGrey">Privacy Policy</span></a>
+            <a href="legal_notice.html"><span class="typo2Body txtGrey">Legal notice</span></a>
         </div>
     </div>
     <div id="loginOverlay" class="loginOverlay">

@@ -11,6 +11,7 @@ async function updatePassword(email, newPw) {
     await setItem('userName', JSON.stringify(data));
 }
 
+
 /**
  * Shows the success message and redirects the user to the home page after 2 seconds.
  * @param {HTMLElement} button - The submit button of the form.
@@ -25,22 +26,19 @@ function showSuccessAndRedirect(button, image) {
     }, 2000);
 }
 
+
 /**
  * Shows an error if the passwords do not match and resets the form.
  * @param {HTMLInputElement} newPw - The input field for the new password.
  * @param {HTMLInputElement} confirm - The input field for the password confirmation.
  */
 function showErrorAndReset(newPw, confirm) {
-    newPw.classList.add('bg-red');
-    confirm.classList.add('bg-red');
-
-    setTimeout(function () {
-        newPw.classList.remove('bg-red');
-        confirm.classList.remove('bg-red');
-        newPw.value = '';
-        confirm.value = '';
-    }, 2000);
+    displayError('newPwError', 'Die Passwörter stimmen nicht überein');
+    displayError('confirmError', 'Die Passwörter stimmen nicht überein');
+    newPw.value = '';
+    confirm.value = '';
 }
+
 
 /**
  * This function checks if the passwords match and updates the password or shows an error accordingly.
@@ -52,6 +50,12 @@ async function reset() {
     const button = document.getElementById('submitButton');
     const image = document.getElementById('successImage');
 
+    if (newPw.value === '' || confirm.value === '') {
+        if (newPw.value === '') displayError('newPwError', 'Please fill out the password field.');
+        if (confirm.value === '') displayError('confirmError', 'Please fill out the password confirmation field.');
+        return;
+    }
+
     if (newPw.value === confirm.value) {
         await updatePassword(email, newPw.value);
         showSuccessAndRedirect(button, image);
@@ -59,4 +63,3 @@ async function reset() {
         showErrorAndReset(newPw, confirm);
     }
 }
-
