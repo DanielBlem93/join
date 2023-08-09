@@ -471,6 +471,10 @@ input::placeholder{
     .btn-deskription{
         display: none;
     }
+
+    #contacts-list{
+        padding-top: 100px;
+    }
     
     .contact-btn{
         position: fixed;
@@ -487,7 +491,7 @@ input::placeholder{
 @media (max-height: 800px){
     .contact-member-icon{
         display: none;
-    }   
+    }  
 }
 @media (max-width: 748px){
     .add-contact-form{
@@ -513,6 +517,7 @@ input::placeholder{
         display: flex;
         align-items: flex-start;
         flex-direction: column;
+        padding-top: 100px;
     }
     .contacts-list-item{
         width: 100%;

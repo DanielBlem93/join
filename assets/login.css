@@ -111,6 +111,7 @@ button {
     justify-content: end;
     opacity: 0.0;
     transition: opacity 1s ease-in-out 500ms;
+    margin-bottom: 50px;
 }
 
 .header {
@@ -477,7 +478,7 @@ label {
 
     .login-header {
         width: auto;
-        top: 778px;
+        top: 748px;
         left: calc(50% - 124px);
     }
 

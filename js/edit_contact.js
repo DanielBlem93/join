@@ -45,7 +45,6 @@ function updateContactFormFields(contact) {
  */
 function openModalEditContakt(contact){
     currentContact = contact;
-    console.log(currentContact);
 
     setElementRightProperty('add-contakt-modal', '0');
     updateContactFormFields(currentContact);
