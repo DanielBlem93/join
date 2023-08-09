@@ -17,12 +17,12 @@ function closeModal(){
 
 
 /**
- * Creates a new contact and stores it in LocalStorage.
- * Fetches values from the input fields 'contactName', 'contactEmail', and 'contactPhone'.
- * Stores the contact in an array stored in LocalStorage under the key 'contacts'.
- * Refreshes the contact list and closes the modal.
- * Refreshes the page to reflect the changes.
+ * Asynchronously creates a new contact based on the input values from the DOM.
+ * It validates the input fields (name, email, and phone) and adds the contact if valid.
+ * After adding, it reloads the contacts and the current window.
+ *
  * @async
+ * @returns {Promise<void>} Resolves once the contact has been added and the subsequent operations have completed.
  */
 async function createContact() {
     let id = generateId();
@@ -32,20 +32,21 @@ async function createContact() {
     let phoneInput = document.getElementById('contactPhone');
     clearErrorMessages();
 
-    if (!isValidName(nameInput.value)) {
+    if (!isValid('name', nameInput.value)) {
         displayError(nameInput, 'Please enter first and last name separated by a space.');
         return;
     }
 
-    if (!isValidEmail(emailInput.value)) {
+    if (!isValid('email', emailInput.value)) {
         displayError(emailInput, 'Please enter a valid email address.');
         return;
     }
 
-    if (!isValidPhone(phoneInput.value)) {
+    if (!isValid('phone', phoneInput.value)) {
         displayError(phoneInput, 'Please enter only numbers for the phone.');
         return;
     }
+    
     const contact = {
         name: nameInput.value,
         email: emailInput.value,
@@ -80,38 +81,30 @@ function clearErrorMessages() {
 
 
 /**
- * Checks if the provided name is valid, consisting of two words (presumably first and last name).
+ * Validates the provided input based on its type (name, email, or phone).
  * 
- * @param {string} name - The name to be validated.
- * @returns {boolean} `true` if the name is valid, `false` otherwise.
+ * @param {string} type - The type of the input ("name", "email", or "phone").
+ * @param {string} value - The value to be validated.
+ * @returns {boolean} `true` if the value is valid, `false` otherwise.
  */
-function isValidName(name) {
-    let nameRegex = /^[a-z]+\s[a-z]+$/i;
-    return nameRegex.test(name);
-}
+function isValid(type, value) {
+    let regex;
 
+    switch (type) {
+        case 'name':
+            regex = /^[a-z]+\s[a-z]+$/i;
+            break;
+        case 'email':
+            regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            break;
+        case 'phone':
+            regex = /^\d+$/;
+            break;
+        default:
+            return false;
+    }
 
-/**
- * Checks if the provided email address is valid.
- * 
- * @param {string} email - The email to be validated.
- * @returns {boolean} `true` if the email is valid, `false` otherwise.
- */
-function isValidEmail(email) {
-    let emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(email);
-}
-
-
-/**
- * Checks if the provided phone number is valid (only contains digits).
- * 
- * @param {string} phone - The phone number to be validated.
- * @returns {boolean} `true` if the phone number is valid, `false` otherwise.
- */
-function isValidPhone(phone) {
-    let phoneRegex = /^\d+$/;
-    return phoneRegex.test(phone);
+    return regex.test(value);
 }
 
 
