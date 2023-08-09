@@ -1,14 +1,3 @@
-// Arrays
-let contactsForAddTask = []
-let categorys = []
-let subtasks = []
-let emails = []
-let newTask = []
-// Variables
-let currentPriority = ""
-let newCategoryStatus = false
-let assingedToStatus = false
-
 /**
  * pre sets the arrays whit values. This function can also be used to reset every array
  */

@@ -1,5 +1,3 @@
-let data = [];
-
 /**
  * This function validates user input. It ensures all fields are filled and the name contains both first and last name.
  * If a field is not valid, it displays an information box under the input field.

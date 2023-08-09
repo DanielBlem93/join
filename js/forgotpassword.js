@@ -1,9 +1,3 @@
-/** 
- * A string to store the current user's email.
- * @type {string}
- */
-let currentEmail;
-
 /**
  * This asynchronous function handles password reset for a user. It retrieves the user's email,
  * checks it against stored users, and redirects to 'newpassword.html' if a match is found.

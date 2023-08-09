@@ -168,8 +168,6 @@ async function editTodo (id) {
     editTodoBox.classList.add('editTodoBox');
     editTodoModal.appendChild(editTodoBox);
 
-    console.log(todo);
-
     editTodoBox.innerHTML += /*html*/ `
         <div class="addTaskTitle">
                 <span class="typography2T6">Title</span>

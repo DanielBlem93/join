@@ -1,10 +1,3 @@
-let todos = [];
-let currentToDos = [];
-let currentDraggedElement;
-let selectedCategory = null;
-const categoriesOrder = ['open', 'progress', 'feedback', 'closed'];
-
-
 /**
  * Asynchronous function that retrieves tasks from storage, processes them, and adds them to the todos list.
  * Each task comprises the following properties: id, category, task category, title, text, done fraction, members, priority, selected color, date, and task ID.

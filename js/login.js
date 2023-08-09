@@ -1,17 +1,3 @@
-/** 
- * An array to store the details of the current user.
- * @type {Array} 
- */
-let currentUser = [];
-
-
-/** 
- * A string to store the name of the current user.
- * @type {string}
- */
-let currentUserName = '';
-
-
 /**
  * This asynchronous function handles user login. It retrieves user input (email and password), checks it against stored users,
  * and redirects to 'summary.html' if a match is found. The name of the logged in user is also stored locally.

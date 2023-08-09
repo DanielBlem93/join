@@ -1,15 +1,3 @@
-let contacts = [];
-let contact = [];
-let contactsArray = [];
-let currentContact = null;
-
-// removeAllContakts();
-// async function removeAllContakts() {
-//     await setItem('contacts', JSON.stringify([]));
-//     getContacts();
-// }
-
-
 /**
  * Opens the "add-contact" modal by adjusting its position on the screen.
  * Prior to opening, it resets the modal to its initial state.
