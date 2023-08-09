@@ -505,13 +505,13 @@ label {
     }
 
     .login-remember {
-        width: 327px;
+        width: 100%;
         display: flex;
         flex-direction: column-reverse;
         justify-content: space-between;
         align-items: flex-start;
         gap: 16px;
-        padding: 0px 16px;
+        padding: 0px 100px;
     }
 
     .login-remember-content {
@@ -519,6 +519,7 @@ label {
         flex-direction: column;
         justify-content: left;
         gap: 32px;
+        width: 90%;
     }
     .indexFooter{
         display: none;
@@ -527,6 +528,9 @@ label {
 
 /* =======SignUpMobile========== */
 @media (max-width: 1000px) {
+    .login-form{
+        width: 70%;
+    }
     .sign-up-form {
         width: 70%;
     }
@@ -553,6 +557,12 @@ label {
 }
 
 @media (max-width: 600px) {
+    .login-form{
+        width: 90%;
+    }
+    .login-remember{
+        padding-left: 30px;
+    }
     .sign-up-form {
         width: 80%;
     }
@@ -610,6 +620,32 @@ label {
     .new-pw h1 {
         font-size: 1.5rem;
     }
-
-
+}
+@media (max-width: 400px) {
+    .login-form {
+        position: absolute;
+        top: 147px;
+        padding: 14px 0px;
+        gap: 13px;
+    }
+    .login-header-signup{
+        gap: 10px;
+    }
+    .login-header {
+        width: auto;
+        top: 660px;
+        /* left: calc(50% - 124px); */
+    }
+    .input-headline{
+        gap: 0px;
+    }
+    .typo2t1{
+        font-size: 2rem!important;
+    }
+    .login-remember-content{
+        gap: 8px;
+    }
+    .login-header{
+        top: 590px;
+    }
 }
