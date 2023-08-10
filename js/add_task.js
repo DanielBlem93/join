@@ -2,34 +2,33 @@
  * pre sets the arrays whit values. This function can also be used to reset every array
  */
 function initArrays() {
-  categorys = [
-    {
-      'category': 'Sales',
-      'color': 'pink',
-    },
-    {
-      'category': 'Backoffice',
-      'color': 'mint',
-    }
-  ]
-  getContaktfromBackend();
-  emails = [];
-  subtasks = [];
+    categorys = [{
+            'category': 'Sales',
+            'color': 'pink',
+        },
+        {
+            'category': 'Backoffice',
+            'color': 'mint',
+        }
+    ]
+    getContaktfromBackend();
+    emails = [];
+    subtasks = [];
 }
 async function getContaktfromBackend() {
-  let tasks = JSON.parse(await getItem('contacts'));
-  tasks.forEach(task => {
-    let names = task.name.split(" ");
-    let contact = {
-      'first-name': names[0],
-      'last-name': names[1],
-      'checked?': 'unchecked',
-      'color': task.colorIcon,
-    };
-    contactsForAddTask.push(contact);
-  });
+    let tasks = JSON.parse(await getItem('contacts'));
+    tasks.forEach(task => {
+        let names = task.name.split(" ");
+        let contact = {
+            'first-name': names[0],
+            'last-name': names[1],
+            'checked?': 'unchecked',
+            'color': task.colorIcon,
+        };
+        contactsForAddTask.push(contact);
+    });
 
-  return contactsForAddTask;
+    return contactsForAddTask;
 }
 // Functions for Category Dropdown menu
 
@@ -40,38 +39,38 @@ async function getContaktfromBackend() {
  * 
  */
 function toggleDropdown(menuClass) {
-  const dropdownMenu = document.getElementsByClassName(menuClass)[0];
-  if (newCategoryStatus || assingedToStatus === true) {
+    const dropdownMenu = document.getElementsByClassName(menuClass)[0];
+    if (newCategoryStatus || assingedToStatus === true) {
 
-  } else {
-    if (dropdownMenu.style.height === '51px') {
-      dropdownMenu.style.height = '204px';
-      dropdownMenu.style.overflow = 'scroll'
     } else {
-      dropdownMenu.style.height = '51px';
-      dropdownMenu.style.overflow = 'hidden'
+        if (dropdownMenu.style.height === '51px') {
+            dropdownMenu.style.height = '204px';
+            dropdownMenu.style.overflow = 'scroll'
+        } else {
+            dropdownMenu.style.height = '51px';
+            dropdownMenu.style.overflow = 'hidden'
+        }
     }
-  }
 }
 
 /**
  * Renders the categorys to the dropdown menu
  */
 function renderCategorys() {
-  let categorysContainer = document.getElementById('categorys')
+    let categorysContainer = document.getElementById('categorys')
 
-  categorysContainer.innerHTML = ""
-  for (let i = 0; i < categorys.length; i++) {
-    let categoryName = categorys[i].category;
-    let categoryColor = categorys[i].color
+    categorysContainer.innerHTML = ""
+    for (let i = 0; i < categorys.length; i++) {
+        let categoryName = categorys[i].category;
+        let categoryColor = categorys[i].color
 
 
-    categorysContainer.innerHTML += ` 
+        categorysContainer.innerHTML += ` 
     
     <div onclick="selectTaskCategory(${i})" id="s${i}" class="dropdown-option category">${categoryName} <div class="circle-${categoryColor}"></div>
     </div>`
 
-  }
+    }
 
 }
 /**
@@ -80,9 +79,9 @@ function renderCategorys() {
  * it will be used to change the style: display 
  */
 function newCategory(display1) {
-  showNewCotegory()
-  prepareInput(display1)
-  toggleColorPallete('flex')
+    showNewCotegory()
+    prepareInput(display1)
+    toggleColorPallete('flex')
 }
 
 /**
@@ -91,18 +90,18 @@ function newCategory(display1) {
  * it will be used to change the style display 
  */
 function prepareInput(display1) {
-  toggleInput(display1, 'input-container')
-  toggleDropdown('dropdown-category')
-  document.getElementById('new-category-input').focus()
-  newCategoryStatus = true
+    toggleInput(display1, 'input-container')
+    toggleDropdown('dropdown-category')
+    document.getElementById('new-category-input').focus()
+    newCategoryStatus = true
 }
 /**
  * Toggles the choose color bar under the input
  * @param {string} action - needs none or flex to toggle the color palette
  */
 function toggleColorPallete(action) {
-  let colors = document.getElementById('colors-container')
-  colors.style.display = `${action}`
+    let colors = document.getElementById('colors-container')
+    colors.style.display = `${action}`
 }
 /**
  * 
@@ -110,16 +109,16 @@ function toggleColorPallete(action) {
  * @param {string} containerID -the ID of the input you want to toggle
  */
 function toggleInput(display1, containerId) {
-  let inputContainer = document.getElementById(`${containerId}`)
-  inputContainer.style.display = `${display1}`
+    let inputContainer = document.getElementById(`${containerId}`)
+    inputContainer.style.display = `${display1}`
 }
 /**
  * Adds new Category to the top of the Dropdownmenu
  */
 function showNewCotegory() {
-  let selectBox = document.getElementById('select-box')
-  clearSelectBox('select-box')
-  selectBox.innerHTML = `     
+    let selectBox = document.getElementById('select-box')
+    clearSelectBox('select-box')
+    selectBox.innerHTML = `     
   <div id="input-container" class="dropdown-option" style="display: none;">
   <input id="new-category-input" class="caption inputFrame"
       placeholder="New Category Name" type="text">
@@ -138,11 +137,11 @@ function showNewCotegory() {
  * @param {string} display1 -flex or none is needed for the toggleInput()
  */
 function discardNewCategory(display1) {
-  newCategoryStatus = false
-  toggleInput(display1, 'input-container')
-  clearSelectBox('select-box')
+    newCategoryStatus = false
+    toggleInput(display1, 'input-container')
+    clearSelectBox('select-box')
 
-  toggleColorPallete('none')
+    toggleColorPallete('none')
 
 }
 /**
@@ -150,46 +149,43 @@ function discardNewCategory(display1) {
  * @param {Array.index} id -needs a index number of the array categorys[] 
  */
 function selectTaskCategory(id) {
-  let selectBox = document.getElementById('select-box')
-  let selected = document.getElementById(`s${id}`)
+    let selectBox = document.getElementById('select-box')
+    let selected = document.getElementById(`s${id}`)
 
-  if (selectBox.innerHTML.includes(`id="s${id}"`)) {
-    clearSelectBox('select-box')
-  } else {
-    toggleDropdown('dropdown-category')
+    if (selectBox.innerHTML.includes(`id="s${id}"`)) {
+        clearSelectBox('select-box')
+    } else {
+        toggleDropdown('dropdown-category')
 
-    clearSelectBox('select-box')
-    selectBox.innerHTML += selected.outerHTML
-  }
+        clearSelectBox('select-box')
+        selectBox.innerHTML += selected.outerHTML
+    }
 }
 /**
  * adds the new catgeory to categorys[] and avoid not choosen colors and no text
  */
 function addNewCategory() {
-  let input = document.getElementById('new-category-input')
-  let value = input.value
+    let input = document.getElementById('new-category-input')
+    let value = input.value
 
-  let selectedColor = getSelectedColor();
-  if (selectedColor === null) {
-    showWarning('Please give your category a color')
-  } else if (value == "") {
+    let selectedColor = getSelectedColor();
+    if (selectedColor === null) {
+        showWarning('Please give your category a color')
+    } else if (value == "") {
 
-    showWarning('Please give your category a name')
-  }
-  else {
-    categorys.push(
-      {
-        'category': `${value}`,
-        'color': `${selectedColor}`,
-      }
-    )
-    renderCategorys()
-    selectTaskCategory(categorys.length - 1)
-    newCategoryStatus = false
-    toggleDropdown('dropdown-category')
+        showWarning('Please give your category a name')
+    } else {
+        categorys.push({
+            'category': `${value}`,
+            'color': `${selectedColor}`,
+        })
+        renderCategorys()
+        selectTaskCategory(categorys.length - 1)
+        newCategoryStatus = false
+        toggleDropdown('dropdown-category')
 
-    toggleColorPallete('none')
-  }
+        toggleColorPallete('none')
+    }
 
 
 }
@@ -198,27 +194,27 @@ function addNewCategory() {
  * @returns the choosen cooler on the color bar and returns null if nothing is choosen
  */
 function getSelectedColor() {
-  const colors = document.getElementsByName("color");
-  for (let i = 0; i < colors.length; i++) {
-    if (colors[i].checked) {
-      return colors[i].value;
+    const colors = document.getElementsByName("color");
+    for (let i = 0; i < colors.length; i++) {
+        if (colors[i].checked) {
+            return colors[i].value;
+        }
     }
-  }
-  return null; // Wenn keine Farbe ausgewählt ist
+    return null; // Wenn keine Farbe ausgewählt ist
 
 }
 
 /**
  * adds select task category to the top if the select-box is empty
  */
-window.addEventListener("click", function () {
-  let selectBox = document.getElementById('select-box');
-  if (selectBox.innerHTML == "") {
-    selectBox.innerHTML = `  <div class="dropdown-option dropdown-start-text">
+window.addEventListener("click", function() {
+    let selectBox = document.getElementById('select-box');
+    if (selectBox.innerHTML == "") {
+        selectBox.innerHTML = `  <div class="dropdown-option dropdown-start-text">
     <div id="select-task-category" style="display: unset;">Select task category</div>
     <div id="select-task-category-img"><img src="assets/img/vector2.svg"></div>
 </div>`;
-  }
+    }
 })
 
 
@@ -226,8 +222,8 @@ window.addEventListener("click", function () {
  * deletes everthing inside of the select box
  */
 function clearSelectBox(selectbox) {
-  let selectBox = document.getElementById(`${selectbox}`)
-  selectBox.innerHTML = ""
+    let selectBox = document.getElementById(`${selectbox}`)
+    selectBox.innerHTML = ""
 }
 //================= functions for Assinged to ========================
 
@@ -237,43 +233,43 @@ function clearSelectBox(selectbox) {
  */
 function checkButton(id) {
 
-  let checkbox = document.getElementsByClassName(`check-button`)[id]
-  let checkboxChecked = document.getElementsByClassName(`check-button-checked`)[id]
+    let checkbox = document.getElementsByClassName(`check-button`)[id]
+    let checkboxChecked = document.getElementsByClassName(`check-button-checked`)[id]
 
-  if (checkbox.style.display === 'none') {
-    checkbox.style.display = 'unset'
-    checkboxChecked.style.display = 'none'
+    if (checkbox.style.display === 'none') {
+        checkbox.style.display = 'unset'
+        checkboxChecked.style.display = 'none'
 
-  } else {
-    checkbox.style.display = 'none'
-    checkboxChecked.style.display = 'unset'
-  }
+    } else {
+        checkbox.style.display = 'none'
+        checkboxChecked.style.display = 'unset'
+    }
 }
 /**
  * set the contact on checked/uncheckd in the JSON array
  * @param {id} id - the id of person you clicking on 
  */
 function checkInJSON(id) {
-  let checkbox = document.getElementsByClassName(`check-button`)[id]
-  if (checkbox.style.display === 'unset') {
-    contactsForAddTask[id]['checked?'] = 'unchecked'
-  } else {
-    contactsForAddTask[id]['checked?'] = 'checked'
-  }
+    let checkbox = document.getElementsByClassName(`check-button`)[id]
+    if (checkbox.style.display === 'unset') {
+        contactsForAddTask[id]['checked?'] = 'unchecked'
+    } else {
+        contactsForAddTask[id]['checked?'] = 'checked'
+    }
 }
 /**
  * renders the contacts form the contactsForAddTask array into to the dropdown
  */
 function renderContacts() {
-  let contacts = document.getElementById('contacts')
-  contacts.innerHTML = "";
+    let contacts = document.getElementById('contacts')
+    contacts.innerHTML = "";
 
-  for (let i = 0; i < contactsForAddTask.length; i++) {
-    let name = contactsForAddTask[i]["first-name"];
-    let lastName = contactsForAddTask[i]["last-name"]
+    for (let i = 0; i < contactsForAddTask.length; i++) {
+        let name = contactsForAddTask[i]["first-name"];
+        let lastName = contactsForAddTask[i]["last-name"]
 
 
-    contacts.innerHTML += `
+        contacts.innerHTML += `
     <div onclick="checkButton(${i});checkInJSON(${i});renderPersons()" class="dropdown-option dropdown-option-img" id="at${i}">
       ${name} ${lastName}
       <div>
@@ -282,50 +278,50 @@ function renderContacts() {
       </div>
     </div>`
 
-  }
-  renderEmails()
+    }
+    renderEmails()
 }
 /**
  * renders the contacts under the dropdown menu to see wich persons the task is assinged to
  */
 function renderPersons() {
 
-  let persons = document.getElementById('assinged-persons-container')
-  persons.innerHTML = "";
+    let persons = document.getElementById('assinged-persons-container')
+    persons.innerHTML = "";
 
-  for (let i = 0; i < contactsForAddTask.length; i++) {
-    if (contactsForAddTask[i]["checked?"] === 'checked') {
+    for (let i = 0; i < contactsForAddTask.length; i++) {
+        if (contactsForAddTask[i]["checked?"] === 'checked') {
 
-      let name = contactsForAddTask[i]["first-name"];
-      let lastName = contactsForAddTask[i]["last-name"];
-      let color = contactsForAddTask[i]["color"];
+            let name = contactsForAddTask[i]["first-name"];
+            let lastName = contactsForAddTask[i]["last-name"];
+            let color = contactsForAddTask[i]["color"];
 
 
-      name = name.charAt(0)
-      lastName = lastName.charAt(0)
+            name = name.charAt(0)
+            lastName = lastName.charAt(0)
 
-      persons.innerHTML += `
+            persons.innerHTML += `
       <div style="background-color: ${color}" class="assinged-person">
                         <Span>${name}${lastName}</Span>
                     </div>
       `;
-    } else { }
-  }
+        } else {}
+    }
 }
 /**
  * eventlistner to fill the selcetbox if its empty with default value
  */
-window.addEventListener("click", function () {
-  let selectBox2 = document.getElementById('select-box2')
-  if (selectBox2.innerHTML == "") {
-    selectBox2.innerHTML =/*html*/ `   
+window.addEventListener("click", function() {
+    let selectBox2 = document.getElementById('select-box2')
+    if (selectBox2.innerHTML == "") {
+        selectBox2.innerHTML = /*html*/ `   
 
     <div class="dropdown-option dropdown-start-text">
     <div id="select-contacts-to-assign" style="display: unset;">Select contacts to assign</div>
     <div id="select-contacts-to-assign-img"><img src="assets/img/vector2.svg"></div>
 </div>
     `
-  }
+    }
 })
 
 /**
@@ -333,10 +329,10 @@ window.addEventListener("click", function () {
  */
 function showInviteNewContactInput() {
 
-  let selectBox2 = document.getElementById('select-box2')
-  clearSelectBox('select-box2')
+    let selectBox2 = document.getElementById('select-box2')
+    clearSelectBox('select-box2')
 
-  selectBox2.innerHTML = /*html*/ `     
+    selectBox2.innerHTML = /*html*/ `     
   
   <div id="input-container2" class="dropdown-option" style="display: none;">
   <input id="assinged-to-input" class="caption inputFrame"
@@ -350,25 +346,25 @@ function showInviteNewContactInput() {
 </div>
   `;
 
-  prepareAssingedToInput()
+    prepareAssingedToInput()
 }
 
 /**
  * some functions to make the input available
  */
 function prepareAssingedToInput() {
-  toggleInput('flex', 'input-container2')
-  toggleDropdown('dropdown-assinged-to')
-  assingedToStatus = true
-  document.getElementById('assinged-to-input').focus()
+    toggleInput('flex', 'input-container2')
+    toggleDropdown('dropdown-assinged-to')
+    assingedToStatus = true
+    document.getElementById('assinged-to-input').focus()
 }
 
 /**
  * clears the first reiter of the dropdown
  */
 function discardAssingedTo() {
-  clearSelectBox('select-box2')
-  assingedToStatus = false
+    clearSelectBox('select-box2')
+    assingedToStatus = false
 
 }
 
@@ -377,33 +373,33 @@ function discardAssingedTo() {
  */
 function applyNewEmail() {
 
-  let input = document.getElementById('assinged-to-input')
-  let vaildEmail = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+    let input = document.getElementById('assinged-to-input')
+    let vaildEmail = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 
-  if (input.value.match(vaildEmail)) {
+    if (input.value.match(vaildEmail)) {
 
-    emails.push(input.value)
- 
-    renderEmails()
-    discardAssingedTo()
+        emails.push(input.value)
 
-  } else {
-    showWarning('This email is invaild')
-  }
+        renderEmails()
+        discardAssingedTo()
+
+    } else {
+        showWarning('This email is invaild')
+    }
 }
 /**
  * renders the email form the email array into the dropdown
  */
 function renderEmails() {
-  let emailscontainer = document.getElementById('emails')
-  emailscontainer.innerHTML = '<div class="dropdown-option send-email"><b>Send Email to:</b></div>'
+    let emailscontainer = document.getElementById('emails')
+    emailscontainer.innerHTML = '<div class="dropdown-option send-email"><b>Send Email to:</b></div>'
 
-  if (emails.length > 0) {
-    for (let i = 0; i < emails.length; i++) {
-      let email = emails[i]
-      index = i + contactsForAddTask.length
+    if (emails.length > 0) {
+        for (let i = 0; i < emails.length; i++) {
+            let email = emails[i]
+            index = i + contactsForAddTask.length
 
-      emailscontainer.innerHTML += `
+            emailscontainer.innerHTML += `
       
       <div onclick="checkButton(${index});" class="dropdown-option dropdown-option-img" id="${index}">
         ${email}
@@ -412,8 +408,8 @@ function renderEmails() {
             <img style="display: unset;"  class="check-button-checked" src="assets/img/icons/Check button v1 checked.svg">
         </div>
       </div>`
+        }
     }
-  }
 }
 // ===================================Dropdowns Ende============================
 /**
@@ -424,23 +420,23 @@ function renderEmails() {
 
 function changeColor(id, priority) {
 
-  let buttons = document.getElementsByClassName('input-containerPrio');
-  for (let i = 0; i < buttons.length; i++) {
-    const button = buttons[i];
-    const svgPath = button.querySelector('svg');
-    const isCurrentButton = button.id === id;
+    let buttons = document.getElementsByClassName('input-containerPrio');
+    for (let i = 0; i < buttons.length; i++) {
+        const button = buttons[i];
+        const svgPath = button.querySelector('svg');
+        const isCurrentButton = button.id === id;
 
-    if (isCurrentButton) {
-      svgPath.classList.add('white-color');
-      button.querySelector('span').classList.add('txtWhite');
-      button.classList.add(priority);
-      currentPriority = priority
-    } else {
-      svgPath.classList.remove('white-color');
-      button.querySelector('span').classList.remove('txtWhite');
-      button.classList.remove('urgent', 'medium', 'low');
+        if (isCurrentButton) {
+            svgPath.classList.add('white-color');
+            button.querySelector('span').classList.add('txtWhite');
+            button.classList.add(priority);
+            currentPriority = priority
+        } else {
+            svgPath.classList.remove('white-color');
+            button.querySelector('span').classList.remove('txtWhite');
+            button.classList.remove('urgent', 'medium', 'low');
+        }
     }
-  }
 }
 
 /**
@@ -448,17 +444,20 @@ function changeColor(id, priority) {
  */
 
 function addNewSubtask() {
-  const inputElement = document.getElementById('newSubtaskInput');
-  const inputValue = inputElement.value.trim();
-  if (inputValue !== '') {
+    const inputElement = document.getElementById('newSubtaskInput');
+    const inputValue = inputElement.value.trim();
+    if (inputValue !== '') {
+        if (subtasks.length >= 5) {
+            showWarning("You can't create more Subtasks")
+        } else {
+            subtasks.push(inputValue)
+            renderSubtask()
+            inputElement.value = ""
+        }
 
-    subtasks.push(inputValue)
-    renderSubtask()
-    inputElement.value = ""
-
-  } else {
-    showWarning('Please give your Subtask a title')
-  }
+    } else {
+        showWarning('Please give your Subtask a title')
+    }
 }
 
 /**
@@ -467,58 +466,63 @@ function addNewSubtask() {
 
 function renderSubtask() {
 
-  let container = document.getElementById('subtaskContainer')
-  container.innerHTML = ""
+    let container = document.querySelector('#subtaskContainer>ul')
+    container.innerHTML = ""
 
-  for (let i = 0; i < subtasks.length; i++) {
-    const task = subtasks[i];
+    for (let i = 0; i < subtasks.length; i++) {
+        const task = subtasks[i];
 
-    container.innerHTML +=
-      `
-    <label>
-      <input type="checkbox" checked="checked">
-      <span class="checkmarkText typography2body subtask">${task}</span>
-      <span class="checkmark"><img class="rectangle6" src="./assets/img/rectangle6.svg"></span>
-    </label
+        container.innerHTML +=
+            `
+           
+      <li class="subtask">- ${task} <img onclick="deleteSubtask(${i})" src="assets/img/delete.png"></li>
+      
     `
-  }
-
+    }
+}
+/**
+ * delets a subtask
+ * @param {index} i expects a number  
+ */
+function deleteSubtask(i) {
+    subtasks.splice(i, 1)
+    renderSubtask()
 }
 
 /**
  * clears the complete tasks 
  */
 function clearTask() {
-  let title = document.getElementById('title')
-  let description = document.getElementById('description')
-  let date = document.getElementById('date')
+    let title = document.getElementById('title')
+    let description = document.getElementById('description')
+    let date = document.getElementById('date')
 
-  title.value = ""
-  description.value = ""
-  date.value = ""
-  resetPriority()
-  initArrays()
-  renderPersons()
-  renderSubtask()
-  clearSelectBox('select-box')
-  clearSelectBox('select-box2')
-  newCategoryStatus = false
-  assingedToStatus = false
+    title.value = ""
+    description.value = ""
+    date.value = ""
+    resetPriority()
+    initArrays()
+    renderPersons()
+    renderSubtask()
+    clearSelectBox('select-box')
+    clearSelectBox('select-box2')
+    newCategoryStatus = false
+    assingedToStatus = false
 }
 
 /**
  * changes colors of prioritys back to default
  */
 function resetPriority() {
-  let buttons = document.getElementsByClassName('addTaskFrame14Prio');
-  for (let i = 0; i < buttons.length; i++) {
-    const button = buttons[i];
-    const svgPath = button.querySelector('svg');
+    let buttons = document.getElementsByClassName('addTaskFrame14Prio');
+    for (let i = 0; i < buttons.length; i++) {
+        const button = buttons[i];
+        const svgPath = button.querySelector('svg');
 
-    button.classList.remove('urgent', 'medium', 'low');
-    svgPath.classList.remove('white-color');
-    button.querySelector('span').classList.remove('txtWhite');
-  }
+        button.classList.remove('urgent', 'medium', 'low');
+        svgPath.classList.remove('white-color');
+        button.querySelector('span').classList.remove('txtWhite');
+    }
 }
 
 
@@ -526,64 +530,64 @@ function resetPriority() {
  * creates the task
  */
 async function createTask() {
-  let titleInput = document.getElementById('title');
-  let descriptionInput = document.getElementById('description');
-  let dateInput = document.getElementById('date');
-  let categoryInput = document.querySelector('#select-box > div');
-  let persons = await addPersonsToNewTask();
-  let title = titleInput.value.trim();
-  let description = descriptionInput.value.trim();
-  let date = dateInput.value.trim();
-  let category = categoryInput.innerText.trim();
-  let taskId = Math.random().toString(36).substr(2) + Date.now().toString(36);
+    let titleInput = document.getElementById('title');
+    let descriptionInput = document.getElementById('description');
+    let dateInput = document.getElementById('date');
+    let categoryInput = document.querySelector('#select-box > div');
+    let persons = await addPersonsToNewTask();
+    let title = titleInput.value.trim();
+    let description = descriptionInput.value.trim();
+    let date = dateInput.value.trim();
+    let category = categoryInput.innerText.trim();
+    let taskId = Math.random().toString(36).substr(2) + Date.now().toString(36);
 
-  let color;
-  for (let cat of categorys) {
-    if (cat.category === category) {
-      color = cat.color;
-      break; 
+    let color;
+    for (let cat of categorys) {
+        if (cat.category === category) {
+            color = cat.color;
+            break;
+        }
     }
-  }
-  
-  if (checkRequierdInputs()) {
-    // Erstelle zunächst das neue Aufgabenobjekt
-    newTask = [{
-      'status': selectedCategory || 'open',
-      'title': title,
-      'description': description,
-      'date': date,
-      'category': category,
-      'persons': persons, 
-      'emails': [emails],
-      'priority': currentPriority,
-      'subtasks': subtasks,
-      'taskID': taskId,
-      'color': color
-    }];
 
-    clearTask();
-    createTaskBackend(newTask);
-    animations();
-  }
+    if (checkRequierdInputs()) {
+        // Erstelle zunächst das neue Aufgabenobjekt
+        newTask = [{
+            'status': selectedCategory || 'open',
+            'title': title,
+            'description': description,
+            'date': date,
+            'category': category,
+            'persons': persons,
+            'emails': [emails],
+            'priority': currentPriority,
+            'subtasks': subtasks,
+            'taskID': taskId,
+            'color': color
+        }];
+
+        clearTask();
+        createTaskBackend(newTask);
+        animations();
+    }
 }
 
 async function addPersonsToNewTask() {
-  let persons = [];
-  
-  for (let i = 0; i < contactsForAddTask.length; i++) {
-    const contact = contactsForAddTask[i];
+    let persons = [];
 
-    if (contact['checked?'] === 'checked') {
-      let firstName = contact['first-name'];
-      let lastName = contact['last-name'];
-      let color = contact['color'];
-      let name = {'name': `${firstName} ${lastName} ${color}`};
+    for (let i = 0; i < contactsForAddTask.length; i++) {
+        const contact = contactsForAddTask[i];
 
-      persons.push(name); 
+        if (contact['checked?'] === 'checked') {
+            let firstName = contact['first-name'];
+            let lastName = contact['last-name'];
+            let color = contact['color'];
+            let name = { 'name': `${firstName} ${lastName} ${color}` };
+
+            persons.push(name);
+        }
     }
-  }
-  
-  return persons; 
+
+    return persons;
 }
 
 // =============== Checking inputs ===================================
@@ -592,39 +596,39 @@ async function addPersonsToNewTask() {
  * @returns true if all inputs aren't empty false if minimum one is empty
  */
 function checkRequierdInputs() {
-  let checkInputTitle = checkInput('title');
-  let checkInputDescription = checkInput('description');
-  let checkInputDate = checkInput('date');
-  let checkCategorys = checkCategory();
-  let checkPrios = checkPrio();
+    let checkInputTitle = checkInput('title');
+    let checkInputDescription = checkInput('description');
+    let checkInputDate = checkInput('date');
+    let checkCategorys = checkCategory();
+    let checkPrios = checkPrio();
 
-  if (checkInputTitle && checkInputDescription && checkInputDate && checkCategorys && checkPrios) {
-    return true;
-  } else {
-   showWarning('Please fill out all required fields')
-    return false;
-  }
+    if (checkInputTitle && checkInputDescription && checkInputDate && checkCategorys && checkPrios) {
+        return true;
+    } else {
+        showWarning('Please fill out all required fields')
+        return false;
+    }
 }
 /**
  * shows a message that this field is requierd if no category is selected
  * @returns 
  */
 function checkCategory() {
-  let categoryInput = document.querySelector('#select-box > div');
-  let category = categoryInput.innerText.trim();
+    let categoryInput = document.querySelector('#select-box > div');
+    let category = categoryInput.innerText.trim();
 
-  if (category === 'Select task category') {
-    showIsRequiered(2, 'remove');
-    return false;
-  } else {
-    if (newCategoryStatus === true) {
-      showIsRequiered(2, 'remove');
-      return false;
+    if (category === 'Select task category') {
+        showIsRequiered(2, 'remove');
+        return false;
     } else {
-      showIsRequiered(2, 'add');
-      return true;
+        if (newCategoryStatus === true) {
+            showIsRequiered(2, 'remove');
+            return false;
+        } else {
+            showIsRequiered(2, 'add');
+            return true;
+        }
     }
-  }
 }
 /**
  * checks if the input is empty and shows a message if it is
@@ -632,17 +636,17 @@ function checkCategory() {
  * @returns -true if the input is filled and false if not
  */
 function checkInput(inputs) {
-  let input = document.getElementById(inputs);
-  let inputValue = input.value.trim();
-  let index = getRequiredIndex(inputs);
+    let input = document.getElementById(inputs);
+    let inputValue = input.value.trim();
+    let index = getRequiredIndex(inputs);
 
-  if (inputValue.length > 0) {
-    showIsRequiered(index, 'add');
-    return true;
-  } else {
-    showIsRequiered(index, 'remove');
-    return false;
-  }
+    if (inputValue.length > 0) {
+        showIsRequiered(index, 'add');
+        return true;
+    } else {
+        showIsRequiered(index, 'remove');
+        return false;
+    }
 }
 /**
  * Is important to show the right "This filed is required" text
@@ -650,13 +654,13 @@ function checkInput(inputs) {
  * @returns -the index for the right "This filed is required" text position
  */
 function getRequiredIndex(inputs) {
-  const inputMappings = {
-    'title': 0,
-    'description': 1,
-    'date': 3
-  };
+    const inputMappings = {
+        'title': 0,
+        'description': 1,
+        'date': 3
+    };
 
-  return inputMappings[inputs] || 0; // Fallback to 0 if inputs is not found in the object
+    return inputMappings[inputs] || 0; // Fallback to 0 if inputs is not found in the object
 }
 
 
@@ -665,13 +669,13 @@ function getRequiredIndex(inputs) {
  * @returns - true if its selected and false if not
  */
 function checkPrio() {
-  if (currentPriority.length > 0) {
-    showIsRequiered(4, 'add');
-    return true;
-  } else {
-    showIsRequiered(4, 'remove');
-    return false;
-  }
+    if (currentPriority.length > 0) {
+        showIsRequiered(4, 'add');
+        return true;
+    } else {
+        showIsRequiered(4, 'remove');
+        return false;
+    }
 }
 /**
  * 
@@ -679,28 +683,28 @@ function checkPrio() {
  * @param {string} action - 'add' or 'remove' for the classlist
  */
 function showIsRequiered(index, action) {
-  let required = document.getElementsByClassName('is-required')[index];
-  required.classList[action]('displayNone');
+    let required = document.getElementsByClassName('is-required')[index];
+    required.classList[action]('displayNone');
 }
 /**
  * Shows a Messagebox 
  * @param {string} text -the text you want to show in the Messagebox
  */
-function showWarning(text){
-  let massageBox= document.getElementById('created-task-massage-text')
-  let img = document.querySelector('#created-task-massage > img')
-  img.style.display = 'none'
+function showWarning(text) {
+    let massageBox = document.getElementById('created-task-massage-text')
+    let img = document.querySelector('#created-task-massage > img')
+    img.style.display = 'none'
 
-  flyIn('flex')
-  massageBox.innerText= `${text}`
+    flyIn('flex')
+    massageBox.innerText = `${text}`
 
-  setTimeout(() => {
-    flyIn('none')
-  }, 3000);
-  setTimeout(() => {
-    massageBox.innerText= `Task added to board`
-  }, 3100); 
-  
+    setTimeout(() => {
+        flyIn('none')
+    }, 3000);
+    setTimeout(() => {
+        massageBox.innerText = `Task added to board`
+    }, 3100);
+
 }
 
 // =========================Animations ===========================
@@ -708,13 +712,13 @@ function showWarning(text){
  * A animation order when you press on add task
  */
 function animations() {
-  flyIn('flex')
-  setTimeout(() => {
-    flyOutBody()
+    flyIn('flex')
     setTimeout(() => {
-      swapToBoard()
-    }, 250);
-  }, 1000);
+        flyOutBody()
+        setTimeout(() => {
+            swapToBoard()
+        }, 250);
+    }, 1000);
 
 }
 /**
@@ -722,44 +726,44 @@ function animations() {
  * @param {string} display - 'none ' or 'unset' to fly the messagebox in
  */
 function flyIn(display) {
-  let massage = document.getElementById('created-task-massage-container')
+    let massage = document.getElementById('created-task-massage-container')
 
-  massage.style.display = `${display}`
-  setTimeout(() => {
-    massage.classList.toggle('flyIn')
-  }, 10);
+    massage.style.display = `${display}`
+    setTimeout(() => {
+        massage.classList.toggle('flyIn')
+    }, 10);
 
 }
 /**
  * swipes the body to the right
  */
 function flyOutBody() {
-  let body = document.getElementsByTagName('body')[0]
-  body.style.transform = ('translateX(100%)')
+    let body = document.getElementsByTagName('body')[0]
+    body.style.transform = ('translateX(100%)')
 }
 /**
  * Getting redirected to the board.html
  */
 function swapToBoard() {
-  window.location.href = 'board.html'
+    window.location.href = 'board.html'
 }
 
 
 // =========================Date ==================================
 
 document.addEventListener('DOMContentLoaded', function() {
-  let heute = new Date();
-  let formattedDate = formatDate(heute);
+    let heute = new Date();
+    let formattedDate = formatDate(heute);
 
-  let datumInput = document.getElementById('date');
-  datumInput.value = formattedDate;
-  datumInput.min = formattedDate;
+    let datumInput = document.getElementById('date');
+    datumInput.value = formattedDate;
+    datumInput.min = formattedDate;
 });
 
 function formatDate(date) {
-  let day = ("0" + date.getDate()).slice(-2);
-  let month = ("0" + (date.getMonth() + 1)).slice(-2);
-  let year = date.getFullYear();
+    let day = ("0" + date.getDate()).slice(-2);
+    let month = ("0" + (date.getMonth() + 1)).slice(-2);
+    let year = date.getFullYear();
 
-  return year + '-' + month + '-' + day;
+    return year + '-' + month + '-' + day;
 }
