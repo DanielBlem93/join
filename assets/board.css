@@ -586,7 +586,7 @@ body {
     align-items: center;
     justify-content: center;
     transition: 125ms ease-in;
-    transform: translateX(2000px);
+    transform: translateX(3000px);
 
 }
 
