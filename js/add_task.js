@@ -448,7 +448,7 @@ function addNewSubtask() {
     const inputValue = inputElement.value.trim();
     if (inputValue !== '') {
         if (subtasks.length >= 5) {
-            showWarning("You can't create more Subtask")
+            showWarning("You can't create more Subtasks")
         } else {
             subtasks.push(inputValue)
             renderSubtask()
