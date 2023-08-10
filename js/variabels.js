@@ -19,3 +19,4 @@ let currentDraggedElement;
 let selectedCategory = null;
 const categoriesOrder = ['open', 'progress', 'feedback', 'closed'];
 let currentEmail;
+let
