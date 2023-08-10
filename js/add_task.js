@@ -447,10 +447,13 @@ function addNewSubtask() {
     const inputElement = document.getElementById('newSubtaskInput');
     const inputValue = inputElement.value.trim();
     if (inputValue !== '') {
-
-        subtasks.push(inputValue)
-        renderSubtask()
-        inputElement.value = ""
+        if (subtasks.length >= 5) {
+            showWarning("You can't create more Subtask")
+        } else {
+            subtasks.push(inputValue)
+            renderSubtask()
+            inputElement.value = ""
+        }
 
     } else {
         showWarning('Please give your Subtask a title')
@@ -477,7 +480,10 @@ function renderSubtask() {
     `
     }
 }
-
+/**
+ * delets a subtask
+ * @param {index} i expects a number  
+ */
 function deleteSubtask(i) {
     subtasks.splice(i, 1)
     renderSubtask()
