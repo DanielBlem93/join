@@ -224,6 +224,7 @@ display: unset;
 
 .add-contacts-container{
     position: relative;
+    max-width: 1200px;
     width: 80%;
     height: 70%;
     background-color: #FFFFFF;

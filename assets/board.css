@@ -63,7 +63,7 @@ body {
 
 
 .board-content {
-    margin: 30px;
+    margin: 0 30px 100px 30px;
 }
 
 .board-header {
@@ -850,6 +850,12 @@ body {
 
     .addTaskPriority button {
         width: 100%
+    }
+    .addTaskFrame28{
+        width: 100%;
+    }
+    .dropdown{
+        min-width: 300px!important;
     }
 
 }
