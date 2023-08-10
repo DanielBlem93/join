@@ -584,6 +584,16 @@ ul {
 .subtask img {
     display: none;
 }
+li {
+    display: flex;
+    justify-content: space-between;
+    font-size: 20px;
+}
+li img {
+    width: 30px;
+    height: 30px;
+    object-fit: contain;
+}
 
 .subtask:hover img {
     display: unset;
@@ -642,7 +652,7 @@ ul {
     width: 0;
 }
 
-.checkmarkText {}
+
 
 
 /* Create the checkmark/indicator (hidden when not checked) */
