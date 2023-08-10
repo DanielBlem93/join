@@ -235,7 +235,7 @@ function generateToDoHTML(element, category, i, nextPosition) {
     <div onclick="showTodo(${element['id']})" class="todo-box-body">
         <p>${element['text']}</p>
     </div>
-
+    <div onclick="showTodo(${element['id']})">
         <div class="todo-box-progress">
             <div class="todo-box-progress-bar">
                 <div class="todo-box-progress-bar-fill" style="width: ${progress * 100}%"></div>
@@ -255,6 +255,7 @@ function generateToDoHTML(element, category, i, nextPosition) {
         </div>
     </div>
     <div id="${category}${i}" class="nextPosition display-none">${nextPosition}</div>
+    </div>
     `;
 }
 
@@ -358,11 +359,16 @@ function searchTodos() {
 function showAddTaskPopup(color, category) {
     selectedCategory = category;
     let popup = document.getElementById('addTaskPopup');
+    let popupContainer = document.getElementById('addTaskPopupContainer');
     popup.dataset.category = category;
-    popup.classList.toggle('popupAnimation')
+    popup.classList.toggle('popupAnimation');
+    
     setTimeout(() => {
-        popup.style.backgroundColor = `${color}`
+        popup.style.backgroundColor = `${color}`;
+        popup.style.opacity = '1';
+        popupContainer.style.opacity = '1';
     }, 125);
+    updateHTML();
 }
 
 
