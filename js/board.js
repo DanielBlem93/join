@@ -187,80 +187,6 @@ function styleTodos() {
 
 
 /**
- * Generates an HTML string for a todo box element with various details about a task.
- *
- * This function expects an `element` object that includes the following properties:
- * - id: A unique identifier for the todo task.
- * - members: A string representing the task's assigned member.
- * - priority: A string representing the task's priority level.
- * - task-category: A string representing the task's category.
- * - title: A string representing the task's title.
- * - text: A string representing the task's description.
- * - done-fraction: A string representing the percentage of the task that has been completed.
- *
- * It uses the `getFirstTwoLetters` and `generatePrioIcon` functions to process the `members` and `priority` data.
- *
- * @param {Object} element - The todo task object to be processed.
- * @returns {string} An HTML string for a todo box element.
- */
-function generateToDoHTML(element, category, i, nextPosition) {
-    let members = element['members'];
-    let letters = getFirstTwoLetters(members);
-    let prioImg = generatePrioIcon(element['priority']);
-    let color = getColorVariable(element['task-color']);
-    let progress = 0;
-    let progressLabel = '';
-    if (element['subtasks'] && element['subtasks'].length > 0) {
-        progress = element['subtasks'].filter(subtaskObj => subtaskObj.isComplete).length / element['subtasks'].length;
-        progressLabel = `${element['subtasks'].filter(subtaskObj => subtaskObj.isComplete).length}/${element['subtasks'].length}`;
-    }
-    let displayUp = element['category'] === 'open' ? 'none' : 'block';
-    let displayDown = element['category'] === 'closed' ? 'none' : 'block';
-
-    return /*html*/ `
-    <div  class="todo-box" draggable="true" ondragstart="startDragging(${element['id']}, '${category}')">
-    <div class="chegeCategory">
-        <img id="up" onclick="upCategory(${element['id']})" src="./assets/img/up.png" style="display: ${displayUp}">
-        <br>
-        <img id="down" onclick="downCategory(${element['id']})" src="./assets/img/down.png" style="display: ${displayDown}">
-    </div>
-    <div id="todoBoxHeader${element['id']}" class="todo-box-header" style="background-color:${color};">
-        <h4>${element['task-category']}</h4>
-    </div>
-
-        <div class="todo-box-title">
-            <h3>${element['title']}</h3>
-        </div>
-
-    <div onclick="showTodo(${element['id']})" class="todo-box-body">
-        <p>${element['text']}</p>
-    </div>
-    <div onclick="showTodo(${element['id']})">
-        <div class="todo-box-progress">
-            <div class="todo-box-progress-bar">
-                <div class="todo-box-progress-bar-fill" style="width: ${progress * 100}%"></div>
-            </div>
-            <p>${progressLabel} Done</p>
-        </div>
-
-        <div id="todoBoxFooterBar${element['id']}" class="todo-box-footer-bar">
-            <div  class="todo-box-footer">
-                <div class="todo-box-footer-right" >
-                    ${letters}
-                </div>
-                <div class="todo-box-footer-left">
-                    ${prioImg}
-                </div>
-            </div> 
-        </div>
-    </div>
-    <div id="${category}${i}" class="nextPosition display-none">${nextPosition}</div>
-    </div>
-    `;
-}
-
-
-/**
  * Retrieves the CSS variable representation of a specified color name.
  * 
  * @param {string} colorName - The name of the color for which the CSS variable should be retrieved.
@@ -313,19 +239,6 @@ function getFirstTwoLetters(members) {
     }
 
     return letterDivs;
-}
-
-
-/**
- * Generates an HTML string for an image element that refers to a priority icon.
- *
- * @param {string} prio - The name of the priority level, which corresponds to the filename of the icon.
- * @returns {string} An HTML string for an image element.
- */
-function generatePrioIcon(prio) {
-    return /*html*/ `
-    <img src="./assets/img/icons/${prio}.png" alt="${prio}">
-    `;
 }
 
 
