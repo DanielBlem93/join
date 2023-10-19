@@ -1,17 +1,3 @@
-/** 
- * An array to store the details of the current user.
- * @type {Array} 
- */
-let currentUser = [];
-
-
-/** 
- * A string to store the name of the current user.
- * @type {string}
- */
-let currentUserName = '';
-
-
 /**
  * This asynchronous function handles user login. It retrieves user input (email and password), checks it against stored users,
  * and redirects to 'summary.html' if a match is found. The name of the logged in user is also stored locally.
@@ -23,16 +9,11 @@ let currentUserName = '';
 async function login() {
     let email = document.getElementById('loginEmail');
     let password = document.getElementById('loginPassword');
-
-    // Validate input
     if (!validateInput(email, password)) {
-        // If the input is not valid, stop execution of the function
         return;
     }
-
-    let data = JSON.parse(await getItem('userName'));
+    let data = JSON.parse(await getItem('userName')) || [];
     let currentUser = Array.isArray(data) ? data.filter(user => user.email === email.value && user.password === password.value) : [];
-
     if (currentUser.length > 0) {
         currentUserName = currentUser[0].name;
         await setItem('currentUserName', currentUserName);
@@ -97,105 +78,62 @@ async function allUsers() {
 
 
 /**
- * This function returns "true" if the viewport is less than or equal to 1000 pixels wide, 
- * and will say "false" if the window is wider than that.
+ * Toggles a CSS class for an HTML element by its id.
+ * Adds the class if `add` is true, removes it otherwise.
  * 
- * @returns 
+ * @param {string} id - The id of the HTML element.
+ * @param {string} className - The CSS class to add or remove.
+ * @param {boolean} [add=true] - Whether to add or remove the class.
+ * 
+ * @example
+ * toggleClassById('myElement', 'active', true);  // Adds the 'active' class to the element with id 'myElement'
  */
-function getMql() {
-    let mql = window.matchMedia("(max-width: 1000px)");
-    return mql.matches;
-}
-
-
-/**
- * This function enables the responsive initial animation of the logo.
- */
-function moveLogo() {
-    if (window.location.href.includes('index.html')) {
-        if (getMql() == false) {
-            hideOverlay();
-            hideLogoMobile();
-            moveLogoDesktop();
-            showContent();
+function toggleClassById(id, className, add = true) {
+    const element = document.getElementById(id);
+    if (element) {
+        if (add) {
+            element.classList.add(className);
         } else {
-            showOverlay();
-            hideOverlayAgain();
-            moveLogoDesktop();
-            moveLogoMobile();
-            showContent();
-        };   
+            element.classList.remove(className);
+        }
     }
 }
 
 
 /**
- * This function enables the movement of the mobile version logo.
+ * Checks if the window width is less than or equal to 1000px.
+ * 
+ * @returns {boolean} True if window width is <= 1000px, false otherwise.
  */
-function moveLogoMobile(){
-    document.getElementById('img-container-mobile').classList.add('movedContainer');
-    document.getElementById('logo-image-mobile').classList.add('movedImage');
-    document.getElementById('img-container-mobile').classList.add('opacity-none');
-    document.getElementById('logo-image-mobile').classList.add('opacity-none');
+function getMql() {
+    return window.matchMedia("(max-width: 1000px)").matches;
 }
 
 
 /**
- * This function makes the dark mobile-background disappear after two seconds 
- * so that the fields are functional.
+ * Moves and modifies the logo and related elements based on the screen size.
+ * This function is intended to be used only on pages that include 'index.html' in their URL.
+ * 
+ * @example
+ * moveLogo();  // Will move and modify elements if on a page with 'index.html' in its URL.
  */
-function hideOverlayAgain() {
-    setTimeout(hideOverlay, 2000);
-    document.getElementById('loginOverlay').classList.add('loginOverlayMobile');
-}
-
-
-/**
- * This function ensures that the elements of the page become visible.
- */
-function showContent() {
-    document.getElementById('login-header').classList.add('opacity');
-    document.getElementById('login-form').classList.add('opacity');
-    document.getElementById('indexFooter').classList.add('opacity');
-}
-
-
-/**
- * This function ensures the movement of the standard version logo
- */
-function moveLogoDesktop() {
-    document.getElementById('img-container').classList.add('movedContainer');
-    document.getElementById('logo-image').classList.add('movedImage');
-}
-
-
-/**
- * This function hides the mobile version of the logo.
- */
-function hideLogoMobile() {
-    document.getElementById('img-container-mobile').classList.add('display-none');
-}
-
-
-/**
- * This function shows the mobile version of the logo.
- */
-function showLogoMobile() {
-    document.getElementById('img-container-mobile').classList.remove('display-none');
-}
-
-
-/**
- * This function hides the mobile background.
- */
-function hideOverlay() {
-    document.getElementById('loginOverlay').classList.add('display-none');
-}
-
-
-/**
- * This function shows the mobile background.
- */
-function showOverlay() {
-    document.getElementById('loginOverlay').classList.remove('display-none');
+function moveLogo() {
+    if (!window.location.href.includes('index.html')) {
+        return;
+    }
+    const isMobile = getMql();
+    toggleClassById('loginOverlay', 'loginOverlayMobile', isMobile);
+    toggleClassById('loginOverlay', 'display-none', !isMobile);
+    toggleClassById('img-container-mobile', 'display-none', !isMobile);
+    ['img-container', 'logo-image', 'img-container-mobile', 'logo-image-mobile'].forEach(id => {
+        toggleClassById(id, 'movedContainer');
+        toggleClassById(id, 'movedImage');
+        toggleClassById(id, 'opacity-none', isMobile);
+    });
+    ['login-header', 'login-form', 'indexFooter'].forEach(id => {
+        toggleClassById(id, 'opacity');
+    });
+    if (isMobile) {
+        setTimeout(() => toggleClassById('loginOverlay', 'display-none', false), 2000);
+    }
 }

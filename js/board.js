@@ -1,54 +1,88 @@
-let todos = [];
-let currentToDos = [];
-let currentDraggedElement;
-let selectedCategory = null;
-const categoriesOrder = ['open', 'progress', 'feedback', 'closed'];
-
-
 /**
- * Asynchronous function that retrieves tasks from storage, processes them, and adds them to the todos list.
- * Each task comprises the following properties: id, category, task category, title, text, done fraction, members, priority, selected color, date, and task ID.
- * After the tasks are added, the HTML is updated to reflect the new tasks.
+ * Fetches tasks from local storage and parses them into a JSON object.
  * 
  * @async
- * @function
- * @returns {Promise<void>} No return value
- * @throws {Error} Throws an error if loading tasks or converting the resulting string to JSON fails.
+ * @returns {Promise<Object[]>} An array of task objects.
+ * @throws {Error} If fetching tasks or parsing fails.
+ */
+async function fetchTasksFromStorage() {
+    try {
+        return JSON.parse(await getItem('task'));
+    } catch (error) {
+        throw new Error('Failed to load tasks or convert to JSON.');
+    }
+}
+
+/**
+ * Filters an array of tasks by their category.
+ *
+ * @param {Object[]} tasks - An array of task objects.
+ * @param {string} selectedCategory - The category to filter by.
+ * @returns {Object[]} An array of tasks that match the selected category.
+ */
+function filterTasksByCategory(tasks, selectedCategory) {
+    return tasks.filter(task => task.category === selectedCategory);
+}
+
+/**
+ * Creates a task object from a given task.
+ * 
+ * @param {Object} task - An object containing task details.
+ * @returns {Object} A new task object.
+ */
+function createTaskObject(task) {
+    let members = (task.persons && task.persons.length > 0) ? task.persons.map(person => person.name) : ['All Employees rgb(200, 200, 120)'];
+    let subtasksWithCompletion = task.subtasks ? task.subtasks.map(subtask => ({ subtask, isComplete: false })) : [];
+
+    return {
+        'id': todos.length,
+        'category': task.status,
+        'task-category': task.category,
+        'title': task.title,
+        'text': task.description,
+        'done-fraction': '',
+        'members': members,
+        'priority': task.priority,
+        'subtasks': subtasksWithCompletion,
+        'date': task.date,
+        'taskID': task.taskID,
+        'task-color': task.color
+    };
+}
+
+/**
+ * Adds a task object to the global `todos` array if it doesn't already exist.
+ * 
+ * @param {Object} task - An object containing task details.
+ */
+function addTaskToTodos(task) {
+    let existingTask = todos.find(t => t.taskID === task.taskID);
+    if (!existingTask) {
+        todos.push(createTaskObject(task));
+    }
+}
+
+/**
+ * Main function to fetch tasks from storage and add them to the `todos` array.
+ * Also updates the HTML elements related to tasks.
+ * 
+ * @async
  */
 async function addTask() {
-    let addTasks = JSON.parse(await getItem('task'));
+    let addTasks = await fetchTasksFromStorage();
     let popup = document.getElementById('addTaskPopup');
     let selectedCategory = popup.dataset.category || 'open';
+    
     if (!addTasks || addTasks.length === 0) {
         return;
     }
 
     for (let taskArray of addTasks) {
         for (let task of taskArray) {
-            let existingTask = todos.find(t => t.taskID === task.taskID);
-            if (!existingTask) {
-                let members = (task.persons && task.persons.length > 0) ? task.persons.map(person => person.name) : ['All Employees rgb(200, 200, 120)'];
-
-                let subtasksWithCompletion = task.subtasks ? task.subtasks.map(subtask => ({ subtask, isComplete: false })) : [];
-
-                todos.push({
-                    'id': todos.length,
-                    'category': task.status,
-                    'task-category': task.category,
-                    'title': task.title,
-                    'text': task.description,
-                    'done-fraction': '',
-                    'members': members,
-                    'priority': task.priority,
-                    'subtasks': subtasksWithCompletion,
-                    'date': task.date,
-                    'taskID': task.taskID,
-                    'task-color': task.color
-                })
-            }
+            addTaskToTodos(task);
         }
     }
-    // setItemTodo();
+
     updateHTML();
 }
 
@@ -188,81 +222,7 @@ function hideEmptyFrame(category) {
 function styleTodos() {
     for (let i = 0; i < todos.length; i++) {
         const selectedColor = todos[i]['selected-color'];
-        // document.getElementById(`todoBoxHeader${todos[i]['id']}`).classList.add(`bg-cat-color-${selectedColor}`);
     }
-}
-
-
-/**
- * Generates an HTML string for a todo box element with various details about a task.
- *
- * This function expects an `element` object that includes the following properties:
- * - id: A unique identifier for the todo task.
- * - members: A string representing the task's assigned member.
- * - priority: A string representing the task's priority level.
- * - task-category: A string representing the task's category.
- * - title: A string representing the task's title.
- * - text: A string representing the task's description.
- * - done-fraction: A string representing the percentage of the task that has been completed.
- *
- * It uses the `getFirstTwoLetters` and `generatePrioIcon` functions to process the `members` and `priority` data.
- *
- * @param {Object} element - The todo task object to be processed.
- * @returns {string} An HTML string for a todo box element.
- */
-function generateToDoHTML(element, category, i, nextPosition) {
-    let members = element['members'];
-    let letters = getFirstTwoLetters(members);
-    let prioImg = generatePrioIcon(element['priority']);
-    let color = getColorVariable(element['task-color']);
-    let progress = 0;
-    let progressLabel = '';
-    if (element['subtasks'] && element['subtasks'].length > 0) {
-        progress = element['subtasks'].filter(subtaskObj => subtaskObj.isComplete).length / element['subtasks'].length;
-        progressLabel = `${element['subtasks'].filter(subtaskObj => subtaskObj.isComplete).length}/${element['subtasks'].length}`;
-    }
-    let displayUp = element['category'] === 'open' ? 'none' : 'block';
-    let displayDown = element['category'] === 'closed' ? 'none' : 'block';
-
-    return /*html*/ `
-    <div  class="todo-box" draggable="true" ondragstart="startDragging(${element['id']}, '${category}')">
-    <div class="chegeCategory">
-        <img id="up" onclick="upCategory(${element['id']})" src="./assets/img/up.png" style="display: ${displayUp}">
-        <br>
-        <img id="down" onclick="downCategory(${element['id']})" src="./assets/img/down.png" style="display: ${displayDown}">
-    </div>
-    <div id="todoBoxHeader${element['id']}" class="todo-box-header" style="background-color:${color};">
-        <h4>${element['task-category']}</h4>
-    </div>
-
-        <div class="todo-box-title">
-            <h3>${element['title']}</h3>
-        </div>
-
-    <div onclick="showTodo(${element['id']})" class="todo-box-body">
-        <p>${element['text']}</p>
-    </div>
-
-        <div class="todo-box-progress">
-            <div class="todo-box-progress-bar">
-                <div class="todo-box-progress-bar-fill" style="width: ${progress * 100}%"></div>
-            </div>
-            <p>${progressLabel} Done</p>
-        </div>
-
-        <div id="todoBoxFooterBar${element['id']}" class="todo-box-footer-bar">
-            <div  class="todo-box-footer">
-                <div class="todo-box-footer-right" >
-                    ${letters}
-                </div>
-                <div class="todo-box-footer-left">
-                    ${prioImg}
-                </div>
-            </div> 
-        </div>
-    </div>
-    <div id="${category}${i}" class="nextPosition display-none">${nextPosition}</div>
-    `;
 }
 
 
@@ -365,11 +325,16 @@ function searchTodos() {
 function showAddTaskPopup(color, category) {
     selectedCategory = category;
     let popup = document.getElementById('addTaskPopup');
+    let popupContainer = document.getElementById('addTaskPopupContainer');
     popup.dataset.category = category;
-    popup.classList.toggle('popupAnimation')
+    popup.classList.toggle('popupAnimation');
+    
     setTimeout(() => {
-        popup.style.backgroundColor = `${color}`
+        popup.style.backgroundColor = `${color}`;
+        popup.style.opacity = '1';
+        popupContainer.style.opacity = '1';
     }, 125);
+    updateHTML();
 }
 
 
@@ -379,7 +344,8 @@ function showAddTaskPopup(color, category) {
  *
  * @param {number} elementId - The ID of the todo element to be moved up in category.
  */
-function upCategory(elementId) {
+function upCategory(event, elementId) {
+    event.stopPropagation();
     let todo = todos[elementId];
 
     let currentCategoryIndex = categoriesOrder.indexOf(todo.category);
@@ -396,7 +362,8 @@ function upCategory(elementId) {
  *
  * @param {number} elementId - The ID of the todo element to be moved down in category.
  */
-function downCategory(elementId) {
+function downCategory(event, elementId) {
+    event.stopPropagation();
     let todo = todos[elementId];
 
     let currentCategoryIndex = categoriesOrder.indexOf(todo.category);

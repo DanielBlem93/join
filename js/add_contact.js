@@ -1,15 +1,3 @@
-let contacts = [];
-let contact = [];
-let contactsArray = [];
-let currentContact = null;
-
-// removeAllContakts();
-// async function removeAllContakts() {
-//     await setItem('contacts', JSON.stringify([]));
-//     getContacts();
-// }
-
-
 /**
  * Opens the "add-contact" modal by adjusting its position on the screen.
  * Prior to opening, it resets the modal to its initial state.
@@ -29,47 +17,88 @@ function closeModal(){
 
 
 /**
- * Creates a new contact and stores it in LocalStorage.
- * Fetches values from the input fields 'contactName', 'contactEmail', and 'contactPhone'.
- * Stores the contact in an array stored in LocalStorage under the key 'contacts'.
- * Refreshes the contact list and closes the modal.
- * Refreshes the page to reflect the changes.
- * @async
+ * Fetches input values for contact name, email, and phone from the DOM.
+ * @returns {Object} An object containing the name, email, and phone as properties.
  */
-async function createContact() {
-    let id = generateId();
-    let colorIcon = getRandomColor();
-    let nameInput = document.getElementById('contactName');
-    let emailInput = document.getElementById('contactEmail');
-    let phoneInput = document.getElementById('contactPhone');
+function getInputValues() {
+    const nameInput = document.getElementById('contactName').value;
+    const emailInput = document.getElementById('contactEmail').value;
+    const phoneInput = document.getElementById('contactPhone').value;
+    return { nameInput, emailInput, phoneInput };
+}
+
+
+/**
+ * Validates the input fields for a new contact.
+ * @param {string} name - The name of the contact.
+ * @param {string} email - The email of the contact.
+ * @param {string} phone - The phone number of the contact.
+ * @returns {boolean} True if all fields are valid, false otherwise.
+ */
+function validateInput(name, email, phone) {
     clearErrorMessages();
-
-    if (!isValidName(nameInput.value)) {
-        displayError(nameInput, 'Please enter first and last name separated by a space.');
-        return;
+    if (!isValid('name', name)) {
+        displayError(document.getElementById('contactName'), 'Please enter first and last name separated by a space.');
+        return false;
     }
-
-    if (!isValidEmail(emailInput.value)) {
-        displayError(emailInput, 'Please enter a valid email address.');
-        return;
+    if (!isValid('email', email)) {
+        displayError(document.getElementById('contactEmail'), 'Please enter a valid email address.');
+        return false;
     }
-
-    if (!isValidPhone(phoneInput.value)) {
-        displayError(phoneInput, 'Please enter only numbers for the phone.');
-        return;
+    if (!isValid('phone', phone)) {
+        displayError(document.getElementById('contactPhone'), 'Please enter only numbers for the phone.');
+        return false;
     }
-    const contact = {
-        name: nameInput.value,
-        email: emailInput.value,
-        phone: phoneInput.value,
+    return true;
+}
+
+/**
+ * Creates a new contact object based on the input fields.
+ * @param {string} name - The name of the contact.
+ * @param {string} email - The email of the contact.
+ * @param {string} phone - The phone number of the contact.
+ * @returns {Object} An object representing the new contact.
+ */
+function createContactObject(name, email, phone) {
+    const id = generateId();
+    const colorIcon = getRandomColor();
+    return {
+        name: name,
+        email: email,
+        phone: phone,
         id: id,
         colorIcon: colorIcon
+    };
+}
+
+
+/**
+ * Performs actions that are necessary after a contact has been successfully added.
+ * @async
+ * @returns {Promise<void>} Resolves once all the post-add actions are completed.
+ */
+async function postAddActions() {
+    await getContacts();
+    closeModal(); 
+}
+
+
+/**
+ * Main function to create a new contact based on input values.
+ * @async
+ * @returns {Promise<void>} Resolves once the contact has been added and all subsequent operations are completed.
+ */
+async function createContact() {
+    const { nameInput, emailInput, phoneInput } = getInputValues();
+
+    if (!validateInput(nameInput, emailInput, phoneInput)) {
+        return;
     }
 
+    const contact = createContactObject(nameInput, emailInput, phoneInput);
+
     await addContact(contact);
-    getContacts();
-    closeModal();
-    window.location.reload();
+    await postAddActions();
 }
 
 
@@ -92,38 +121,28 @@ function clearErrorMessages() {
 
 
 /**
- * Checks if the provided name is valid, consisting of two words (presumably first and last name).
+ * Validates the provided input based on its type (name, email, or phone).
  * 
- * @param {string} name - The name to be validated.
- * @returns {boolean} `true` if the name is valid, `false` otherwise.
+ * @param {string} type - The type of the input ("name", "email", or "phone").
+ * @param {string} value - The value to be validated.
+ * @returns {boolean} `true` if the value is valid, `false` otherwise.
  */
-function isValidName(name) {
-    let nameRegex = /^[a-z]+\s[a-z]+$/i;
-    return nameRegex.test(name);
-}
-
-
-/**
- * Checks if the provided email address is valid.
- * 
- * @param {string} email - The email to be validated.
- * @returns {boolean} `true` if the email is valid, `false` otherwise.
- */
-function isValidEmail(email) {
-    let emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(email);
-}
-
-
-/**
- * Checks if the provided phone number is valid (only contains digits).
- * 
- * @param {string} phone - The phone number to be validated.
- * @returns {boolean} `true` if the phone number is valid, `false` otherwise.
- */
-function isValidPhone(phone) {
-    let phoneRegex = /^\d+$/;
-    return phoneRegex.test(phone);
+function isValid(type, value) {
+    let regex;
+    switch (type) {
+        case 'name':
+            regex = /^[a-z]+\s[a-z]+$/i;
+            break;
+        case 'email':
+            regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            break;
+        case 'phone':
+            regex = /^\d+$/;
+            break;
+        default:
+            return false;
+    }
+    return regex.test(value);
 }
 
 
@@ -187,10 +206,8 @@ function resetModal() {
     setValue('contactName', '');
     setValue('contactEmail', '');
     setValue('contactPhone', '');
-
     toggleClass('btn-add', 'displaynone', false);
     toggleClass('btn-edit', 'displaynone', true);
-
     setValue('header-add-edit', 'Add');
     setValue('header-text', 'Tasks are better with a team!');
 }
@@ -205,47 +222,10 @@ function resetModal() {
 function renderActionButton(contactString, action) {
     let imgPath = action === 'edit' ? './assets/img/edit.png' : './assets/img/delete.png';
     let actionFunction = action === 'edit' ? 'openModalEditContakt' : 'deleteContact';
-
     return /*html*/ `
         <div onclick="${actionFunction}(${contactString})" class="contact-body-header-${action}">
             <img src="${imgPath}" alt="">
             ${action.charAt(0).toUpperCase() + action.slice(1)}
-        </div>
-    `;
-}
-
-
-/**
- * Renders a contact.
- * @param {Object} contact - The contact to render.
- * @param {string} initials - The initials of the contact name.
- * @return {string} The HTML string for the contact.
- */
-function renderContact(contact, initials, color = getRandomColor()) {
-    let contactString = JSON.stringify(contact).replace(/"/g, '&quot;');
-    return /*html*/`
-         <div class="contact-header">
-            <div class="contact-header-icon" style="background-color: ${contact.colorIcon};">${initials}</div>
-            <div>
-                <div class="contact-header-name">${contact.name}</div>
-                <div class="contact-header-add-task">
-                    ${renderActionButton(contactString, 'edit')}
-                    ${renderActionButton(contactString, 'delete')}
-                </div>
-            </div>
-        </div>
-        <div class="contact-body">
-            <div class="contact-body-header">
-                <div class="contact-body-header-title">Contact Information</div>
-            </div>
-            <div class="contact-body-item">
-                <div class="contact-body-item-title">Email</div>
-                <div class="contact-body-item-value-email">${contact.email}</div>
-            </div>
-            <div class="contact-body-item">
-                <div class="contact-body-item-title">Phone</div>
-                <div class="contact-body-item-value">${contact.phone}</div>
-            </div>
         </div>
     `;
 }
@@ -260,24 +240,89 @@ function applyStyles(element, styles) {
 }
 
 
+/**
+ * Removes all inline styles from the given element.
+ * @param {HTMLElement} element - The DOM element from which to remove styles.
+ */
 function resetStyles(element) {
     element.removeAttribute('style');
 }
 
 
 /**
- * Displays a specific contact's details based on the provided index.
- * Adjusts the view and styling based on the current window width (responsive design).
- * 
- * @param {number} index - The index of the contact in the contactsArray to be displayed.
- * 
- * @requires applyStyles - A function that sets multiple styles to a given DOM element.
- * @requires resetStyles - A function that resets styles of a given DOM element.
- * @requires getInitials - A function that retrieves the initials of a provided name.
- * @requires renderContact - A function that renders contact details.
- * 
- * @example
- * showContact(5); // Displays the details of the contact at index 5.
+ * Sets the content and styles for the contact display.
+ * @param {HTMLElement} contactContent - The DOM element where the contact information will be displayed.
+ * @param {Object} contact - The contact object containing the details to be displayed.
+ * @param {Function} getInitials - The function to generate initials from the contact's name.
+ */
+function setContactContent(contactContent, contact, getInitials) {
+    contactContent.style.right = '0';
+    contactContent.innerHTML = renderContact(contact, getInitials(contact.name).join(''));
+}
+
+
+/**
+ * Applies mobile-specific styles to the contactMobile element.
+ * @param {HTMLElement} contactMobile - The DOM element to which styles will be applied.
+ */
+function setContactMobileStyles(contactMobile) {
+    applyStyles(contactMobile, {
+        display: 'flex',
+        width: '100%',
+        height: '100%',
+        position: 'fixed',
+        left: '0',
+        right: '0',
+        top: '0',
+        zIndex: '1100',
+        backgroundColor: '#F6F7F8',
+        alignItems: 'center',
+        justifyContent: 'center'
+    });
+}
+
+
+/**
+ * Sets styles for the back button.
+ * @param {HTMLElement} back - The DOM element representing the back button.
+ */
+function setBackStyles(back) {
+    applyStyles(back, {
+        display: 'block',
+        position: 'absolute',
+        top: '150px',
+        right: '60px'
+    });
+}
+
+
+/**
+ * Sets styles for mobile view.
+ * @param {HTMLElement} contactMobile - The DOM element representing the mobile contact view.
+ * @param {HTMLElement} back - The DOM element representing the back button.
+ */
+function setMobileViewStyles(contactMobile, back) {
+    setContactMobileStyles(contactMobile);
+    setBackStyles(back);
+}
+
+
+/**
+ * Adds an event listener to the back button to reset styles.
+ * @param {HTMLElement} back - The DOM element representing the back button.
+ * @param {HTMLElement} contactMobile - The DOM element representing the mobile contact view.
+ */
+function addBackEventListener(back, contactMobile) {
+    back.addEventListener('click', () => {
+        resetStyles(contactMobile);
+        resetStyles(back);
+    });
+}
+
+
+/**
+ * Displays the contact information based on the given index.
+ * @param {number} index - The index of the contact to be displayed.
  */
 function showContact(index) {
     const contactMobile = document.getElementById('contact-m');
@@ -285,39 +330,13 @@ function showContact(index) {
     const contactContent = document.getElementById('contact-content');
     const back = document.getElementById('back-to-contancts');
     
-    contactContent.style.right = '0';
-    contactContent.innerHTML = renderContact(contact, getInitials(contact.name).join(''));
-    
-    if(window.innerWidth <= 1024) {
-        applyStyles(contactMobile, {
-            display: 'flex',
-            width: '100%',
-            height: '100%',
-            position: 'fixed',
-            left: '0',
-            right: '0',
-            top: '0',
-            zIndex: '1100',
-            backgroundColor: '#F6F7F8',
-            alignItems: 'center',
-            justifyContent: 'center'
-        });
+    setContactContent(contactContent, contact, getInitials);
 
-        applyStyles(back, {
-            display: 'block',
-            position: 'absolute',
-            top: '120px',
-            right: '60px'
-        });
-        
-        back.addEventListener('click', () => {
-            resetStyles(contactMobile);
-            resetStyles(back);
-        });
+    if(window.innerWidth <= 1024) {
+        setMobileViewStyles(contactMobile, back);
+        addBackEventListener(back, contactMobile);
     }
 }
-
-
 
 
 /**
@@ -345,59 +364,6 @@ async function deleteContact(contact) {
 function getRandomColor() {
     const colorValues = Array.from({length: 3}, () => Math.floor(Math.random() * 256));
     return `rgb(${colorValues.join(', ')})`;
-}
-
-
-
-/**
- * Generates the HTML for a contact block.
- * @param {Object} contact - The contact object.
- * @param {string} firstInitial - The first initial of the contact's name.
- * @param {string} secondInitial - The second initial of the contact's name.
- * @param {string} color - The color for the contact icon.
- * @param {number} contactIndex - The index of the contact in the contacts array.
- * @return {string} The HTML string for the contact block.
- */
-function renderContactBlock(contact, firstInitial, secondInitial, color, contactIndex) {
-    return /*html*/`
-        <div onclick="showContact(${contactIndex})" class="contacts-list-item">
-            <div class="contact-list-icon" style="background-color: ${contact.colorIcon};">
-                ${firstInitial.toUpperCase()}${secondInitial.toUpperCase()}    
-            </div>
-            <div>
-                <div class="contacts-list-item-name">${contact.name}</div>
-                <div class="contacts-list-item-email">${contact.email}</div>
-            </div>
-        </div>`;
-}
-
-/**
- * Fetches contacts from Storage, sorts them, generates the corresponding HTML and inserts it into the contact list.
- * @async
- */
-async function getContacts() {
-    const contactList = document.getElementById('contacts-list');
-    let contacts = JSON.parse(await getItem('contacts')) || [];
-    contacts = contacts.filter(contact => contact.name);
-    contacts.sort((a, b) => a.name.localeCompare(b.name, undefined, {sensitivity: 'base'}))
-
-    let lastInitial = '';
-    let htmlString = contacts.reduce((acc, contact) => {
-        const [firstInitial, secondInitial] = getInitials(contact.name);
-        const color = getRandomColor();
-        const initialBlock = firstInitial.toUpperCase() !== lastInitial 
-            ? `<div class="contact-list-first-latter">${firstInitial.toUpperCase()}</div><hr class="contact-list-hr">` 
-            : '';
-
-        lastInitial = firstInitial.toUpperCase();
-        contactsArray.push(contact); 
-        const contactIndex = contactsArray.length - 1;
-        const contactBlock = renderContactBlock(contact, firstInitial, secondInitial, color, contactIndex);
-
-        return acc + initialBlock + contactBlock;
-    }, '');
-
-    contactList.innerHTML = htmlString;
 }
 
 

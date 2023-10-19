@@ -45,14 +45,10 @@ function updateContactFormFields(contact) {
  */
 function openModalEditContakt(contact){
     currentContact = contact;
-    console.log(currentContact);
-
     setElementRightProperty('add-contakt-modal', '0');
     updateContactFormFields(currentContact);
-
     toggleButtonVisibility('btn-add');
     toggleButtonVisibility('btn-edit');
-
     updateElementHTML('header-add-edit', 'Edit');
     updateElementHTML('header-text', '');
 }
@@ -78,20 +74,15 @@ function updateCurrentContact() {
  */
 async function saveContact(){
     updateCurrentContact();
-
     if (!validateContact(currentContact)) {
         return;
     }
-
     let contacts = JSON.parse(await getItem('contacts'));
     let index = contacts.findIndex(item => item.id === currentContact.id);
     if (index !== -1) {
         contacts[index] = currentContact;
-    }
-
-    
+    }    
     await setItem('contacts', JSON.stringify(contacts));
-
     getContacts();
     closeModal();
     currentContact = null; 
@@ -100,74 +91,57 @@ async function saveContact(){
 
 
 /**
- * Validates if a given name is valid. A valid name consists of two words separated by a space.
- * E.g. "John Doe".
- * 
- * @param {string} name - The name to be validated.
- * @returns {boolean} - True if the name is valid, false otherwise.
- */
-function isValidName(name) {
-    const regex = /^[a-z]+\s[a-z]+$/i;
-    return regex.test(name);
-}
-
-
-/**
- * Validates if a given email is in a correct format.
- * 
- * @param {string} email - The email to be validated.
- * @returns {boolean} - True if the email is in a correct format, false otherwise.
- */
-function isValidEmail(email) {
-    const regex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
-    return regex.test(email);
-}
-
-
-/**
- * Validates if a given phone number is valid. A valid phone number contains only digits.
- * 
- * @param {string} phone - The phone number to be validated.
- * @returns {boolean} - True if the phone number is valid, false otherwise.
- */
-function isValidPhone(phone) {
-    const regex = /^\d+$/;
-    return regex.test(phone);
-}
-
-
-/**
- * Validates if a given phone number is valid. A valid phone number contains only digits.
- * 
- * @param {string} phone - The phone number to be validated.
- * @returns {boolean} - True if the phone number is valid, false otherwise.
+ * Validates the provided contact information (name, email, and phone).
+ *
+ * @param {Object} contact - The contact details to validate.
+ * @param {string} contact.name - The full name of the contact.
+ * @param {string} contact.email - The email address of the contact.
+ * @param {string} contact.phone - The phone number of the contact.
+ * @returns {boolean} Returns true if all contact details are valid; otherwise returns false.
  */
 function validateContact(contact) {
-    let isValid = true;
-    if (!isValidName(contact.name)) {
-        document.getElementById('contactNameError').innerText = 'Ungültiger Name.';
-        document.getElementById('contactNameError').style.display = 'block';
-        document.getElementById('contactNameError').style.color = 'red';
-        isValid = false;
-    } else {
-        document.getElementById('contactNameError').style.display = 'none';
+    let isValidFlag = true;
+    const fields = ['name', 'email', 'phone'];
+    for (let field of fields) {
+        if (!isValid(field, contact[field])) {
+            document.getElementById(`contact${capitalizeFirstLetter(field)}Error`).innerText = getErrorMessage(field);
+            document.getElementById(`contact${capitalizeFirstLetter(field)}Error`).style.display = 'block';
+            document.getElementById(`contact${capitalizeFirstLetter(field)}Error`).style.color = 'red';
+            isValidFlag = false;
+        } else {
+            document.getElementById(`contact${capitalizeFirstLetter(field)}Error`).style.display = 'none';
+        }
     }
-    if (!isValidEmail(contact.email)) {
-        document.getElementById('contactEmailError').innerText = 'Ungültige E-Mail-Adresse.';
-        document.getElementById('contactEmailError').style.display = 'block';
-        document.getElementById('contactEmailError').style.color = 'red';
-        isValid = false;
-    } else {
-        document.getElementById('contactEmailError').style.display = 'none';
+    return isValidFlag;
+}
+
+
+/**
+ * Capitalizes the first letter of the provided string.
+ *
+ * @param {string} string - The string to capitalize.
+ * @returns {string} Returns the string with the first letter capitalized.
+ */
+function capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
+
+/**
+ * Provides an appropriate error message based on the type of validation error.
+ *
+ * @param {'name' | 'email' | 'phone'} type - The type of validation error (e.g., 'name', 'email', 'phone').
+ * @returns {string} Returns a descriptive error message for the given error type.
+ */
+function getErrorMessage(type) {
+    switch (type) {
+        case 'name':
+            return 'Please enter first and last name separated by a space.';
+        case 'email':
+            return 'Please enter a valid email address.';
+        case 'phone':
+            return 'Please enter only numbers for the phone.';
+        default:
+            return '';
     }
-    if (!isValidPhone(contact.phone)) {
-        document.getElementById('contactPhoneError').innerText = 'Ungültige Telefonnummer.';
-        document.getElementById('contactPhoneError').style.display = 'block';
-        document.getElementById('contactPhoneError').style.color = 'red';
-        isValid = false;
-    } else {
-        document.getElementById('contactPhoneError').style.display = 'none';
-    }
-    
-    return isValid;
 }

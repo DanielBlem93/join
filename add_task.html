@@ -8,9 +8,9 @@
     <link rel="stylesheet" href="./assets/fonts.css">
     <link rel="stylesheet" href="./assets/add_task.css">
     <link rel="stylesheet" href="./assets/style.css">
-    <script src="js/template-script2.js"></script>
-    <script src="js/db-connect.js"></script>
-    <script src="js/signUp.js"></script>
+    <script src="js/template_script2.js"></script>
+    <script src="js/db_connect.js"></script>
+    <script src="js/sign_up.js"></script>
     <script src="js/summary.js"></script>
     <script src="js/login.js"></script>
     <script src="./js/add_contact.js"></script>
@@ -25,7 +25,7 @@
 
     <div w3-include-html="assets/templates/desktop_template.html"></div>
     <main>
-        
+
         <section id="options">
             <div id="left-side">
                 <div class="headline-container">
@@ -42,8 +42,7 @@
                 <div class="addTaskDescription width95">
                     <span class="captions">Description</span>
                     <div class="textarea-container width95">
-                        <textarea id="description" class="captions textareaFrame"
-                            placeholder="Enter a Description"></textarea>
+                        <textarea id="description" class="captions textareaFrame" placeholder="Enter a Description"></textarea>
                     </div>
                     <span class="is-required displayNone">This field is required</span>
                 </div>
@@ -52,19 +51,16 @@
                     <div style="height: 51px;" class="dropdown dropdown-category captions width95">
 
                         <div class="dropdown-content">
-                            <div onclick="toggleDropdown('dropdown-category width95');renderCategorys()"
-                                id="select-box">
+                            <div onclick="toggleDropdown('dropdown-category width95');renderCategorys()" id="select-box">
 
                                 <div class="dropdown-option dropdown-start-text">
-                                    <div id="select-task-category width95" style="display: unset;">Select task
-                                        category
+                                    <div id="select-task-category width95" style="display: unset;">Select task category
                                     </div>
                                     <div id="select-task-category-img width95"><img src="assets/img/vector2.svg">
                                     </div>
                                 </div>
                             </div>
-                            <div onclick="newCategory('flex', 'none', 'none')" class="dropdown-option width95 ">New
-                                Category
+                            <div onclick="newCategory('flex', 'none', 'none')" class="dropdown-option width95 ">New Category
                             </div>
                             <div id="categorys"></div>
                         </div>
@@ -104,23 +100,19 @@
                     <span class="captions">Assinged to</span>
                     <div style="height: 51px;" class="dropdown dropdown-assinged-to captions width95">
                         <div class="dropdown-content">
-                            <div id="select-box2" onclick="toggleDropdown('dropdown-assinged-to');renderContacts()"
-                                class="dropdown-option dropdown-start-text">
+                            <div id="select-box2" onclick="toggleDropdown('dropdown-assinged-to');renderContacts()" class="dropdown-option dropdown-start-text">
                                 <div class="dropdown-option dropdown-start-text">
-                                    <div id="select-contacts-to-assign" style="display: unset;">Select contacts to
-                                        assign
+                                    <div id="select-contacts-to-assign" style="display: unset;">Select contacts to assign
                                     </div>
                                     <div id="select-contacts-to-assign-img"><img src="assets/img/vector2.svg"></div>
                                 </div>
 
                                 <div id="input-container2" class="dropdown-option" style="display: none;">
-                                    <input id="assinged-to-input" class="captions inputFrame"
-                                        placeholder="Contact E-Mail" type="email">
+                                    <input id="assinged-to-input" class="captions inputFrame" placeholder="Contact E-Mail" type="email">
                                     <div class="check-container">
                                         <img onclick="" src="assets/img/icons/dropdown-close-button.svg">
                                         <img src="assets/img/icons/dropdown-abtrenner.svg">
-                                        <img onclick="addNewCategory()"
-                                            src="assets/img/icons/dropdown-check-button.svg">
+                                        <img onclick="addNewCategory()" src="assets/img/icons/dropdown-check-button.svg">
                                     </div>
                                 </div>
                             </div>
@@ -128,8 +120,8 @@
                             <div id="emails"></div>
 
                             <div onclick="showInviteNewContactInput()" class="dropdown-option dropdown-option-img">
-                                Invite
-                                new contact<div><img src="assets/img/icons/invite-new-contact.svg"></div>
+                                Invite new contact
+                                <div><img src="assets/img/icons/invite-new-contact.svg"></div>
                             </div>
                         </div>
                     </div>
@@ -143,8 +135,7 @@
                 <div class="addTaskDueDate width95">
                     <span class="captions width95 ">Due date</span>
                     <div class="input-container width95">
-                        <input id="date" type="date" class="captions inputFrame width95" placeholder="dd/mm/yyyy"
-                            min="2023-01-01">
+                        <input id="date" type="date" class="captions inputFrame width95" placeholder="dd/mm/yyyy" min="2023-01-01">
                     </div>
                     <span class="is-required displayNone">This field is required</span>
                 </div>
@@ -152,8 +143,7 @@
                     <span class="captions">Priority</span>
 
                     <div class="addTaskPriority width95">
-                        <button id="addTaskBtnUrgent" onclick="changeColor('addTaskBtnUrgent','urgent')"
-                            class="input-containerPrio buttonFramePrio ">
+                        <button id="addTaskBtnUrgent" onclick="changeColor('addTaskBtnUrgent','urgent')" class="input-containerPrio buttonFramePrio ">
                             <span class="captions">Urgent</span>
                             <svg width="21" height="15" viewBox="0 0 21 15" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
@@ -177,8 +167,7 @@
                                 </defs>
                             </svg>
                         </button>
-                        <button id="addTaskBtnMedium" onclick="changeColor('addTaskBtnMedium', 'medium')"
-                            class="input-containerPrio buttonFramePrio">
+                        <button id="addTaskBtnMedium" onclick="changeColor('addTaskBtnMedium', 'medium')" class="input-containerPrio buttonFramePrio">
                             <span class="captions">Medium</span>
                             <svg width="20" height="9" viewBox="0 0 20 9" xmlns="http://www.w3.org/2000/svg">
                                 <g id="Prio media" clip-path="url(#clip0_70119_2628)">
@@ -201,8 +190,7 @@
                                 </defs>
                             </svg>
                         </button>
-                        <button id="addTaskBtnLow" onclick="changeColor('addTaskBtnLow', 'low')"
-                            class="input-containerPrio buttonFramePrio">
+                        <button id="addTaskBtnLow" onclick="changeColor('addTaskBtnLow', 'low')" class="input-containerPrio buttonFramePrio">
                             <span class="captions">Low</span>
                             <svg width="20" height="15" viewBox="0 0 20 15" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
@@ -229,7 +217,11 @@
                         <input id="newSubtaskInput" class="captions inputFrame width95" placeholder="Add new Subtasks">
                         <img class="iconoirCancel" src="./assets/img/iconoir_cancel.svg" onclick="addNewSubtask()">
                     </div>
-                    <div class="subtaskContainer" id="subtaskContainer"></div>
+                    <div class="subtaskContainer" id="subtaskContainer">
+                        <ul>
+
+                        </ul>
+                    </div>
                 </div>
 
                 <div class="buttons-container width95">
@@ -255,8 +247,7 @@
         </section>
     </main>
 
-
-    <script src="js/add_task_dropdowns.js"></script>
+    <script src="js/variabels.js"></script>
     <script src="js/add_task.js"></script>
 </body>
 

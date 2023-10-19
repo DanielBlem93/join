@@ -1,4 +1,30 @@
 /**
+ * Generates a greeting based on the current time and updates the inner HTML of an element with id "greeting".
+ * - Good morning: 5am - 12pm
+ * - Good afternoon: 12pm - 6pm
+ * - Good evening: 6pm - 10pm
+ * - Good night: 10pm - 5am
+ * 
+ * @example
+ * // Updates the element with id "greeting" with an appropriate greeting.
+ * generateGreeting();
+ * 
+ * @returns {void} Nothing
+ */
+function generateGreeting() {
+    const date = new Date();
+    const hour = date.getHours();
+    let greeting;
+    if (hour >= 5 && hour < 12) greeting = "Good morning,";
+    else if (hour >= 12 && hour < 18) greeting = "Good afternoon,";
+    else if (hour >= 18 && hour < 22) greeting = "Good evening,";
+    else greeting = "Good night,";
+    document.getElementById("greeting").innerHTML = greeting;
+}
+
+
+
+/**
  * For each task element with the class 'summary-task', an event listener is added. 
  * When a task element is clicked, the user is redirected to the 'board.html' page.
  */

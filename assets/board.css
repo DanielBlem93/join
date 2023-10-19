@@ -63,7 +63,7 @@ body {
 
 
 .board-content {
-    margin: 30px;
+    margin: 0 30px 100px 30px;
 }
 
 .board-header {
@@ -143,7 +143,7 @@ body {
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: space-evenly;
     align-items: flex-start;
 }
 
@@ -163,7 +163,7 @@ body {
     padding: 20px;
     margin-top: 20px;
     margin-right: 20px;
-    /* cursor: pointer; */
+    cursor: pointer; 
     transition: all 0.2s ease-in-out;
 }
 .chegeCategory{
@@ -233,6 +233,7 @@ body {
 .todo-box-footer-bar {
     display: flex;
     flex-direction: row;
+    cursor: pointer;
 }
 
 .todo-box-footer {
@@ -244,6 +245,7 @@ body {
     justify-content: space-between;
     align-items: center;
     margin-top: 20px;
+    cursor: pointer;
 
 }
 
@@ -252,14 +254,13 @@ body {
     padding: 10px;
     display: flex;
     flex-direction: row;
-
+    cursor: pointer;
 }
 
 .todo-icon-name {
     border-radius: 50%;
     color: #FFFFFF;
     background-color: #800080;
-
     width: 35px;
     height: 35px;
     display: flex;
@@ -575,6 +576,7 @@ body {
     position: fixed;
     margin-left: auto;
     margin-right: auto;
+    opacity: 0;
     left: 0;
     right: 0;
     width: 100%;
@@ -584,7 +586,7 @@ body {
     align-items: center;
     justify-content: center;
     transition: 125ms ease-in;
-    transform: translateX(2000px);
+    transform: translateX(3000px);
 
 }
 
@@ -601,6 +603,7 @@ body {
     height: 90%;
     background-color: var(--background-white);
     border-radius: 20px;
+    opacity: 0;
 
 }
 
@@ -753,10 +756,15 @@ body {
         justify-content: flex-end;
         align-items: flex-start;
         gap: 20px;
+        height: 250px;
     }
 
 }
 @media(max-width: 768px) {
+
+    h3{
+        font-size: 1rem;
+    }
     
     .modal-content{
         width: 100%;
@@ -769,6 +777,7 @@ body {
         height: 100%;
         border-radius: 0;
         padding: 10px;
+        margin: 0;
     }
 }
 @media(max-width: 600px) {
@@ -807,6 +816,14 @@ body {
     .chegeCategory{
         display: block;
     }
+    .input-container{
+        width: 100%;
+    }
+}
+@media (max-width: 500px){
+    .editOk{
+        position: inherit;
+    }
 }
 
 
@@ -824,7 +841,12 @@ body {
     #right-side{
         padding-bottom: 0;
     }
-
+    .addTaskDescription{
+        width: 300px;
+    }
+    .addTaskDropdown{
+        width: 300px;
+    }
 }
 
 
@@ -840,6 +862,12 @@ body {
 
     .addTaskPriority button {
         width: 100%
+    }
+    .addTaskFrame28{
+        width: 100%;
+    }
+    .dropdown{
+        min-width: 300px!important;
     }
 
 }
