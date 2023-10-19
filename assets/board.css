@@ -57,18 +57,28 @@
 
 
 body {
+    display: flex;
+    justify-content: center;
+    width: 100%;
     background: var(--background-white);
-    overflow-x: hidden;
+
 }
 
-
 .board-content {
-    margin: 0 30px 100px 30px;
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+
+    margin-left: 232px;
+    overflow: auto;
+
+
 }
 
 .board-header {
-    width: 1145px;
-    height: 327px;
+    margin-top: 90px;
+    width: 90%;
+    height: 160px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -138,13 +148,24 @@ body {
     cursor: pointer;
 }
 
-.board-body-container {
-    width: 1145px;
+#kanban-board {
+    width: 100%;
+    height: 100%;
     display: flex;
-    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    overflow: auto;
+}
+
+.board-body-container {
+    width: 80%;
+    display: flex;
+    align-items: center;
+
     flex-direction: row;
-    justify-content: space-evenly;
-    align-items: flex-start;
+    gap: 50px;
+
+
 }
 
 .board-body-haeder {
@@ -162,11 +183,11 @@ body {
     border-radius: 10px;
     padding: 20px;
     margin-top: 20px;
-    margin-right: 20px;
-    cursor: pointer; 
+    cursor: pointer;
     transition: all 0.2s ease-in-out;
 }
-.chegeCategory{
+
+.chegeCategory {
     position: absolute;
     top: 10px;
     right: 10px;
@@ -446,7 +467,7 @@ body {
     display: flex;
 }
 
-#priority{
+#priority {
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -465,9 +486,9 @@ body {
     overflow: scroll;
 }
 
-.modal-members::-webkit-scrollbar {
+/* .modal-members::-webkit-scrollbar {
     display: none;
-}
+} */
 
 .modalMember {
     display: flex;
@@ -623,12 +644,12 @@ body {
     z-index: 999;
 }
 
-.platzhalter{
+.platzhalter {
     width: 100%;
     height: 100%;
     background-color: var(--background-dark-active);
     border-radius: 20px;
-    
+
 }
 
 
@@ -650,7 +671,8 @@ body {
     font-size: 20px;
     opacity: 0.5;
 }
-.chegeCategory{
+
+.chegeCategory {
     display: none;
 }
 
@@ -678,80 +700,55 @@ body {
 /* ==================RESPONSIVE=========================== */
 @media(max-width:1450px) {
     #addTaskPopupContainer {
-        
-      width: 90%;
+
+        width: 90%;
     }
-    main{
+
+    main {
         position: fixed;
         margin-left: auto;
         margin-right: auto;
         left: 0;
         right: 0;
     }
-    .board-body-container{
-        width: 100%;
+
+
+
+    .board-header {
+        align-self: flex-end;
     }
-    .drag-area{
-        overflow: scroll;
-        flex-basis: 33%;
-        width: 100%;
-    }
-    .drag-area::-webkit-scrollbar {
-        display: none;
-    }
-    .board-body-haeder{
-        width: 100%;
-        position: sticky;
-        top: 0;
-        background-color: var(--background-white);
-        margin-bottom: 10px;
-        padding-bottom: 10px;
-    }
-    .board-body{
-        width: 100%;
-        margin: 10px;
-        flex-wrap: wrap;
-    }
-    .board-header{
-        width: 100%;
-    }
-    
-    .todo-box{
-        width: 100%;
-        margin-right: 1px;
-        
-    }
+
 }
 
+
 @media(max-width:1333px) {
- 
-    #addTaskPopupContainer {
-        overflow-y: scroll;
+
+    body{
+        margin-bottom:90px ;
     }
 
-    #addTaskPopupContainer::-webkit-scrollbar {
-        display: none ;
-    } 
-    main::-webkit-scrollbar {
-        display: none ;
-    } 
-  
-    .buttons-container{
+    .buttons-container {
         margin-bottom: 50px !important;
     }
-    .input-container{
+
+    .input-container {
         width: 422px
     }
-    
+
 }
 
 @media(max-width:1024px) {
-    #addTaskPopupContainer {
+
+    .board-content{
+        margin-left: 0;
+    }
+     #addTaskPopupContainer {
         width: 100%;
         height: 100%;
         border-radius: 0;
     }
-    .board-header{
+
+    .board-header {
         flex-direction: column;
         justify-content: flex-end;
         align-items: flex-start;
@@ -760,68 +757,95 @@ body {
     }
 
 }
-@media(max-width: 768px) {
 
-    h3{
+@media(max-width: 768px) {
+ 
+    .todo-box{
+        width: 280px;
+    }
+    .board-body-container{
+        flex-wrap: wrap;
+        align-items: center;
+    }
+
+    h3 {
         font-size: 1rem;
     }
-    
-    .modal-content{
+
+    .modal-content {
         width: 100%;
         height: 100%;
         border-radius: 0;
         padding: 10px;
     }
-    .editTodoBox{
+
+    .editTodoBox {
         width: 100%;
         height: 100%;
         border-radius: 0;
         padding: 10px;
         margin: 0;
     }
-}
-@media(max-width: 600px) {
+
     .board-header-search {
         width: 100%;
         flex-direction: column-reverse;
         align-items: flex-end;
         gap: 10px;
     }
-    .board-body-container{
+
+    .board-body-container {
         width: 100%;
 
         align-items: center;
         justify-content: center;
     }
-    .drag-area{
+    .board-body{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .drag-area {
         height: auto;
         flex-basis: 100%;
         width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
     }
-    .board-header h1{
+
+    .board-header h1 {
         margin-bottom: -80px;
     }
-   
-    #btn-add-board{
+
+    #btn-add-board {
         display: none;
     }
-    .board-button{
+
+    .board-button {
         width: 50px;
         height: 50px;
     }
 
-    .width95{
+    .width95 {
         width: 95%;
     }
-    .chegeCategory{
+
+    .chegeCategory {
         display: block;
     }
-    .input-container{
+
+    .input-container {
         width: 100%;
     }
 }
-@media (max-width: 500px){
-    .editOk{
+
+@media (max-width: 500px) {
+
+    .editOk {
         position: inherit;
     }
 }
@@ -838,13 +862,16 @@ body {
         min-width: 0;
 
     }
-    #right-side{
+
+    #right-side {
         padding-bottom: 0;
     }
-    .addTaskDescription{
+
+    .addTaskDescription {
         width: 300px;
     }
-    .addTaskDropdown{
+
+    .addTaskDropdown {
         width: 300px;
     }
 }
@@ -863,17 +890,19 @@ body {
     .addTaskPriority button {
         width: 100%
     }
-    .addTaskFrame28{
+
+    .addTaskFrame28 {
         width: 100%;
     }
-    .dropdown{
-        min-width: 300px!important;
+
+    .dropdown {
+        min-width: 300px !important;
     }
 
 }
 
 @media(max-width: 350px) {
-   body *{
-    font-size: 16px;
-   }
+    body * {
+        font-size: 16px;
+    }
 }
