@@ -2,7 +2,7 @@
  * pre sets the arrays whit values. This function can also be used to reset every array
  */
 async function initArrays() {
-    categorys = JSON.parse(await getItem('categorys'));
+    // categorys = JSON.parse(await getItem('categorys'));
     // categorys = [];
     // categorys = setItem('categorys', JSON.stringify(categorys));
     getContaktfromBackend();
@@ -38,11 +38,14 @@ function toggleDropdown(menuClass) {
     const dropdownMenu = document.getElementsByClassName(menuClass)[0];
 
     if (dropdownMenu.style.height === DROPDOWN_MIN_HEIGHT) {
+      
         dropdownMenu.style.height = DROPDOWN_MAX_HEIGHT;
         dropdownMenu.style.overflow = 'scroll';
         dropdownMenu.style.position = 'absolute';
         dropdownMenu.style.zIndex = DROPDOWN_Z_INDEX;
+      
     } else {
+        dropdownMenu.scrollTo(top)
         dropdownMenu.style.height = DROPDOWN_MIN_HEIGHT;
         dropdownMenu.style.overflow = 'hidden';
         dropdownMenu.style.position = '';
@@ -61,7 +64,7 @@ function renderCategorys() {
     for (let i = 0; i < categorys.length; i++) {
         let categoryName = categorys[i].category;
         let categoryColor = categorys[i].color;
-        console.log(categorys);
+
         categorysContainer.innerHTML += /*html*/` 
     <div onclick="selectTaskCategory(${i})" id="s${i}" class="dropdown-option category">${categoryName} <div class="circle-${categoryColor}"></div>
     </div>`;
@@ -163,6 +166,7 @@ function selectTaskCategory(id) {
     if (selectBox.innerHTML.includes(`id="s${id}"`)) {
         clearSelectBox('select-box')
     } else {
+        
         toggleDropdown('dropdown-category')
 
         clearSelectBox('select-box')
@@ -177,7 +181,7 @@ function selectTaskCategory(id) {
 async function addNewCategory() {
     let input = document.getElementById('new-category-input')
     let value = input.value
-    categorys = JSON.parse(await getItem('categorys'));
+    // categorys = JSON.parse(await getItem('categorys'));
 
     let selectedColor = getSelectedColor();
     if (selectedColor === null) {
@@ -196,7 +200,7 @@ async function addNewCategory() {
         newCategoryStatus = false;
         toggleDropdown('dropdown-category');
         toggleColorPallete('none')
-        await setItem('categorys', JSON.stringify(categorys));
+        // await setItem('categorys', JSON.stringify(categorys));
     }
 }
 

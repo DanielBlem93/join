@@ -45,7 +45,7 @@ function generateToDoHTML(element, category, i, nextPosition) {
             <h3>${element['title']}</h3>
         </div>
 
-    <div onclick="showTodo(${element['id']})" class="todo-box-body">
+    <div onclick="showTodo(${element['id']}); " class="todo-box-body">
         <p>${element['text']}</p>
     </div>
     <div >
@@ -306,8 +306,8 @@ function generateToDoHTMLModal(todo) {
     }
 
     let todoHTML = /*html*/ `
-    <div class="modal-content">
-        <div onclick="closeModalBord()" class="modal-close">
+    <div onclick="doNotClose(event)" class="modal-content">
+        <div onclick="; closeModalBord(event)" class="modal-close">
             <img src="./assets/img/close-icon.png" alt="">
         </div>
         <h4 style="background-color: ${color}" class="modal-category">${todo['task-category']}</h4>

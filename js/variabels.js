@@ -6,7 +6,24 @@ let contact = [];
 let contactsArray = [];
 let currentContact = null;
 let contactsForAddTask = []
-let categorys = []
+let categorys = [
+    {
+        'category': 'Sales',
+        'color': 'red'
+    },
+    {
+        'category': 'Backoffice',
+        'color': 'green'
+    },
+    {
+        'category': 'Development',
+        'color': 'orange'
+    },
+    {
+        'category': 'Testing',
+        'color': 'purple'
+    },
+]
 let subtasks = []
 let emails = []
 let newTask = []

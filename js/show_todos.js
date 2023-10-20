@@ -11,7 +11,7 @@ function showTodo(id) {
     modalTodo.classList.remove('displayNone');
     modalTodo.innerHTML = '';
     modalTodo.innerHTML = ``;
-    modalTodo.innerHTML += generateToDoHTMLModal(todo); 
+    modalTodo.innerHTML += generateToDoHTMLModal(todo);
 }
 
 
@@ -54,10 +54,10 @@ function generateSubtaskHTML(subtaskObj, index, todoId) {
 function generateMemberHTML(member) {
     let splitMember = member.split(' rgb(');
     let name = splitMember[0];
-    let color = splitMember[1] ? "rgb(" + splitMember[1] : getRandomColor(); 
+    let color = splitMember[1] ? "rgb(" + splitMember[1] : getRandomColor();
 
     let names = name.split(' ');
-    let initials = names[0][0] + (names[1] ? names[1][0] : ''); 
+    let initials = names[0][0] + (names[1] ? names[1][0] : '');
 
     let memberHTML = `<p class="modalMember"><span class="initMember" style="background-color:${color}">${initials}</span> ${name}</p>`;
     return memberHTML;
@@ -96,7 +96,7 @@ function toggleSubtask(todoId, subtaskId) {
  */
 async function saveTodo(id) {
     let index = id;
-    let todo = todos[index]; 
+    let todo = todos[index];
     if (!todo) {
         console.error(`Todo with index ${index} not found.`);
         return;
@@ -141,7 +141,7 @@ let addPersonsToNewTodo = () => {
             persons.push(fullName);
         }
     }
-    return persons; 
+    return persons;
 }
 
 
@@ -173,6 +173,9 @@ function closeModalBord() {
     modalTodo.classList.add('displayNone');
 }
 
+function doNotClose(event) {
+    event.stopPropagation()
+}
 
 /**
  * Deletes a todo based on its id and updates the local storage.
