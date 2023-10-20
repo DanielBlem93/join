@@ -36,19 +36,19 @@ async function getContaktfromBackend() {
  */
 function toggleDropdown(menuClass) {
     const dropdownMenu = document.getElementsByClassName(menuClass)[0];
-    
-        if (dropdownMenu.style.height === DROPDOWN_MIN_HEIGHT ) {
-            dropdownMenu.style.height = 'auto';
-            dropdownMenu.style.overflow = 'scroll';
-            dropdownMenu.style.position = 'absolute';
-            dropdownMenu.style.zIndex = DROPDOWN_Z_INDEX;
-        } else {
-            dropdownMenu.style.height = DROPDOWN_MIN_HEIGHT;
-            dropdownMenu.style.overflow = 'hidden';
-            dropdownMenu.style.position = '';
-            dropdownMenu.style.zIndex = '';
-        }
-    
+
+    if (dropdownMenu.style.height === DROPDOWN_MIN_HEIGHT) {
+        dropdownMenu.style.height = DROPDOWN_MAX_HEIGHT;
+        dropdownMenu.style.overflow = 'scroll';
+        dropdownMenu.style.position = 'absolute';
+        dropdownMenu.style.zIndex = DROPDOWN_Z_INDEX;
+    } else {
+        dropdownMenu.style.height = DROPDOWN_MIN_HEIGHT;
+        dropdownMenu.style.overflow = 'hidden';
+        dropdownMenu.style.position = '';
+        dropdownMenu.style.zIndex = '';
+    }
+
 }
 
 
@@ -190,11 +190,11 @@ async function addNewCategory() {
             'category': `${value}`,
             'color': `${selectedColor}`,
         })
-        
+
         renderCategorys();
         selectTaskCategory(categorys.length - 1);
         newCategoryStatus = false;
-        toggleDropdown('dropdown-category'); 
+        toggleDropdown('dropdown-category');
         toggleColorPallete('none')
         await setItem('categorys', JSON.stringify(categorys));
     }
@@ -220,7 +220,7 @@ function getSelectedColor() {
 /**
  * adds select task category to the top if the select-box is empty
  */
-window.addEventListener("click", function() {
+window.addEventListener("click", function () {
     let selectBox = document.getElementById('select-box');
     if (selectBox.innerHTML == "") {
         selectBox.innerHTML =/*html*/ `  <div class="dropdown-option dropdown-start-text">
@@ -286,17 +286,34 @@ function renderContacts() {
         let name = contactsForAddTask[i]["first-name"];
         let lastName = contactsForAddTask[i]["last-name"]
         contacts.innerHTML +=/*html*/ `
-    <div onclick="checkButton(${i});checkInJSON(${i});renderPersons()" class="dropdown-option dropdown-option-img" id="at${i}">
-      ${name} ${lastName}
-      <div>
-          <img class="check-button" src="assets/img/icons/Check button v1.svg">
-          <img style="display: none;" class="check-button-checked" src="assets/img/icons/Check button v1 checked.svg">
-      </div>
-    </div>`
+          ${isContactChecked(i, name, lastName)}
+    `
     }
     renderEmails()
 }
+function isContactChecked(i, name, lastName) {
+    if (contactsForAddTask[i]['checked?'] === 'unchecked') {
+        return ` 
+        <div onclick="checkButton(${i});checkInJSON(${i});renderPersons()" class="dropdown-option dropdown-option-img" id="at${i}">
+           ${checkButtonHtml(name, lastName)}
+        </div>
+        `
+    } else {
+        return `
+        <div style="display: none;" onclick="checkButton(${i});checkInJSON(${i});renderPersons()" class="dropdown-option dropdown-option-img" id="at${i}">
+        ${checkButtonHtml(name, lastName)}
+        </div>
+        `
+    }
+}
 
+function checkButtonHtml(name, lastName){
+    return ` ${name} ${lastName}
+    <div>
+    <img class="check-button" src="assets/img/icons/Check button v1.svg">
+    <img style="display: none;" class="check-button-checked" src="assets/img/icons/Check button v1 checked.svg">
+    </div>`
+}
 
 /**
  * renders the contacts under the dropdown menu to see wich persons the task is assinged to
@@ -316,7 +333,7 @@ function renderPersons() {
                         <Span>${name}${lastName}</Span>
                     </div>
       `;
-        } 
+        }
     }
 }
 
@@ -324,7 +341,7 @@ function renderPersons() {
 /**
  * eventlistner to fill the selcetbox if its empty with default value
  */
-window.addEventListener("click", function() {
+window.addEventListener("click", function () {
     let selectBox2 = document.getElementById('select-box2')
     if (selectBox2.innerHTML == "") {
         selectBox2.innerHTML = /*html*/ `   
@@ -662,7 +679,7 @@ function getRequiredIndex(inputs) {
         'description': 1,
         'date': 3
     };
-    return inputMappings[inputs] || 0; 
+    return inputMappings[inputs] || 0;
 }
 
 
@@ -755,7 +772,7 @@ function swapToBoard() {
     window.location.href = 'board.html'
 }
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     let heute = new Date();
     let formattedDate = formatDate(heute);
 

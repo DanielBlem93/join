@@ -96,7 +96,7 @@ body {
 }
 
 .input-container {
-    width: 251px;
+
     height: 51px;
     position: relative;
 }
@@ -486,9 +486,9 @@ body {
     overflow: scroll;
 }
 
-/* .modal-members::-webkit-scrollbar {
+.modal-members::-webkit-scrollbar {
     display: none;
-} */
+}
 
 .modalMember {
     display: flex;
@@ -592,6 +592,14 @@ body {
 
 
 /* ==============Add Task Popup ================ */
+#contacts {
+ 
+}
+
+.dropdown-assinged-to{
+    overflow: auto;
+    height: 250px 
+}
 
 #addTaskPopup {
     position: fixed;
@@ -723,8 +731,8 @@ body {
 
 @media(max-width:1333px) {
 
-    body{
-        margin-bottom:90px ;
+    body {
+        margin-bottom: 90px;
     }
 
     .buttons-container {
@@ -739,10 +747,11 @@ body {
 
 @media(max-width:1024px) {
 
-    .board-content{
+    .board-content {
         margin-left: 0;
     }
-     #addTaskPopupContainer {
+
+    #addTaskPopupContainer {
         width: 100%;
         height: 100%;
         border-radius: 0;
@@ -759,11 +768,12 @@ body {
 }
 
 @media(max-width: 768px) {
- 
-    .todo-box{
+
+    .todo-box {
         width: 280px;
     }
-    .board-body-container{
+
+    .board-body-container {
         flex-wrap: wrap;
         align-items: center;
     }
@@ -800,7 +810,8 @@ body {
         align-items: center;
         justify-content: center;
     }
-    .board-body{
+
+    .board-body {
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -905,4 +916,8 @@ body {
     body * {
         font-size: 16px;
     }
+}
+
+.addTaskFrame17Recurso11{
+    display: none;
 }
