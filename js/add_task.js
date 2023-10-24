@@ -23,7 +23,6 @@ async function getContaktfromBackend() {
         };
         contactsForAddTask.push(contact);
     });
-
     return contactsForAddTask;
 }
 
@@ -38,12 +37,12 @@ function toggleDropdown(menuClass) {
     const dropdownMenu = document.getElementsByClassName(menuClass)[0];
 
     if (dropdownMenu.style.height === DROPDOWN_MIN_HEIGHT) {
-      
+
         dropdownMenu.style.height = DROPDOWN_MAX_HEIGHT;
         dropdownMenu.style.overflow = 'scroll';
         dropdownMenu.style.position = 'absolute';
         dropdownMenu.style.zIndex = DROPDOWN_Z_INDEX;
-      
+
     } else {
         dropdownMenu.scrollTo(top)
         dropdownMenu.style.height = DROPDOWN_MIN_HEIGHT;
@@ -68,9 +67,7 @@ function renderCategorys() {
         categorysContainer.innerHTML += /*html*/` 
     <div onclick="selectTaskCategory(${i})" id="s${i}" class="dropdown-option category">${categoryName} <div class="circle-${categoryColor}"></div>
     </div>`;
-
     }
-
 }
 
 
@@ -149,9 +146,7 @@ function discardNewCategory(display1) {
     newCategoryStatus = false
     toggleInput(display1, 'input-container')
     clearSelectBox('select-box')
-
     toggleColorPallete('none')
-
 }
 
 
@@ -166,9 +161,7 @@ function selectTaskCategory(id) {
     if (selectBox.innerHTML.includes(`id="s${id}"`)) {
         clearSelectBox('select-box')
     } else {
-        
         toggleDropdown('dropdown-category')
-
         clearSelectBox('select-box')
         selectBox.innerHTML += selected.outerHTML
     }
@@ -217,7 +210,6 @@ function getSelectedColor() {
         }
     }
     return null; // Wenn keine Farbe ausgewählt ist
-
 }
 
 
@@ -311,13 +303,6 @@ function isContactChecked(i, name, lastName) {
     }
 }
 
-function checkButtonHtml(name, lastName){
-    return ` ${name} ${lastName}
-    <div>
-    <img class="check-button" src="assets/img/icons/Check button v1.svg">
-    <img style="display: none;" class="check-button-checked" src="assets/img/icons/Check button v1 checked.svg">
-    </div>`
-}
 
 /**
  * renders the contacts under the dropdown menu to see wich persons the task is assinged to
@@ -376,7 +361,6 @@ function showInviteNewContactInput() {
         </div>
         </div>
   `;
-
     prepareAssingedToInput()
 }
 
@@ -428,17 +412,11 @@ function renderEmails() {
         for (let i = 0; i < emails.length; i++) {
             let email = emails[i]
             index = i + contactsForAddTask.length
-            emailscontainer.innerHTML += `
-      <div onclick="checkButton(${index});" class="dropdown-option dropdown-option-img" id="${index}">
-        ${email}
-        <div>
-            <img style="display: none;" " class="check-button" src="assets/img/icons/Check button v1.svg">
-            <img style="display: unset;"  class="check-button-checked" src="assets/img/icons/Check button v1 checked.svg">
-        </div>
-      </div>`;
+            emailscontainer.innerHTML += generateEmailsHTML(index, email)
         }
     }
 }
+
 
 
 /**
@@ -595,6 +573,11 @@ async function createTask() {
     }
 }
 
+
+/**
+ * creates the persons for Assinged to
+ * @returns //the persons Array
+ */
 async function addPersonsToNewTask() {
     let persons = [];
     for (let i = 0; i < contactsForAddTask.length; i++) {
@@ -711,6 +694,8 @@ function showIsRequiered(index, action) {
     let required = document.getElementsByClassName('is-required')[index];
     required.classList[action]('displayNone');
 }
+
+
 /**
  * Shows a Messagebox 
  * @param {string} text -the text you want to show in the Messagebox
@@ -732,6 +717,7 @@ function showWarning(text) {
 
 }
 
+
 // =========================Animations ===========================
 /**
  * A animation order when you press on add task
@@ -746,6 +732,8 @@ function animations() {
     }, 1000);
 
 }
+
+
 /**
  * 
  * @param {string} display - 'none ' or 'unset' to fly the messagebox in
@@ -776,6 +764,9 @@ function swapToBoard() {
     window.location.href = 'board.html'
 }
 
+/**
+ * sets the calendar to the current date
+ */
 document.addEventListener('DOMContentLoaded', function () {
     let heute = new Date();
     let formattedDate = formatDate(heute);
@@ -785,7 +776,11 @@ document.addEventListener('DOMContentLoaded', function () {
     datumInput.min = formattedDate;
 });
 
-
+/**
+ * formates the date into the required validation
+ * @param {date} date //the current date
+ * @returns the correct format for the date
+ */
 function formatDate(date) {
     let day = ("0" + date.getDate()).slice(-2);
     let month = ("0" + (date.getMonth() + 1)).slice(-2);

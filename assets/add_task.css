@@ -498,7 +498,7 @@ input[type="radio"]:checked+label {
     position: absolute;
     left: 0;
     right: 0;
-    top: 90px;
+    top: 50px;
     margin-right: auto;
     margin-left: auto;
     width: 0px;

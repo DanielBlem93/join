@@ -84,7 +84,7 @@ function generateToDoHTML(element, category, i, nextPosition) {
  * const contactDropdownHTML = getContaktFromStor();
  * document.getElementById('someElementId').innerHTML = contactDropdownHTML;
  */
-function getContaktFromStor () {
+function getContaktFromStor() {
     return /*html*/`
         <div class="addTaskDropdown">
                     <span class="typography2T6">Assinged to</span>
@@ -121,9 +121,9 @@ function getContaktFromStor () {
                 </div>
     
     `;
-    }
+}
 
-    
+
 /**
  * Asynchronously edits a Todo item by its ID.
  * 
@@ -141,16 +141,10 @@ function getContaktFromStor () {
  * editTodo(5);  // Opens a modal to edit the Todo with ID 5
  * 
  */
-async function editTodo (id) {
-    let contacts = JSON.parse(await getItem('contacts'));
-    let todo = todos[id];
-    const editTodoModal = document.getElementById('editTodoModal');
-    editTodoModal.style.right = '0';
-    const editTodoBox = document.createElement('div');
-    editTodoBox.classList.add('editTodoBox');
-    editTodoModal.appendChild(editTodoBox);
 
-    editTodoBox.innerHTML += /*html*/ `
+
+function generateEditTodoHTML(todo) {
+    return /*html*/ `
         <div class="addTaskTitle">
                 <span class="typography2T6">Title</span>
                 <div class=" input-container">
@@ -250,27 +244,25 @@ async function editTodo (id) {
                     </div>
                     <span class="is-required displayNone">This field is required</span>
                 </div>`;
-        editTodoBox.innerHTML += getContaktFromStor();
 
-        editTodoBox.innerHTML += /*html*/ `
+}
+/**
+ *  generats HTML for the EditToDo function
+ * @param {object} todo //the selected todo 
+ * @returns returns generated HTML 
+ */
+function generateEditHTML(todo) {
+    return  /*html*/ `
     
-        <div>
-            <button class="editClose" onclick="closeEditModal()">
-                <img src="./assets/img/close-icon.png">
-            </button>
-        </div>
-        <div class="editSubtasks">
-            <button onclick="saveTodo(${todo['id']})" id="saveAll" class="editOk">OK</button>
-        </div>
-    `;
-    if (todo['priority'] === 'urgent') {
-        changeColor('addTaskBtnUrgent', 'urgent');
-    } else if (todo['priority'] === 'medium') {
-        changeColor('addTaskBtnMedium', 'medium');
-    } else if (todo['priority'] === 'low') {
-        changeColor('addTaskBtnLow', 'low');
-    }
-    addPersonsToNewTodo();
+    <div>
+        <button class="editClose" onclick="closeEditModal()">
+            <img src="./assets/img/close-icon.png">
+        </button>
+    </div>
+    <div class="editSubtasks">
+        <button onclick="saveTodo(${todo['id']})" id="saveAll" class="editOk">OK</button>
+    </div>
+`;
 }
 
 
@@ -302,7 +294,7 @@ function generateToDoHTMLModal(todo) {
     let imgTodosPriorities = todo['priority'] === 'urgent' ? './assets/img/urgent.svg' : todo['priority'] === 'medium' ? './assets/img/mediumweiss.png' : todo['priority'] === 'low' ? './assets/img/lowweiss.png' : './assets/img/lowweiss.png';
     let membersHTML = '';
     if (todo.members && todo.members.length > 0) {
-        membersHTML = todo.members.map(member =>  generateMemberHTML(member)).join('');
+        membersHTML = todo.members.map(member => generateMemberHTML(member)).join('');
     }
 
     let todoHTML = /*html*/ `
@@ -394,31 +386,37 @@ function renderContactBlock(contact, firstInitial, secondInitial, color, contact
         </div>`;
 }
 
+
+
 /**
- * Fetches contacts from Storage, sorts them, generates the corresponding HTML and inserts it into the contact list.
- * @async
+ * 
+ * @param {string} name //the first Name
+ * @param {string} lastName  //the last name
+ * @returns  * Returns HTML for the Assinged to Dropdown
  */
-async function getContacts() {
-    const contactList = document.getElementById('contacts-list');
-    let contacts = JSON.parse(await getItem('contacts')) || [];
-    contacts = contacts.filter(contact => contact.name);
-    contacts.sort((a, b) => a.name.localeCompare(b.name, undefined, {sensitivity: 'base'}))
-
-    let lastInitial = '';
-    let htmlString = contacts.reduce((acc, contact) => {
-        const [firstInitial, secondInitial] = getInitials(contact.name);
-        const color = getRandomColor();
-        const initialBlock = firstInitial.toUpperCase() !== lastInitial 
-            ? `<div class="contact-list-first-latter">${firstInitial.toUpperCase()}</div><hr class="contact-list-hr">` 
-            : '';
-
-        lastInitial = firstInitial.toUpperCase();
-        contactsArray.push(contact); 
-        const contactIndex = contactsArray.length - 1;
-        const contactBlock = renderContactBlock(contact, firstInitial, secondInitial, color, contactIndex);
-
-        return acc + initialBlock + contactBlock;
-    }, '');
-
-    contactList.innerHTML = htmlString;
+function checkButtonHtml(name, lastName) {
+    return ` ${name} ${lastName}
+    <div>
+    <img class="check-button" src="assets/img/icons/Check button v1.svg">
+    <img style="display: none;" class="check-button-checked" src="assets/img/icons/Check button v1 checked.svg">
+    </div>`
 }
+
+
+/**
+ * 
+ * @param {number} index //number/index of the for loop
+ * @param {string} email //the email from the contact
+ * @returns  * Returns HTML for the Assinged to Dropdown at the Email location
+ */
+function generateEmailsHTML(index, email) {
+    return `
+    <div onclick="checkButton(${index});" class="dropdown-option dropdown-option-img" id="${index}">
+      ${email}
+      <div>
+          <img style="display: none;" " class="check-button" src="assets/img/icons/Check button v1.svg">
+          <img style="display: unset;"  class="check-button-checked" src="assets/img/icons/Check button v1 checked.svg">
+      </div>
+    </div>`;
+}
+

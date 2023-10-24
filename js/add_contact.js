@@ -70,7 +70,34 @@ function createContactObject(name, email, phone) {
         colorIcon: colorIcon
     };
 }
+/**
+ * Fetches contacts from Storage, sorts them, generates the corresponding HTML and inserts it into the contact list.
+ * @async
+ */
+async function getContacts() {
+    const contactList = document.getElementById('contacts-list');
+    let contacts = JSON.parse(await getItem('contacts')) || [];
+    contacts = contacts.filter(contact => contact.name);
+    contacts.sort((a, b) => a.name.localeCompare(b.name, undefined, {sensitivity: 'base'}))
 
+    let lastInitial = '';
+    let htmlString = contacts.reduce((acc, contact) => {
+        const [firstInitial, secondInitial] = getInitials(contact.name);
+        const color = getRandomColor();
+        const initialBlock = firstInitial.toUpperCase() !== lastInitial 
+            ? `<div class="contact-list-first-latter">${firstInitial.toUpperCase()}</div><hr class="contact-list-hr">` 
+            : '';
+
+        lastInitial = firstInitial.toUpperCase();
+        contactsArray.push(contact); 
+        const contactIndex = contactsArray.length - 1;
+        const contactBlock = renderContactBlock(contact, firstInitial, secondInitial, color, contactIndex);
+
+        return acc + initialBlock + contactBlock;
+    }, '');
+
+    contactList.innerHTML = htmlString;
+}
 
 /**
  * Performs actions that are necessary after a contact has been successfully added.

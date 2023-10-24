@@ -156,7 +156,8 @@ body {
     justify-content: center;
     overflow: auto;
 }
-#kanban-board::-webkit-scrollbar{
+
+#kanban-board::-webkit-scrollbar {
     display: none;
 }
 
@@ -172,7 +173,7 @@ body {
 }
 
 .board-body-haeder {
-    width: 250px;
+    width: 260px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -419,7 +420,7 @@ body {
 
 
 .modal-title {
-    font-size: 4rem;
+    font-size: 2.5rem;
     font-weight: 900;
     color: #2A3647;
     margin: 20px;
@@ -593,13 +594,11 @@ body {
 
 
 /* ==============Add Task Popup ================ */
-#contacts {
- 
-}
+#contacts {}
 
-.dropdown-assinged-to{
+.dropdown-assinged-to {
     overflow: auto;
-    height: 250px 
+    height: 250px
 }
 
 #addTaskPopup {
@@ -684,6 +683,10 @@ body {
 .chegeCategory {
     display: none;
 }
+.chegeCategory img{
+width: 25px;
+height: 20px;
+}
 
 /* hightlight */
 
@@ -744,9 +747,6 @@ body {
         width: 422px
     }
 
-}
-
-@media(max-width:1024px) {
 
     .board-content {
         margin-left: 0;
@@ -765,10 +765,15 @@ body {
         gap: 20px;
         height: 250px;
     }
-
 }
 
+@media(max-width:1024px) {}
+
 @media(max-width: 768px) {
+
+    .input-container {
+        width: 95% !important;
+    }
 
     .todo-box {
         width: 280px;
@@ -856,6 +861,9 @@ body {
 }
 
 @media (max-width: 500px) {
+    .headline{
+        font-size: 3rem;
+    }
 
     .editOk {
         position: inherit;
@@ -880,11 +888,11 @@ body {
     }
 
     .addTaskDescription {
-        width: 300px;
+        width: 95%;
     }
 
     .addTaskDropdown {
-        width: 300px;
+   
     }
 }
 
@@ -919,6 +927,6 @@ body {
     }
 }
 
-.addTaskFrame17Recurso11{
+.addTaskFrame17Recurso11 {
     display: none;
 }

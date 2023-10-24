@@ -72,7 +72,7 @@ async function addTask() {
     let addTasks = await fetchTasksFromStorage();
     let popup = document.getElementById('addTaskPopup');
     let selectedCategory = popup.dataset.category || 'open';
-    
+
     if (!addTasks || addTasks.length === 0) {
         return;
     }
@@ -157,10 +157,8 @@ async function setItemTodo() {
 */
 function renderToDos(category) {
     document.getElementById(category + 'EmptyFrame').classList.add('display-none');
-
     let filteredToDos = todos.filter(t => t['category'] == category);
     const nextPosition = category + (filteredToDos.length - 1);
-
     document.getElementById(category).innerHTML = '';
 
     for (let i = 0; i < filteredToDos.length; i++) {
@@ -328,7 +326,7 @@ function showAddTaskPopup(color, category) {
     let popupContainer = document.getElementById('addTaskPopupContainer');
     popup.dataset.category = category;
     popup.classList.toggle('popupAnimation');
-    
+
     setTimeout(() => {
         popup.style.backgroundColor = `${color}`;
         popup.style.opacity = '1';

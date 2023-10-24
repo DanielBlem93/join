@@ -33,6 +33,29 @@ function generateSubtaskHTML(subtaskObj, index, todoId) {
     return subtaskHTML;
 }
 
+async function editTodo(id) {
+    let contacts = JSON.parse(await getItem('contacts'));
+    let todo = todos[id];
+    const editTodoModal = document.getElementById('editTodoModal');
+    editTodoModal.style.right = '0';
+    const editTodoBox = document.createElement('div');
+    editTodoBox.classList.add('editTodoBox');
+    editTodoModal.appendChild(editTodoBox);
+
+    editTodoBox.innerHTML += generateEditTodoHTML(todo)
+    editTodoBox.innerHTML += getContaktFromStor();
+
+    editTodoBox.innerHTML += generateEditHTML(todo)
+
+    if (todo['priority'] === 'urgent') {
+        changeColor('addTaskBtnUrgent', 'urgent');
+    } else if (todo['priority'] === 'medium') {
+        changeColor('addTaskBtnMedium', 'medium');
+    } else if (todo['priority'] === 'low') {
+        changeColor('addTaskBtnLow', 'low');
+    }
+    addPersonsToNewTodo();
+}
 
 /**
  * Generates the HTML representation for a member with initials and a background color.
