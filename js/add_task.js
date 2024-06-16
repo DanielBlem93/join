@@ -60,7 +60,7 @@ function closeDropdown(dropdownMenu) {
 }
 
 function setDropdownVariable(menuClass) {
-    if (menuClass === 'dropdown-category width95') {
+    if (menuClass === 'dropdown-category') {
         dropdown1Open = !dropdown1Open
     } else {
         dropdown2Open = !dropdown2Open
@@ -69,11 +69,11 @@ function setDropdownVariable(menuClass) {
 }
 
 window.addEventListener('click', (event) => {
-    const dropdownMenu1 = document.getElementsByClassName('dropdown-category width95')[0]
+    const dropdownMenu1 = document.getElementsByClassName('dropdown-category')[0]
     const dropdownMenu2 = document.getElementsByClassName('dropdown-assinged-to')[0]
 
     if (dropdown1Open && !dropdownMenu1.contains(event.target)) {
-        toggleDropdown('dropdown-category width95');
+        toggleDropdown('dropdown-category');
 
     } else if ((dropdown2Open && !dropdownMenu2.contains(event.target))) {
         toggleDropdown('dropdown-assinged-to');
