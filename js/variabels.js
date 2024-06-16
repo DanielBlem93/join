@@ -39,3 +39,5 @@ let currentEmail;
 const DROPDOWN_MIN_HEIGHT = '51px';
 const DROPDOWN_MAX_HEIGHT = '204px';
 const DROPDOWN_Z_INDEX = '20';
+let dropdown1Open =false
+let dropdown2Open =false

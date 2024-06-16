@@ -37,23 +37,49 @@ function toggleDropdown(menuClass) {
     const dropdownMenu = document.getElementsByClassName(menuClass)[0];
 
     if (dropdownMenu.style.height === DROPDOWN_MIN_HEIGHT) {
-
-        dropdownMenu.style.height = DROPDOWN_MAX_HEIGHT;
-        dropdownMenu.style.overflow = 'scroll';
-        dropdownMenu.style.position = 'absolute';
-        dropdownMenu.style.zIndex = DROPDOWN_Z_INDEX;
-
+        openDropdown(dropdownMenu)
     } else {
-        dropdownMenu.scrollTo(top)
-        dropdownMenu.style.height = DROPDOWN_MIN_HEIGHT;
-        dropdownMenu.style.overflow = 'hidden';
-        dropdownMenu.style.position = '';
-        dropdownMenu.style.zIndex = '';
+        closeDropdown(dropdownMenu)
+    }
+    setDropdownVariable(menuClass)
+}
+
+function openDropdown(dropdownMenu) {
+    dropdownMenu.style.height = DROPDOWN_MAX_HEIGHT;
+    dropdownMenu.style.overflow = 'scroll';
+    dropdownMenu.style.position = 'absolute';
+    dropdownMenu.style.zIndex = DROPDOWN_Z_INDEX;
+}
+
+function closeDropdown(dropdownMenu) {
+    dropdownMenu.scrollTo(top)
+    dropdownMenu.style.height = DROPDOWN_MIN_HEIGHT;
+    dropdownMenu.style.overflow = 'hidden';
+    dropdownMenu.style.position = '';
+    dropdownMenu.style.zIndex = '';
+}
+
+function setDropdownVariable(menuClass) {
+    if (menuClass === 'dropdown-category width95') {
+        dropdown1Open = !dropdown1Open
+    } else {
+        dropdown2Open = !dropdown2Open
     }
 
 }
 
+window.addEventListener('click', (event) => {
+    const dropdownMenu1 = document.getElementsByClassName('dropdown-category width95')[0]
+    const dropdownMenu2 = document.getElementsByClassName('dropdown-assinged-to')[0]
 
+    if (dropdown1Open && !dropdownMenu1.contains(event.target)) {
+        toggleDropdown('dropdown-category width95');
+
+    } else if ((dropdown2Open && !dropdownMenu2.contains(event.target))) {
+        toggleDropdown('dropdown-assinged-to');
+       
+    }
+});
 /**
  * Renders the categorys to the dropdown menu
  */
@@ -157,7 +183,6 @@ function discardNewCategory(display1) {
 function selectTaskCategory(id) {
     let selectBox = document.getElementById('select-box')
     let selected = document.getElementById(`s${id}`)
-    console.log(selected);
     if (selectBox.innerHTML.includes(`id="s${id}"`)) {
         clearSelectBox('select-box')
     } else {
@@ -232,7 +257,6 @@ window.addEventListener("click", function () {
  */
 function clearSelectBox(selectbox) {
     let selectBox = document.getElementById(`${selectbox}`);
-    console.log(selectBox);
     selectBox.innerHTML = "";
 }
 
