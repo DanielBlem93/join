@@ -134,6 +134,8 @@ function moveLogo() {
         toggleClassById(id, 'opacity');
     });
     if (isMobile) {
-        setTimeout(() => toggleClassById('loginOverlay', 'display-none', false), 2000);
+
+        setTimeout(() => toggleClassById('loginOverlay', 'display-none', true), 1500);
+
     }
 }
